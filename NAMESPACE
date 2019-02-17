@@ -1,0 +1,60 @@
+importFrom("stats", "rgeom","rnorm", "predict")
+importFrom("utils", "head","tail", "type.convert")
+importFrom("polynom", "polynomial","is.polynomial")
+importFrom("MTS", "VARMAsim","VARMA")
+
+export("pMgen","pMgen.a","pMgen.b","pMgen.c","pMgen.d","pMgen.varma",
+       "pMconvert",
+       "pMdiag",
+       "pMstr",
+       "coefs","const","degree","lead","diag","tr",
+       "predict.polynomial",
+       "predict.pMatrix",
+       "pMrow", "pMcol", "pMbas", "pMsub",
+       "pMsgn", 
+       "pMadj", "pMdet", 
+       "charpn",
+       "pMkmm",
+       "pMprod","pVsk",
+       "pn2ch", "ch2pn", "pprt",
+       "cycFill", 
+       "colMax","rowMax","colMin","rowMin",
+       "ssetNext", "permNext", "permSign",
+       "M2pM","pM2M",
+       "t.pMatrix","tr",
+       "polyMul",
+       "CanForm",
+       "proper",
+       "is.pMatrix",
+       "%*%", 
+	   "MTS2pM")
+
+S3method("diag","list")
+
+S3method("charpn","matrix")
+S3method("tr","matrix")
+
+S3method("coefs","polynomial")
+S3method("const","polynomial")
+S3method("degree","polynomial")
+S3method("lead","polynomial")
+S3method("predict","polynomial")
+
+S3method("charpn","pMatrix")
+S3method("const","pMatrix")
+S3method("coefs","pMatrix")
+S3method("degree","pMatrix")
+S3method("diag","pMatrix")
+S3method("dim","pMatrix")
+S3method("lead","pMatrix")
+S3method("Ops","pMatrix")
+S3method("predict","pMatrix")
+S3method("print","pMatrix")
+S3method("print","pMvarma")
+S3method("tr","pMatrix")
+
+S3method("predict","charpn")
+
+
+# ----
+# fine 

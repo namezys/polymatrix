@@ -1,0 +1,57 @@
+\name{lead}
+\alias{lead}
+\title{The leading coefficient of a polynom or polynomial matrix}
+\description{ ... }
+\usage{lead(p,method=c("matrix","column","row","element"))}
+\arguments{\item{p}{a \code{\link{polynomial}} or \code{\link{pMatrix-package}} class object}
+           \item{method}{controls the interpretation of the word: "leading", see the details}
+           }
+\details{
+The four possible interpretation of the \code{lead}
+for a polynomial matrix are the followings.
+\itemize{
+
+\item{\code{matrix}: the highest matrix coefficient of the polynomial matrix.}
+\item{\code{column}: taken the polynomial matrix column-wise, the column vector 
+            of highest coefficient of each column.}
+\item{\code{row}: taken the polynomial matrix row-wise, the  row vector
+            of highest coefficient of each row.}
+\item{\code{element}: a matrix formed by the highest coefficients of the polynomial 
+            elements of the polynomial matrix.}
+}
+}
+
+\value{Returns a matrix by the same size as the 
+       polynomial matrix.}
+\seealso{\code{\link{coefs}}, \code{\link{degree}}, \code{\link{const}}}
+\keyword{utilities}
+\examples{
+lead(polynom::polynomial(0:12))
+pm<-pMgen.a()
+pa<-pMconvert(pm,"pMarray")
+pb<-pMconvert(pm,"pMbroad")
+pc<-pMconvert(pm,"pMcells")
+pd<-pMconvert(pm,"pMdlist")
+lead(pa)
+lead(pb)
+lead(pc)
+lead(pd)
+
+
+rawAdat<-ch2pn(c("-3 + x^2","2 + 4*x","-x^2","1","2","3 + x","2*x","0","2 - 3*x" ))
+px<-pMgen.d(3,3,rawData=rawAdat)
+rm(rawAdat)
+
+px
+
+lead(px)
+lead(px,method="matrix")
+lead(px,method="row")
+lead(px,method="column")
+lead(px,method="element")
+rm(pm,pa,pb,pc,pd,px)
+}
+
+
+
+
