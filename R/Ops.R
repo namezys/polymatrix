@@ -23,16 +23,35 @@
           class(pd) <- c("pMdlist","pMatrix")		  
 		  return(pd)}	  }
 
-	
+
+equal <- function(first, second)
+{
+  stopifnot(!missing(first), !missing(first))
+  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  return(all(first$dim == second$dim) && all(first$degree == second$degree)
+         && all(first$const == second$const) && all(first$array == second$array));
+}
+
 
 Ops.pMatrix <- 
 function(e1, e2)
-{   
-    if(missing(e2))
-        return(switch(.Generic,
-                      "+" = pMconvert(e1,"pMdlist"),
-                      "-" = pMsgn(pMconvert(e1,"pMdlist")),
-                      stop("unsupported unary operation")))
+{
+  # unari operators
+  if(missing(e2)) {
+      return(
+        switch(.Generic,
+               "+"=pMconvert(e1,"pMdlist"),
+               "-"=pMsgn(pMconvert(e1,"pMdlist")),
+               stop("unsupported unary operation")))
+  }
+
+  # ---- cmp
+  if (.Generic == '==') {
+    return(equal(e1, e2))
+  } else if (.Generic == '!=') {
+    return(!equal(e1, e2))
+  }
+
     if(!is.pMatrix(e1)) {ee<-e2;e2<-e1;e1<-ee;rm(ee)}
     e1<-pMconvert(e1,"pMdlist")	
     {                  
@@ -52,7 +71,7 @@ function(e1, e2)
     dim<-switch(.Generic,"+"=,"-"=,"^"= dim(e1),"*"=c(dim(e1)[1],dim(e2)[2]))
     k<-dim[1]
     j<-dim[2]
-    e1.e2<-vector("list",k)
+    e1.e2<-vector("list", k)
     for(i1 in 1:k) e1.e2[[i1]]<-vector("list",j)
     e1.op.e2 <-
         switch(.Generic,
