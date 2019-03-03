@@ -1,5 +1,5 @@
 # -----
-# Generators for pMatrix class polynomial matrices 
+# Generators for pMatrix class polynomial matrices
 
 #  0. # pMgen          - call the generators
 
@@ -13,122 +13,222 @@
 # ----------------------
 #  0. # pMgen          - call the generators
 
-pMgen <- 
-function(k,j,rawData,symb,rand,degree,byrow,sm="pMarray",...) 
-{ if(!substr(sm,3,3)%in%c("a","b","c","d")) 
+pMgen <-
+function(k,j,rawData,symb,rand,degree,byrow,sm="pMarray",...)
+{
+  method <- substr(sm,3,3)
+  if (!method %in% c("a","b","c","d")) {
     stop("the admissible storage methods are: 'pMarray','pMbroad','pMcells' and 'pMdlist'!")
-  degree <- if(!missing("degree")) degree else 2
-  k <- if(!missing("k")) k else 2
-  j <- if(!missing("j")) j else 3
-  symb <- if(!missing("symb")) symb else "x"
-  rand <- if(!missing("rand")) rand else FALSE
-  byrow  <- if(!missing("byrow")) byrow else  FALSE
-  pM <- switch(substr(sm,3,3),
-   "a"= { rawData <- if(!missing("rawData")) rawData else 1:(k*j*(max(degree)+1))
-          pMgen.a(k=k,j=j,rawData=rawData,symb=symb,rand=rand,degree=degree,byrow=byrow)}, 
-   "b"= { rawData <- if(!missing("rawData")) rawData else 1:(k*j*(degree+1))
-          pMgen.b(k=k,j=j,rawData=rawData,symb=symb,rand=rand,degree=degree,byrow=byrow)}, 
-   "c"= { rawData <- if(!missing("rawData")) rawData else 1:(k*j*(max(degree)+1))
-          pMgen.c(k=k,j=j,rawData=rawData,symb=symb,rand=rand,degree=degree,byrow=byrow)},
-   "d"= { rawData <- if(!missing("rawData")) rawData else list(polynom::polynomial(1:3))
-          pMgen.d(k=k,j=j,rawData=rawData,symb=symb,rand=rand,degree=degree,byrow=byrow)})
-  return(pM)	  
+  }
+  if (missing("degree")) {
+    degree <- 2
+  }
+  if (missing("k")) {
+    k <- 2
+  }
+  if (missing("j")) {
+    j <- 3
+  }
+  if (missing("symb")) {
+    symb <- "x"
+  }
+  if (missing("rand")) {
+    rand <- FALSE
+  }
+  if (missing("byrow")) {
+    byrow <- FALSE
+  }
+  if (missing("rawData")) {
+    rawData <- switch (method,
+      a=1:(k * j * (max(degree) + 1)),
+      b=1:(k * j * (degree + 1)),
+      c=1:(k * j * (max(degree)+1)),
+      d=list(polynom::polynomial(1:3))
+    )
+  }
+  fabric = switch(method, a=pMgen.a, b=pMgen.b, c=pMgen.c, d=pMgen.d)
+  return(fabric(k=k, j=j, rawData=rawData, symb=symb, rand=rand, degree=degree, byrow=byrow))
 }
 
 
 # ----------------------
 #  1. # pMgen.a       - pMatrix in pMarray form
 
-pMgen.a <- 
-function(k = 2, j = 3, rawData = 1:(k * j * (max(degree) + 1)),
-         symb = "x",rand = FALSE, degree = 2, byrow = FALSE) 
+pMgen.a <-
+function(k=2, j=3, rawData=1:(k * j * (max(degree) + 1)), symb="x", rand=FALSE, degree=2, byrow=FALSE)
 {
-    if (missing("degree")) 
-      degree <- matrix(sample(0:3, k * j, c(1, 2, 3, 2), replace = TRUE), k, j)
-  degree <- if(!is.matrix(degree)) 
-      matrix(degree,k,j) else degree
-  d <- max(degree)
-  n <- k * j + sum(degree)
-  if(is.function(rand)) rawData <- rand(n)
-  if(is.logical(rand)) if(rand) rawData <- rnorm(n)
-  rawData <- cycFill(rawData,n)
-  ip <- 1;op <- 1
-  rawDataSupp <- rep(0,k*j*(d+1))
-  for(ij in 1:j) for(ik in 1:k)  
-    { rawDataSupp[op:(op+degree[ik,ij])] <- rawData[ip:(ip+degree[ik,ij])];
-	  ip <- ip+degree[ik,ij]+1; op <- op+d+1}
-  ci <- seq(1,by=d+1,length=k*j)
-  const <- matrix(rawDataSupp[ci],k,j,
-                      dimnames=list(paste0("x",1:k),paste0("y",1:j)),byrow=byrow)
-  array <- if(d==0) NULL else
-            array(as.vector(t(matrix(rawDataSupp[-ci],d))),dim=c(k,j,d),
-               dimnames=list(paste0("x",1:k),paste0("y",1:j),
-                             if(d==1) symb else c(symb,paste0(symb,"^",2:d))))
-  pm <- list( dim=c(k,j),degree=degree, symb=symb, const=const, array=array)
-  class(pm)<-c("pMarray","pMatrix")
-  return(pm) }
+  # fill default arguments
+  rows <- k
+  columns <- j
+  if (missing("degree")) {
+      degree <- matrix(sample(0:3, rows * columns, prob=c(1, 2, 3, 2), replace=TRUE), rows, columns)
+  } else if(!is.matrix(degree)) {
+      degree <- matrix(degree, rows, columns)
+  }
+  max_degree <- max(degree)
+  raw_data_size <- rows * columns + sum(degree)
+  if (is.function(rand)) {
+    rawData <- rand(raw_data_size)
+  }
+  if (is.logical(rand) && rand) {
+    rawData <- rnorm(raw_data_size)
+  }
+  # prepareind dato for matrix
+  rawData <- cycFill(rawData,raw_data_size)
+  in_pos <- 1
+  out_pos <- 1
+  rawDataSupp <- rep(0, rows * columns * (max_degree + 1))
+  for (ij in 1:columns) {
+    for (ik in 1:rows) {
+      rawDataSupp[out_pos:(out_pos + degree[ik, ij])] <- rawData[in_pos:(in_pos + degree[ik, ij])];
+	    in_pos <- in_pos + degree[ik, ij] + 1
+	    out_pos <- out_pos + max_degree + 1
+    }
+  }
+  # build constants
+  const_idx <- seq(1, by=max_degree + 1, length=rows * columns)
+  const_names <- list(paste0("x", 1:rows), paste0("y", 1:columns))
+  const <- matrix(rawDataSupp[const_idx], rows, columns, dimnames=const_names, byrow=byrow)
+  if (max_degree == 0) {
+    array <- NULL
+  } else {
+    if (max_degree == 1) {
+      dimnames <- list(paste0("x", 1:rows), paste0("y", 1:columns), symb)
+    } else {
+      dimnames <- list(paste0("x", 1:rows), paste0("y", 1:columns), c(symb, paste0(symb, "^", 2:max_degree)))
+    }
+    coefficient_data <- rawDataSupp[-const_idx]
+    coefficient_matrix <- t(matrix(coefficient_data, max_degree))
+    array <- array(as.vector(coefficient_matrix), dim=c(rows, columns, max_degree), dimnames=dimnames)
+  }
+  pm <- list(dim=c(rows, columns), degree=degree, symb=symb, const=const, array=array)
+  class(pm) <- c("pMarray","pMatrix")
+  return(pm)
+}
 
 # ----------------------
 #  2. # pMgen.b       - pMatrix in pMbroad form
 
-pMgen.b <- 
-function(k=2,j=3,rawData=1:(k*j*(degree+1)),symb="x",rand=FALSE,degree=2,byrow=FALSE)   
-{ pa<-pMgen.a(k=k,j=j,degree=degree,rawData=rawData,symb=symb,rand=rand)
-  pb<-pMconvert(pa,"pMbroad")
+pMgen.b <-
+function(k=2, j=3, rawData=1:(k * j * (degree + 1)), symb="x", rand=FALSE, degree=2, byrow=FALSE)
+{
+  pa <- pMgen.a(k=k, j=j, degree=degree, rawData=rawData, symb=symb, rand=rand)
+  pb <- pMconvert(pa,"pMbroad")
   return(pb)
-  }
+}
 
 # ----------------------
 #  3. # pMgen.c       - pMatrix in pMcells form
 
-pMgen.c <- 
-function(k=2,j=3,rawData=1:(k*j*(max(degree)+1)),symb="x",rand=FALSE, degree = 2, byrow = FALSE)   
-{ pa<-pMgen.a(k=k,j=j,degree=degree,rawData=rawData,symb=symb,rand=rand)
-  pc<-pMconvert(pa,"pMcells")
+pMgen.c <-
+function(k=2, j=3, rawData=1:(k * j * (max(degree) + 1)), symb="x", rand=FALSE, degree=2, byrow=FALSE)
+{
+  pa <- pMgen.a(k=k, j=j, degree=degree, rawData=rawData, symb=symb, rand=rand)
+  pc <- pMconvert(pa,"pMcells")
   return(pc)
 }
-   
+
+
+generate_random_d <- function(rand, degree, byrow, data_size)
+{
+  if (is.null(rand) || rand == FALSE) {
+    # use default
+    return(list(polynomial(1:3)))
+  }
+  # we have to generate rawData
+  if (is.logical(rand)) {
+    stopifnot(rand == TRUE)
+    dgm <- function() { rgeom(1,.33) + 1 }
+  } else {
+    stopifnot(is.function(rand))
+    dgm <- rand
+  }
+  
+  data <- vector("list", data_size)
+  deg <- as.numeric(if(byrow) t(degree) else degree)
+  for (i1 in 1:data_size) {
+    p_coef <- vector("numeric", deg[i1] + 1)
+    for (i2 in 0:deg[i1]) {
+      p_coef[i2 + 1] <- dgm()
+    }
+    data[[i1]] <- polynom::polynomial(p_coef)
+  }
+  return(data)
+}
+
+convert_to_polynome <- function(data)
+{
+  result = vector("list", length(data))
+  for(i in 1:length(data)) {
+    if (is.polynomial(data[[i]])) {
+      result[[i]] <- data[[i]]
+    } else {
+      result[[i]] <- polynom::polynomial(data[[i]])
+    }
+  }
+  return(result)
+}
+
 # ----------------------
 #  4. # pMgen.d       - pMatrix in pMdlist form
 
-pMgen.d <- 
-function(k=2,j=3,rawData=list(polynomial(1:3)),symb="x",rand=FALSE,degree,byrow=FALSE)   
-{ n <- k*j
-  if(missing(degree)) 
-      degree<-matrix(sample(0:3,k*j,c(1,2,3,2),replace=TRUE),k,j)
-  if(!missing(degree)) if(is.null(degree))
-      degree<-matrix(sample(0:3,k*j,c(1,2,3,2),replace=TRUE),k,j)
-  degree <- if(!is.matrix(degree)) matrix(degree,k,j) else degree
-  dgm<-if(is.logical(rand)) function() rgeom(1,.33)+1 else rand
-  if(is.function(rand)) rand<-TRUE
-  if(rand) 
-   { rawData<-vector("list",n)
-     deg<-as.numeric(if(byrow) t(degree) else degree)
-      for(i1 in 1:n)
-        { rd<-vector("numeric",deg[i1]+1)
-		  for(i2 in 0:deg[i1]) rd[i2+1]<-dgm()
-         rawData[[i1]] <- polynom::polynomial(rd) }}  
-  m <- length(rawData)
-  rawData_class_good<-vector("logical",m)
-  for(i in 1:m) rawData_class_good[i]<-polynom::is.polynomial(rawData[[i]])
-  if(!all(rawData_class_good)) stop("rawData class error!!!\n")
-  rawData<-cycFill(rawData,n)
+pMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL, byrow=FALSE)
+{
+  rows <- k
+  columns <- j
+  data_size <- rows * columns
   
-  dlist <- vector("list",k)
-  if(!byrow)  
-    for (i1 in 1:k) 
-       dlist[[i1]]<-rawData[(1:j-1)*k+i1] # by col data
-  if(byrow) 
-    {
-      for (i1 in 1:k) dlist[[i1]]            <-vector("list",j)
-      for (i in 1:n-1) dlist[[i%/%j+1]][[i%%j+1]]<-rawData[[i+1]]
-     } 
+  # generate rawData if it's empty
+  if (is.null(rawData)) {
+    # generate degree matrix if necessary, it is used for generate rawData
+    if (is.null(degree)) {
+      degree <- matrix(sample(0:3, data_size, c(1, 2, 3, 2), replace=TRUE), rows, columns)
+    }
+    if (!is.matrix(degree)) {
+      degree <- matrix(degree, raws, columns)
+    }
+    rawData <- generate_random_d(rand=rand, degree=degree, byrow=byrow, data_size=data_size)
+  } else {
+    # if rawData was provided, rand and degree would be invalid arguments
+    if (!is.null(degree)) {
+      stop("degree is invalid argument with rawData")
+    }
+    if (!is.null(rand)) {
+      stop("rand is invalid argument with rawData")
+    }
+  }
+  # convert rawData if necessary
+  rawData <- convert_to_polynome(rawData)
+  # fill empty elements
+  rawData<-cycFill(rawData, data_size)
+
+  dlist <- vector("list", k)
+  if (byrow) {
+    for (i1 in 1:rows) {
+      dlist[[i1]] <- vector("list", j)
+    }
+    for (i in 1:data_size - 1) {
+      dlist[[i %/% columns + 1]][[i %% columns + 1]] <- rawData[[i + 1]]
+    }
+  } else {
+    for (i1 in 1:rows) {
+      # by col data
+      dlist[[i1]] <- rawData[(1:columns - 1) * rows + i1]
+    }
+  }
+
+  # refill
+  d <- matrix(0, rows, columns);
+  for (r in 1:rows) {
+    for(c in 1:columns) {
+      d[r, c] <- degree(dlist[[r]][[c]])
+    }
+  }
   
-  d<-matrix(0,k,j); 
-    for (i1 in 1:k) for(i2 in 1:j) d[i1,i2] <- degree(dlist[[i1]][[i2]])
-  pd<-list(dim=c(k,j),degree=d,symb=symb,dlist=dlist)
-  class(pd)<-c("pMdlist","pMatrix")
-  return(pd) 
+  # build
+  pd <- list(dim=c(rows, columns), degree=d, symb=symb, dlist=dlist)
+  class(pd) <- c("pMdlist","pMatrix")
+  return(pd)
 }
 
 
@@ -149,5 +249,4 @@ function(k=3,j=3,rawData=list(polynomial(1:3)),symb="x",rand=FALSE,degree=c(1,1)
 
 
 # -----
-# fine  
-
+# fine
