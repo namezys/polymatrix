@@ -202,7 +202,7 @@ pMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL, by
   # fill empty elements
   rawData<-cycFill(rawData, data_size)
 
-  dlist <- vector("list", k)
+  dlist <- vector("list", rows)
   if (byrow) {
     for (i1 in 1:rows) {
       dlist[[i1]] <- vector("list", j)

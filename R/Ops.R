@@ -1,104 +1,248 @@
 # the Ops group method for pMatrix class // (2016.05.25)
-# the elements of the Ops group are: + - * / ^ < > <= >= != == %% %/% & | ! 
+# the elements of the Ops group are: + - * / ^ < > <= >= != == %% %/% & | !
 # --------------------------------------------------------------------------
-# library("pMatrix") 
+# library("pMatrix")
 
 "%*%"<-function(x,y)
  { if(!is.pMatrix(x)&!is.pMatrix(y)) base::"%*%"(x,y)
     else
 	if(!(is.pMatrix(x)&is.pMatrix(y))) stop("non-conformable arguments")
-     else 
+     else
       if(dim(x)[2]!=dim(y)[1]) stop("non-conformable arguments")
-       else 
+       else
         {
           k<-dim(x)[1]
           j<-dim(y)[2]
           x.y<-vector("list",k)
           for(i1 in 1:k) x.y[[i1]]<-vector("list",j)
           for(i1 in 1:k) for(i2 in 1:j) # row-column scalar product
-            x.y[[i1]][[i2]]<-pVsk(pMrow(x,i1),pMcol(y,i2)) 
-          d<-matrix(0,k,j)       
+            x.y[[i1]][[i2]]<-pVsk(pMrow(x,i1),pMcol(y,i2))
+          d<-matrix(0,k,j)
           for(i1 in 1:k) for(i2 in 1:j) d[i1,i2] <- degree(x.y[[i1]][[i2]])
           pd<-list(dim=c(k,j),degree=d,symb=x$symb,dlist=x.y)
-          class(pd) <- c("pMdlist","pMatrix")		  
+          class(pd) <- c("pMdlist","pMatrix")		
 		  return(pd)}	  }
 
 
-equal <- function(first, second)
+matrix_equal <- function(first, second)
 {
-  stopifnot(!missing(first), !missing(first))
+  stopifnot(!missing(first), !missing(second))
   stopifnot(is.pMatrix(second), is.pMatrix(second))
-  return(all(first$dim == second$dim) && all(first$degree == second$degree)
-         && all(first$const == second$const) && all(first$array == second$array));
+  stopifnot(all(class(first) == class(second)))
+  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  if (any(first$dim != second$dim)) {
+    return(FALSE)
+  }
+  if (any(first$degree != second$degree)) {
+    return(FALSE)
+  }
+  for(r in 1:first$dim[1]) {
+    for(c in 1:first$dim[2] ) {
+      if (first$dlist[[r]][[c]] != second$dlist[[r]][[c]]) {
+        return(FALSE);
+      }
+    }
+  }
+  return(TRUE);
 }
 
+scalar_equal <- function(first, second)
+{
+  stopifnot(!missing(first), !missing(second))
+  stopifnot(is.pMatrix(first), !is.pMatrix(second))
+  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  for(r in 1:first$dim[1]) {
+    for(c in 1:first$dim[2] ) {
+      if (first$dlist[[r]][[c]] != second) {
+        return(FALSE);
+      }
+    }
+  }
+  return(TRUE)
+}
 
-Ops.pMatrix <- 
-function(e1, e2)
+build_matrix <- function(rows, columns, dlist, symb)
+{
+  d <- matrix(0, rows, columns);
+  for (r in 1:rows) {
+    for(c in 1:columns) {
+      d[r, c] <- degree(dlist[[r]][[c]])
+    }
+  }
+
+  pd <- list(dim=c(rows, columns), degree=d, symb=symb, dlist=dlist)
+  class(pd) <- c("pMdlist","pMatrix")
+  return(pd)
+}
+
+matrix_b_op <- function(first, second, op)
+{
+  stopifnot(!missing(first), !missing(second))
+  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  stopifnot(all(class(first) == class(second)))
+  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  if (any(first$dim != second$dim)) {
+    stop("Argemnts have a diferent dim")
+  }
+  dlist <- vector("list", first$dim[1])
+  for(r in 1:first$dim[1]) {
+    dlist[[r]] = vector("list", second$dim[2])
+  }
+  for(r in 1:first$dim[1]) {
+    for(c in 1:first$dim[2]) {
+      dlist[[r]][[c]] = op(first$dlist[[r]][[c]], second$dlist[[r]][[c]])
+    }
+  }
+
+  return(build_matrix(first$dim[1], first$dim[2], dlist, first$symb))
+}
+
+scalar_b_op <- function(first, second, op)
+{
+  stopifnot(!missing(first), !missing(second))
+  stopifnot(is.pMatrix(first), !is.pMatrix(second))
+  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  dlist <- vector("list", first$dim[1])
+
+  for(r in 1:first$dim[1]) {
+    dlist[[r]] = vector("list", first$dim[2])
+    for(c in 1:first$dim[2]) {
+      dlist[[r]][[c]] <- op(first$dlist[[r]][[c]], second)
+    }
+  }
+
+  return(build_matrix(first$dim[1], first$dim[2], dlist, first$symb))
+}
+
+matrix_mul <- function(first, second)
+{
+  stopifnot(!missing(first), !missing(second))
+  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  stopifnot(all(class(first) == class(second)))
+  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+
+  if (first$dim[2] != second$dim[1]) {
+    stop("non-conformable arguments of matrix multiplication")
+  }
+
+  rows = first$dim[1]
+  columns = second$dim[2]
+  result <- vector("list", rows)
+  for(r in 1:rows) {
+    result[[r]] <- vector("list", columns)
+    for(c in 1:columns) {
+      v <- polynom::polynomial(0)
+      for(i in 1:first$dim[2]) {
+        v <- v + first$dlist[[r]][[i]] * second$dlist[[i]][[c]]
+      }
+      result[[r]][[c]] <- v
+    }
+  }
+
+  return(build_matrix(rows, columns, result, first$symb))
+}
+
+matrix_pow <- function(left, right)
+{
+  if (!is.pMatrix(left)) {
+    stop("Operator ^ is defined only for matrix as left operand")
+  }
+  if (!is.numeric(right)) {
+    stop("Operator ^ is defined only for integer as right operand")
+  }
+  if (right %% 1 != 0) {
+    stop("Operator ^ is defined only for integer as right operand")
+  }
+  if (right < 0) {
+    stop("Power of matrix can't be negative")
+  }
+  if (left$dim[1] != left$dim[2]) {
+    stop("Power of matrix is defined only for square matrixes")
+  }
+  if (right == 0) {
+    return(pMdiag(polynom::polynomial(1), left$dim[1], left$dim[2]))
+  }
+  if (right == 1) {
+    return(left)
+  }
+  r <- left
+  for(i in 2:right) {
+    r <- r * left
+  }
+  return(r)
+}
+
+Ops.pMatrix <- function(e1, e2)
 {
   # unari operators
   if(missing(e2)) {
-      return(
-        switch(.Generic,
-               "+"=pMconvert(e1,"pMdlist"),
-               "-"=pMsgn(pMconvert(e1,"pMdlist")),
-               stop("unsupported unary operation")))
+    result <- switch (.Generic,
+      "+" = pMconvert(e1,"pMdlist"),
+      "-" = pMsgn(pMconvert(e1,"pMdlist")),
+      stop("unsupported unary operation")
+    )
+    return(result)
   }
 
-  # ---- cmp
-  if (.Generic == '==') {
-    return(equal(e1, e2))
-  } else if (.Generic == '!=') {
-    return(!equal(e1, e2))
+  if (is.pMatrix(e1)) {
+    e1 <- pMconvert(e1, "pMdlist")
   }
 
-    if(!is.pMatrix(e1)) {ee<-e2;e2<-e1;e1<-ee;rm(ee)}
-    e1<-pMconvert(e1,"pMdlist")	
-    {                  
-    if(class(e2)[1]=="numeric") 
-        { e2 <- if(.Generic ==     "*") pMdiag(polynomial(e2),dim(e1)[2])
-                else if(.Generic %in% c("+","-")) pMgen.d(dim(e1)[1],dim(e1)[2],rawData=list(polynom::polynomial(e2))) # pMcons(polynomial(e2),dim(e1)[1],dim(e1)[2])
-                else if(.Generic ==     "^") abs(trunc(e2[1])) }
-      else { if(class(e2)[1]=="character"& .Generic == "*") e2 <- pMdiag(ch2pn(e2),dim(e1)[2])
-      else { if(class(e2)[1]=="polynomial"& .Generic == "*") e2 <- pMdiag(e2,dim(e1)[2])
-      else   if(class(e2)[1]%in%c("pMarray","pMbroad","pMcells","pMdlist"))
-                 e2<-pMconvert(e2,"pMdlist")
-               else { if(class(e2)=="matrix") e2<-M2pM(e2,"pMdlist")
-               else stop("The object on the left side is a 'pMatrix'
-                          but the object on right side 
-                          not a 'numeric','matrix' or 'pMatrix' object")} }}
-    }  
-    dim<-switch(.Generic,"+"=,"-"=,"^"= dim(e1),"*"=c(dim(e1)[1],dim(e2)[2]))
-    k<-dim[1]
-    j<-dim[2]
-    e1.e2<-vector("list", k)
-    for(i1 in 1:k) e1.e2[[i1]]<-vector("list",j)
-    e1.op.e2 <-
-        switch(.Generic,
-               "+" = { for(i1 in 1:k) for(i2 in 1:j) 
-                           e1.e2[[i1]][[i2]] <- e1$dlist[[i1]][[i2]]+e2$dlist[[i1]][[i2]];
-                       e1.e2},
-               "-" = { for(i1 in 1:k) for(i2 in 1:j) 
-                           e1.e2[[i1]][[i2]] <- e1$dlist[[i1]][[i2]]-e2$dlist[[i1]][[i2]];
-                       e1.e2},
-               "*" = { for(i1 in 1:k)
-                         for(i2 in 1:j) # row-column scalar product
-                           e1.e2[[i1]][[i2]]<-pVsk(pMrow(e1,i1),pMcol(e2,i2)) 
-                       e1.e2},
-               "^" = { e1.e2 <- if(e2==0) pMdiag(polynomial(1),k,k)$dlist
-                                  else if (e2==1) e1$dlist
-                                  else { prline<-
-                                         paste0("(e1",
-                                                paste0(rep("*e1",e2-1),collapse=""),
-                                                ")$dlist")
-                                  eval(parse(text=prline)) }
-                       e1.e2},
-           stop("unsupported operation on polynomial matrices")) 
-    d<-matrix(0,k,j)       
-    for(i1 in 1:k) for(i2 in 1:j) d[i1,i2] <- degree(e1.op.e2[[i1]][[i2]])
-    pd<-list(dim=dim,degree=d,symb=e1$symb,dlist=e1.op.e2)       
-    class(pd) <- c("pMdlist","pMatrix")
-    return(pd)
+  if (is.pMatrix(e2)) {
+    e2 <- pMconvert(e2, "pMdlist")
+  }
+
+  if (is.character(e1)) {
+    e1 <- ch2pn(e1)
+  }
+
+  if (is.character(e2)) {
+    e2 <- ch2pn(e2)
+  }
+
+  stopifnot(is.pMatrix(e1) || is.pMatrix(e2))
+
+  if (.Generic == "-") {
+    .Generic <- "+"
+    e2 <- -e2
+  }
+
+  if (.Generic == "^") {
+    return(matrix_pow(e1, e2))
+  }
+
+  if (!is.pMatrix(e1) || !is.pMatrix(e2)) {
+    # we got only one matrix, but all operation is communicative or anticomunicative
+    stopifnot(is.pMatrix(e1) || is.pMatrix(e2))
+    anitcomunicative <- FALSE
+    if (is.pMatrix(e2)) {
+      stopifnot(!is.pMatrix(e1))
+      tmp <- e1
+      e1 <- e2
+      e2 <- tmp
+    }
+
+    result <- switch (.Generic,
+      "==" = scalar_equal(e1, e2),
+      "!=" = !scalar_equal(e1, e2),
+      "+" = scalar_b_op(e1, e2, function(a, b) {a + b}),
+      "*" = scalar_b_op(e1, e2, function(a, b) {a * b}),
+      stop("Unknown operator")
+    )
+    return(result)
+  }
+
+  stopifnot(is.pMatrix(e1), is.pMatrix(e2))
+
+  result <- switch (.Generic,
+    "==" = matrix_equal(e1, e2),
+    "!=" = !matrix_equal(e1, e2),
+    "+" = matrix_b_op(e1, e2, function(a, b) {a + b}),
+    "*" = matrix_mul(e1, e2),
+    stop("Unknown operator")
+  )
+
+  return(result)
 }
 
 # ----
