@@ -4,8 +4,6 @@
 #  2. # print.pMvarma  - method for "pMvarma" class objects
 # ?3. # print.chpn     - print method for "chpn" class objects
 #  4. # pprt           - print function for "polynomial" class objects
-#  5. # pn2ch          - "polynomial" to "char" converter
-#  6. # ch2pn          - "char" to "polynomial" converter
 # --- # -----------
 
 
@@ -132,104 +130,6 @@ function(x, symb="x", shift=0, digits = getOption("digits"), decreasing = FALSE,
     }
 }
 
-# -----
-#  5. # pn2ch      - "polynomial" to "char" converter
-#
-pn2ch <-
-function(x,symb="x", digits = getOption("digits"), decreasing = FALSE, ...)
-{
-    p <- unclass(x)
-    lp <- length(p) - 1 # fokszam
-    names(p) <- 0:lp # felcimkezes
-    p <- p[p != 0] # csak a nem nullak
-    if(length(p) == 0) return("0") # ha elfogyott
-    if(decreasing) p <- rev(p) # ha forditva kell
-    signs <- ifelse(p < 0, "- ", "+ ") # az egyes tagok elojelei
-    signs[1] <- if(signs[1] == "- ") "-" else "" # az elso csak ha -
-    np <- names(p) # a hatvanyok
-    # p <- as.character(abs(p)) # az egyutthatok
-	  p <- abs(p)
-      pw <- vector("character",length(p));
-      for(j in 1:length(p)) pw[j]<-format(p[j], digits = digits);
-      p <- pw;
-      rm(pw)
-    p[p == "1" & np != "0"] <- "" # nem kell a 1 mint nem-konstans egyutthato
-    pow <- paste0(symb,"^", np)
-    pow[np == "0"] <- ""  # z^0
-    pow[np == "1"] <- symb # z^1 
-    stars <- rep.int("*", length(p))
-    stars[p == "" | pow == ""] <- ""
-    return(paste(signs, p, stars, pow, sep = "", collapse = " "))
-}
-
-
-# -----
-#  6. # ch2pn     - "character" to "polynomial" converter
-#
-ch2pn <- 
-function(chv,symb="x")
-  { w<-list()
-    for(k in 1:length(chv))
-      {
-
-        ch<-chv[k] 
-
-        if(class(ch)!="character")  stop("The argumet must be a 'character' class vector!")
-        ch<-paste(strsplit(ch," ",fixed=TRUE)[[1]],collapse="") # killing the spaces
-        if(ch=="") return(NULL)
-        if(substr(ch,1,1)=="+") ch<-substr(ch,2,nchar(ch))
-
-        ch <- strsplit(ch,"+",fixed=TRUE)[[1]] # break by "+"
-        ch <- strsplit(ch,"-",fixed=TRUE) # break by "-" => double list
-
-        if(ch[[1]][1]=="") ch[[1]]<-c(paste0("-",ch[[1]][2]),ch[[1]][-(1:2)]) # the first chr == "-"
-		# the term signs are "-" in the second order list
-        for(i in 1:length(ch)) 
-          if(length(ch[[i]])>1) for(j in 2:length(ch[[i]])) ch[[i]][j]<-paste0("-",ch[[i]][j]) 
-
-        if(length(ch[[1]])==0) return(NULL)
-        for(i in 1:length(ch)) 
-          for(j in 1:length(ch[[i]])) 
-            if(substr(ch[[i]][j],nchar(ch[[i]][j]),nchar(ch[[i]][j]))==symb) 
-              ch[[i]][j]<-paste0(ch[[i]][j],"^1") # write "x^1" in place "x"
-
-        for(i in 1:length(ch)) 
-          for(j in 1:length(ch[[i]])) 
-            if(!sum(charToRaw(ch[[i]][j])==charToRaw(symb)) & 
-			   class(type.convert(ch[[i]][j],as.is=TRUE))!="character") 
-              ch[[i]][j]<-paste0(ch[[i]][j],paste0("*",symb,"^0")) # write "x^0" if a term of degree 0 
-
-        ch<-unlist(ch)
-
-        for(i in 1:length(ch)) if(nchar(ch[i])>1&(substr(ch[i],1,2)==paste0("-",symb))) # change -x to -1*x
-          ch[i]<-paste0("-1*",substr(ch[i],2,nchar(ch[i])))
-
-        symb.terms<-NULL
-        for(i in 1:length(ch)) 
-          if(length(which(charToRaw(ch[i])==charToRaw(symb)))!=0)
-		     symb.terms<-c(symb.terms,i) 
-        if(length(symb.terms)==0) {w<-c(w,list(polynomial(0)));next}			 
-        ch<-ch[symb.terms]# the terms with "symb" 
-		
-        v<-NULL
-        for(i in 1:length(ch)) 
-          v<-c(v,which(charToRaw(ch[i])==charToRaw(symb))) # pozitions of "symb" 
-
-        if(length(v)!=length(ch) & length(v)!=0)  stop("Format error!")
-        ch[v==1]<-paste0("1*",ch[v==1]);v[v==1]<-3 # "1*" before "symb" if necessary
-        # coefs and degrees 
-        ch.coef<-ch.degr<-rep("",length(ch))
-        for(i in 1:length(ch)) ch.coef[i]<-substr(ch[i],1,v[i]-2)
-        for(i in 1:length(ch)) ch.degr[i]<-substr(ch[i],v[i]+2,nchar(ch[i]))
-        ch.coef<-type.convert(ch.coef)
-        ch.degr<-type.convert(ch.degr)
-
-        pch<-rep(0,max(ch.degr)+1)
-        pch[trunc(ch.degr+1)]<-ch.coef # the coefficient vector 
-        w<-c(w,list(polynomial(pch)))
-      }
-    return(if(length(w)-1) w else w[[1]])   
-    }
 
 # ----
 # fine
