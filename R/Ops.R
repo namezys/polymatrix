@@ -1,28 +1,7 @@
 # the Ops group method for pMatrix class // (2016.05.25)
-# the elements of the Ops group are: + - * / ^ < > <= >= != == %% %/% & | !
+# the elements of the Ops group are: == != + - * ^ %==% %!=% %+% %-% %*%
 # --------------------------------------------------------------------------
 # library("pMatrix")
-
-"%*%"<-function(x,y)
- { if(!is.pMatrix(x)&!is.pMatrix(y)) base::"%*%"(x,y)
-    else
-	if(!(is.pMatrix(x)&is.pMatrix(y))) stop("non-conformable arguments")
-     else
-      if(dim(x)[2]!=dim(y)[1]) stop("non-conformable arguments")
-       else
-        {
-          k<-dim(x)[1]
-          j<-dim(y)[2]
-          x.y<-vector("list",k)
-          for(i1 in 1:k) x.y[[i1]]<-vector("list",j)
-          for(i1 in 1:k) for(i2 in 1:j) # row-column scalar product
-            x.y[[i1]][[i2]]<-pVsk(pMrow(x,i1),pMcol(y,i2))
-          d<-matrix(0,k,j)
-          for(i1 in 1:k) for(i2 in 1:j) d[i1,i2] <- degree(x.y[[i1]][[i2]])
-          pd<-list(dim=c(k,j),degree=d,symb=x$symb,dlist=x.y)
-          class(pd) <- c("pMdlist","pMatrix")		
-		  return(pd)}	  }
-
 
 matrix_equal <- function(first, second)
 {
@@ -172,11 +151,11 @@ matrix_pow <- function(left, right)
   return(r)
 }
 
-Ops.pMatrix <- function(e1, e2)
+pOps <- function(e1, e2, operator)
 {
   # unari operators
   if(missing(e2)) {
-    result <- switch (.Generic,
+    result <- switch (operator,
       "+" = pMconvert(e1,"pMdlist"),
       "-" = pMsgn(pMconvert(e1,"pMdlist")),
       stop("unsupported unary operation")
@@ -202,12 +181,12 @@ Ops.pMatrix <- function(e1, e2)
 
   stopifnot(is.pMatrix(e1) || is.pMatrix(e2))
 
-  if (.Generic == "-") {
-    .Generic <- "+"
+  if (operator == "-") {
+    operator <- "+"
     e2 <- -e2
   }
 
-  if (.Generic == "^") {
+  if (operator == "^") {
     return(matrix_pow(e1, e2))
   }
 
@@ -222,7 +201,7 @@ Ops.pMatrix <- function(e1, e2)
       e2 <- tmp
     }
 
-    result <- switch (.Generic,
+    result <- switch (operator,
       "==" = scalar_equal(e1, e2),
       "!=" = !scalar_equal(e1, e2),
       "+" = scalar_b_op(e1, e2, function(a, b) {a + b}),
@@ -234,7 +213,7 @@ Ops.pMatrix <- function(e1, e2)
 
   stopifnot(is.pMatrix(e1), is.pMatrix(e2))
 
-  result <- switch (.Generic,
+  result <- switch (operator,
     "==" = matrix_equal(e1, e2),
     "!=" = !matrix_equal(e1, e2),
     "+" = matrix_b_op(e1, e2, function(a, b) {a + b}),
@@ -243,6 +222,38 @@ Ops.pMatrix <- function(e1, e2)
   )
 
   return(result)
+}
+
+# define custom operators
+
+Ops.pMatrix <- function(e1, e2)
+{
+  return(pOps(e1, e2, .Generic))
+}
+
+"%==%" <- function(left, right)
+{
+  return(pOps(left, right, "=="))
+}
+
+"%!=%" <- function(left, right)
+{
+  return(pOps(left, right, "!="))
+}
+
+"%+%" <- function(left, right)
+{
+  return(pOps(left, right, "+"))
+}
+
+"%-%" <- function(left, right)
+{
+  return(pOps(left, right, "-"))
+}
+
+"%*%" <- function(left, right)
+{
+  return(pOps(left, right, "*"))
 }
 
 # ----
