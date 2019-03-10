@@ -104,18 +104,18 @@ test_that("sclalar operators", {
 
   expect_true(a * 1 == a)
   expect_true(1 * a == a)
-  expect_true(a %*% 1 == a)
-  expect_true(1 %*% a == a)
+  expect_true(a %x% 1 == a)
+  expect_true(1 %x% a == a)
 
   aMul2 <- pMgen.d(2, 3, list(2 * 1, 2 * p(c(2, 3)), 2 * 3, 2 * 1, 2 * p(c(1, 3))))
   expect_true(a * 2 == aMul2)
   expect_true(2 * a == aMul2)
-  expect_true(a %*% 2 == aMul2)
-  expect_true(2 %*% a == aMul2)
+  expect_true(a %x% 2 == aMul2)
+  expect_true(2 %x% a == aMul2)
 
   aMul1x1 <- pMgen.d(2, 3, list(p(c(1, 1)), p(c(2, 5, 3)), p(c(3, 3)), p(c(1, 1)), p(c(1, 4,3))))
-  expect_true(a %*% p(c(1, 1)) == aMul1x1)
-  expect_true(p(c(1, 1)) %*% a == aMul1x1)
+  expect_true(a %x% p(c(1, 1)) == aMul1x1)
+  expect_true(p(c(1, 1)) %x% a == aMul1x1)
 })
 
 test_that("matrix operators", {
@@ -136,7 +136,7 @@ test_that("matrix mult", {
   b <-   pMgen.d(3, 2, list(p(c(1, 3)),  2,          p(c(2, 3)),   3, p(c(1, 3))))
   aMULb <- pMgen.d(2, 2, list(p(c(13, 14, 3)), p(c(6, 12, 9)), p(c(9, 19, 3)), p(c(8, 15))))
   expect_true(a * b == aMULb)
-  expect_true(a %*% b == aMULb)
+  expect_true(a %x% b == aMULb)
 })
 
 test_that("matrix power", {

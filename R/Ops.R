@@ -251,7 +251,7 @@ Ops.pMatrix <- function(e1, e2)
   return(pOps(left, right, "-"))
 }
 
-"%*%" <- function(left, right)
+"%x%" <- function(left, right)
 {
   return(pOps(left, right, "*"))
 }

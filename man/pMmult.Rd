@@ -1,6 +1,6 @@
-\name{\%*\%}
+\name{\%x\%}
 
-\alias{\%*\%}
+\alias{\%x\%}
 
 \title{Multiplication of two \code{pMatrix} class polynomial matrices}
 
@@ -9,11 +9,11 @@ Matrix multipliction for \code{pMatrix} class polynomial matrices.
 It multiplies the two matrices only, if they are conformable. 
 }
 
-\usage{x\%*\%y}
+\usage{left \%x\% right}
 
 \arguments{
-\item{x}{a \code{pMatrix} class object} 
-\item{y}{a \code{pMatrix} class object} 
+\item{left}{a \code{pMatrix} class object, scalar number or polynomial} 
+\item{right}{a \code{pMatrix} class object, scalar number or polynomial} 
 }
 
 \details{The number of columns in \code{x} must be equal to number of rows in \code{y}.}
@@ -27,7 +27,7 @@ the \code{pMatrix} class \code{x} and \code{y} matrices.}
 
 \examples{
 pm<-pMgen.a()
-pm\%*\%t(pm)
+pm * t(pm)
 
 rm(pm)
 
@@ -35,13 +35,12 @@ rm(pm)
 a <- matrix(1:12,3,4)
 b <- matrix(1:20,4,5)
 a\%*\%b
-base::"\%*\%"(a,b)
 
 a<-M2pM(a)
 b<-M2pM(b)
-a\%*\%b
+a * b
 
-pM2M(a)\%*\%pM2M(b)
+pM2M(a) \%*\% pM2M(b)
 
 rm(a,b)
 

@@ -27,7 +27,7 @@ CanForm.final <- # VARMA conversion to fimal form
 function(pM)
   {
     AR<-pMdiag(list(pMdet(pM$AR)),dim(pM$AR)) 
-    MA<-pMadj(pM$AR)%*%pM$MA
+    MA<-pMadj(pM$AR)%x%pM$MA
     pM$AR<-AR	
     pM$MA<-MA
     pM$degree<-c(degree(AR),degree(MA))

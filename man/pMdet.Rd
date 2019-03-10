@@ -27,7 +27,7 @@ d11<-elem(D,1,1);d12<-elem(D,1,2);d13<-elem(D,1,3)
 d21<-elem(D,2,1);d22<-elem(D,2,2);d23<-elem(D,2,3)
 d31<-elem(D,3,1);d32<-elem(D,3,2);d33<-elem(D,3,3)
 
-pMgen.d(3,3,rawData=list(d11,d12,d13,d21,d22,d23,d31,d32,d33),degree=1,symb="x",byrow=TRUE)
+pMgen.d(3, 3, rawData=list(d11,d12,d13,d21,d22,d23,d31,d32,d33), symb="x", byrow=TRUE)
 
 # direct det calculation
 d11*d22*d33+d12*d23*d31+d13*d21*d32-(d13*d22*d31+d11*d23*d32+d12*d21*d33)

@@ -26,7 +26,7 @@ export("pMgen","pMgen.a","pMgen.b","pMgen.c","pMgen.d","pMgen.varma",
        "CanForm",
        "proper",
        "is.pMatrix",
-       "%*%", 
+       "%x%", 
 	   "MTS2pM")
 
 S3method("diag","list")

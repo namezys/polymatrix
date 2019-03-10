@@ -24,10 +24,10 @@ pMsub(A,1,1)*pMsub(A,2,2)-pMsub(A,1,2)*pMsub(A,2,1)
 (B<-pMadj(A))
 # 11 + 12*x                  -7 - 8*x - 9*x^2 - 10*x^3 
 #  -4 - 5*x - 6*x^2           1 + 2*x + 3*x^2
-A\%*\%B         # diagonal
+A*B         # diagonal
 pMdet(A)
 
-B\%*\%A         
+B*A         
 pMdet(A)
 
 # real matrices

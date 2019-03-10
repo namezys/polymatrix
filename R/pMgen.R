@@ -185,7 +185,7 @@ pMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL, by
       degree <- matrix(sample(0:3, data_size, c(1, 2, 3, 2), replace=TRUE), rows, columns)
     }
     if (!is.matrix(degree)) {
-      degree <- matrix(degree, raws, columns)
+      degree <- matrix(degree, rows, columns)
     }
     rawData <- generate_random_d(rand=rand, degree=degree, byrow=byrow, data_size=data_size)
   } else {
