@@ -1,17 +1,6 @@
 # -----
-# is.pMatrix - consistecy check of a pMatrix object  
 # pMstr      - consistecy check of a pMatrix object  
 # -----
-
-
-
-is.pMatrix <-
-function(x)   
-  { return(
-	 if(sum(class(x)=="pMatrix")+sum(class(x)%in%c("pMarray","pMbroad","pMcells","pMdlist"))==2)
-	    TRUE else FALSE)
-  }
-
 
 pMstr <-
 function(pm) 

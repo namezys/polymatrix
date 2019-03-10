@@ -17,12 +17,39 @@
 #     # rowMin    - row minimum values of a matrix
 # 13. # cycFill   - cyclic fill by a given material
 # 14. # pMdiag    - diagonal polynomial matrix
+#      is.pMatrix - consistecy check of a pMatrix object  
 # --- # -----------
 
+is.pMatrix.pMarray <- function(x)
+{
+  return(all(class(x) == c("pMarray", "pMatrix")))
+}
+
+is.pMatrix.pMbroad <- function(x)
+{
+  return(all(class(x) == c("pMbroad", "pMatrix")))
+}
+
+is.pMatrix.pMcells <- function(x)
+{
+  return(all(class(x) == c("pMcells", "pMatrix")))
+}
+
+is.pMatrix.pMdlist <- function(x)
+{
+  return(all(class(x) == c("pMdlist", "pMatrix")))
+}
+
+is.pMatrix <- function(x)   
+{ 
+  return(is.pMatrix.pMarray(x) || is.pMatrix.pMbroad(x) 
+         || is.pMatrix.pMcells(x) || is.pMatrix.pMdlist(x))
+}
 
 
 # -----------------
 #  1. # pMcol     - a column of a polynomial matrix
+
 
 pMcol <-
 function(pm,which=1)
