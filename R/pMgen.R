@@ -133,7 +133,7 @@ generate_random_d <- function(rand, degree, byrow, data_size)
 {
   if (is.null(rand) || rand == FALSE) {
     # use default
-    return(list(polynomial(1:3)))
+    return(list(polynom::polynomial(1:3)))
   }
   # we have to generate rawData
   if (is.logical(rand)) {
@@ -160,7 +160,7 @@ convert_to_polynome <- function(data)
 {
   result = vector("list", length(data))
   for(i in 1:length(data)) {
-    if (is.polynomial(data[[i]])) {
+    if (polynom::is.polynomial(data[[i]])) {
       result[[i]] <- data[[i]]
     } else {
       result[[i]] <- polynom::polynomial(data[[i]])

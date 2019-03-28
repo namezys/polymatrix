@@ -346,6 +346,33 @@ function(p,k,symb="x")
     return(pMgen.d(k,k,rawData=rawData,symb=symb))
   }
 
+GCD <- function (...) {
+  UseMethod("GCD")
+}
+
+GCD.pMatrix <- function(x, ...)
+{
+  if(missing("x")) {
+    stop("Expected pMatrix")
+  }
+  x <- pMconvert(x, "pMdlist")
+  per_rows <- lapply(x$dlist, function(x) {polynom::GCD(polynom::as.polylist(x))})
+  return(polynom::GCD(polynom::as.polylist(per_rows)))
+}
+
+LCM <- function (...) {
+  UseMethod("LCM")
+}
+
+LCM.pMatrix <- function(x, ...)
+{
+  if(missing("x")) {
+    stop("Expected pMatrix")
+  }
+  x <- pMconvert(x, "pMdlist")
+  per_rows <- lapply(x$dlist, function(x) {polynom::LCM(polynom::as.polylist(x))})
+  return(polynom::LCM(polynom::as.polylist(per_rows)))
+}
   
 # -----------------
 # fine
