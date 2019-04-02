@@ -8,31 +8,31 @@ test_that("is.pMatrix", {
   expect_false(is.pMatrix.pMcells(pMgen.a()))
   expect_false(is.pMatrix.pMdlist(pMgen.a()))
   expect_true(is.pMatrix(pMgen.a()))
-  
+
   expect_false(is.pMatrix.pMarray(pMgen.b()))
   expect_true(is.pMatrix.pMbroad(pMgen.b()))
   expect_false(is.pMatrix.pMcells(pMgen.b()))
   expect_false(is.pMatrix.pMdlist(pMgen.b()))
   expect_true(is.pMatrix(pMgen.b()))
-  
+
   expect_false(is.pMatrix.pMarray(pMgen.c()))
   expect_false(is.pMatrix.pMbroad(pMgen.c()))
   expect_true(is.pMatrix.pMcells(pMgen.c()))
   expect_false(is.pMatrix.pMdlist(pMgen.c()))
   expect_true(is.pMatrix(pMgen.c()))
-  
+
   expect_false(is.pMatrix.pMarray(pMgen.d()))
   expect_false(is.pMatrix.pMbroad(pMgen.d()))
   expect_false(is.pMatrix.pMcells(pMgen.d()))
   expect_true(is.pMatrix.pMdlist(pMgen.d()))
   expect_true(is.pMatrix(pMgen.d()))
-  
+
   expect_false(is.pMatrix.pMarray(1))
   expect_false(is.pMatrix.pMbroad(1))
   expect_false(is.pMatrix.pMcells(1))
   expect_false(is.pMatrix.pMdlist(1))
   expect_false(is.pMatrix(1))
-  
+
   expect_false(is.pMatrix.pMarray(""))
   expect_false(is.pMatrix.pMbroad(""))
   expect_false(is.pMatrix.pMcells(""))
@@ -50,6 +50,6 @@ test_that("GCD/LCM", {
   expect_equal(LCM(b), p(c(3, 9)))
 
   c <- pMgen.d(3, 2, list(p(c(1, 3)),  p(c(1, 6, 9)), p(c(1, 0, -9))))
-  expect_equal(GCD(b), p(1, 3))
-  expect_equal(LCM(b), p(c(1, 3, -9, 27)) / 2)
+  expect_equal(GCD(c), p(c(1, 3)))
+  expect_equal(LCM(c), p(c(1, 3, -9, -27)) / 2)
 })
