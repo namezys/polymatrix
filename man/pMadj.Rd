@@ -8,7 +8,7 @@
 \usage{pMadj(pm)}
 \arguments{\item{pm}{a 'pMatrix' class object} }
 
-\details{more details than the description above }
+\details{more details than the description above will be here }
 
 \value{The adjugate of the given polynomial matrix}
 
