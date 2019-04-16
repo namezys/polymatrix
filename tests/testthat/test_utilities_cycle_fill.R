@@ -1,3 +1,5 @@
+context("utils_cyc_fill")
+
 test_that("new_cycFill with numerical data", {
   a = new_cycFill(c(1,2,3,4), 6)
   expect_equal(a, c(1,2,3,4,1,2))
