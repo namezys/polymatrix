@@ -50,3 +50,11 @@ test_that("pMgen without params", {
   expect_equal(random_matrix$dim, c(2, 3))
   expect_true(all(random_matrix$degree <= 3))
 })
+
+test_that("cycFill with numerical data", {
+  a = cycFill(c(1,2,3,4), 6)
+  expect_equal(a, c(1,2,3,4,1,2))
+  
+  b = cycFill(c(5,6,7), 8)
+  expect_equal(b, c(5,6,7,5,6,7,5,6))
+})
