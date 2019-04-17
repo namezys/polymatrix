@@ -15,3 +15,13 @@ test_that("new_cycFill with polynomail data", {
   d = new_cycFill((polynomial(c(5,11))), 13)
   expect_equal(d, c(5,11,5,11,5,11,5,11,5,11,5,11,5))
 })
+
+test_that("new_cycFill with list of polynomails data", {
+  e = new_cycFill(list(polynomial(c(5,9)), polynomial(c(2,11)), polynomial(c(9,14))), 6)
+  expect_equal(e[[1]], polynomial(c(5,9)))
+  expect_equal(e[[2]], polynomial(c(2,11)))
+  expect_equal(e[[3]], polynomial(c(9,14)))
+  expect_equal(e[[4]], polynomial(c(5,9)))
+  expect_equal(e[[5]], polynomial(c(2,11)))
+  expect_equal(e[[6]], polynomial(c(9,14)))
+})
