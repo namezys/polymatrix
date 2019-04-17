@@ -309,17 +309,43 @@ function(m)
 # 13. # cycFill   - cyclic fill a vector//list of given length 
 
 cycFill <-
-function(u,m)
-  { n<-length(u)
-    if(m!=n) 
-      { v<- if(class(u)=="list") list() else NULL
-        if(m%/%n>=1) for(i in 1:(m%/%n)) v[(i-1)*n+(1:n)]<-u[1:n]
-        if(m%%n) v[n*m%/%n+(1:(m%%n))]<-u[1:(m%%n)]
-      } else
-      v<-u
-   return(v)
+function(data, size)
+{ 
+  lengthOfData <- length(data)
+    
+  if(size == lengthOfData) {
+    return(data)
   }
-
+    
+  stopifnot(class(data) == "list" || class(data) == "numeric" || class(data) == "polynomial" 
+            || class(data) == "matrix" || class(data) == "array" || class(data) == "integer")
+    
+  if(class(data) == "list") {
+    dataToReturn <- list()
+  } else if(class(data) == "matrix") {
+    dataToReturn <- matrix()
+  } else if(class(data) == "array") {
+    dataToReturn <- array()
+  } else {
+    dataToReturn <- c()
+  }
+    
+   if(size %/% lengthOfData >= 1) {
+     for(i in 1:(size %/% lengthOfData)) {
+      offset <- (i-1) * lengthOfData
+      dataToReturn[offset + (1:lengthOfData)] <- data[1:lengthOfData]
+    }
+   }
+    
+    
+   if(size %% lengthOfData) {
+     offset <- lengthOfData * size %/% lengthOfData
+     chunk_size <- size %% lengthOfData
+    dataToReturn[offset + (1:(chunk_size))] <- data[1:(chunk_size)]
+   }
+    
+   return(dataToReturn)
+ }
 
 # -----------------
 # 14. # pMdiag    - diagonal polynomial matrix
@@ -376,38 +402,3 @@ LCM.pMatrix <- function(x, ...)
   
 # -----------------
 # fine
-
-new_cycFill <-
-function(data, size)
-{ 
-  lengthOfData <- length(data)
-  
-  if(size == lengthOfData) {
-    return(data)
-  }
-  
-  stopifnot(class(data) == "list" || class(data) == "numeric" || class(data) == "polynomial")
-  
-  if(class(data) == "list") {
-    dataToReturn <- list()
-  } else {
-    dataToReturn <- c()
-  }
-      
-  if(size %/% lengthOfData >= 1) {
-    for(i in 1:(size %/% lengthOfData)) {
-      offset <- (i-1) * lengthOfData
-      dataToReturn[offset + (1:lengthOfData)] <- data[1:lengthOfData]
-    }
-  }
-      
-  
-  if(size %% lengthOfData) {
-    offset <- lengthOfData * size %/% lengthOfData
-    chunk_size <- size %% lengthOfData
-    dataToReturn[offset + (1:(chunk_size))] <- data[1:(chunk_size)]
-  }
-    
-  return(dataToReturn)
-}
-
