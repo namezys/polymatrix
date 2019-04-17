@@ -378,11 +378,11 @@ LCM.pMatrix <- function(x, ...)
 # fine
 
 new_cycFill <-
-function(data, number)
+function(data, size)
 { 
   lengthOfData <- length(data)
   
-  if(number == lengthOfData) {
+  if(size == lengthOfData) {
     return(data)
   }
   
@@ -394,14 +394,18 @@ function(data, number)
     dataToReturn <- c()
   }
       
-  if(number %/% lengthOfData >= 1) {
-    for(i in 1:(number %/% lengthOfData)) {
-      dataToReturn[(i-1) * lengthOfData + (1:lengthOfData)] <- data[1:lengthOfData]
+  if(size %/% lengthOfData >= 1) {
+    for(i in 1:(size %/% lengthOfData)) {
+      offset <- (i-1) * lengthOfData
+      dataToReturn[offset + (1:lengthOfData)] <- data[1:lengthOfData]
     }
   }
       
-  if(number %% lengthOfData) {
-    dataToReturn[lengthOfData * number %/% lengthOfData + (1:(number %% lengthOfData))] <- data[1:(number %% lengthOfData)]
+  
+  if(size %% lengthOfData) {
+    offset <- lengthOfData * size %/% lengthOfData
+    chunk_size <- size %% lengthOfData
+    dataToReturn[offset + (1:(chunk_size))] <- data[1:(chunk_size)]
   }
     
   return(dataToReturn)
