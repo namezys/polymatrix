@@ -378,32 +378,32 @@ LCM.pMatrix <- function(x, ...)
 # fine
 
 new_cycFill <-
-function(u,m)
+function(data, number)
 { 
-  n <- length(u)
-    
-  if(m != n) { 
-      
-    if(class(u) == "list") {
-      v <- list()
-    } else {
-      v <- NULL
-    }
-      
-    if(m %/% n >= 1) {
-      for(i in 1:(m %/% n)) {
-        v[(i-1) * n + (1:n)] <- u[1:n]
-      }
-    }
-      
-    if(m %% n) {
-      v[n * m %/% n + (1:(m %% n))] <- u[1:(m %% n)]
-    }
-      
+  lengthOfData <- length(data)
+  
+  if(number == lengthOfData) {
+    return(data)
+  }
+  
+  stopifnot(class(data) == "list" || class(data) == "numeric" || class(data) == "polynomial")
+  
+  if(class(data) == "list") {
+    dataToReturn <- list()
   } else {
-    v <- u
+    dataToReturn <- c()
+  }
+      
+  if(number %/% lengthOfData >= 1) {
+    for(i in 1:(number %/% lengthOfData)) {
+      dataToReturn[(i-1) * lengthOfData + (1:lengthOfData)] <- data[1:lengthOfData]
+    }
+  }
+      
+  if(number %% lengthOfData) {
+    dataToReturn[lengthOfData * number %/% lengthOfData + (1:(number %% lengthOfData))] <- data[1:(number %% lengthOfData)]
   }
     
-  return(v)
+  return(dataToReturn)
 }
 
