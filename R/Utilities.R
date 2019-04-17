@@ -377,3 +377,33 @@ LCM.pMatrix <- function(x, ...)
 # -----------------
 # fine
 
+new_cycFill <-
+function(u,m)
+{ 
+  n <- length(u)
+    
+  if(m != n) { 
+      
+    if(class(u) == "list") {
+      v <- list()
+    } else {
+      v <- NULL
+    }
+      
+    if(m %/% n >= 1) {
+      for(i in 1:(m %/% n)) {
+        v[(i-1) * n + (1:n)] <- u[1:n]
+      }
+    }
+      
+    if(m %% n) {
+      v[n * m %/% n + (1:(m %% n))] <- u[1:(m %% n)]
+    }
+      
+  } else {
+    v <- u
+  }
+    
+  return(v)
+}
+
