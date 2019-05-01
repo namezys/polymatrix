@@ -410,10 +410,10 @@ function(matrix)
     stop("The 'colMin' function requires a 'matrix' class argument!")
   }
   
-  dimension <- dim(matrix)[2]
-  numVector <- vector("numeric", dimension)
+  size <- dim(matrix)[2]
+  numVector <- vector("numeric", size)
   
-  for(i in 1:dimension) {
+  for(i in 1:size) {
     numVector[i] <- min(matrix[, i])
   }
   
@@ -427,10 +427,10 @@ function(matrix)
     stop("The 'rowMin' function requires a 'matrix' class argument!")
   }
   
-  dimension <- dim(matrix)[1]
-  numVector <- vector("numeric", dimension)
+  size <- dim(matrix)[1]
+  numVector <- vector("numeric", size)
   
-  for(i in 1:dimension) {
+  for(i in 1:size) {
     numVector[i] <- min(matrix[i,])
   }
   
