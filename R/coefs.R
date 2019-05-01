@@ -1,5 +1,5 @@
 # ---
-# list of coef matrices (as in pMcells class) 
+# list of coef matrices (as in polyMcells class) 
 
 coefs <-
 function(p,degree="all") UseMethod("coefs")
@@ -11,11 +11,11 @@ function(p,degree="all")
       else return(as.numeric(p)[degree])
   }
 
-coefs.pMatrix <-
+coefs.polyMatrix <-
 function(p,degree="all")  
   { 
-    if(degree[1]=="all") return(pMconvert(p,"pMcells")$cells)
-      else return(pMconvert(p,"pMcells")$cells[degree]) 
+    if(degree[1]=="all") return(polyMconvert(p,"polyMcells")$cells)
+      else return(polyMconvert(p,"polyMcells")$cells[degree]) 
   }
 
 

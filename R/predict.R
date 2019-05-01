@@ -22,21 +22,21 @@ function(object,M,meth=c("as.matrix","as.the.polynom.package"),...)
                                pc <- rev(pc)
                                for(pcj in pc) w <- x * w + pcj
                                w }},
-               "pMatrix" = { w <- pMdiag(polynom::polynomial(0),dim(M)[1])
+               "polyMatrix" = { w <- pMdiag(polynom::polynomial(0),dim(M)[1])
                              pcr<-rev(pc)
                              for(pcrj in pcr) 
                                w <- w*x+pMdiag(polynom::polynomial(pcrj),dim(M)[1])
                              w },
-               stop("The argument not a real, complex matrix or 'pMatrix' class object!")
+               stop("The argument not a real, complex matrix or 'polyMatrix' class object!")
                              )
      return(v) 
 }
 
 
-predict.pMatrix <-
+predict.polyMatrix <-
 function(object, M, ...)
 { 
-    pd <- pMconvert(object,"pMdlist")
+    pd <- polyMconvert(object,"polyMdlist")
     k <- dim(pd)[1]
     j <- dim(pd)[2]
     v <- matrix(NA, k, j)

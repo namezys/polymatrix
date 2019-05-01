@@ -1,5 +1,5 @@
 # -----
-# pMstr      - consistecy check of a pMatrix object  
+# pMstr      - consistecy check of a polyMatrix object  
 # -----
 
 pMstr <-
@@ -7,8 +7,8 @@ function(pm)
    { 
      # the class attribute 
      cl<-class(pm)
-     if (length(cl)!=2|cl[2]!="pMatrix"|
-         !(cl[1]%in%c("pMarray","pMbroad","pMcells","pMdlist"))) 
+     if (length(cl)!=2|cl[2]!="polyMatrix"|
+         !(cl[1]%in%c("polyMarray","polyMbroad","polyMcells","polyMdlist"))) 
        stop("Problem with the object class!")
      cl<-substr(cl[1],3,3)
      
@@ -18,16 +18,16 @@ function(pm)
      
      # presence of the apropriate data arguments
      if (cl=="a"&(is.null(pm$const)|is.null(pm$array)))
-       stop("The object is in 'pMarray' form, but the data part absent!")
+       stop("The object is in 'polyMarray' form, but the data part absent!")
 
      if (cl=="b"&is.null(pm$broad))
-       stop("The object is in 'pMbroad' form, but the data part absent!")
+       stop("The object is in 'polyMbroad' form, but the data part absent!")
 
      if (cl=="c"&is.null(pm$cells))
-       stop("The object is in 'pMcells' form, but the data part absent!")
+       stop("The object is in 'polyMcells' form, but the data part absent!")
 
      if (cl=="d"&is.null(pm$dlist))
-       stop("The object is in 'pMdlist' form, but the data part absent!")
+       stop("The object is in 'polyMdlist' form, but the data part absent!")
        
      # the structure of the data part
      hibas<-FALSE

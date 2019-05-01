@@ -1,9 +1,9 @@
-\name{predict.pMatrix}
-\alias{predict.pMatrix}
+\name{predict.polyMatrix}
+\alias{predict.polyMatrix}
 \title{Calculate the value of a polynomial for real, complex and matrix argument}
 \description{ ... }
 
-\usage{\method{predict}{pMatrix}(object,M,\dots)}
+\usage{\method{predict}{polyMatrix}(object,M,\dots)}
 
 \arguments{\item{object}{    ~~Describe \code{polynomial} here~~}
            \item{M}{    ~~Describe \code{polynomial} here~~}
@@ -25,7 +25,7 @@
 \examples{
 
 # predict the value of a polynomial matrix at a real or complex value
-pm<-pMgen.d(2,2,
+pm<-polyMgen.d(2,2,
   rawData=list(polynom::polynomial(1),
                polynom::polynomial(c(0,0,1)),
                polynom::polynomial(c(0,1)),

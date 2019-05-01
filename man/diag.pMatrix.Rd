@@ -1,21 +1,21 @@
-\name{diag.pMatrix}
-\alias{diag.pMatrix}
+\name{diag.polyMatrix}
+\alias{diag.polyMatrix}
 \alias{diag.list}
 
-\title{Extract the diagonal of a pMatrix, or construct a diagonal pMatrix}
+\title{Extract the diagonal of a polyMatrix, or construct a diagonal polyMatrix}
 
 \description{ ... }
 
 \usage{
 \method{diag}{list}(v,k,j=k)
-\method{diag}{pMatrix}(pm,k=dim(pm)[1],j=dim(pm)[2],type=c("list","pMatrix"))
+\method{diag}{polyMatrix}(pm,k=dim(pm)[1],j=dim(pm)[2],type=c("list","polyMatrix"))
 }
 
 \arguments{
 \item{v}{the \code{list} class input material for the composed diagonal matrix}
 \item{k}{number of rows in the output object}
 \item{j}{number of columns in the output object}
-\item{pm}{the \code{pMatrix} class input matrix}
+\item{pm}{the \code{polyMatrix} class input matrix}
 \item{type}{the required form and class of the result}
 }
 
@@ -23,24 +23,24 @@
 The \code{diag} has two distinct usages.
 When the class of the first input parameter is
 \itemize{
-    \item {'\code{list}', then returns a pMatrix with the given diagonal and 
+    \item {'\code{list}', then returns a polyMatrix with the given diagonal and 
     zero off-diagonal entries.}
-    \item {'\code{pMatrix}', then it extracts the diagonal.}
+    \item {'\code{polyMatrix}', then it extracts the diagonal.}
 }
 Note. 
 In the first case the elements of the list must be \code{polynomial} class objects.   
-In the second case the result is a \code{list} or \code{pMatrix} class object
+In the second case the result is a \code{list} or \code{polyMatrix} class object
 determined by the value of the \code{type} parameter.
 }
 
 \value{The returned value is a 
-  \item{list}{class object, when it extracts the diagonal from a \code{pMatrix}, and the 
-  value of \code{type} isn't \code{"pMatrix"}.}
-  \item{pMatrix}{class object, when it compose a matrix from the given diagonal or when it
-  catch the diagonal of a \code{pMatrix}, and \code{type="pMatrix"}.}
+  \item{list}{class object, when it extracts the diagonal from a \code{polyMatrix}, and the 
+  value of \code{type} isn't \code{"polyMatrix"}.}
+  \item{polyMatrix}{class object, when it compose a matrix from the given diagonal or when it
+  catch the diagonal of a \code{polyMatrix}, and \code{type="polyMatrix"}.}
   }
 
-\seealso{\code{\link{pMatrix-package}}.}
+\seealso{\code{\link{polyMatrix-package}}.}
 
 \keyword{internal}
 
@@ -64,11 +64,11 @@ diag(v,ncol=4)
 
 # first kind usage: catch the diagonal elements
 
-px<-pMgen.d(3,3,rawData=ch2pn(
+px<-polyMgen.d(3,3,rawData=ch2pn(
      c("-3 + z^2","2 + 4*z","-z^2",
        "1","2","3 + z",
        "2*z","0","2 - 3*z"),"z"),byrow=TRUE)
-class(px) # "pMdlist" "pMatrix"
+class(px) # "polyMdlist" "polyMatrix"
 px
 
 w<-diag(px) # the default: type="list"
@@ -79,12 +79,12 @@ class(w) # "list"
 # $ :Class 'polynomial'  num [1:2] 2 -3
 w
 
-w<-diag(px,type="pMatrix")
-class(w) # "pMdlist" "pMatrix"
+w<-diag(px,type="polyMatrix")
+class(w) # "polyMdlist" "polyMatrix"
 w
 
 
-# second kind usage: compose a diagonal pMatrix
+# second kind usage: compose a diagonal polyMatrix
 
 ci<-c(4,1,3,2)
 v<-vector("list",length(ci))
@@ -100,7 +100,7 @@ diag(v,5)
 diag(v,3,5)
 
 pd<-diag(v,4,5) 
-class(pd) # "pMdlist" "pMatrix"
+class(pd) # "polyMdlist" "polyMatrix"
 pd
 
 rm(ci,i,m,pd,px,v,w)

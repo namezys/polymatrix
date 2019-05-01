@@ -4,8 +4,8 @@
 \description{If \code{pMy} is \code{NULL}, then the result is the sum of squares of the elements of \code{pMy}. Otherwise it is equals by the scalar product ot the two given polynomial vectors.}
 \usage{pVsk(pMx, pMy=NULL)}
 \arguments{
-      \item{pMx}{a \code{pMatrix} class row or column vector}
-      \item{pMy}{a \code{pMatrix} class row or column vector}    
+      \item{pMx}{a \code{polyMatrix} class row or column vector}
+      \item{pMy}{a \code{polyMatrix} class row or column vector}    
 }
 
 \details{The two vectors must be the same length.}
@@ -18,7 +18,7 @@
 \keyword{math}
 
 \examples{
-A <- pMgen.d(2,2,rawData=ch2pn(c("-3","2+4*z","-z^2","1"),"z"))
+A <- polyMgen.d(2,2,rawData=ch2pn(c("-3","2+4*z","-z^2","1"),"z"))
 A
 
 pMcol(A,1) # ("-3" , "2 + 4*x")

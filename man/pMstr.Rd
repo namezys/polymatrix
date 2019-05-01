@@ -1,13 +1,13 @@
 \name{pMstr}
 \alias{pMstr}
-\title{pMatrix object consistency check}
+\title{polyMatrix object consistency check}
 \description{ ... }
 \usage{pMstr(pm) }
 \arguments{
   \item{pm}{a polynomial matrix}   }
-\details{Checks the consistency of a \code{pMatrix} object.
-In the \code{pMatrix} there are four different but equivalent 
-storing methods of polynomial matrices: \code{pMatrix}}
+\details{Checks the consistency of a \code{polyMatrix} object.
+In the \code{polyMatrix} there are four different but equivalent 
+storing methods of polynomial matrices: \code{polyMatrix}}
 \value{
 A print on the consistency of the given polynomial object.
 Information about the observed errors.
@@ -16,13 +16,13 @@ Information about the observed errors.
 \note{further notes }
 \author{Manel Boukhris [tun]}
 \seealso{See also 
-\code{\link{pMgen.a}}, 
-\code{\link{pMgen.b}}, 
-\code{\link{pMgen.c}}, 
-\code{\link{pMgen.d}}}
+\code{\link{polyMgen.a}}, 
+\code{\link{polyMgen.b}}, 
+\code{\link{polyMgen.c}}, 
+\code{\link{polyMgen.d}}}
 \examples{
-A<-pMgen.a(2,3,5)
-B<-pMconvert(A,"pMdlist")
+A<-polyMgen.a(2,3,5)
+B<-polyMconvert(A,"polyMdlist")
 \donttest{
 pMstr(B)$cns
 

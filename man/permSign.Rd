@@ -4,7 +4,7 @@
 \description{ ... }
 \usage{permSign(r)}
 \arguments{
-  \item{r}{    ~~Describe \code{pMgen} here~~ }   }
+  \item{r}{    ~~Describe \code{polyMgen} here~~ }   }
 \details{more details than the description above }
 \value{Describe the value returned!! If it is a LIST, use \item{comp1 }{Description of 'comp1'}}
 \note{further notes }

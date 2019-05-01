@@ -1,5 +1,5 @@
 # ----
-# the matrix trace for 'matrix' and 'pMatrix' class objects
+# the matrix trace for 'matrix' and 'polyMatrix' class objects
 
 tr <-
 function(M) UseMethod("tr")
@@ -11,9 +11,9 @@ function(M)
     numic<-sum(as.numeric(M)[seq(1,by=n+1,l=n)])
     return(numic)}
 
-tr.pMatrix <-
+tr.polyMatrix <-
 function(M)  
-  { pd<-pMconvert(M,"pMdlist")
+  { pd<-polyMconvert(M,"polyMdlist")
     ponom<-polynomial(0)
     if(dim(pd)[1]>dim(pd)[2]) pd<-t(pd);
     m<-min(dim(pd))

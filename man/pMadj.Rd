@@ -6,7 +6,7 @@
 \description{ ... }
 
 \usage{pMadj(pm)}
-\arguments{\item{pm}{a 'pMatrix' class object} }
+\arguments{\item{pm}{a 'polyMatrix' class object} }
 
 \details{more details than the description above will be here }
 
@@ -14,7 +14,7 @@
 
 \seealso{\code{\link{pMdet}}, \code{\link{pMsub}}}
 \examples{
-(A<-pMgen.a(2,2))
+(A<-polyMgen.a(2,2))
 # 1 + 2*x + 3*x^2           7 + 8*x + 9*x^2 + 10*x^3 
 # 4 + 5*x + 6*x^2           11 + 12*x 
 pMdet(A)

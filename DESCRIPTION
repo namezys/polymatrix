@@ -1,4 +1,4 @@
-Package: pMatrix
+Package: polyMatrix
 Version: 0.0.10.20190128
 Date: 2019-01-28
 Title: Infrastructure for Manipulation Polynomial Matrices 

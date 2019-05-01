@@ -7,7 +7,7 @@ function(p,...) UseMethod("degree")
 degree.polynomial <-
 function(p,...)  return(length(p)-1)
 
-degree.pMatrix <-
+degree.polyMatrix <-
 function(p,method=c("default","matrix","column","row"),...)  
        {d <- switch(substr(method[1],1,1),
                     "d"=max(p$degree),     # default

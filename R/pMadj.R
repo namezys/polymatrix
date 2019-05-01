@@ -2,7 +2,7 @@ pMadj <- # the adjugate of the given polynomial matrix
 function(pm)
   { if(dim(pm)[1]!=dim(pm)[2]) stop("'pm' must be a square matrix")
     k<-dim(pm)[1]
-    pd<-pMconvert(pm,"pMdlist") # convert to a 'pMdlist' class object
+    pd<-polyMconvert(pm,"polyMdlist") # convert to a 'polyMdlist' class object
     padj<-pd # skeleton of the result
     for(i in 1:k) 
       for(j in 1:k) 

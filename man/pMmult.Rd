@@ -2,31 +2,31 @@
 
 \alias{\%x\%}
 
-\title{Multiplication of two \code{pMatrix} class polynomial matrices}
+\title{Multiplication of two \code{polyMatrix} class polynomial matrices}
 
 \description{
-Matrix multipliction for \code{pMatrix} class polynomial matrices.
+Matrix multipliction for \code{polyMatrix} class polynomial matrices.
 It multiplies the two matrices only, if they are conformable. 
 }
 
 \usage{left \%x\% right}
 
 \arguments{
-\item{left}{a \code{pMatrix} class object, scalar number or polynomial} 
-\item{right}{a \code{pMatrix} class object, scalar number or polynomial} 
+\item{left}{a \code{polyMatrix} class object, scalar number or polynomial} 
+\item{right}{a \code{polyMatrix} class object, scalar number or polynomial} 
 }
 
 \details{The number of columns in \code{x} must be equal to number of rows in \code{y}.}
 
-\value{A \code{pMatrix} class object which is the product of 
-the \code{pMatrix} class \code{x} and \code{y} matrices.}
+\value{A \code{polyMatrix} class object which is the product of 
+the \code{polyMatrix} class \code{x} and \code{y} matrices.}
 
-\seealso{\code{\link{pMatrix-package}}}
+\seealso{\code{\link{polyMatrix-package}}}
 
 \keyword{math}
 
 \examples{
-pm<-pMgen.a()
+pm<-polyMgen.a()
 pm * t(pm)
 
 rm(pm)

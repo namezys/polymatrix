@@ -1,6 +1,6 @@
 \name{MTS2pM}
 \alias{MTS2pM}
-\title{Conversion the VARMA representation of MTS package to pMatrix representation}
+\title{Conversion the VARMA representation of MTS package to polyMatrix representation}
 
 \description{The VARMA representation of MTS is a list by 13 elements. 
 The necessary elements to represent a VARMA model are the c(2, 3, 4, 5, 8, 11, 12, 13):
@@ -19,7 +19,7 @@ ARorder, MAorder, cnst, coef, Sigma, Phi, Theta, Ph0 }
 \value{An \code{pMvarma} class object, equivalent with the \code{M} input object, 
        created by the package \code{MTS}.}
 
-\seealso{\code{\link{print.pMvarma}}, \code{\link{print.pMatrix}}}
+\seealso{\code{\link{print.pMvarma}}, \code{\link{print.polyMatrix}}}
 
 \keyword{utilities}
 

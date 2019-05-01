@@ -1,7 +1,7 @@
 # ----
 # The dim of a polynomial matrix
 
-dim.pMatrix <-
+dim.polyMatrix <-
 function(x) return(x$dim)
 
 # ----

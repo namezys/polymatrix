@@ -1,34 +1,34 @@
 \name{dim}
 \alias{dim}
-\alias{dim.pMatrix}
+\alias{dim.polyMatrix}
 \title{The dimension of a polynomial matrix}
-\description{Retuns the value of the $dim element of the given \code{pMatrix} object.}
+\description{Retuns the value of the $dim element of the given \code{polyMatrix} object.}
 
-\usage{\method{dim}{pMatrix}(x)}
+\usage{\method{dim}{polyMatrix}(x)}
 
-\arguments{ \item{x}{a \code{pMatrix} class object} }
+\arguments{ \item{x}{a \code{polyMatrix} class object} }
 
-\details{A method for \code{pMatrix} objects. Does notcontrol the validity of the
+\details{A method for \code{polyMatrix} objects. Does notcontrol the validity of the
 $dim element.}
 
-\value{A 2 element vector: the dimension parameter of the input pMatrix.}
+\value{A 2 element vector: the dimension parameter of the input polyMatrix.}
 
 
 \examples{
 dim(matrix(1:12,3,4)) # dim of a real matrix
 
-A <- pMgen.a()
-class(A)# pMarray
-dim(A) # dim of a pMatrix
+A <- polyMgen.a()
+class(A)# polyMarray
+dim(A) # dim of a polyMatrix
 
-B <- pMconvert(A,"pMdlist")
-class(B)# pMdlist
+B <- polyMconvert(A,"polyMdlist")
+class(B)# polyMdlist
 dim(B)
 
-dim(pMgen.a())
-dim(pMgen.b())
-dim(pMgen.c())
-dim(pMgen.d())
+dim(polyMgen.a())
+dim(polyMgen.b())
+dim(polyMgen.c())
+dim(polyMgen.d())
 
 rm(A,B)
 }

@@ -1,6 +1,6 @@
 # -----
 # print utilities
-#  1. # print.pMatrix  - method for "pMatrix" class objects
+#  1. # print.polyMatrix  - method for "polyMatrix" class objects
 #  2. # print.pMvarma  - method for "pMvarma" class objects
 # ?3. # print.chpn     - print method for "chpn" class objects
 #  4. # pprt           - print function for "polynomial" class objects
@@ -8,48 +8,49 @@
 
 
 # ---
-#  1. # print.pMatrix  - method for "pMatrix" class objects
+#  1. # print.polyMatrix  - method for "polyMatrix" class objects
 # printing variations: style=c("matrix","polynom","broad","raw")
 #                matrix - as a list of matrices
 #                poly   - by a matrix of polynoms
 #                broad  - by a broad matrix of coefficients
 #                raw    - as it is stored
 #
-print.pMatrix <-
+print.polyMatrix <-
 function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"),shift=2,...)
-  {  style<-substr(style[1],1,1)
+  {
+  style<-substr(style[1],1,1)
      switch(style, # check the first letter
             "r" = { pm <- x;                                # raw
                     class(pm) <- "list";
                     print(pm,digits=,digits)} ,
-            "m" = { pd <- pMconvert(x,"pMdlist")            # matrix
+            "m" = { pd <- polyMconvert(x,"polyMdlist")            # matrix
                     dlist<-pd$dlist
                     dim<-dim(pd);k<-dim[1];j<-dim[2]
                     chdl<-vector("character" ,k*j)
                     for(i1 in 1:k)for(i2 in 1:j)
                       chdl[(i1-1)*j+i2]<-pn2ch(dlist[[i1]][[i2]],x$symb,digits)
-                    cl<-max(nchar(chdl)) 
-                    for(i3 in 1:(k*j)) 
+                    cl<-max(nchar(chdl))
+                    for(i3 in 1:(k*j))
                       chdl[i3]<-substr(paste0(chdl[i3],
                                        paste(rep(" ",cl), collapse="")),1,cl)
                     koz<-paste(rep(" ",shift), collapse="")
-                    for(i1 in 1:k) 
+                    for(i1 in 1:k)
                       cat(" ", paste(chdl[(i1-1)*j+1:j], collapse=koz),"\n")
-                  }, 
-            "p" = { dlist <- pMconvert(x,"pMdlist")$dlist   # polynom
-                    for(i1 in 1:x$dim[1]) for(i2 in 1:x$dim[2]) 
+                  },
+            "p" = { dlist <- polyMconvert(x,"polyMdlist")$dlist   # polynom
+                    for(i1 in 1:x$dim[1]) for(i2 in 1:x$dim[2])
                     pprt(dlist[[i1]][[i2]],x$symb,(i2-1)*shift,digits)},
-            "b" = { pbm<-pMconvert(x,"pMbroad")$broad       # broad
-                    j<-dim(x)[2] 
+            "b" = { pbm<-polyMconvert(x,"polyMbroad")$broad       # broad
+                    j<-dim(x)[2]
                     k<-dim(pbm)[1]
                     m<-dim(pbm)[2]
                     dmax1<-m/j
                     ch<-NULL
-                    for(i1 in 1:k) for(i3 in 1:m) 
+                    for(i1 in 1:k) for(i3 in 1:m)
                       ch<-c(ch,format(pbm[i1,i3],digits=digits))
                     cl<-max(nchar(ch))
-                    koz<-paste(rep(" ",cl), collapse="")  
-                    for(i4 in 1:(k*m)) 
+                    koz<-paste(rep(" ",cl), collapse="")
+                    for(i4 in 1:(k*m))
                       { w<-paste0(koz,ch[i4])
                         ch[i4]<-substr(w,nchar(w)-cl+1,nchar(w)) }
                     koz<-paste(rep(" ",shift), collapse="")
@@ -58,7 +59,7 @@ function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"
                        for(i3 in 1:dmax1)
                          cat(paste(ch[(i1-1)*m+(i3-1)*j+1:j], collapse=" "),collapse=koz)
                        cat("\n") }
-                  }  ) # end of switch  
+                  }  ) # end of switch
   }
 # ---
 #  2. # print.pMvarma  - method for "pMarma" class objects
@@ -80,17 +81,17 @@ function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"
 	if(!is.null(x$scm))
       cat(paste0("Scale Component Modell: ",x$scm,"\n"))
     cat(paste0(rep("=",17),collapse=""),"\n")
-	
-    if(!is.na(x$degree[1]))	  
-      { 	
+
+    if(!is.na(x$degree[1]))
+      {
         cat(paste0("AR:\n",paste0(rep("-",17),collapse=""),"\n"))
-        print.pMatrix(x$AR,style,digits,shift)
+        print.polyMatrix(x$AR,style,digits,shift)
         cat(paste0(rep("=",17),collapse=""),"\n") }
 
-    if(!is.na(x$degree[2]))	  
-      { 	
+    if(!is.na(x$degree[2]))
+      {
 		cat(paste0("MA:\n",paste0(rep("-",17),collapse=""),"\n"))
-        print.pMatrix(x$MA,style,digits,shift)
+        print.polyMatrix(x$MA,style,digits,shift)
         cat(paste0(rep("=",17),collapse=""),"\n") }
   }
 
@@ -106,7 +107,7 @@ function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"
 #         res<-paste0(res,if(i) "+" else "",
 #                     "(",pn2ch(x[[i+1]]),")'s^",i,"'")
 #      }
-#     cat(paste0(res,"\n"))}  
+#     cat(paste0(res,"\n"))}
 
 # -----
 #  4. # pprt           - print function for "polynomial" class objects
