@@ -1,4 +1,4 @@
 library(testthat)
-library(pMatrix)
+library(polyMatrix)
 
-test_check("pMatrix")
+test_check("polyMatrix")
