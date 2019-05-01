@@ -16,7 +16,7 @@
 polyMgen <-
 function(k,j,rawData,symb,rand,degree,byrow,sm="polyMarray",...)
 {
-  method <- substr(sm,3,3)
+  method <- substr(sm,6,6)
   if (!method %in% c("a","b","c","d")) {
     stop("the admissible storage methods are: 'polyMarray','polyMbroad','polyMcells' and 'polyMdlist'!")
   }
@@ -143,7 +143,7 @@ generate_random_d <- function(rand, degree, byrow, data_size)
     stopifnot(is.function(rand))
     dgm <- rand
   }
-  
+
   data <- vector("list", data_size)
   deg <- as.numeric(if(byrow) t(degree) else degree)
   for (i1 in 1:data_size) {
@@ -177,7 +177,7 @@ polyMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL,
   rows <- k
   columns <- j
   data_size <- rows * columns
-  
+
   # generate rawData if it's empty
   if (is.null(rawData)) {
     # generate degree matrix if necessary, it is used for generate rawData
@@ -224,7 +224,7 @@ polyMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL,
       d[r, c] <- degree(dlist[[r]][[c]])
     }
   }
-  
+
   # build
   pd <- list(dim=c(rows, columns), degree=d, symb=symb, dlist=dlist)
   class(pd) <- c("polyMdlist","polyMatrix")
@@ -235,15 +235,15 @@ polyMgen.d <- function(k=2, j=3, rawData=NULL, symb="x", rand=NULL, degree=NULL,
 # ----------------------
 #  5. # polyMgen.varma       - Generate a pMvarma class polynomial matrix pair
 
-polyMgen.varma <- 
-function(k=3,j=3,rawData=list(polynomial(1:3)),symb="x",rand=FALSE,degree=c(1,1), byrow = FALSE)   
-{ 
+polyMgen.varma <-
+function(k=3,j=3,rawData=list(polynomial(1:3)),symb="x",rand=FALSE,degree=c(1,1), byrow = FALSE)
+{
   if(length(degree)!=2) stop("Use two degree parameters (p,q)!")
   AR <- if(!is.na(degree[1])) polyMgen.d(k,j,rand=TRUE,degree=degree[1]) else NA
   MA <- if(!is.na(degree[2])) polyMgen.d(k,j,rand=TRUE,degree=degree[2]) else NA
   varma<-list(degree=c(ar=degree[1],ma=degree[2]),AR=AR,MA=MA)
   class(varma)<-"pMvarma"
-  return(varma) 
+  return(varma)
 }
 
 
