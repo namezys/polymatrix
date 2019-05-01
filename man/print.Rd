@@ -1,16 +1,16 @@
 \name{print}
-\alias{print.pMatrix}
+\alias{print.polyMatrix}
 \alias{print.pMvarma}
 \title{Print a polynomial matrix or a varma model in the given form}
 
-\description{Printing method for class \code{pMatrix} and \code{pMvarma}.}
+\description{Printing method for class \code{polyMatrix} and \code{pMvarma}.}
 
 \usage{
-\method{print}{pMatrix}(x, style = c("matrix","polynom","broad","raw"),digits = getOption("digits"), shift = 2, ...)
+\method{print}{polyMatrix}(x, style = c("matrix","polynom","broad","raw"),digits = getOption("digits"), shift = 2, ...)
 \method{print}{pMvarma}(x, style = c("matrix","polynom","broad","raw"),digits = getOption("digits"), shift = 2, ...)
 }
 
-\arguments{\item{x}{a \code{pMatrix} or \code{pMvarma} class object to print}
+\arguments{\item{x}{a \code{polyMatrix} or \code{pMvarma} class object to print}
            \item{style}{one of the four printing type}
            \item{digits}{the number of significant digits to print}
            \item{shift}{shift for print of elements if the style is 'polynom'} 
@@ -26,13 +26,13 @@
 
 \examples{
 set.seed(1)
-pm<-pMgen.a(rand=function(x) rpois(x,1)) 
+pm<-polyMgen.a(rand=function(x) rpois(x,1)) 
 
 
-pa <- pMconvert(pm,"pMarray") # class: "pMarray" "pMatrix"
-pb <- pMconvert(pm,"pMbroad") # class: "pMbroad" "pMatrix"
-pc <- pMconvert(pm,"pMcells") # class: "pMcells" "pMatrix"
-pd <- pMconvert(pm,"pMdlist") # class: "pMdlist" "pMatrix"
+pa <- polyMconvert(pm,"polyMarray") # class: "polyMarray" "polyMatrix"
+pb <- polyMconvert(pm,"polyMbroad") # class: "polyMbroad" "polyMatrix"
+pc <- polyMconvert(pm,"polyMcells") # class: "polyMcells" "polyMatrix"
+pd <- polyMconvert(pm,"polyMdlist") # class: "polyMdlist" "polyMatrix"
 rm(pm)
 
 # the default print image: matrix of polynomials
@@ -59,7 +59,7 @@ print(pd,"raw")
 
 rm(pa,pb,pc,pd)
 
-varma<-pMgen.varma() 
+varma<-polyMgen.varma() 
 
 varma
 print(varma,"matrix") # the same print image

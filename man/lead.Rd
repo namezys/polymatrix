@@ -3,7 +3,7 @@
 \title{The leading coefficient of a polynom or polynomial matrix}
 \description{ ... }
 \usage{lead(p,method=c("matrix","column","row","element"))}
-\arguments{\item{p}{a \code{\link{polynomial}} or \code{\link{pMatrix-package}} class object}
+\arguments{\item{p}{a \code{\link{polynomial}} or \code{\link{polyMatrix-package}} class object}
            \item{method}{controls the interpretation of the word: "leading", see the details}
            }
 \details{
@@ -27,11 +27,11 @@ for a polynomial matrix are the followings.
 \keyword{utilities}
 \examples{
 lead(polynom::polynomial(0:12))
-pm<-pMgen.a()
-pa<-pMconvert(pm,"pMarray")
-pb<-pMconvert(pm,"pMbroad")
-pc<-pMconvert(pm,"pMcells")
-pd<-pMconvert(pm,"pMdlist")
+pm<-polyMgen.a()
+pa<-polyMconvert(pm,"polyMarray")
+pb<-polyMconvert(pm,"polyMbroad")
+pc<-polyMconvert(pm,"polyMcells")
+pd<-polyMconvert(pm,"polyMdlist")
 lead(pa)
 lead(pb)
 lead(pc)
@@ -39,7 +39,7 @@ lead(pd)
 
 
 rawAdat<-ch2pn(c("-3 + x^2","2 + 4*x","-x^2","1","2","3 + x","2*x","0","2 - 3*x" ))
-px<-pMgen.d(3,3,rawData=rawAdat)
+px<-polyMgen.d(3,3,rawData=rawAdat)
 rm(rawAdat)
 
 px

@@ -5,25 +5,25 @@
 \title{Conversion of constant matrices}
 
 \description{
-Conversion between the 'matrix' and 'pMatrix' class representation of constant matrices.
+Conversion between the 'matrix' and 'polyMatrix' class representation of constant matrices.
 }
 
 \usage{
-M2pM(m,class=c("pMarray","pMbroad","pMcells","pMdlist"))
+M2pM(m,class=c("polyMarray","polyMbroad","polyMcells","polyMdlist"))
 pM2M(pM)
 }
 
 \arguments{
 \item{m}{A matrix class object}
 \item{class}{The required class of the value}
-\item{pM}{A pMatrix class object}                 
+\item{pM}{A polyMatrix class object}                 
 }
 
-\details{\code{M2pM} convert the \code{matrix} class objets to an \code{pMatrix} class object.
-\code{pM2M} convert the zero degree \code{pMatrix} class objects  to an \code{matrix} object.}
+\details{\code{M2pM} convert the \code{matrix} class objets to an \code{polyMatrix} class object.
+\code{pM2M} convert the zero degree \code{polyMatrix} class objects  to an \code{matrix} object.}
 
 \value{
-The \code{M2pM(m)} returns the given 'm' matrix in 'pMatrix' class form.
+The \code{M2pM(m)} returns the given 'm' matrix in 'polyMatrix' class form.
 The \code{pM2M(pM)} returns the given 'pM' polynomial matrix in 'matrix' class form, if it is a constant matrix,
 else give an error sign.
 }
@@ -40,10 +40,10 @@ pM<-M2pM(m)
 class(pM)
 pM
 
-M2pM(m,"pMarray")
-M2pM(m,"pMbroad")
-M2pM(m,"pMcells")
-M2pM(m,"pMdlist")
+M2pM(m,"polyMarray")
+M2pM(m,"polyMbroad")
+M2pM(m,"polyMcells")
+M2pM(m,"polyMdlist")
 
 rm(m,pM)
 

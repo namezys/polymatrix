@@ -1,11 +1,11 @@
-\name{pMatrix-package}
-\alias{pMatrix-package}
+\name{polyMatrix-package}
+\alias{polyMatrix-package}
 \docType{package}
-\title{\packageTitle{pMatrix}}
-\description{\packageDescription{pMatrix}}
+\title{\packageTitle{polyMatrix}}
+\description{\packageDescription{polyMatrix}}
 \details{
   \tabular{ll}{
-    Package: \tab pMatrix\cr
+    Package: \tab polyMatrix\cr
     Type: \tab Package\cr
     Version: \tab 0.0.05\cr
     Date: \tab 2016-06-04\cr
@@ -14,9 +14,9 @@
 Infrastructure for manipulation polynomial matrices.
 }
 \author{
-\packageAuthor{pMatrix}
+\packageAuthor{polyMatrix}
 \cr
-Maintainer: \packageMaintainer{pMatrix}
+Maintainer: \packageMaintainer{polyMatrix}
 }
 \references{
 See other polynomial packages: 
@@ -29,17 +29,17 @@ See other polynomial packages:
 }
 \examples{
 
-# the  c("pMarray", "pMatrix") class structure
-str(pMgen.a())
+# the  c("polyMarray", "polyMatrix") class structure
+str(polyMgen.a())
 
-# the  c("pMbroad", "pMatrix") class structure
-str(pMgen.b())
+# the  c("polyMbroad", "polyMatrix") class structure
+str(polyMgen.b())
 
-# the  c("pMcells", "pMatrix") class structure
-str(pMgen.c())
+# the  c("polyMcells", "polyMatrix") class structure
+str(polyMgen.c())
 
-# the  c("pMdlist", "pMatrix") class structure
-str(pMgen.d())
+# the  c("polyMdlist", "polyMatrix") class structure
+str(polyMgen.d())
 
 }
 \keyword{ package }

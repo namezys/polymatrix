@@ -12,7 +12,7 @@ pMdiag(p,k,symb="x")
   \item{symb}{the symbol used in the polynomial matrix}
 }
 
-\value{A 'pMatrix' class polynomial matrix with given diagonal elements.}
+\value{A 'polyMatrix' class polynomial matrix with given diagonal elements.}
 
 \seealso{\code{\link{diag}}}
 

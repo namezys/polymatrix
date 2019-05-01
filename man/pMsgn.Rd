@@ -7,20 +7,20 @@
   \item{pm}{a polynomial matrix object}          }
 \details{For polynomial matrices returns the -1 times of the given value}
 \value{The polynomial matrix for which the pm+pMsgn(pm) equals a zero polynomial matrix}
-\seealso{\code{\link{Ops.pMatrix}}}
+\seealso{\code{\link{Ops.polyMatrix}}}
 \examples{
 
-A<-pMgen.a()
+A<-polyMgen.a()
 A
-class(A) # "pMarray" "pMatrix"
+class(A) # "polyMarray" "polyMatrix"
 
-A - pMconvert(A,"pMbroad")
-A - pMconvert(A,"pMcells")
-A - pMconvert(A,"pMdlist")
+A - polyMconvert(A,"polyMbroad")
+A - polyMconvert(A,"polyMcells")
+A - polyMconvert(A,"polyMdlist")
 
-A + pMsgn(pMconvert(A,"pMbroad"))
-A + pMsgn(pMconvert(A,"pMcells"))
-A + pMsgn(pMconvert(A,"pMdlist"))
+A + pMsgn(polyMconvert(A,"polyMbroad"))
+A + pMsgn(polyMconvert(A,"polyMcells"))
+A + pMsgn(polyMconvert(A,"polyMdlist"))
 
 rm(A)
 }

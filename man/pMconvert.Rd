@@ -1,51 +1,51 @@
-\name{pMconvert}
-\alias{pMconvert}
-\title{Conversion between the pairs of the four pMatrix subclasses}
+\name{polyMconvert}
+\alias{polyMconvert}
+\title{Conversion between the pairs of the four polyMatrix subclasses}
 
-\description{The \code{pMatrix} package has 4 different but equivalent method to store
+\description{The \code{polyMatrix} package has 4 different but equivalent method to store
 the polynomial matrices. This function provide a conversion between the 4 methods. In the
 background operate one of 12 method, matching to the sub-class of the given input object 
 and the required sub-class of the output object.}
 
-\usage{pMconvert(pM,newclass)}
+\usage{polyMconvert(pM,newclass)}
 
 \arguments{
-  \item{pM}{an arbitrary \code{pMatrix} class object}   
+  \item{pM}{an arbitrary \code{polyMatrix} class object}   
   \item{newclass}{an class identifier character string, one of 
-        \code{"pMarray"}, \code{"pMbroad"}, \code{"pMcells"} or \code{"pMdlist"}}   
+        \code{"polyMarray"}, \code{"polyMbroad"}, \code{"polyMcells"} or \code{"polyMdlist"}}   
 		}
 
-\value{An \code{pMatrix} class object, equivalent with the \code{pM} input object, 
+\value{An \code{polyMatrix} class object, equivalent with the \code{pM} input object, 
        but stored in the new, given format by the \code{newclass} parameter.}
 
-\seealso{\code{\link{pMatrix-package}}}
+\seealso{\code{\link{polyMatrix-package}}}
 
 \keyword{utilities}
 
 \examples{
 set.seed(2)
-pa<-pMgen.a(rand=function(x) rpois(x,1)) # Poisson(1) distributed coefficients
-class(pa) # "pMarray" "pMatrix"
+pa<-polyMgen.a(rand=function(x) rpois(x,1)) # Poisson(1) distributed coefficients
+class(pa) # "polyMarray" "polyMatrix"
 str(pa)
 pa
 
-pb<-pMconvert(pa,'pMbroad')
-class(pb) # "pMbroad" "pMatrix"
+pb<-polyMconvert(pa,'polyMbroad')
+class(pb) # "polyMbroad" "polyMatrix"
 str(pb)
 pb
 
-pc<-pMconvert(pa,'pMcells')
-class(pc) # "pMcells" "pMatrix"
+pc<-polyMconvert(pa,'polyMcells')
+class(pc) # "polyMcells" "polyMatrix"
 str(pc)
 pc
 
-pd<-pMconvert(pa,'pMcells')
-class(pd) # "pMdlist" "pMatrix"
+pd<-polyMconvert(pa,'polyMcells')
+class(pd) # "polyMdlist" "polyMatrix"
 str(pd)
 pd
 
-px<-pMconvert(pa,'pMarray')
-class(px) # "pMarray" "pMatrix"
+px<-polyMconvert(pa,'polyMarray')
+class(px) # "polyMarray" "polyMatrix"
 str(px)
 px
 

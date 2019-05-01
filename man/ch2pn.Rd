@@ -32,7 +32,7 @@ chz<-"1+z+z^3+2*z^4-4*z^5-15*z^16"; # the same polynom over 'z'
 ch2pn(chz) # == 1: the only "x" power in the input string
 ch2pn(chz,"z") # 1 + x + x^3 + 2*x^4 - 4*x^5 - 15*x^16 
 
-pprt(ch2pn(chz,"z"),"x") # the same print by pMatrix::pprt() print utility
+pprt(ch2pn(chz,"z"),"x") # the same print by polyMatrix::pprt() print utility
 
 ch2pn("-2*x^3-5*x^2+x^5+x^6+5*x-x^7+1")# 1 + 5*x - 5*x^2 - 2*x^3 + x^5 + x^6 - x^7 
 ch2pn("-2*x^3-5*x^2+x^5+x^6+5*x-x^7+1","z")# 1
@@ -47,11 +47,11 @@ ch2pn(" 6  + 5*z^3","z") # 6 + 5*x^3
 
 ch2pn(c(" x "," 1 + x^2 ")) # a list of 'polynomial' class elements: [[1]] x  [[2]] 1 + x^2 
 
-pMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0"))) # col.wise a "pMdlist" "pMatrix" class object
+polyMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0"))) # col.wise a "polyMdlist" "polyMatrix" class object
 
-pMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0")),symb="x") # symbole given for output 
+polyMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0")),symb="x") # symbole given for output 
 
-pMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0"),symb="x"),symb="x") # symbole given for input and output 
+polyMgen.d(2,2,rawData=ch2pn(c("1","x^2","x","0"),symb="x"),symb="x") # symbole given for input and output 
 
 rm(chz,p,chx)
 

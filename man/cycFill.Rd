@@ -12,7 +12,7 @@ The output object filled cylical filled by the given material \code{u}.}
 \value{Depending on the class of the given material,
 the class of the result is \code{vector} or \code{list}.
 The length of the result equals by the given \code{m}}
-\seealso{Used in the code of \code{\link{pMgen.a}}, \code{\link{pMgen.d}}}
+\seealso{Used in the code of \code{\link{polyMgen.a}}, \code{\link{polyMgen.d}}}
 \keyword{utilities}
 \examples{
 

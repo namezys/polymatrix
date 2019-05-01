@@ -4,15 +4,15 @@
 \description{ ... }
 \usage{polyMul(p,q)}
 \arguments{
-  \item{p}{... \code{pMgen}}
-  \item{q}{... \code{pMgen}}
+  \item{p}{... \code{polyMgen}}
+  \item{q}{... \code{polyMgen}}
 }
 \details{more details than the description above }
 \value{Describe the value returned!! If it is a LIST, use \item{comp1 }{Description of 'comp1'}}
 \note{further notes }
 \author{who you are }
 \references{references to the literature }
-\seealso{objects to See Also as \code{\link{pMatrix-package}}}
+\seealso{objects to See Also as \code{\link{polyMatrix-package}}}
 \keyword{math}
 \examples{
 set.seed(12345)

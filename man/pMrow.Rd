@@ -1,10 +1,10 @@
 \name{pMrow}
 \alias{pMrow}
-\title{A row of the given \code{pMatrix}}
+\title{A row of the given \code{polyMatrix}}
 \description{Pick up a given row of the given matrix}
 \usage{pMrow(pm, which = 1)}
 \arguments{
-  \item{pm}{a \code{pMatrix} class object}
+  \item{pm}{a \code{polyMatrix} class object}
   \item{which}{the number of the required column} }
 \details{more details than the description above}
 \value{A \code{pVector} class list of the elements of 
@@ -12,7 +12,7 @@
 \seealso{\code{\link{pMrow}}}
 \keyword{manip}
 \examples{
-A<-pMgen.a()
+A<-polyMgen.a()
 A
 pMrow(A,1)
 }

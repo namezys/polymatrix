@@ -1,13 +1,13 @@
 \name{tr}
 \alias{tr}
 
-\title{Trace of a 'matrix' or 'pMatrix' class matrix}
+\title{Trace of a 'matrix' or 'polyMatrix' class matrix}
 
 \description{Returns the trace of the given matrix.}
 
 \usage{tr(M)}
 
-\arguments{\item{M}{a \code{matrix} or \code{pMatrix} class object}}
+\arguments{\item{M}{a \code{matrix} or \code{polyMatrix} class object}}
 
 \details{Calculate the sum of the diagonal elements of the given matrix.}
 
@@ -15,9 +15,9 @@
   \item a \code{numeric} class object, 
         if the given matrix is a \code{matrix} class object.
   \item a \code{polynomial} class object, 
-        if the given matrix is a \code{pMatrix} class object.    }}
+        if the given matrix is a \code{polyMatrix} class object.    }}
 
-\seealso{\code{\link{tr.pMatrix}}, \code{\link{pMatrix-package}}, \code{\link{polynomial}}, 
+\seealso{\code{\link{tr.polyMatrix}}, \code{\link{polyMatrix-package}}, \code{\link{polynomial}}, 
          but the \code{\link{trace}} is a debugging utility}
 
 \keyword{utilities}
@@ -46,12 +46,12 @@ tr(M) # 15
 # 4  8  12
 tr(M) # 18
 
-# case of pMatrix class input objects
-pM <- pMgen.d(3,3,rawData=
+# case of polyMatrix class input objects
+pM <- polyMgen.d(3,3,rawData=
        ch2pn(c("-3 + z^2","2 + 4*z","-z^2",
                "1",       "2","3 + z",
                "2*z","0","2 - 3*z"),"z"),byrow=TRUE,symb="z")
-class(pM) # "pMdlist" "pMatrix"
+class(pM) # "polyMdlist" "polyMatrix"
 pM
 
 ( p <- tr(pM) ) # 1 - 3*x + x^2 

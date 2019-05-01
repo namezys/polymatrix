@@ -8,8 +8,8 @@
 \usage{degree(p, ...)}
 
 \arguments{
-           \item{p}{a \code{polynomial} or \code{pMatrix} class object}
-           \item{\dots}{supplementary options see \code{degree.pMatrix}}
+           \item{p}{a \code{polynomial} or \code{polyMatrix} class object}
+           \item{\dots}{supplementary options see \code{degree.polyMatrix}}
 } 
 
 \details{more details than the description above }
@@ -18,7 +18,7 @@
 depending on the supplemantary parameter}
 
 \seealso{\code{\link{lead}}, 
-         \code{\link{degree.pMatrix}}, 
+         \code{\link{degree.polyMatrix}}, 
          \code{\link{degree.polynomial}}}
 
 \keyword{utilities}
@@ -28,7 +28,7 @@ p<-polynom::polynomial(0:12)
 class(p) # polynom
 degree(p)
 
-pM<-pMgen.d(3,3,rawData=
+pM<-polyMgen.d(3,3,rawData=
    ch2pn(c("-3+x^3","2+4*x","x^2","1","2","3+x","2*x","0","2-3*x")))
 pM
 
@@ -37,10 +37,10 @@ degree(pM,"c") # column wise maximum degree
 degree(pM,"r") # row wise maximum degree
 degree(pM,"m") # matrix: elementwise degree
 
-degree(pMconvert(pM,"pMarray"),"m") # pMarray class 
-degree(pMconvert(pM,"pMbroad"),"m") # pMbroad class
-degree(pMconvert(pM,"pMcells"),"m") # pMcells class
-degree(pMconvert(pM,"pMdlist"),"m") # pMdlist class
+degree(polyMconvert(pM,"polyMarray"),"m") # polyMarray class 
+degree(polyMconvert(pM,"polyMbroad"),"m") # polyMbroad class
+degree(polyMconvert(pM,"polyMcells"),"m") # polyMcells class
+degree(polyMconvert(pM,"polyMdlist"),"m") # polyMdlist class
 
 rm(p,pM)
 }

@@ -17,10 +17,10 @@
 
 \references{references to the literature }
 
-\seealso{See Also as \code{\link{pMatrix-package}}}
+\seealso{See Also as \code{\link{polyMatrix-package}}}
 
 \examples{
-pMgen.a()
+polyMgen.a()
 }
 
 \keyword{math}

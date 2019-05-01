@@ -11,12 +11,12 @@
 \details{
 If the row or colum number is NULL, then the result is all element from the given columns or rows.
 If \code{j} is not given, then the adequate symmetric submatrix.}
-\value{A polynomial matrix which is a submatrix of the given matrix in '\code{pMdlist}' format.}
+\value{A polynomial matrix which is a submatrix of the given matrix in '\code{polyMdlist}' format.}
 
 \seealso{\code{\link{pMdet}}, \code{\link{pMadj}}}
 
 \examples{
-A<-pMgen.a(3,4,1:24,degree=1)
+A<-polyMgen.a(3,4,1:24,degree=1)
 A
 pMsub(A, 2, 3)
 pMsub(A, 1,NULL)
