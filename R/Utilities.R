@@ -286,24 +286,38 @@ function(m)
       # rowMin    - row minimum values of a matrix
 
 colMin <-
-function(m)  
- { if(class(m)!="matrix") 
-      stop("The 'colMin' function require a 'matrix' class argument!")
-   k<-dim(m)[2]
-   v<-vector("numeric",k)
-   for(i2 in 1:k) v[i2]<-min(m[,i2])
-   return(v)
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+    stop("The 'colMin' function requires a 'matrix' class argument!")
   }
+    
+  size <- dim(matrix)[2]
+  numVector <- vector("numeric", size)
+    
+  for(i in 1:size) {
+    numVector[i] <- min(matrix[, i])
+  }
+    
+  return(numVector)
+}
 
 rowMin <-
-function(m)  
- { if(class(m)!="matrix") 
-      stop("The 'rowMin' function require a 'matrix' class argument!")
-   k<-dim(m)[1]
-   v<-vector("numeric",k)
-   for(i1 in 1:k) v[i1]<-min(m[i1,])
-   return(v)
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+    stop("The 'rowMin' function requires a 'matrix' class argument!")
   }
+    
+  size <- dim(matrix)[1]
+  numVector <- vector("numeric", size)
+    
+  for(i in 1:size) {
+    numVector[i] <- min(matrix[i,])
+  }
+    
+  return(numVector)
+}
  
 # -----------------
 # 13. # cycFill   - cyclic fill a vector//list of given length 
@@ -402,3 +416,4 @@ LCM.pMatrix <- function(x, ...)
   
 # -----------------
 # fine
+
