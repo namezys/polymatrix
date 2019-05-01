@@ -402,3 +402,38 @@ LCM.pMatrix <- function(x, ...)
   
 # -----------------
 # fine
+
+new_colMin <-
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+    stop("The 'colMin' function requires a 'matrix' class argument!")
+  }
+  
+  dimension <- dim(matrix)[2]
+  numVector <- vector("numeric", dimension)
+  
+  for(i in 1:dimension) {
+    numVector[i] <- min(matrix[, i])
+  }
+  
+  return(numVector)
+}
+
+new_rowMin <-
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+    stop("The 'rowMin' function requires a 'matrix' class argument!")
+  }
+  
+  dimension <- dim(matrix)[1]
+  numVector <- vector("numeric", dimension)
+  
+  for(i in 1:dimension) {
+    numVector[i] <- min(matrix[i,])
+  }
+  
+  return(numVector)
+}
+
