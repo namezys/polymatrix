@@ -1,7 +1,7 @@
 pMdet <- 
 function(pm)
   { if(dim(pm)[1]!=dim(pm)[2]) stop("'pm' must be a square matrix")
-    pd<-pMconvert(pm,"pMdlist")
+    pd<-polyMconvert(pm,"polyMdlist")
     m<-dim(pd)[1]
     t<-m # before the first step: the perm.length; after: the actual permutation
     if(m==1) p<-pd$dlist[[1]][[1]]

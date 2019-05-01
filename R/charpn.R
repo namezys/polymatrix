@@ -7,13 +7,13 @@ function(M) UseMethod("charpn")
 charpn.matrix <-
 function(M)  
    { n<-dim(M)[1]
-     pm <- pMgen.a(dim(M)[1],dim(M)[2],rawData=as.numeric(M),degree=0)
+     pm <- polyMgen.a(dim(M)[1],dim(M)[2],rawData=as.numeric(M),degree=0)
      if (!n==dim(pm)[2]) stop("The 'M' is not a square matrix")
      xI<-pMdiag(ch2pn("x"),n)
      chpn<-pMdet(xI-pm)
      return(chpn) }
 
-charpn.pMatrix <-
+charpn.polyMatrix <-
 function(M)  
   { pM<-M 
     vecszor <- function(v,i) 
@@ -44,7 +44,7 @@ function(M)
          return(prod)}
 
     n<-dim(pM)[1]
-      pd<- -pMconvert(M,"pMdlist") # minus !!! mert(lambdaI-pMatrix) kell
+      pd<- -polyMconvert(M,"polyMdlist") # minus !!! mert(lambdaI-polyMatrix) kell
 
       pcch <- vector("list",n+1) # list of polynomial coefs of the char.polynom
       for(i in 1:(n+1)) pcch[[i]]<-polynom::polynomial(0)

@@ -17,33 +17,33 @@
 #     # rowMin    - row minimum values of a matrix
 # 13. # cycFill   - cyclic fill by a given material
 # 14. # pMdiag    - diagonal polynomial matrix
-#      is.pMatrix - consistecy check of a pMatrix object  
+#      is.polyMatrix - consistecy check of a polyMatrix object  
 # --- # -----------
 
-is.pMatrix.pMarray <- function(x)
+is.polyMatrix.polyMarray <- function(x)
 {
-  return(all(class(x) == c("pMarray", "pMatrix")))
+  return(all(class(x) == c("polyMarray", "polyMatrix")))
 }
 
-is.pMatrix.pMbroad <- function(x)
+is.polyMatrix.polyMbroad <- function(x)
 {
-  return(all(class(x) == c("pMbroad", "pMatrix")))
+  return(all(class(x) == c("polyMbroad", "polyMatrix")))
 }
 
-is.pMatrix.pMcells <- function(x)
+is.polyMatrix.polyMcells <- function(x)
 {
-  return(all(class(x) == c("pMcells", "pMatrix")))
+  return(all(class(x) == c("polyMcells", "polyMatrix")))
 }
 
-is.pMatrix.pMdlist <- function(x)
+is.polyMatrix.polyMdlist <- function(x)
 {
-  return(all(class(x) == c("pMdlist", "pMatrix")))
+  return(all(class(x) == c("polyMdlist", "polyMatrix")))
 }
 
-is.pMatrix <- function(x)   
+is.polyMatrix <- function(x)   
 { 
-  return(is.pMatrix.pMarray(x) || is.pMatrix.pMbroad(x) 
-         || is.pMatrix.pMcells(x) || is.pMatrix.pMdlist(x))
+  return(is.polyMatrix.polyMarray(x) || is.polyMatrix.polyMbroad(x) 
+         || is.polyMatrix.polyMcells(x) || is.polyMatrix.polyMdlist(x))
 }
 
 
@@ -53,8 +53,8 @@ is.pMatrix <- function(x)
 
 pMcol <-
 function(pm,which=1)
-  { if(class(pm)[2]!="pMatrix") stop("The 'pm' parameter must be a 'pMatrix' object") 
-    pm<-pMconvert(pm,"pMdlist")
+  { if(class(pm)[2]!="polyMatrix") stop("The 'pm' parameter must be a 'polyMatrix' object") 
+    pm<-polyMconvert(pm,"polyMdlist")
     k<-dim(pm)[1]
     dlist<-vector("list",k)
     degree<-matrix(NA,k,1)
@@ -66,7 +66,7 @@ function(pm,which=1)
                    degree = degree,
                    symb = "x",   
                    dlist = dlist),
-              class = c("pMdlist","pMatrix")))
+              class = c("polyMdlist","polyMatrix")))
    }
 
 
@@ -75,8 +75,8 @@ function(pm,which=1)
 
 pMrow <-
 function(pm,which=1)
-  { if(class(pm)[2]!="pMatrix") stop("The 'pm' parameter must be a 'pMatrix' object") 
-    pd<-pMconvert(pm,"pMdlist")
+  { if(class(pm)[2]!="polyMatrix") stop("The 'pm' parameter must be a 'polyMatrix' object") 
+    pd<-polyMconvert(pm,"polyMdlist")
     j<-dim(pd)[2]
     dlist<-vector("list",1)
     dlist[[1]]<-vector("list",j)
@@ -89,7 +89,7 @@ function(pm,which=1)
                    degree = degree,
                    symb = "x",   
                    dlist = dlist),
-              class = c("pMdlist","pMatrix")))
+              class = c("polyMdlist","polyMatrix")))
    }
 
 # -----------------
@@ -99,7 +99,7 @@ pMbas <-   # bastion vector of a matrix or a subvector by the index: 'ki'
 function(pm,ki,byrow)
   { n <- length(ki)
     if(byrow & n>dim(pm)[1]|(!byrow & n>dim(pm)[2])) stop("Index vector too long!")
-    pd <- pMconvert(pm,"pMdlist")
+    pd <- polyMconvert(pm,"polyMdlist")
     if(dim(pd)[1]==1) pd<-t(pd) # if vector let it a column
     if(dim(pd)[2]==1)
           {v<-pd$dlist[ki]
@@ -118,7 +118,7 @@ function(pm,ki,byrow)
                    degree = matrix(degree,n,1),
                    symb = "x",   
                    dlist = v),
-              class = c("pMdlist","pMatrix")))
+              class = c("polyMdlist","polyMatrix")))
    }
 
 
@@ -127,7 +127,7 @@ function(pm,ki,byrow)
 
 pMsub <-    
 function(pm,i,j=i) 
-  { pd<-pMconvert(pm,"pMdlist")
+  { pd<-polyMconvert(pm,"polyMdlist")
     
     if(length(i)>0) 
       { i<-i[i!=0];i<-i[i<=pd$dim[1]] 
@@ -143,7 +143,7 @@ function(pm,i,j=i)
           pd$dlist[[k]]<-pd$dlist[[k]][j]# retain or delet  the j.th column from the k.th row
         pd$dim[2] <- if(j[1]<0) pd$dim[2]-length(j) else length(j)  } }
     pd$degree<-pd$degree[if(length(i)) i else 1:pd$dim[1],if(length(j)) j else 1:pd$dim[2],drop=FALSE] 
-    pm<-pMconvert(pd,class(pm)[1])		
+    pm<-polyMconvert(pd,class(pm)[1])		
     return(pm) 
    }
   
@@ -153,7 +153,7 @@ function(pm,i,j=i)
 pMprod <-
 function(pm)
   { 
-    pm <- pMconvert(pm,"pMdlist")
+    pm <- polyMconvert(pm,"polyMdlist")
     if(min(dim(pm)) != 1) stop("The input must be a vector!")
     m <- max(dim(pm))
     pr <- polynom::polynomial(1)
@@ -170,12 +170,12 @@ pVsk <-
 function(pMx,pMy=NULL)
   { if(is.null(pMy)) pMy <- pMx
     if(max(min(dim(pMx)),min(dim(pMy)))!=1)
-       stop("The scalar product works only for two vector 'pMatrix' object!")
+       stop("The scalar product works only for two vector 'polyMatrix' object!")
     if(max(dim(pMx))!=max(dim(pMy)))
        stop("The scalar product works only for two equal length vectors!")
     m<-max(dim(pMx))  
-    pdx <- pMconvert(pMx,"pMdlist")    
-    pdy <- pMconvert(pMy,"pMdlist")    
+    pdx <- polyMconvert(pMx,"polyMdlist")    
+    pdy <- polyMconvert(pMy,"polyMdlist")    
     if(m==dim(pdx)[2]) pdx <- t(pdx)
     if(m==dim(pdy)[2]) pdy <- t(pdy)
     p<-polynom::polynomial(0)
@@ -192,14 +192,14 @@ function(pMx,pMy=NULL)
 pMsgn <-   # change of the sign
 function(pm) 
   {   mpm <- switch(class(pm)[1],
-             pMarray = { pm$const<- -pm$const; pm$array<- -pm$array; pm },
-             pMbroad = { pm$broad<- -pm$broad; pm },
-             pMcells = { for(i3 in 0:degree(pm)) pm$cells[[i3+1]]<- -pm$cells[[i3+1]]; pm },
-             pMdlist = { for(i1 in 1:dim(pm)[1]) 
+             polyMarray = { pm$const<- -pm$const; pm$array<- -pm$array; pm },
+             polyMbroad = { pm$broad<- -pm$broad; pm },
+             polyMcells = { for(i3 in 0:degree(pm)) pm$cells[[i3+1]]<- -pm$cells[[i3+1]]; pm },
+             polyMdlist = { for(i1 in 1:dim(pm)[1]) 
                             for(i2 in 1:dim(pm)[2]) 
                               pm$dlist[[i1]][[i2]] <- -pm$dlist[[i1]][[i2]]
                          pm },
-              stop("A not regular 'pMatrix' class object!"))    
+              stop("A not regular 'polyMatrix' class object!"))    
       return(mpm)
    }
 
@@ -369,19 +369,19 @@ function(p,k,symb="x")
         { for(i2 in 1:k)
             rawData <- c(rawData,list(ch2pn("0")))
           rawData <- c(rawData,rD[i1])  	    }
-    return(pMgen.d(k,k,rawData=rawData,symb=symb))
+    return(polyMgen.d(k,k,rawData=rawData,symb=symb))
   }
 
 GCD <- function (...) {
   UseMethod("GCD")
 }
 
-GCD.pMatrix <- function(x, ...)
+GCD.polyMatrix <- function(x, ...)
 {
   if(missing("x")) {
-    stop("Expected pMatrix")
+    stop("Expected polyMatrix")
   }
-  x <- pMconvert(x, "pMdlist")
+  x <- polyMconvert(x, "polyMdlist")
   per_rows <- lapply(x$dlist, function(x) {polynom::GCD(polynom::as.polylist(x))})
   return(polynom::GCD(polynom::as.polylist(per_rows)))
 }
@@ -390,12 +390,12 @@ LCM <- function (...) {
   UseMethod("LCM")
 }
 
-LCM.pMatrix <- function(x, ...)
+LCM.polyMatrix <- function(x, ...)
 {
   if(missing("x")) {
-    stop("Expected pMatrix")
+    stop("Expected polyMatrix")
   }
-  x <- pMconvert(x, "pMdlist")
+  x <- polyMconvert(x, "polyMdlist")
   per_rows <- lapply(x$dlist, function(x) {polynom::LCM(polynom::as.polylist(x))})
   return(polynom::LCM(polynom::as.polylist(per_rows)))
 }

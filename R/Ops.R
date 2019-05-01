@@ -1,14 +1,14 @@
-# the Ops group method for pMatrix class // (2016.05.25)
+# the Ops group method for polyMatrix class // (2016.05.25)
 # the elements of the Ops group are: == != + - * ^ %==% %!=% %+% %-% %*%
 # --------------------------------------------------------------------------
-# library("pMatrix")
+# library("polyMatrix")
 
 matrix_equal <- function(first, second)
 {
   stopifnot(!missing(first), !missing(second))
-  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
   stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
   if (any(first$dim != second$dim)) {
     return(FALSE)
   }
@@ -28,8 +28,8 @@ matrix_equal <- function(first, second)
 scalar_equal <- function(first, second)
 {
   stopifnot(!missing(first), !missing(second))
-  stopifnot(is.pMatrix(first), !is.pMatrix(second))
-  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  stopifnot(is.polyMatrix(first), !is.polyMatrix(second))
+  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
   for(r in 1:first$dim[1]) {
     for(c in 1:first$dim[2] ) {
       if (first$dlist[[r]][[c]] != second) {
@@ -50,16 +50,16 @@ build_matrix <- function(rows, columns, dlist, symb)
   }
 
   pd <- list(dim=c(rows, columns), degree=d, symb=symb, dlist=dlist)
-  class(pd) <- c("pMdlist","pMatrix")
+  class(pd) <- c("polyMdlist","polyMatrix")
   return(pd)
 }
 
 matrix_b_op <- function(first, second, op)
 {
   stopifnot(!missing(first), !missing(second))
-  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
   stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
   if (any(first$dim != second$dim)) {
     stop("Argemnts have a diferent dim")
   }
@@ -79,8 +79,8 @@ matrix_b_op <- function(first, second, op)
 scalar_b_op <- function(first, second, op)
 {
   stopifnot(!missing(first), !missing(second))
-  stopifnot(is.pMatrix(first), !is.pMatrix(second))
-  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  stopifnot(is.polyMatrix(first), !is.polyMatrix(second))
+  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
   dlist <- vector("list", first$dim[1])
 
   for(r in 1:first$dim[1]) {
@@ -96,9 +96,9 @@ scalar_b_op <- function(first, second, op)
 matrix_mul <- function(first, second)
 {
   stopifnot(!missing(first), !missing(second))
-  stopifnot(is.pMatrix(second), is.pMatrix(second))
+  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
   stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("pMdlist", "pMatrix")))
+  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
 
   if (first$dim[2] != second$dim[1]) {
     stop("non-conformable arguments of matrix multiplication")
@@ -123,7 +123,7 @@ matrix_mul <- function(first, second)
 
 matrix_pow <- function(left, right)
 {
-  if (!is.pMatrix(left)) {
+  if (!is.polyMatrix(left)) {
     stop("Operator ^ is defined only for matrix as left operand")
   }
   if (!is.numeric(right)) {
@@ -156,19 +156,19 @@ pOps <- function(e1, e2, operator)
   # unari operators
   if(missing(e2)) {
     result <- switch (operator,
-      "+" = pMconvert(e1,"pMdlist"),
-      "-" = pMsgn(pMconvert(e1,"pMdlist")),
+      "+" = polyMconvert(e1,"polyMdlist"),
+      "-" = pMsgn(polyMconvert(e1,"polyMdlist")),
       stop("unsupported unary operation")
     )
     return(result)
   }
 
-  if (is.pMatrix(e1)) {
-    e1 <- pMconvert(e1, "pMdlist")
+  if (is.polyMatrix(e1)) {
+    e1 <- polyMconvert(e1, "polyMdlist")
   }
 
-  if (is.pMatrix(e2)) {
-    e2 <- pMconvert(e2, "pMdlist")
+  if (is.polyMatrix(e2)) {
+    e2 <- polyMconvert(e2, "polyMdlist")
   }
 
   if (is.character(e1)) {
@@ -179,7 +179,7 @@ pOps <- function(e1, e2, operator)
     e2 <- ch2pn(e2)
   }
 
-  stopifnot(is.pMatrix(e1) || is.pMatrix(e2))
+  stopifnot(is.polyMatrix(e1) || is.polyMatrix(e2))
 
   if (operator == "-") {
     operator <- "+"
@@ -190,12 +190,12 @@ pOps <- function(e1, e2, operator)
     return(matrix_pow(e1, e2))
   }
 
-  if (!is.pMatrix(e1) || !is.pMatrix(e2)) {
+  if (!is.polyMatrix(e1) || !is.polyMatrix(e2)) {
     # we got only one matrix, but all operation is communicative or anticomunicative
-    stopifnot(is.pMatrix(e1) || is.pMatrix(e2))
+    stopifnot(is.polyMatrix(e1) || is.polyMatrix(e2))
     anitcomunicative <- FALSE
-    if (is.pMatrix(e2)) {
-      stopifnot(!is.pMatrix(e1))
+    if (is.polyMatrix(e2)) {
+      stopifnot(!is.polyMatrix(e1))
       tmp <- e1
       e1 <- e2
       e2 <- tmp
@@ -211,7 +211,7 @@ pOps <- function(e1, e2, operator)
     return(result)
   }
 
-  stopifnot(is.pMatrix(e1), is.pMatrix(e2))
+  stopifnot(is.polyMatrix(e1), is.polyMatrix(e2))
 
   result <- switch (operator,
     "==" = matrix_equal(e1, e2),
@@ -226,7 +226,7 @@ pOps <- function(e1, e2, operator)
 
 # define custom operators
 
-Ops.pMatrix <- function(e1, e2)
+Ops.polyMatrix <- function(e1, e2)
 {
   return(pOps(e1, e2, .Generic))
 }

@@ -7,11 +7,11 @@ function(p,method=c("matrix","column","row","element")) UseMethod("lead")
 lead.polynomial <-
 function(p,...)  return(as.numeric(p)[length(p)])
 
-lead.pMatrix <-
+lead.polyMatrix <-
 function(p,method=c("matrix","column","row","element"))
-  {  #  stop("The 'p' input is not a regular 'pMatrix' object!"))
+  {  #  stop("The 'p' input is not a regular 'polyMatrix' object!"))
      modszer<-substr(method[1],1,1)
-     pc<-pMconvert(p,"pMcells")
+     pc<-polyMconvert(p,"polyMcells")
      k<-dim(pc)[1];j<-dim(pc)[2];
      mit<- switch(modszer,
                   "m" =  matrix(degree(pc),k,j),                # matrix

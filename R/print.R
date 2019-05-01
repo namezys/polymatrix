@@ -1,6 +1,6 @@
 # -----
 # print utilities
-#  1. # print.pMatrix  - method for "pMatrix" class objects
+#  1. # print.polyMatrix  - method for "polyMatrix" class objects
 #  2. # print.pMvarma  - method for "pMvarma" class objects
 # ?3. # print.chpn     - print method for "chpn" class objects
 #  4. # pprt           - print function for "polynomial" class objects
@@ -8,21 +8,21 @@
 
 
 # ---
-#  1. # print.pMatrix  - method for "pMatrix" class objects
+#  1. # print.polyMatrix  - method for "polyMatrix" class objects
 # printing variations: style=c("matrix","polynom","broad","raw")
 #                matrix - as a list of matrices
 #                poly   - by a matrix of polynoms
 #                broad  - by a broad matrix of coefficients
 #                raw    - as it is stored
 #
-print.pMatrix <-
+print.polyMatrix <-
 function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"),shift=2,...)
   {  style<-substr(style[1],1,1)
      switch(style, # check the first letter
             "r" = { pm <- x;                                # raw
                     class(pm) <- "list";
                     print(pm,digits=,digits)} ,
-            "m" = { pd <- pMconvert(x,"pMdlist")            # matrix
+            "m" = { pd <- polyMconvert(x,"polyMdlist")            # matrix
                     dlist<-pd$dlist
                     dim<-dim(pd);k<-dim[1];j<-dim[2]
                     chdl<-vector("character" ,k*j)
@@ -36,10 +36,10 @@ function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"
                     for(i1 in 1:k) 
                       cat(" ", paste(chdl[(i1-1)*j+1:j], collapse=koz),"\n")
                   }, 
-            "p" = { dlist <- pMconvert(x,"pMdlist")$dlist   # polynom
+            "p" = { dlist <- polyMconvert(x,"polyMdlist")$dlist   # polynom
                     for(i1 in 1:x$dim[1]) for(i2 in 1:x$dim[2]) 
                     pprt(dlist[[i1]][[i2]],x$symb,(i2-1)*shift,digits)},
-            "b" = { pbm<-pMconvert(x,"pMbroad")$broad       # broad
+            "b" = { pbm<-polyMconvert(x,"polyMbroad")$broad       # broad
                     j<-dim(x)[2] 
                     k<-dim(pbm)[1]
                     m<-dim(pbm)[2]
@@ -84,13 +84,13 @@ function(x,style=c("matrix","polynom","broad","raw"),digits = getOption("digits"
     if(!is.na(x$degree[1]))	  
       { 	
         cat(paste0("AR:\n",paste0(rep("-",17),collapse=""),"\n"))
-        print.pMatrix(x$AR,style,digits,shift)
+        print.polyMatrix(x$AR,style,digits,shift)
         cat(paste0(rep("=",17),collapse=""),"\n") }
 
     if(!is.na(x$degree[2]))	  
       { 	
 		cat(paste0("MA:\n",paste0(rep("-",17),collapse=""),"\n"))
-        print.pMatrix(x$MA,style,digits,shift)
+        print.polyMatrix(x$MA,style,digits,shift)
         cat(paste0(rep("=",17),collapse=""),"\n") }
   }
 

@@ -1,10 +1,10 @@
 # ---
-# the transposed pMatrix
+# the transposed polyMatrix
 
 
-t.pMatrix <-
+t.polyMatrix <-
 function(x)  
- { pd<-pMconvert(x,"pMdlist")
+ { pd<-polyMconvert(x,"polyMdlist")
    tpd<-pd
    tpd$dim<-rev(tpd$dim)
    tpd$degree<-t(tpd$degree)
