@@ -262,24 +262,38 @@ function(r)
       # rowMax    - row maximum values of a matrix
 
 colMax <-
-function(m)  
- { if(class(m)!="matrix") 
-      stop("The 'colMax' function require a 'matrix' class argument!")
-   k<-dim(m)[2]
-   v<-vector("numeric",k)
-   for(i2 in 1:k) v[i2]<-max(m[,i2])
-   return(v)
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+     stop("The 'colMax' function requires a 'matrix' class argument!")
   }
+    
+  size <- dim(matrix)[2]
+  numVector <- vector("numeric", size)
+    
+  for(i in 1:size) {
+    numVector[i] <- max(matrix[, i])
+  }
+    
+  return(numVector)
+}
 
 rowMax <-
-function(m)  
- { if(class(m)!="matrix") 
-      stop("The 'rowMax' function require a 'matrix' class argument!")
-   k<-dim(m)[1]
-   v<-vector("numeric",k)
-   for(i1 in 1:k) v[i1]<-max(m[i1,])
-   return(v)
+function(matrix)  
+{ 
+  if(class(matrix) != "matrix") {
+    stop("The 'rowMax' function requires a 'matrix' class argument!")
   }
+    
+  size <- dim(matrix)[1]
+  numVector <- vector("numeric", size)
+    
+  for(i in 1:size) {
+    numVector[i] <- max(matrix[i,])
+  }
+    
+  return(numVector)
+}
 
 # -----------------
 # 12. # colMin    - column minimum values of a matrix
