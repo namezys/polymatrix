@@ -1,16 +1,18 @@
 Package: polyMatrix
-Version: 0.0.10.20190128
-Date: 2019-01-28
+Version: 0.1.0
 Title: Infrastructure for Manipulation Polynomial Matrices 
-Type: Package
-Author: Lilla Lomoschitz [hun], 
-        Ildiko Laszlo [hun], 
-        Peter Prohle [hun], 
-        Tamas Prohle [hun]
 Description: A collection of functions to implement classes for polynomial matrix manipulations.
+Type: Package
+Authors@R: c(
+    person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role=c("cre", "aut")),
+    person("Nikolai", "Ryzhkov", email="namezys@gmail.com", role=c("aut")),
+    person("Ildiko", "Laszlo", role="ctb"),
+    person("Ulas Onat", "Alakent", role="ctb")
+    )
 Imports: polynom
-License: GPL-3
+License: MIT + file LICENSE
 Depends: R (>= 3.0), stats, MTS
-Maintainer: Prohle Tamas <prohlet@ludens.elte.hu>
+Suggests: testthat
 Repository: CRAN
-Date/Publication: 2018-10-14 10:42:40
+URL: https://github.com/namezys/polymatrix
+BugReports: https://github.com/namezys/polymatrix/issues

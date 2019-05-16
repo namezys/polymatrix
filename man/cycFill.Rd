@@ -2,11 +2,13 @@
 \alias{cycFill}
 \title{A given length vector or list, filled cyclical by given material}
 \description{Fills an object by the given material}
-\usage{cycFill(u,m)}
+
+\usage{cycFill(data, size)}
 \arguments{
-  \item{u}{the material}
-  \item{m}{the desired length}
-  }
+  \item{data}{the material}
+  \item{size}{the desired length}
+}
+
 \details{The class of the output is just the same as the class of input.
 The output object filled cylical filled by the given material \code{u}.}
 \value{Depending on the class of the given material,

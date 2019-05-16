@@ -52,6 +52,7 @@ S3method("predict","polyMatrix")
 S3method("print","polyMatrix")
 S3method("print","pMvarma")
 S3method("tr","polyMatrix")
+S3method("t","polyMatrix")
 
 S3method("predict","charpn")
 

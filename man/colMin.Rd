@@ -2,12 +2,10 @@
 \alias{colMin}
 \title{Column minimums for numeric matrices}
 \description{ ... }
-\usage{
-colMin(m)
-}
 
+\usage{colMin(matrix)}
 \arguments{
-  \item{m}{a matrix class object}
+  \item{matrix}{a matrix class object}
 }
 
 \details{more details than the description above }

@@ -2,12 +2,10 @@
 \alias{rowMin}
 \title{Row minimums for numeric matrices}
 \description{ ... }
-\usage{
-rowMin(m)
-}
 
+\usage{rowMin(matrix)}
 \arguments{
-  \item{m}{a matrix class object}
+  \item{matrix}{a matrix class object}
 }
 
 \details{more details than the description above }

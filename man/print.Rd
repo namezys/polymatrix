@@ -6,14 +6,20 @@
 \description{Printing method for class \code{polyMatrix} and \code{pMvarma}.}
 
 \usage{
-\method{print}{polyMatrix}(x, style = c("matrix","polynom","broad","raw"),digits = getOption("digits"), shift = 2, ...)
-\method{print}{pMvarma}(x, style = c("matrix","polynom","broad","raw"),digits = getOption("digits"), shift = 2, ...)
+\method{print}{polyMatrix}(
+    x, style=c("matrix", "polynom", "broad", "raw"),
+    digits=getOption("digits"), shift = 2, ...
+)
+\method{print}{pMvarma}(
+    x, style=c("matrix", "polynom", "broad", "raw"),
+    digits=getOption("digits"), shift = 2, ...
+)
 }
 
 \arguments{\item{x}{a \code{polyMatrix} or \code{pMvarma} class object to print}
            \item{style}{one of the four printing type}
            \item{digits}{the number of significant digits to print}
-           \item{shift}{shift for print of elements if the style is 'polynom'} 
+           \item{shift}{shift for print of elements if the style is 'polynom'}
 		   \item{\dots}{...} }
 
 \details{more details than the description above }
@@ -26,7 +32,7 @@
 
 \examples{
 set.seed(1)
-pm<-polyMgen.a(rand=function(x) rpois(x,1)) 
+pm<-polyMgen.a(rand=function(x) rpois(x,1))
 
 
 pa <- polyMconvert(pm,"polyMarray") # class: "polyMarray" "polyMatrix"
@@ -59,7 +65,7 @@ print(pd,"raw")
 
 rm(pa,pb,pc,pd)
 
-varma<-polyMgen.varma() 
+varma<-polyMgen.varma()
 
 varma
 print(varma,"matrix") # the same print image
