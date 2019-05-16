@@ -2,12 +2,10 @@
 \alias{rowMax}
 \title{Row maximums for numeric matrices}
 \description{ ... }
-\usage{
-rowMax(m)
-}
 
+\usage{rowMax(matrix)}
 \arguments{
-  \item{m}{a matrix class object}
+  \item{matrix}{a matrix class object}
 }
 
 \details{more details than the description above }

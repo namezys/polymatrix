@@ -2,12 +2,10 @@
 \alias{colMax}
 \title{Column maximums for numeric matrices}
 \description{ ... }
-\usage{
-colMax(m)
-}
 
+\usage{colMax(matrix)}
 \arguments{
-  \item{m}{a matrix class object}
+  \item{matrix}{a matrix class object}
 }
 
 \details{more details than the description above }
