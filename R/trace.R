@@ -2,24 +2,38 @@
 # the matrix trace for 'matrix' and 'polyMatrix' class objects
 
 tr <-
-function(M) UseMethod("tr")
+function(matrixObject) {
+  UseMethod("tr")
+}
 
 tr.matrix <-
-function(M)  
-  { if(nrow(M)>ncol(M))M<-t(M);
-    n<-min(dim(M))
-    numic<-sum(as.numeric(M)[seq(1,by=n+1,l=n)])
-    return(numic)}
+function(matrixObject)  
+{ 
+  if(nrow(matrixObject) > ncol(matrixObject)) {
+    matrixObject <- t(matrixObject)
+  }
+  
+  minDim <- min(dim(matrixObject))
+  numericSum <- sum(as.numeric(matrixObject)[seq(1, by = minDim + 1, l = minDim)])
+  return(numericSum)
+}
 
 tr.polyMatrix <-
-function(M)  
-  { pd<-polyMconvert(M,"polyMdlist")
-    ponom<-polynomial(0)
-    if(dim(pd)[1]>dim(pd)[2]) pd<-t(pd);
-    m<-min(dim(pd))
-    for(k in 1:m)
-    ponom<-ponom+pd$dlist[[k]][[k]]
-    return(ponom) }
+function(polyMatrixObject)  
+{ 
+  pList <- polyMconvert(polyMatrixObject,"polyMdlist")
+  polynomialObject <- polynomial(0)
+  
+  if(dim(pList)[1] > dim(pList)[2]) {
+    pList <- t(pList)
+  }
+  minDim <- min(dim(pList))
+  for(i in 1:minDim) {
+    polynomialObject <- polynomialObject + pList$dlist[[i]][[i]]
+  }
+  
+  return(polynomialObject) 
+}
 
    
 # ----
