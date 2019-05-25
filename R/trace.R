@@ -15,6 +15,7 @@ function(matrixObject)
   
   minDim <- min(dim(matrixObject))
   numericSum <- sum(as.numeric(matrixObject)[seq(1, by = minDim + 1, l = minDim)])
+  
   return(numericSum)
 }
 
@@ -27,7 +28,9 @@ function(polyMatrixObject)
   if(dim(pList)[1] > dim(pList)[2]) {
     pList <- t(pList)
   }
+  
   minDim <- min(dim(pList))
+  
   for(i in 1:minDim) {
     polynomialObject <- polynomialObject + pList$dlist[[i]][[i]]
   }
