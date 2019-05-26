@@ -1,15 +1,13 @@
 # ----
 # the matrix trace for 'matrix' and 'polyMatrix' class objects
 
-tr <-
-function(matrixObject) {
+tr <- function(matrixObject) {
   UseMethod("tr")
 }
 
-tr.matrix <-
-function(matrixObject)  
+tr.matrix <- function(matrixObject)  
 { 
-  if(nrow(matrixObject) > ncol(matrixObject)) {
+  if (nrow(matrixObject) > ncol(matrixObject)) {
     matrixObject <- t(matrixObject)
   }
   
@@ -19,13 +17,12 @@ function(matrixObject)
   return(numericSum)
 }
 
-tr.polyMatrix <-
-function(polyMatrixObject)  
+tr.polyMatrix <- function(polyMatrixObject)  
 { 
-  pList <- polyMconvert(polyMatrixObject,"polyMdlist")
+  pList <- polyMconvert(polyMatrixObject, "polyMdlist")
   polynomialObject <- polynomial(0)
   
-  if(dim(pList)[1] > dim(pList)[2]) {
+  if (dim(pList)[1] > dim(pList)[2]) {
     pList <- t(pList)
   }
   
