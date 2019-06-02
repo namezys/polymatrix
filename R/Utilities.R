@@ -51,23 +51,24 @@ is.polyMatrix <- function(x)
 #  1. # pMcol     - a column of a polynomial matrix
 
 
-pMcol <-
-function(pm,which=1)
-  { if(class(pm)[2]!="polyMatrix") stop("The 'pm' parameter must be a 'polyMatrix' object") 
-    pm<-polyMconvert(pm,"polyMdlist")
-    k<-dim(pm)[1]
-    dlist<-vector("list",k)
-    degree<-matrix(NA,k,1)
-    for (i in 1:k) 
-      { dlist[[i]]<-list(pm$dlist[[i]][[which]])
-        degree[i,1]<-degree(dlist[[i]][[1]])    }
-    return(
-    structure(list(dim = c(k,1),
-                   degree = degree,
-                   symb = "x",   
-                   dlist = dlist),
-              class = c("polyMdlist","polyMatrix")))
-   }
+pMcol <- function(pm, which=1)
+{ 
+  if (class(pm)[2] != "polyMatrix") {
+    stop("The 'pm' parameter must be a 'polyMatrix' object")
+  }
+  
+  plist <- polyMconvert(pm, "polyMdlist")
+  pdim <- dim(plist)[1]
+  dlist <- vector("list", pdim)
+  degree <- matrix(NA, pdim, 1)
+  
+  for (i in 1:pdim) {
+    dlist[[i]] <- list(pm$dlist[[i]][[which]])
+    degree[i,1] <- degree(dlist[[i]][[1]])    
+  }
+  
+  return(structure(list(dim=c(pdim, 1), degree=degree, symb="x", dlist=dlist), class=c("polyMdlist", "polyMatrix")))
+}
 
 
 # -----------------
