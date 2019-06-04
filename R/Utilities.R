@@ -76,9 +76,6 @@ pMcol <- function(pm, which=1)
 
 pMrow <- function(pm, which=1)
 { 
-  if(class(pm)[2] != "polyMatrix") {
-    stop("The 'pm' parameter must be a 'polyMatrix' object") 
-  }
   
   plist <- polyMconvert(pm, "polyMdlist")
   pdim <- dim(plist)[2]
