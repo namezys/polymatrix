@@ -148,24 +148,24 @@ pMsub <- function(pm, i, j=i)
   }
   
   if (length(j) > 0) {
-    j <- j[j!=0]
-    j <- j[j<=pd$dim[2]]
-    
-	  if (length(j) > 0) {
-     if ((!all(j < 0)) & (!all(j > 0))) {
-      stop("The column selection indices have different signs!")
-     }
+   j <- j[j!=0]
+   j <- j[j<=pd$dim[2]]
+   
+   if (length(j) > 0) {
+    if ((!all(j < 0)) & (!all(j > 0))) {
+     stop("The column selection indices have different signs!")
+    }
 	    
-     for(k in 1:length(pd$dlist)) {
-        pd$dlist[[k]] <- pd$dlist[[k]][j] # retain or delete the j.th column from the k.th row
-     }
+    for(k in 1:length(pd$dlist)) {
+      pd$dlist[[k]] <- pd$dlist[[k]][j] # retain or delete the j.th column from the k.th row
+    }
       
-	   if (j[1] < 0) {
-	     pd$dim[2] <- pd$dim[2] - length(j)
-	   } else {
-	     pd$dim[2] <- length(j)
-	   }
+    if (j[1] < 0) {
+	   pd$dim[2] <- pd$dim[2] - length(j)
+	  } else {
+	   pd$dim[2] <- length(j)
 	  }
+	 }
   }
   
   rows <- if (length(i)) i else 1:pd$dim[1]
