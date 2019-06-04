@@ -74,24 +74,22 @@ pMcol <- function(pm, which=1)
 # -----------------
 #  2. # pMrow     - a row of a polynomial matrix 
 
-pMrow <-
-function(pm,which=1)
-  { if(class(pm)[2]!="polyMatrix") stop("The 'pm' parameter must be a 'polyMatrix' object") 
-    pd<-polyMconvert(pm,"polyMdlist")
-    j<-dim(pd)[2]
-    dlist<-vector("list",1)
-    dlist[[1]]<-vector("list",j)
-    degree<-matrix(NA,1,j)
-    for (i in 1:j) 
-      { dlist[[1]][[i]]<-pd$dlist[[which]][[i]]
-        degree[1,i]<-degree(dlist[[1]][[i]])    }
-    return(
-    structure(list(dim = c(1,j),
-                   degree = degree,
-                   symb = "x",   
-                   dlist = dlist),
-              class = c("polyMdlist","polyMatrix")))
-   }
+pMrow <- function(pm, which=1)
+{ 
+  
+  plist <- polyMconvert(pm, "polyMdlist")
+  pdim <- dim(plist)[2]
+  dlist <- vector("list", 1)
+  dlist[[1]] <- vector("list", pdim)
+  degree <- matrix(NA, 1, pdim)
+  
+  for (i in 1:pdim) { 
+    dlist[[1]][[i]] <- plist$dlist[[which]][[i]]
+    degree[1,i] <- degree(dlist[[1]][[i]])    
+  }
+  
+  return(structure(list(dim=c(1, pdim), degree=degree, symb="x", dlist=dlist), class=c("polyMdlist", "polyMatrix")))
+}
 
 # -----------------
 #  3. # pMbas     - bastion vector, the permutation: 'ki'
