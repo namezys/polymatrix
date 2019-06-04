@@ -160,7 +160,7 @@ pMsub <- function(pm, i, j=i)
           pd$dlist[[k]] <- pd$dlist[[k]][j] # retain or delete the j.th column from the k.th row
       }
       
-	    if(j[1] < 0) {
+	    if (j[1] < 0) {
 	      pd$dim[2] <- pd$dim[2] - length(j)
 	    } else {
 	      pd$dim[2] <- length(j)
@@ -168,8 +168,8 @@ pMsub <- function(pm, i, j=i)
 	  }
   }
   
-  rows <- if(length(i)) i else 1:pd$dim[1]
-  columns <- if(length(j)) j else 1:pd$dim[2]
+  rows <- if (length(i)) i else 1:pd$dim[1]
+  columns <- if (length(j)) j else 1:pd$dim[2]
   
   pd$degree <- pd$degree[rows, columns, drop=FALSE]
   pm <- polyMconvert(pd, class(pm)[1])
