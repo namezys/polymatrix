@@ -219,19 +219,37 @@ function(pMx,pMy=NULL)
 # -----------------
 #  7. # pMsgn     - sign-change of a polynomial matrix
 
-pMsgn <-   # change of the sign
-function(pm)
-  {   mpm <- switch(class(pm)[1],
-             polyMarray = { pm$const<- -pm$const; pm$array<- -pm$array; pm },
-             polyMbroad = { pm$broad<- -pm$broad; pm },
-             polyMcells = { for(i3 in 0:degree(pm)) pm$cells[[i3+1]]<- -pm$cells[[i3+1]]; pm },
-             polyMdlist = { for(i1 in 1:dim(pm)[1])
-                            for(i2 in 1:dim(pm)[2])
-                              pm$dlist[[i1]][[i2]] <- -pm$dlist[[i1]][[i2]]
-                         pm },
-              stop("A not regular 'polyMatrix' class object!"))
-      return(mpm)
-   }
+pMsgn <- function(pm)
+{
+  switch(class(pm)[1],
+         polyMarray = {
+           pm$const <- -pm$const
+           pm$array <- -pm$array
+           pmToReturn <- pm
+         },
+         polyMbroad = {
+           pm$broad <- -pm$broad
+           pmToReturn <- pm
+         },
+         polyMcells = {
+           for(i in 0:degree(pm)) {
+             pm$cells[[i+1]] <- -pm$cells[[i+1]]
+             pmToReturn <- pm
+           }
+         },
+         polyMdlist = {
+           for(i in 1:dim(pm)[1]) {
+             for(j in 1:dim(pm)[2]) {
+               pm$dlist[[i]][[j]] <- -pm$dlist[[i]][[j]]
+             }
+           }
+           pmToReturn <- pm
+         },
+         stop("Not a regular 'polyMatrix' class object!")
+  )
+  
+  return(pmToReturn)
+}
 
 
 # -----------------
