@@ -237,18 +237,29 @@ function(pm)
 # -----------------
 #  8. # ssetNext  - next subset of a set
 
-ssetNext<-
-function(ss)
- { m <- length(ss)
-   if(m==1)
-     return(if(ss==0) m else rep(0,ss))
-   if (all(ss!=0)) return(m)
-    else
-       { k<-tail(which(ss==0),1)
-         ss[k]<-1
-         if(k<m) ss[(k+1):m]<-0
-         return(ss) }
-   }
+ssetNext <- function(set)
+{ 
+  size <- length(set)
+  
+  if (size == 1) {
+    if (set == 0) {
+      return(size)
+    } else {
+      return(rep(0, set))
+    }
+  }
+  
+  if (all(set != 0)) {
+    return(size)
+  } else {
+    k <- tail(which(set==0), 1)
+    set[k] <- 1
+    if (k < size) {
+      set[(k + 1):size] <- 0
+    }
+    return(set) 
+  }
+}
 
 
 # -----------------
