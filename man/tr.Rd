@@ -5,19 +5,21 @@
 
 \description{Returns the trace of the given matrix.}
 
-\usage{tr(M)}
+\usage{tr(matrixObject)}
 
-\arguments{\item{M}{a \code{matrix} or \code{polyMatrix} class object}}
+\arguments{
+  \item{matrixObject}{a \code{matrix} or \code{polyMatrix} class object}
+}
 
 \details{Calculate the sum of the diagonal elements of the given matrix.}
 
 \value{\itemize{
-  \item a \code{numeric} class object, 
+  \item a \code{numeric} class object,
         if the given matrix is a \code{matrix} class object.
-  \item a \code{polynomial} class object, 
+  \item a \code{polynomial} class object,
         if the given matrix is a \code{polyMatrix} class object.    }}
 
-\seealso{\code{\link{tr.polyMatrix}}, \code{\link{polyMatrix-package}}, \code{\link{polynomial}}, 
+\seealso{\code{\link{tr.polyMatrix}}, \code{\link{polyMatrix-package}}, \code{\link{polynomial}},
          but the \code{\link{trace}} is a debugging utility}
 
 \keyword{utilities}
@@ -54,7 +56,7 @@ pM <- polyMgen.d(3,3,rawData=
 class(pM) # "polyMdlist" "polyMatrix"
 pM
 
-( p <- tr(pM) ) # 1 - 3*x + x^2 
+( p <- tr(pM) ) # 1 - 3*x + x^2
 class(p) # "polynomial"
 
 rm(M,pM,p)
