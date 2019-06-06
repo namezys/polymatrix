@@ -284,8 +284,8 @@ permSign <- function(prm)
    
   for(i in (size - 1):1) {
     for(j in 1:i) {
-      if(prm[j] > prm[j+1]) {
-        prm[j+0:1] <- prm[j+1:0]
+      if(prm[j] > prm[j + 1]) {
+        prm[j + 0:1] <- prm[j + 1:0]
         valueToReturn <- -valueToReturn
       }
     }
