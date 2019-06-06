@@ -273,18 +273,26 @@ function(r)
 # -----------------
 # 10. # permSign  - the sign of a permutation
 
-permSign <-
-function(r)
- { if(!all(sort(r)==1:length(r))) stop("The given 'r' is not a permutation")
-   n<-length(r)
-   s<-1
-   for(j in (n-1):1)
-    for(k in 1:j)
-     if(r[k]>r[k+1])
-       { r[k+0:1]<-r[k+1:0]
-         s<- -s }
-   return(s)
+permSign <- function(prm)
+{ 
+  if(!all(sort(prm) == 1:length(prm))) {
+    stop("The given 'r' is not a permutation")
   }
+  
+  size <- length(prm)
+  valueToReturn <- 1
+   
+  for(i in (size - 1):1) {
+    for(j in 1:i) {
+      if(prm[j] > prm[j+1]) {
+        prm[j+0:1] <- prm[j+1:0]
+        valueToReturn <- -valueToReturn
+      }
+    }
+  }
+  
+  return(valueToReturn)
+}
 
 
 # -----------------
