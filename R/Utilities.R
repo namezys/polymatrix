@@ -94,31 +94,44 @@ pMrow <- function(pm, which=1)
 # -----------------
 #  3. # pMbas     - bastion vector, the permutation: 'ki'
 
-pMbas <-   # bastion vector of a matrix or a subvector by the index: 'ki'
-function(pm,ki,byrow)
-  { n <- length(ki)
-    if(byrow & n>dim(pm)[1]|(!byrow & n>dim(pm)[2])) stop("Index vector too long!")
-    pd <- polyMconvert(pm,"polyMdlist")
-    if(dim(pd)[1]==1) pd<-t(pd) # if vector let it a column
-    if(dim(pd)[2]==1)
-          {v<-pd$dlist[ki]
-           degree<-degree(pm,"m")[ki,1,drop=FALSE]}
-     else {
-            v <- vector("list",n)
-            if(byrow)
-              for (k in 1:n) v[[k]][1] <- list(pd$dlist[[k]][[ki[k]]])
-             else
-              for (k in 1:n) v[[k]][1] <- list(pd$dlist[[ki[k]]][[k]])
-            degree <- vector("numeric",n)
-            for (k in 1:n) degree[k] <- degree(v[[k]][[1]])
-           }
-    return(
-    structure(list(dim = c(n,1),
-                   degree = matrix(degree,n,1),
-                   symb = "x",
-                   dlist = v),
-              class = c("polyMdlist","polyMatrix")))
-   }
+pMbas <- function(pm, ki, byrow)
+{ 
+  size <- length(ki)
+  
+  if (byrow & size > dim(pm)[1] | (!byrow & size > dim(pm)[2])) {
+    stop("Index vector too long!")
+  }
+  
+  pd <- polyMconvert(pm, "polyMdlist")
+  
+  if(dim(pd)[1] == 1) {
+    pd <- t(pd)
+  }
+  
+  if(dim(pd)[2] == 1) {
+    v <- pd$dlist[ki]
+    degree <- degree(pm, "m")[ki, 1, drop=FALSE]
+  } else {
+    v <- vector("list", size)
+    if (byrow) {
+      for (i in 1:size) {
+        v[[i]][1] <- list(pd$dlist[[i]][[ki[i]]])
+      }
+    } else {
+      for (i in 1:size) {
+        v[[i]][1] <- list(pd$dlist[[ki[i]]][[i]])
+      }
+    }
+    
+    degree <- vector("numeric", size)
+    
+    for (i in 1:size) {
+      degree[i] <- degree(v[[i]][[1]])
+    }
+  }
+  
+  return(structure(list(dim=c(size, 1), degree=matrix(degree, size, 1), symb="x", dlist=v), class=c("polyMdlist", "polyMatrix")))
+}
 
 
 # -----------------
