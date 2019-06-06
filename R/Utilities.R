@@ -180,17 +180,24 @@ pMsub <- function(pm, i, j=i)
 # -----------------
 #  5. # pMprod    - a product of the elements of a polynomial vector
 
-pMprod <-
-function(pm)
-  {
-    pm <- polyMconvert(pm,"polyMdlist")
-    if(min(dim(pm)) != 1) stop("The input must be a vector!")
-    m <- max(dim(pm))
-    pr <- polynom::polynomial(1)
-    for (k in 1:m)
-      pr <- pr*(if(m==dim(pm)[1]) pm$dlist[[k]][[1]] else pm$dlist[[1]][[k]])
-    return(pr)
-   }
+pMprod <- function(pm)
+{ 
+  pm <- polyMconvert(pm, "polyMdlist")
+  
+  dimMax <- max(dim(pm))
+  pr <- polynom::polynomial(1)
+  
+  for (i in 1:dimMax) {
+    if (dimMax == dim(pm)[1]) {
+      value <- pm$dlist[[i]][[1]]
+    } else {
+      value <- pm$dlist[[1]][[i]]
+    }
+    pr <- pr * value
+  }
+  
+  return(pr)
+}
 
 
 # -----------------
