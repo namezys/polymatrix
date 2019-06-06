@@ -299,20 +299,30 @@ ssetNext <- function(set)
 # -----------------
 #  9. # permNext  - lexicographical next permutation
 
-permNext <-
-function(r)
- { if(length(r)==1) return(1:r)
-   if(!all(sort(r)==1:length(r))) stop("The given 'r' is not a permutation")
-   p<-tail(which(diff(r)>0),1)
-   if(length(p)==0) return(length(r))
-   a<-r[p]
-   b<-r[(p+1):length(r)]
-   c<-min(b[b>a])
-   b<-b[b!=c]# b\c
-   r[p]<-c
-   r[(p+1):length(r)]<-sort(c(a,b))
-   return(r)
+permNext <- function(prm)
+{ 
+  if (length(prm) == 1) {
+    return(1:prm)
   }
+  
+  if (!all(sort(prm) == 1:length(prm))) {
+    stop("The given 'prm' is not a permutation")
+  }
+  
+  p <- tail(which(diff(prm) > 0), 1)
+  
+  if (length(p) == 0) {
+    return(length(prm))
+  }
+  
+  a <- prm[p]
+  b <- prm[(p + 1):length(prm)]
+  c <- min(b[b > a])
+  b <- b[b != c]
+  prm[p] <- c
+  prm[(p + 1):length(prm)] <- sort(c(a, b))
+  return(prm)
+}
 
 
 # -----------------
