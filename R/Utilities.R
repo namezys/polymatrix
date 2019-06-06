@@ -196,24 +196,40 @@ function(pm)
 # -----------------
 #  6. # pVsk      - scalar product of two polynomial vectors
 
-pVsk <-
-function(pMx,pMy=NULL)
-  { if(is.null(pMy)) pMy <- pMx
-    if(max(min(dim(pMx)),min(dim(pMy)))!=1)
+pVsk <- function(pMx, pMy=NULL)
+{ 
+  if (is.null(pMy)) {
+    pMy <- pMx
+  }
+  
+  if (max(min(dim(pMx)), min(dim(pMy))) != 1) {
        stop("The scalar product works only for two vector 'polyMatrix' object!")
-    if(max(dim(pMx))!=max(dim(pMy)))
+  }
+    
+  if(max(dim(pMx)) != max(dim(pMy))) {
        stop("The scalar product works only for two equal length vectors!")
-    m<-max(dim(pMx))
-    pdx <- polyMconvert(pMx,"polyMdlist")
-    pdy <- polyMconvert(pMy,"polyMdlist")
-    if(m==dim(pdx)[2]) pdx <- t(pdx)
-    if(m==dim(pdy)[2]) pdy <- t(pdy)
-    p<-polynom::polynomial(0)
-    for (i in 1:m)
-       p<-p+pdx$dlist[[i]][[1]]*pdy$dlist[[i]][[1]]
+  }
+  
+  dimMax <- max(dim(pMx))
+  pdx <- polyMconvert(pMx, "polyMdlist")
+  pdy <- polyMconvert(pMy, "polyMdlist")
+  
+  if (dimMax == dim(pdx)[2]) {
+    pdx <- t(pdx)
+  }
+  
+  if (dimMax == dim(pdy)[2]) {
+    pdy <- t(pdy)
+  }
+  
+  p <- polynom::polynomial(0)
+  
+  for (i in 1:dimMax) {
+    p <- p + pdx$dlist[[i]][[1]] * pdy$dlist[[i]][[1]]
+  }
 
-    return(p)
-   }
+  return(p)
+}
 
 
 # -----------------
