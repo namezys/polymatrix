@@ -491,27 +491,50 @@ function(data, size)
 # -----------------
 # 14. # pMdiag    - diagonal polynomial matrix
 
-pMdiag <-
-function(p,k,symb="x")
-  {
-    mclass<-if (class(p)=="polynomial") "OK" else
-     if (class(p)=="list") if(all(sapply(p,class)=="polynomial")) "OK" else "BAD" else "BAD"
-    if(mclass=="BAD") stop("The input not a 'polynomial' or a 'list' class object of 'polynomial's!")
-	if(length(k)>2|(length(k)==2&(k[1]!=k[2]))) stop("We for only square matrices!")
-	if(length(k)==2) k<-k[1]
-    p <- if (class(p)=="polynomial") list(p) else p
-    K<-length(p)
-    rD <- list()
-    if(k%/%K>0) for(i in 1:(k%/%K)) rD <- c(rD,p)
-    if(k%%K!=0) rD <- c(rD,p[1:(k%%K)])
-    rawData<-rD[1]
-    if(k>1)
-      for(i1 in 2:k)
-        { for(i2 in 1:k)
-            rawData <- c(rawData,list(ch2pn("0")))
-          rawData <- c(rawData,rD[i1])  	    }
-    return(polyMgen.d(k,k,rawData=rawData,symb=symb))
+pMdiag <- function(pm, k, symb="x")
+{
+  if (class(pm) != "polynomial" && (class(pm) != "list" || (all(sapply(pm, class) != "polynomial")))) {
+    stop("The input is not a 'polynomial' or a 'list' class object of 'polynomial's!")
   }
+  
+	if (length(k) > 2 | (length(k) == 2 & (k[1] != k[2]))) {
+	  stop("It is only for only square matrices!")
+	}
+  
+	if (length(k) == 2) {
+	  k <- k[1]
+	}
+  
+  if (class(pm) == "polynomial") {
+    pm <- list(pm)
+  }
+  
+  size <- length(pm)
+  rD <- list()
+  
+  if (k %/% size > 0) {
+    for (i in 1:(k %/% size)) {
+      rD <- c(rD, pm)
+    }
+  }
+  
+  if (k %% size != 0) {
+    rD <- c(rD, pm[1:(k %% size)])
+  }
+  
+  rawData <- rD[1]
+  
+  if (k > 1) {
+    for(i in 2:k) {
+      for(j in 1:k) {
+        rawData <- c(rawData, list(ch2pn("0")))
+      }
+      rawData <- c(rawData, rD[i])
+    }
+  }
+  
+  return(polyMgen.d(k, k, rawData=rawData, symb=symb))
+}
 
 GCD <- function (...) {
   UseMethod("GCD")
