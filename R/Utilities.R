@@ -497,13 +497,13 @@ pMdiag <- function(pm, k, symb="x")
     stop("The input is not a 'polynomial' or a 'list' class object of 'polynomial's!")
   }
   
-	if (length(k) > 2 | (length(k) == 2 & (k[1] != k[2]))) {
+  if (length(k) > 2 | (length(k) == 2 & (k[1] != k[2]))) {
 	  stop("It is only for only square matrices!")
 	}
   
-	if (length(k) == 2) {
+  if (length(k) == 2) {
 	  k <- k[1]
-	}
+  }
   
   if (class(pm) == "polynomial") {
     pm <- list(pm)
