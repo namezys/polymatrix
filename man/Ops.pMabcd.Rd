@@ -12,8 +12,10 @@
 \method{Ops}{polyMatrix}(e1,e2)}
 \arguments{\item{e1}{an object of class \code{polyMatrix}.}
            \item{e2}{an object of class \code{numeric}, \code{character} or  \code{polyMatrix}.}}
-\value{A \code{c("polyMdlist","polyMatrix")} class polynomial matrix got by 
-       performing the operation on the two arguments}
+\value{
+A \code{c("polyMdlist","polyMatrix")} class polynomial matrix 
+which is the result obtained by performing the operation on the two arguments.
+}
 \author{Prohle Tamas}
 \seealso{objects to See Also as \code{\link{polyMatrix-package}}, \code{\link{Ops}}}
 

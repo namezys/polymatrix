@@ -2,10 +2,10 @@
 \alias{permNext}
 \title{The next permutation}
 \description{Returns for a permutation the next permutation}
-\usage{permNext(r)}
+\usage{permNext(prm)}
 \arguments{
-  \item{r}{the length of required permutation, or 
-           the permutation for which the next we will}}
+  \item{prm}{the length of required permutation, or 
+             the permutation for which the next we will}}
 \details{When it is a natural number, then the program take it as the 
 length of the required permutation, and returns the first permutation 
 of the given length. If it is a sequence of natural numbers then

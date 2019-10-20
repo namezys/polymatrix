@@ -17,21 +17,21 @@
              not fully works.}
 
 \usage{
-polyMgen.a(k=2, j=3, rawData=1:(k * j * (max(degree) + 1)),
+polyMgen.a(nrow=2, ncol=3, rawData=1:(nrow * ncol * (max(degree) + 1)),
            symb="x", rand=FALSE, degree=2, byrow=FALSE)
-polyMgen.b(k=2, j=3, rawData=1:(k * j * (degree + 1)),
+polyMgen.b(nrow=2, ncol=3, rawData=1:(nrow * ncol * (degree + 1)),
            symb="x", rand=FALSE, degree=2, byrow=FALSE)
-polyMgen.c(k=2, j=3, rawData=1:(k * j * (max(degree) + 1)),
+polyMgen.c(nrow=2, ncol=3, rawData=1:(nrow * ncol * (max(degree) + 1)),
            symb="x", rand=FALSE, degree=2, byrow=FALSE)
-polyMgen.d(k=2, j=3, rawData=NULL,
+polyMgen.d(nrow=2, ncol=3, rawData=NULL,
            symb="x", rand=NULL, degree=NULL, byrow=FALSE)
-polyMgen.varma(k=3, j=3, rawData=list(polynomial(1:3)),
+polyMgen.varma(nrow=3, ncol=3, rawData=list(polynomial(1:3)),
                symb="x", rand=FALSE, degree=c(1,1), byrow=FALSE)
 }
 
 \arguments{
-  \item{k}{the desired number of rows.}
-  \item{j}{the desired number of columns.}
+  \item{nrow}{the desired number of rows.}
+  \item{ncol}{the desired number of columns.}
   \item{degree}{the desired degrees of polynomials when it is random filled.}
   \item{rawData}{material to fill the polynomial matrix.
                 In case of \code{polyMgen.a}, \code{polyMgen.b} and \code{polyMgen.c}

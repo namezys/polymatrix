@@ -11,13 +11,13 @@
   \item{matrixObject}{a \code{matrix} or \code{polyMatrix} class object}
 }
 
-\details{Calculate the sum of the diagonal elements of the given matrix.}
+\details{Calculates the sum of the diagonal elements of the given matrix.}
 
 \value{\itemize{
   \item a \code{numeric} class object,
-        if the given matrix is a \code{matrix} class object.
+        if the given matrix is a \code{matrix} class object
   \item a \code{polynomial} class object,
-        if the given matrix is a \code{polyMatrix} class object.    }}
+        if the given matrix is a \code{polyMatrix} class object    }}
 
 \seealso{\code{\link{tr.polyMatrix}}, \code{\link{polyMatrix-package}}, \code{\link{polynomial}},
          but the \code{\link{trace}} is a debugging utility}

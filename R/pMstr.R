@@ -1,21 +1,21 @@
 # -----
-# pMstr      - consistecy check of a polyMatrix object  
+# pMstr      - consistecy check of a polyMatrix object
 # -----
 
 pMstr <-
-function(pm) 
-   { 
-     # the class attribute 
+function(pm)
+   {
+     # the class attribute
      cl<-class(pm)
      if (length(cl)!=2|cl[2]!="polyMatrix"|
-         !(cl[1]%in%c("polyMarray","polyMbroad","polyMcells","polyMdlist"))) 
+         !(cl[1]%in%c("polyMarray","polyMbroad","polyMcells","polyMdlist")))
        stop("Problem with the object class!")
      cl<-substr(cl[1],3,3)
-     
+
      # presence of "dim", "degree", "symb" arguments
      if (is.null(pm$dim)|is.null(pm$degree)|is.null(pm$symb))
        stop("One of argument 'dim', 'degree' or 'symb' missing!")
-     
+
      # presence of the apropriate data arguments
      if (cl=="a"&(is.null(pm$const)|is.null(pm$array)))
        stop("The object is in 'polyMarray' form, but the data part absent!")
@@ -28,29 +28,29 @@ function(pm)
 
      if (cl=="d"&is.null(pm$dlist))
        stop("The object is in 'polyMdlist' form, but the data part absent!")
-       
+
      # the structure of the data part
      hibas<-FALSE
      hibas<-switch(cl,"a"=,"b"=,"c"=,"d"=)
-     if (hibas) 
+     if (hibas)
        stop("Bad structure of the data part!")
 
-     # dim 
+     # dim
      hibas<-FALSE
      hibas<-switch(cl,"a"=,"b"=,"c"=,"d"=)
-     if (hibas) 
+     if (hibas)
        stop("Bad dim argument!")
 
      # degree
      hibas<-switch(cl,"a"=,"b"=,"c"=,"d"=)
-     if (hibas) 
+     if (hibas)
        stop("Bad dim argument!")
 
      # symb
-     if (length(pm$symb)!=1|nchar(pm$symb[1])!=1) 
+     if (length(pm$symb)!=1|nchar(pm$symb[1])!=1)
        stop("Bad symb argument!")
-     
-     # --- 
+
+     # ---
      hibas<-FALSE
      if(pm$degree!=dim(pm$coefs)[3]) {hibas<-TRUE;stop("Problem with degree !")}
      if(all(pm$dim!=dim(pm$const))) {hibas<-TRUE;stop("Problem with constant matrix dimension !")}
@@ -67,12 +67,12 @@ function(pm)
      m<-rep(NA,n)
      for(k in 1:n)
      m[k] <- length (pd$dlist[[k]])
-     if(!all(m==m[1])) 
+     if(!all(m==m[1]))
                       ans<-paste(txt,"one or more matrix element is missing")
      else
      # class problem of an sublist
      for (i in 1:length(pd$dlist))
-        if (!is.list(pd$dlist[[i]])) 
+        if (!is.list(pd$dlist[[i]]))
                       ans<-paste(txt,"class problem of an sublist")
      else
      # class problem of an element
@@ -85,6 +85,6 @@ function(pm)
                    txt=if(ans==cns) cns else err,
                    err=ans))
    }
-  
+
 # -----------------
 # fine

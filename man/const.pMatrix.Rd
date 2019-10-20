@@ -4,21 +4,23 @@
 
 \title{The constant of a polynom or a polynomial matrix}
 
-\description{Returns the constant of the given polynom or polynomial matrix.}
+\description{
+Returns the constant of a \code{polynom} class object or 
+the constant matrix of a \code{polyMatrix} class object.
+}
 
 \usage{const(p)
        \method{const}{polynomial}(p)
        \method{const}{polyMatrix}(p)
 }
 
-\arguments{\item{p}{A \code{polynomial} or \code{polyMatrix} class object}}
+\arguments{\item{p}{a \code{polynomial} or \code{polyMatrix} class object}}
 
-\details{Get out 
-         the constant of a \code{polynom} class object or 
-         the constant matrix of a \code{polyMatrix} class object.}
-
-\value{A \code{numeric} object, containing the constant of the given polynom, or 
-       a \code{matrix} class object, containing the constant matrix of the given polynomial matrix.}
+\value{
+A \code{numeric} object, containing the constant of the given 
+polynom, or of a \code{matrix} class object which contains the 
+constant matrix of the given polynomial matrix.
+}
 
 \seealso{\code{\link{coefs}}, \code{\link{lead}}}
 

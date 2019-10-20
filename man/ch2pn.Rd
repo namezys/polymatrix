@@ -2,17 +2,16 @@
 \alias{ch2pn}
 \title{Converts a \code{character} class object to a \code{polynomial} class object}
 \description{
-Receive a \code{character} class object -- like the print image of a \code{polynomial} object --
+Receives a \code{character} class object -- which looks like the print image of a \code{polynomial} object --
 and returns a \code{polynomial} class object.}
 \usage{ch2pn(chv, symb = "x")}
 \arguments{
   \item{chv}{a \code{character} class object like the print image of a \code{polynomial} object}
   \item{symb}{the required symbol of input polynom string}
   }
-\details{This technical subrutin
-convert a \code{character} object to a \code{polynomial} object.
-The "x" is the default symbol in input string. The output is a polynomial or a list of polynomials,
-without defined symbol. The default \code{print.polynomial} writes out the output by the symbol "x".}
+\details{This technical subrutin converts a \code{character} object to a \code{polynomial} object.
+The "x" is the default symbol in the input string. The output is a \code{polynomial} or a list of \code{polynomial}s,
+without any defined symbol. The default \code{print.polynomial} writes out the output by the symbol "x".}
 
 \value{A \code{polynomial} class object or a \code{list} of \code{polynomial} objects.}
 

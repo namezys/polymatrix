@@ -1,13 +1,14 @@
 \name{is.polyMatrix}
 \alias{is.polyMatrix}
-\title{Is an object of Type polyMatrix?}
+\title{Is an object of type '\code{polyMatrix}'?}
 \description{Checks wether the given object is a \code{polyMatrix} object or not.}
 \usage{is.polyMatrix(x) }
 \arguments{
   \item{x}{an R object.}   }
-\details{is.polyMatrix returns TRUE if its argument is a \code{polyMatrix}
+\details{\code{is.polyMatrix} returns \code{TRUE} if its argument is a \code{polyMatrix}
 (that is, has "polyMatrix" amongst its classes
-and one of sub-classes "polyMarray", "polyMbroad", "polyMcells" or "polyMdlist") and FALSE otherwise.}
+and one of the four sub-classes:
+"polyMarray", "polyMbroad", "polyMcells", "polyMdlist") and \code{FALSE} otherwise.}
 
 \keyword{check}
 

@@ -15,11 +15,16 @@
              \item{degree}{"all" or the serial numben of requested coefficients.}   
 }
 
-\details{Two methods. One for a \code{polynomial} objects, the other for \code{polyMatrix} objects.}
+\details{
+The \code{coefs} consists of two methods. 
+One for a \code{polynomial} objects, 
+the other one for \code{polyMatrix} objects.
+}
 
-\value{A \code{vector} of requested coefficients of the input polynom or 
-       a \code{list} of requested coefficient matrices of the input \code{polyMatrix}.}
-\seealso{\code{\link{const}}, \code{\link{lead}}}
+\value{
+ A \code{vector} of the requested coefficients of the input polynom or 
+ a \code{list} of the requested coefficient matrices of the input \code{polyMatrix}.
+}
 
 \keyword{internal}
 

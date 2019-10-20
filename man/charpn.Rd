@@ -1,26 +1,25 @@
 \name{charpn}
 \alias{charpn}
 
-\title{The characteristic polynom of a matrix or polynomial matrix}
+\title{The characteristic polynom of a matrix or a polynomial matrix}
 
-\description{In the case of  polynomial matrix it is a polynom by polynomial coefficients}
+\description{The characteristic polynom of a polynomial matrix is a polynom with polynomial coefficients.}
 
 \usage{charpn(M)}
 
 \arguments{
-           \item{M}{an \code{polyMatrix} class polynomial matrix object}
+           \item{M}{polynomial matrix object of \code{polyMatrix} class}
 } 
 
-\details{more details than the description above \code{det(sI-M)}}
 
-\value{
-When the input is a \code{matrix} class object then a \code{polynomial} object.
-When the input is a \code{polyMatrix} class object then a \code{charpn} class object, 
-which is a list of \code{polynomial} objects
+\value{\code{det(sI-M)}.
+When the input is a \code{matrix} class object then the value is a \code{polynomial} object.
+When the input is a \code{polyMatrix} class object then a value is \code{charpn} class object, 
+which is a list of \code{polynomial} objects.
 }
 
-\note{The solution of the algorith is very primitive, a signed sum of products.
-      Exists more elegant and efficient methods.}
+\note{The solution of the algorithm is simple one, a signed sum of products.
+      There are more elegant and efficient solutions.}
 
 \seealso{\code{\link{predict.charpn}}}
 
@@ -53,6 +52,21 @@ class(pM6) # "polyMdlist" "polyMatrix"
       
 ls() # M1, pM1, M2, pM2, pM3, pM4, pM5, pM6
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# the eigenvalues of a matrix are 
+#   roots of the characteristic polynomial 
+
+pn1 <- charpn(M1) # the characteristic polynom of M1 
+ev <- eigen(M1)$values
+ev # 1 1
+predict(pn1,ev) # OK: zero matrix
+
+pn2 <- charpn(M2) # the characteristic polynom of M2 
+ev <- eigen(M2)$values
+round(ev,3) # 1.5+1.323i 1.5-1.323i 0.0+0.000i
+round(predict(pn2,ev)) # OK:  0+0i 0+0i 0+0i
+
+rm(pn1,pn2, ev)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # the characteristic polynomial and 

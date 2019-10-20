@@ -1,19 +1,31 @@
 \name{pMcol}
 \alias{pMcol}
-\title{A column of the given \code{polyMatrix}}
-\description{Pick up a given column of the given matrix}
+
+\title{
+A column of the given \code{polyMatrix}
+}
+
+\description{
+Picks up a given column of the given matrix}
+
 \usage{pMcol(pm, which = 1)}
+
 \arguments{
   \item{pm}{a \code{polyMatrix} class object}
-  \item{which}{the number of the required column}     }
-\details{more details than the description above }
+  \item{which}{the serial number of the required column}     }
+
 \value{A \code{pVector} class list of the elements of 
-       the \code{which} column of the \code{pm} polynomial matrix}
+       the column \sQuote{\code{which}} of the polynomial matrix \sQuote{\code{pm}}.}
+	   
 \seealso{\code{\link{pMrow}}}
+
 \keyword{manip}
+
 \examples{
-A<-polyMgen.a()
+A <- polyMgen.a()
 A
-pMcol(A,1)
+
+pMcol(A,2)
+
 }
 

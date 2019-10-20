@@ -1,26 +1,27 @@
 \name{pMkmm}
 \alias{pMkmm}
 \title{The Kronecker indices of a polynomial matrix}
-\description{ ... }
+
+\description{
+Calculates the Kronecker indices of a polynomial matrix.
+}
 
 \usage{pMkmm(pm) }
 
-\arguments{\item{pm}{A polynomial matrix}}
+\arguments{\item{pm}{a polynomial matrix}}
 
-\details{more details than the description above }
+\value{A vector of the Kronecker indices.}
 
-\value{A vector of the Kronecker indices}
+\note{The method doesn't work yet.}
 
-\note{further notes }
+%\references{references to the literature }
 
-\author{Manel Boukhris [tun]}
-
-\references{references to the literature }
-
-\seealso{See Also as \code{\link{polyMatrix-package}}}
+\seealso{\code{\link{polyMatrix-package}}}
 
 \examples{
+\donttest{
 polyMgen.a()
+} #% end of donttest
 }
 
 \keyword{math}

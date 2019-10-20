@@ -1,16 +1,27 @@
 \name{pMsgn}
 \alias{pMsgn}
 \title{Change the sign of a polynomial matrix object}
-\description{ ... }
+
+\description{
+Multiplies the given \code{polyMatrix} by \code{-1}, and
+returns the \code{-1} times the given polynomial matrix.
+}
+
 \usage{pMsgn(pm)}
+
 \arguments{
   \item{pm}{a polynomial matrix object}          }
-\details{For polynomial matrices returns the -1 times of the given value}
-\value{The polynomial matrix for which the pm+pMsgn(pm) equals a zero polynomial matrix}
+
+\value{
+The polynomial matrix for which the \code{pm+pMsgn(pm)} 
+equals a zero polynomial matrix.
+}
+
 \seealso{\code{\link{Ops.polyMatrix}}}
+
 \examples{
 
-A<-polyMgen.a()
+A <- polyMgen.a()
 A
 class(A) # "polyMarray" "polyMatrix"
 
@@ -24,5 +35,6 @@ A + pMsgn(polyMconvert(A,"polyMdlist"))
 
 rm(A)
 }
+
 \keyword{manip}
 

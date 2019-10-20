@@ -3,14 +3,16 @@
 
 \title{The adjugate of the given polynomial matrix}
 
-\description{ ... }
+\description{The adjugate of the given matrix. 
+Also the transpose of the matrix
+formed from the determinants of submatrices
+multiplied by the chessboard rule signs.}
 
 \usage{pMadj(pm)}
 \arguments{\item{pm}{a 'polyMatrix' class object} }
 
-\details{more details than the description above will be here }
 
-\value{The adjugate of the given polynomial matrix}
+\value{A \code{polyMatrix} class object, the adjugate of the given polynomial matrix.}
 
 \seealso{\code{\link{pMdet}}, \code{\link{pMsub}}}
 \examples{

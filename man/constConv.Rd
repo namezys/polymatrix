@@ -14,18 +14,18 @@ pM2M(pM)
 }
 
 \arguments{
-\item{m}{A matrix class object}
-\item{class}{The required class of the value}
-\item{pM}{A polyMatrix class object}                 
+\item{m}{a matrix class object}
+\item{class}{the required class of the value}
+\item{pM}{a polyMatrix class object}                 
 }
 
-\details{\code{M2pM} convert the \code{matrix} class objets to an \code{polyMatrix} class object.
-\code{pM2M} convert the zero degree \code{polyMatrix} class objects  to an \code{matrix} object.}
+\details{\code{M2pM} converts the \code{matrix} class objets to an \code{polyMatrix} class object.
+\code{pM2M} converts the zero degree \code{polyMatrix} class objects  to an \code{matrix} object.}
 
 \value{
-The \code{M2pM(m)} returns the given 'm' matrix in 'polyMatrix' class form.
-The \code{pM2M(pM)} returns the given 'pM' polynomial matrix in 'matrix' class form, if it is a constant matrix,
-else give an error sign.
+The \code{M2pM(m)} returns the given '\code{m}' matrix in '\code{polyMatrix}' class form.
+The \code{pM2M(pM)} returns the given '\code{pM}' polynomial matrix in '\code{matrix}' class form, if it is a constant matrix, 
+otherwise gives an error message.
 }
 
 \seealso{\code{\link{coefs}}, \code{\link{lead}},  \code{\link{degree}}}

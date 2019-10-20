@@ -1,15 +1,17 @@
 \name{MTS2pM}
 \alias{MTS2pM}
-\title{Conversion the VARMA representation of MTS package to polyMatrix representation}
+\title{Converts MTS representation of a VARMA process to a polyMatrix representation}
 
-\description{The VARMA representation of MTS is a list by 13 elements. 
-The necessary elements to represent a VARMA model are the c(2, 3, 4, 5, 8, 11, 12, 13):
-ARorder, MAorder, cnst, coef, Sigma, Phi, Theta, Ph0 }
+\description{The MTS representation of VARMA process is a list 
+of 13 elements. 
+The necessary elements to represent a VARMA model are the c(2, 3, 4, 5, 8, 11, 12, 13) elements:
+ARorder, MAorder, cnst, coef, Sigma, Phi, Theta, Ph0.
+The other five are redundant parameters.}
 
 \usage{MTS2pM(M)}
 
 \arguments{
-  \item{M}{an arbitrary VARMA modell list of \code{MTS} package}   
+  \item{M}{an arbitrary VARMA model list-object of the \code{MTS} package}   
   	}
 
 \details{MTS (Multivariate Time Series)  

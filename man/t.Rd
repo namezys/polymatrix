@@ -10,15 +10,16 @@
 
 \details{
 The method first convert the storage method of the given \code{polyMatrix} object to \code{polyMdlist} class interpretation,
-thereafter reflects the \code{polyMatrix} on its diagonal.
+then flips the \code{polyMatrix} over its diagonal.
 }
 
-\value{The returned value: A '\code{polyMdlist}, \code{polyMatrix}' class object, 
-  the transposed version of the given \code{x} polynomial matrix.
-  }
+\value{
+A '\code{polyMdlist}, \code{polyMatrix}' class object, 
+the transposed version of the given \code{x} polynomial matrix.
+}
 
 
-\seealso{The \code{t} in the \code{base} package.}
+\seealso{The \sQuote{\code{t}} in the \code{base} package.}
 
 \examples{
 

@@ -1,15 +1,11 @@
 \name{permSign}
 \alias{permSign}
 \title{The sign of the permutation}
-\description{ ... }
-\usage{permSign(r)}
+\description{The sign of a permutation equals to the parity of the count of involutions to order the given permutation }
+\usage{permSign(prm)}
 \arguments{
-  \item{r}{    ~~Describe \code{polyMgen} here~~ }   }
-\details{more details than the description above }
-\value{Describe the value returned!! If it is a LIST, use \item{comp1 }{Description of 'comp1'}}
-\note{further notes }
-\author{who you are }
-\references{references to the literature }
+  \item{prm}{The permutation to evaluate}   }
+\value{The parity of the given permutation. Equals to +1 if even and -1 if it is odd.}
 \seealso{\code{\link{permNext}}, \code{\link{ssetNext}} }
 
 \keyword{internal}

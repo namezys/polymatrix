@@ -1,6 +1,7 @@
 # -----------------
 # Matrix utilities
 #
+#  0. # is.polyMatrix - consistecy check of a polyMatrix object
 #  1. # pMcol     - a column of a polynomial matrix
 #  2. # pMrow     - a row of a polynomial matrix
 #  3. # pMbas     - bastion vector, the permutation: 'ki' (calc of det)
@@ -17,7 +18,7 @@
 #     # rowMin    - row minimum values of a matrix
 # 13. # cycFill   - cyclic fill by a given material
 # 14. # pMdiag    - diagonal polynomial matrix
-#      is.polyMatrix - consistecy check of a polyMatrix object
+# 15. # GCD LCM   - greatest common divisor and least common multiple
 # --- # -----------
 
 is.polyMatrix.polyMarray <- function(x)
@@ -42,6 +43,12 @@ is.polyMatrix.polyMdlist <- function(x)
 
 is.polyMatrix <- function(x)
 {
+  if(missing("x")) {
+    stop("Expected polyMatrix")
+  }
+  id (length(class(pM))!=2) {
+    return(false);
+  }
   return(is.polyMatrix.polyMarray(x) || is.polyMatrix.polyMbroad(x)
          || is.polyMatrix.polyMcells(x) || is.polyMatrix.polyMdlist(x))
 }
@@ -53,10 +60,6 @@ is.polyMatrix <- function(x)
 
 pMcol <- function(pm, which=1)
 {
-  if (class(pm)[2] != "polyMatrix") {
-    stop("The 'pm' parameter must be a 'polyMatrix' object")
-  }
-
   plist <- polyMconvert(pm, "polyMdlist")
   pdim <- dim(plist)[1]
   dlist <- vector("list", pdim)
@@ -76,7 +79,6 @@ pMcol <- function(pm, which=1)
 
 pMrow <- function(pm, which=1)
 {
-
   plist <- polyMconvert(pm, "polyMdlist")
   pdim <- dim(plist)[2]
   dlist <- vector("list", 1)
@@ -95,19 +97,19 @@ pMrow <- function(pm, which=1)
 #  3. # pMbas     - bastion vector, the permutation: 'ki'
 
 pMbas <- function(pm, ki, byrow)
-{ 
+{
   size <- length(ki)
-  
+
   if (byrow & size > dim(pm)[1] | (!byrow & size > dim(pm)[2])) {
     stop("Index vector too long!")
   }
-  
+
   pd <- polyMconvert(pm, "polyMdlist")
-  
+
   if(dim(pd)[1] == 1) {
     pd <- t(pd)
   }
-  
+
   if(dim(pd)[2] == 1) {
     v <- pd$dlist[ki]
     degree <- degree(pm, "m")[ki, 1, drop=FALSE]
@@ -122,14 +124,14 @@ pMbas <- function(pm, ki, byrow)
         v[[i]][1] <- list(pd$dlist[[ki[i]]][[i]])
       }
     }
-    
+
     degree <- vector("numeric", size)
-    
+
     for (i in 1:size) {
       degree[i] <- degree(v[[i]][[1]])
     }
   }
-  
+
   return(structure(list(dim=c(size, 1), degree=matrix(degree, size, 1), symb="x", dlist=v), class=c("polyMdlist", "polyMatrix")))
 }
 
@@ -194,12 +196,12 @@ pMsub <- function(pm, i, j=i)
 #  5. # pMprod    - a product of the elements of a polynomial vector
 
 pMprod <- function(pm)
-{ 
+{
   pm <- polyMconvert(pm, "polyMdlist")
-  
+
   dimMax <- max(dim(pm))
   pr <- polynom::polynomial(1)
-  
+
   for (i in 1:dimMax) {
     if (dimMax == dim(pm)[1]) {
       value <- pm$dlist[[i]][[1]]
@@ -208,7 +210,7 @@ pMprod <- function(pm)
     }
     pr <- pr * value
   }
-  
+
   return(pr)
 }
 
@@ -217,33 +219,33 @@ pMprod <- function(pm)
 #  6. # pVsk      - scalar product of two polynomial vectors
 
 pVsk <- function(pMx, pMy=NULL)
-{ 
+{
   if (is.null(pMy)) {
     pMy <- pMx
   }
-  
+
   if (max(min(dim(pMx)), min(dim(pMy))) != 1) {
        stop("The scalar product works only for two vector 'polyMatrix' object!")
   }
-    
+
   if(max(dim(pMx)) != max(dim(pMy))) {
        stop("The scalar product works only for two equal length vectors!")
   }
-  
+
   dimMax <- max(dim(pMx))
   pdx <- polyMconvert(pMx, "polyMdlist")
   pdy <- polyMconvert(pMy, "polyMdlist")
-  
+
   if (dimMax == dim(pdx)[2]) {
     pdx <- t(pdx)
   }
-  
+
   if (dimMax == dim(pdy)[2]) {
     pdy <- t(pdy)
   }
-  
+
   p <- polynom::polynomial(0)
-  
+
   for (i in 1:dimMax) {
     p <- p + pdx$dlist[[i]][[1]] * pdy$dlist[[i]][[1]]
   }
@@ -283,7 +285,7 @@ pMsgn <- function(pm)
          },
          stop("Not a regular 'polyMatrix' class object!")
   )
-  
+
   return(pmToReturn)
 }
 
@@ -292,9 +294,9 @@ pMsgn <- function(pm)
 #  8. # ssetNext  - next subset of a set
 
 ssetNext <- function(set)
-{ 
+{
   size <- length(set)
-  
+
   if (size == 1) {
     if (set == 0) {
       return(size)
@@ -302,7 +304,7 @@ ssetNext <- function(set)
       return(rep(0, set))
     }
   }
-  
+
   if (all(set != 0)) {
     return(size)
   } else {
@@ -311,7 +313,7 @@ ssetNext <- function(set)
     if (k < size) {
       set[(k + 1):size] <- 0
     }
-    return(set) 
+    return(set)
   }
 }
 
@@ -320,21 +322,21 @@ ssetNext <- function(set)
 #  9. # permNext  - lexicographical next permutation
 
 permNext <- function(prm)
-{ 
+{
   if (length(prm) == 1) {
     return(1:prm)
   }
-  
+
   if (!all(sort(prm) == 1:length(prm))) {
     stop("The given 'prm' is not a permutation")
   }
-  
+
   p <- tail(which(diff(prm) > 0), 1)
-  
+
   if (length(p) == 0) {
     return(length(prm))
   }
-  
+
   a <- prm[p]
   b <- prm[(p + 1):length(prm)]
   c <- min(b[b > a])
@@ -349,14 +351,14 @@ permNext <- function(prm)
 # 10. # permSign  - the sign of a permutation
 
 permSign <- function(prm)
-{ 
+{
   if(!all(sort(prm) == 1:length(prm))) {
     stop("The given 'r' is not a permutation")
   }
-  
+
   size <- length(prm)
   valueToReturn <- 1
-   
+
   for(i in (size - 1):1) {
     for(j in 1:i) {
       if(prm[j] > prm[j + 1]) {
@@ -365,7 +367,7 @@ permSign <- function(prm)
       }
     }
   }
-  
+
   return(valueToReturn)
 }
 
@@ -491,78 +493,82 @@ function(data, size)
 # -----------------
 # 14. # pMdiag    - diagonal polynomial matrix
 
-pMdiag <- function(pm, k, symb="x")
+pMdiag <-function(p, diag_dim, symb="x")
 {
-  if (class(pm) != "polynomial" && (class(pm) != "list" || (all(sapply(pm, class) != "polynomial")))) {
-    stop("The input is not a 'polynomial' or a 'list' class object of 'polynomial's!")
-  }
-  
-  if (length(k) > 2 | (length(k) == 2 & (k[1] != k[2]))) {
-	  stop("It is only for only square matrices!")
-	}
-  
-  if (length(k) == 2) {
-	  k <- k[1]
-  }
-  
-  if (class(pm) == "polynomial") {
-    pm <- list(pm)
-  }
-  
-  size <- length(pm)
-  rD <- list()
-  
-  if (k %/% size > 0) {
-    for (i in 1:(k %/% size)) {
-      rD <- c(rD, pm)
+  if (class(p) != "polynomial") {
+    if (class(p) != "list" || all(sapply(p, class) != "polynomial")) {
+      stop("The input not a 'polynomial' or a 'list' class object of 'polynomial's!")
     }
   }
-  
-  if (k %% size != 0) {
-    rD <- c(rD, pm[1:(k %% size)])
+
+  if (length(diag_dim) > 2 | (length(diag_dim) == 2 && (diag_dim[1] != diag_dim[2]))) {
+    stop("We work for square matrices only!")
   }
-  
+	if (length(diag_dim) == 2) {
+	  diag_dim <- diag_dim[1]
+	}
+  stopifnot(length(diag_dim) == 1)
+
+  if (class(p)=="polynomial") {
+    p <- list(p)
+  }
+
+  size <- length(p)
+  rD <- list()
+
+  if (diag_dim %/% size > 0) {
+    for(i in 1:(diag_dim %/% size)) {
+      rD <- c(rD, p)
+    }
+  }
+
+  if (diag_dim %% size != 0) {
+    rD <- c(rD, p[1:(diag_dim %% size)])
+  }
   rawData <- rD[1]
-  
-  if (k > 1) {
-    for(i in 2:k) {
-      for(j in 1:k) {
+
+  if (diag_dim > 1) {
+    for (i1 in 2:diag_dim){
+      for (i2 in 1:diag_dim) {
         rawData <- c(rawData, list(ch2pn("0")))
       }
-      rawData <- c(rawData, rD[i])
+      rawData <- c(rawData,rD[i1])
     }
   }
-  
-  return(polyMgen.d(k, k, rawData=rawData, symb=symb))
+
+  return(polyMgen.d(diag_dim, diag_dim, rawData=rawData, symb=symb))
 }
 
-GCD <- function (...) {
-  UseMethod("GCD")
-}
-
-GCD.polyMatrix <- function(x, ...)
+typed_operation = function(x, type, operation)
 {
-  if(missing("x")) {
-    stop("Expected polyMatrix")
+  M <- polyMconvert(x, "polyMdlist")
+  if (!any(type == OPERAIION_TYPES)) {
+    stop("Unexpected operation type ")
   }
-  x <- polyMconvert(x, "polyMdlist")
-  per_rows <- lapply(x$dlist, function(x) {polynom::GCD(polynom::as.polylist(x))})
-  return(polynom::GCD(polynom::as.polylist(per_rows)))
+
+  if (type == OPERAIION_TYPE_COLUMN) {
+    x <- t(x)
+  }
+
+  per_rows <- lapply(x$dlist, function(y) {operation(polynom::as.polylist(y))})
+  if (type == OPERATION_TYPE_ROW) {
+    return(polynom::as.polylist(per_rows))
+  }
+  stopifnot(type == OPERATION_TYPE_TOTAL)
+  return(operation(polynom::as.polylist(per_rows)))
 }
 
-LCM <- function (...) {
-  UseMethod("LCM")
-}
+# -----------------
+# 15. # GCD LCM   - greatest common divisor and least common multiple
 
-LCM.polyMatrix <- function(x, ...)
+GCD.polyMatrix <- function(x, type=OPERATION_TYPE_TOTAL, ...)
 {
-  if(missing("x")) {
-    stop("Expected polyMatrix")
-  }
-  x <- polyMconvert(x, "polyMdlist")
-  per_rows <- lapply(x$dlist, function(x) {polynom::LCM(polynom::as.polylist(x))})
-  return(polynom::LCM(polynom::as.polylist(per_rows)))
+  return(typed_operation(x, type, polynom::GCD))
 }
+
+LCM.polyMatrix <- function(x, type=OPERATION_TYPE_TOTAL,...)
+{
+  return(typed_operation(x, type, polynom::LCM))
 
 # -----------------
 # fine

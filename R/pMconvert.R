@@ -22,21 +22,19 @@
 # -----
 #  1. # polyMconvert - [abcd] representation converter for "polyMatrix" class objects
 #
-polyMconvert <-
-function(pM,newclass)
- {
-  if((length(class(pM))==2)&(class(pM)[2]=="polyMatrix"))
-   {
-    old.c <- substr(class(pM)[1],6,6)
-    new.c <- substr(newclass[1],6,6)
-    pN <-
-      if(old.c==new.c) pM
+polyMconvert <- function(pM, newclass)
+{
+  if (!is.polyMatrix(pm)) {
+    stop("Expect a 'polyMatrix' object")
+  }
+
+  old.c <- substr(class(pM)[1],6,6)
+  new.c <- substr(newclass[1],6,6)
+  pN <- if(old.c==new.c) pM
         else eval(parse(text=paste0("polyMconvert.",old.c,"2",new.c,"(pM)")))
 
 	return(pN)
-	}
-
-  }
+}
 
 # -------------------------------------------------------------------
 # polynom matrix dim=c(k,j), max degree=d

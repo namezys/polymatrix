@@ -1,41 +1,48 @@
 \name{predict.polyMatrix}
 \alias{predict.polyMatrix}
-\title{Calculate the value of a polynomial for real, complex and matrix argument}
-\description{ ... }
+\title{Calculate the value of a polynomial matrix for real or complex values}
+
+\description{
+Calculate the value of the polynom elements of the 
+\sQuote{\code{polyMatrix}} class object for real and complex argument also. 
+}
 
 \usage{\method{predict}{polyMatrix}(object,M,\dots)}
 
-\arguments{\item{object}{    ~~Describe \code{polynomial} here~~}
-           \item{M}{    ~~Describe \code{polynomial} here~~}
-           \item{\dots}{    ~~ this parameter}
-            }
+\arguments{
+\item{object}{a \sQuote{\code{polyMatrix}} class object}
+\item{M}{a real or complex argument}
+\item{\dots}{additional arguments}
+}
 
-\details{The 'polynom::predict.polynomial()' method works for real,
-         complex and matrix argument also. But in the case of matrix
-         argumet it uses the elementwise product. This modified 
-         version calculate by the usual matrix product definition.}
+\value{
+A matrix the just the same size as the input, 
+filled by the values of the polynom elements, at the given argument.
+}
 
-\value{Describe the value returned!! If it is a LIST, use \item{comp1 }{Description of 'comp1'}}
-\note{further notes }
-
-\seealso{\code{\link{predict.polynomial}}, \code{\link{predict.charpn}}}
+\seealso{
+\code{\link{predict.polynomial}}, \code{\link{predict.charpn}}
+}
 
 \keyword{arith}
 
 \examples{
+# for predict the value of a polynomial matrix at a real or complex value
+#    the used method: predict.polyMatrix()
 
-# predict the value of a polynomial matrix at a real or complex value
-pm<-polyMgen.d(2,2,
-  rawData=list(polynom::polynomial(1),
-               polynom::polynomial(c(0,0,1)),
-               polynom::polynomial(c(0,1)),
-               polynom::polynomial(0)))
-pm # 1, z^2\\\\ z, 0
+pm <- polyMgen.d(2,2,ch2pn(c("1","x","x^2","0")))
+pm # 1, x^2 \\ x, 0
                
-predict(pm,2) # matrix(c(1,4,2,0),2) 
+predict(pm,2) # 1, 4 \\ 2, 0 
 
-# predict the result of a linear model
-x<-1:5;y<-rnorm(5);predict(lm(y~x)) # the used method: predict.lm()
+# for predict the result of a linear model
+#    the used method: predict.lm()
+
+x<-1:5;y<-rnorm(5);predict(lm(y~x)) 
+
 rm(pm,x,y)
 }
+
+% -----
+% fine
 

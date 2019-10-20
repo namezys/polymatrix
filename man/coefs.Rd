@@ -9,17 +9,18 @@
 
 \arguments{  
 \item{p}{a \code{polynomial} or \code{polyMatrix} class object}
-\item{degree}{"all" or the serial numben of requested coefficients.}   
+\item{degree}{"all" or the serial number of the requested coefficients.}   
 }
 
 \details{
-Two methods. One for a \code{polynomial} objects, 
-the other for \code{polyMatrix} objects.
+The \code{coefs} consists of two methods. 
+One for a \code{polynomial} objects, 
+the other one for \code{polyMatrix} objects.
 }
 
 \value{
- A \code{vector} of requested coefficients of the input polynom or 
- a \code{list} of requested coefficient matrices of the input \code{polyMatrix}.
+ A \code{vector} of the requested coefficients of the input polynom or 
+ a \code{list} of the requested coefficient matrices of the input \code{polyMatrix}.
 }
 
 \seealso{

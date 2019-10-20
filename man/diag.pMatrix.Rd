@@ -2,30 +2,33 @@
 \alias{diag.polyMatrix}
 \alias{diag.list}
 
-\title{Extract the diagonal of a polyMatrix, or construct a diagonal polyMatrix}
+\title{Extracts the diagonal of a \code{polyMatrix}, or constructs a diagonal \code{polyMatrix}}
 
-\description{ ... }
+\description{
+If the input is a \code{polyMatrix} then the output is its diagonal.
+If the input is a vector then the output is a diagonal matrix.
+}
 
 \usage{
-\method{diag}{list}(v,k,j=k)
-\method{diag}{polyMatrix}(pm,k=dim(pm)[1],j=dim(pm)[2],type=c("list","polyMatrix"))
+\method{diag}{list}(v,nrow,ncol=nrow)
+\method{diag}{polyMatrix}(pm,nrow=dim(pm)[1],ncol=dim(pm)[2],type=c("list","polyMatrix"))
 }
 
 \arguments{
-\item{v}{the \code{list} class input material for the composed diagonal matrix}
-\item{k}{number of rows in the output object}
-\item{j}{number of columns in the output object}
+\item{v}{the \code{list} class input material for the diagonal matrix}
+\item{nrow}{number of rows in the output object}
+\item{ncol}{number of columns in the output object}
 \item{pm}{the \code{polyMatrix} class input matrix}
 \item{type}{the required form and class of the result}
 }
 
 \details{
-The \code{diag} has two distinct usages.
+The \code{diag} has two different applications.
 When the class of the first input parameter is
 \itemize{
     \item {'\code{list}', then returns a polyMatrix with the given diagonal and 
     zero off-diagonal entries.}
-    \item {'\code{polyMatrix}', then it extracts the diagonal.}
+    \item {'\code{polyMatrix}', then extracts the diagonal.}
 }
 Note. 
 In the first case the elements of the list must be \code{polynomial} class objects.   
@@ -33,12 +36,14 @@ In the second case the result is a \code{list} or \code{polyMatrix} class object
 determined by the value of the \code{type} parameter.
 }
 
-\value{The returned value is a 
-  \item{list}{class object, when it extracts the diagonal from a \code{polyMatrix}, and the 
-  value of \code{type} isn't \code{"polyMatrix"}.}
-  \item{polyMatrix}{class object, when it compose a matrix from the given diagonal or when it
-  catch the diagonal of a \code{polyMatrix}, and \code{type="polyMatrix"}.}
-  }
+\value{
+The returned value is a 
+\item{list}{class object, when it extracts the diagonal from 
+a \code{polyMatrix}, and the value of \code{type} isn't '\code{polyMatrix}'.}
+\item{polyMatrix}{class object, when builds a matrix from the given diagonal or 
+when returns the diagonal of a \code{polyMatrix}, 
+and the \code{type="polyMatrix"}.}
+}
 
 \seealso{\code{\link{polyMatrix-package}}.}
 

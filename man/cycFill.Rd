@@ -1,6 +1,6 @@
 \name{cycFill}
 \alias{cycFill}
-\title{A given length vector or list, filled cyclical by given material}
+\title{A vector or a list of a given length, filled cyclically by the given material}
 \description{Fills an object by the given material}
 
 \usage{cycFill(data, size)}
@@ -9,13 +9,22 @@
   \item{size}{the desired length}
 }
 
-\details{The class of the output is just the same as the class of input.
-The output object filled cylical filled by the given material \code{u}.}
-\value{Depending on the class of the given material,
+\details{
+The class of the output is the same as the class of the input.
+The output object is filled cylically by the given material \code{u}.}
+
+\value{
+Depending on the class of the given material,
 the class of the result is \code{vector} or \code{list}.
-The length of the result equals by the given \code{m}}
-\seealso{Used in the code of \code{\link{polyMgen.a}}, \code{\link{polyMgen.d}}}
+The length of the result equals by the value of the \code{size} parameter.
+}
+
+\seealso{Used in the code of \code{\link{polyMgen.a}}, 
+
+\code{\link{polyMgen.d}}}
+
 \keyword{utilities}
+
 \examples{
 
 u<-c(4,1,3,2)

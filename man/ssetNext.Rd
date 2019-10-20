@@ -2,9 +2,9 @@
 \alias{ssetNext}
 \title{The next subset}
 \description{Returns for a subset the next subset}
-\usage{ssetNext(ss)}
+\usage{ssetNext(set)}
 \arguments{
-  \item{ss}{the size of the full set, or 
+  \item{set}{the size of the full set, or 
            the indexes of subset for which the next we will}}
 \details{When it is a natural number, then the program take it as the 
 size of the full set, and returns the indicator of the first subset,

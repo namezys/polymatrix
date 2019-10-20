@@ -251,7 +251,7 @@ Ops.polyMatrix <- function(e1, e2)
   return(pOps(left, right, "-"))
 }
 
-"%x%" <- function(left, right)
+"%X%" <- function(left, right)
 {
   return(pOps(left, right, "*"))
 }

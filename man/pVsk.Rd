@@ -1,17 +1,20 @@
 \name{pVsk}
 \alias{pVsk}
 \title{The scalar product of two polynomial vectors}
-\description{If \code{pMy} is \code{NULL}, then the result is the sum of squares of the elements of \code{pMy}. Otherwise it is equals by the scalar product ot the two given polynomial vectors.}
+
+\description{
+If \code{pMy} is \code{NULL}, then the result is the sum of squares of the elements of \code{pMx}. 
+Otherwise equals the scalar product ot the two given polynomial vectors.}
 \usage{pVsk(pMx, pMy=NULL)}
 \arguments{
       \item{pMx}{a \code{polyMatrix} class row or column vector}
       \item{pMy}{a \code{polyMatrix} class row or column vector}    
 }
 
-\details{The two vectors must be the same length.}
+\details{The two vectors must have the same length.}
 
 \value{A \code{polynomial} class object, which is the sum of 
-       the elementwise product of the two vectors}
+       the elementwise product of the two vectors.}
 
 \seealso{\link{pMprod}}
 

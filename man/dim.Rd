@@ -8,10 +8,10 @@
 
 \arguments{ \item{x}{a \code{polyMatrix} class object} }
 
-\details{A method for \code{polyMatrix} objects. Does notcontrol the validity of the
-$dim element.}
+\details{A method for \code{polyMatrix} objects. 
+Does not check the validity of the $dim element.}
 
-\value{A 2 element vector: the dimension parameter of the input polyMatrix.}
+\value{A 2 element vector which contains the dimension parameters of the input \code{polyMatrix}.}
 
 
 \examples{

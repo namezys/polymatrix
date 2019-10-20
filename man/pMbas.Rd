@@ -1,19 +1,21 @@
 \name{pMbas}
 \alias{pMbas}
 \title{Bastion elements of a polynomial matrix}
-\description{ ... }
+
+\description{Elements of a \code{matrix} or \code{polyMatrix} object, 
+         from non-beating positions for bastion in the matrix as a chess board.}
+
 \usage{pMbas(pm, ki, byrow) }
 \arguments{
   \item{pm}{a \code{polynomial} matrix object}
   \item{ki}{a permutation of the column numbers}   
   \item{byrow}{logical. If \code{FALSE} (the default) the elments of \code{ki} are column indexes, 
                         if \code{TRUE} these are row indexes.}   }
-\details{Usual, elements of a \code{matrix} or \code{polyMatrix} object, 
-         from non-beating positions for bastion in the matrix as a chess board
-         in a \code{pVector} object.}
+\details{Usual}						
 \value{A list of \code{polynomial} class bastion elements 
        of the given \code{polyMatrix}
-       determined by the permutation \code{ki}}
+       determined by the given permutation \code{ki}.
+       in a \code{pVector} object}
 \seealso{\code{\link{pMdet}}}
 \keyword{manip}
 \examples{

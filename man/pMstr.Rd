@@ -1,28 +1,35 @@
 \name{pMstr}
 \alias{pMstr}
+
 \title{polyMatrix object consistency check}
-\description{ ... }
-\usage{pMstr(pm) }
-\arguments{
-  \item{pm}{a polynomial matrix}   }
-\details{Checks the consistency of a \code{polyMatrix} object.
+
+\description{
+Checks the consistency of a \code{polyMatrix} object.
 In the \code{polyMatrix} there are four different but equivalent 
-storing methods of polynomial matrices: \code{polyMatrix}}
-\value{
-A print on the consistency of the given polynomial object.
-Information about the observed errors.
+storing methods of polynomial matrices.
 }
 
-\note{further notes }
-\author{Manel Boukhris [tun]}
-\seealso{See also 
+\usage{pMstr(pm) }
+
+\arguments{
+\item{pm}{a polynomial matrix}   
+}
+
+\value{
+A logical value of the consistency of the given polynomial object.
+In case of inconsistency an information about the errors.
+}
+
+\seealso{
 \code{\link{polyMgen.a}}, 
 \code{\link{polyMgen.b}}, 
 \code{\link{polyMgen.c}}, 
-\code{\link{polyMgen.d}}}
+\code{\link{polyMgen.d}}
+}
+
 \examples{
-A<-polyMgen.a(2,3,5)
-B<-polyMconvert(A,"polyMdlist")
+A <- polyMgen.a(2,3,5)
+B <- polyMconvert(A,"polyMdlist")
 \donttest{
 pMstr(B)$cns
 
@@ -42,7 +49,7 @@ str(B)
 pMstr(B)[[3]]
 
 
-} # end of donttest
+} # % end of donttest
 }
 \keyword{manip}
 

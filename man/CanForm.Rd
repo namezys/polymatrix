@@ -3,12 +3,15 @@
 \alias{CanForm.echelon}
 \alias{CanForm.final}
 \alias{CanForm.scm}
-\title{Conversion between the pairs of the four polyMatrix subclasses}
 
-\description{The \code{polyMatrix} package has 4 different but equivalent method to store
-the polynomial matrices. This function provide a conversion between the 4 methods. In the
-background operate one of 6 method, matching to the sub-class of the given input object 
-and the required sub-class of the output object.}
+\title{Conversion an ARMA representation to a canonical form}
+
+\description{
+The representation of ARMA processes is unambiguous only in canonical form.
+The \code{CanForm} method if the necessary parameters are given 
+converts the ARMA representation to 
+\code{echelon}, \code{final} or \code{scm} form.
+}
 
 \usage{
 CanForm(pM,form)
@@ -20,12 +23,19 @@ CanForm.scm(pM)
 \arguments{  
 \item{pM}{an arbitrary \code{pMvarma} class object}    
 \item{form}{an arbitrary or "\code{echelon}", "\code{final}", "\code{scm}" form code}    
-  }
+}
 
-\value{An \code{polyMatrix} class object, equivalent with the \code{pM} input object, 
-       but stored in the new, given format by the \code{newclass} parameter.}
+\value{
+An \code{pMvarma} class object in echelon, final or scm form.
+}
 
-\seealso{\code{\link{polyMatrix-package}}}
+\note{
+This method does't not work yet.
+}
+
+\seealso{
+\code{\link{polyMatrix-package}}
+}
 
 \keyword{utilities}
 
@@ -41,3 +51,5 @@ rm(parma)
 
 }
 
+% ----
+% fine 

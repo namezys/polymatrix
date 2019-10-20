@@ -2,15 +2,17 @@
 \alias{Ops.polyMatrix}
 \title{Arithmetic Ops Group Methods for polyMatrix class objects}
 \description{
-  Allows arithmetic operations by a left hand side polynomial matrices.
+  Allows arithmetic operations by left hand side polynomial matrices.
   Contains operators such as addition, multiplication, division, etc.
 }
 \usage{
 \method{Ops}{polyMatrix}(e1,e2)}
-\arguments{\item{e1}{an object of class \code{polyMatrix}.}
-           \item{e2}{an object of class \code{numeric}, \code{character} or  \code{polyMatrix}.}}
-\value{A \code{c("polyMdlist","polyMatrix")} class polynomial matrix got by 
-       performing the operation on the two arguments}
+\arguments{\item{e1}{an object of class \code{polyMatrix}}
+           \item{e2}{an object of class \code{numeric}, \code{character} or  \code{polyMatrix}}}
+\value{
+A \code{c("polyMdlist","polyMatrix")} class polynomial matrix which is the result obtained by performing the operation on the two arguments.
+}
+
 \author{Prohle Tamas}
 \seealso{\code{\link{polyMatrix-package}}, \code{\link{Ops}}}
 \keyword{symbolmath}
