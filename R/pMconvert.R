@@ -22,16 +22,16 @@
 # -----
 #  1. # polyMconvert - [abcd] representation converter for "polyMatrix" class objects
 #
-polyMconvert <- function(pM, newclass)
+polyMconvert <- function(pm, newclass)
 {
   if (!is.polyMatrix(pm)) {
     stop("Expect a 'polyMatrix' object")
   }
 
-  old.c <- substr(class(pM)[1],6,6)
+  old.c <- substr(class(pm)[1],6,6)
   new.c <- substr(newclass[1],6,6)
-  pN <- if(old.c==new.c) pM
-        else eval(parse(text=paste0("polyMconvert.",old.c,"2",new.c,"(pM)")))
+  pN <- if(old.c==new.c) pm
+        else eval(parse(text=paste0("polyMconvert.",old.c,"2",new.c,"(pm)")))
 
 	return(pN)
 }

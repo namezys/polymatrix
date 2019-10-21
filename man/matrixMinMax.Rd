@@ -7,21 +7,22 @@
 \description{Calculate the maximums or minimums column-wise or row-wise, depending on the called method.}
 
 \usage{
-colMax(matrix) # column maximums
-colMin(matrix) # column minimums
-rowMax(matrix) # row maximums
-rowMin(matrix) # row minimums
+  colMax(matrix) # column maximums
+  colMin(matrix) # column minimums
+  rowMax(matrix) # row maximums
+  rowMin(matrix) # row minimums
 }
 \arguments{
   \item{matrix}{a \code{matrix} class object}
 }
 
-
-%\details{Calculate the maximums or minimums column-wise or row-wise, depending on the called method.}
-
 \value{A vector by the column or row maximums or minimums of the given matrix.}
 
-\seealso{\code{\link{colMin}},\code{\link{rowMax}},\code{\link{rowMin}}}
+\seealso{
+  \code{\link{colMin}},
+  \code{\link{rowMax}},
+  \code{\link{rowMin}}
+}
 
 \keyword{utilities}
 
@@ -38,7 +39,4 @@ rowMin(matrix) # row minimums
   rowMax(M)  # c(5,6,3)
   rowMin(M)  # c(2,4,0)
   rm(M)
-
-
 }
-

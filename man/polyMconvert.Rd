@@ -3,26 +3,28 @@
 \title{Conversion between the pairs of the four polyMatrix subclasses}
 
 \description{
-The \code{polyMatrix} package has 4 different but equivalent methods to store
-the polynomial matrices. 
-This function provides a conversion between the 4 methods. 
-In the background operates one of the existing 12 subrutines, 
-corresponding to the sub-class of the given input object 
-and the required sub-class of the output object.
+  The \code{polyMatrix} package has 4 different but equivalent methods to store
+  the polynomial matrices.
+
+  This function provides a conversion between the 4 methods.
+  In the background operates one of the existing 12 subrutines,
+  corresponding to the sub-class of the given input object
+  and the required sub-class of the output object.
 }
 
-\usage{polyMconvert(pM,newclass)}
+\usage{polyMconvert(pm, newclass)}
 
 \arguments{
-  \item{pM}{an arbitrary \code{polyMatrix} class object}   
-  \item{newclass}{a class identifier character string, one of the following:
-        \\ 
-        \code{"polyMarray"}, \code{"polyMbroad"}, \code{"polyMcells"} or \code{"polyMdlist"}}   
+  \item{pm}{an arbitrary \code{polyMatrix} class object}
+  \item{newclass}{
+    a class identifier character string, one of the following: \\
+    \code{"polyMarray"}, \code{"polyMbroad"}, \code{"polyMcells"} or \code{"polyMdlist"}
+  }
 }
 
 \value{
-A \code{polyMatrix} class object, equivalent with the \code{pM} input object, 
-       but stored in the new, given format by the \code{newclass} parameter.
+  A \code{polyMatrix} class object, equivalent with the \code{pM} input object,
+  but stored in the new, given format by the \code{newclass} parameter.
 }
 
 \seealso{\code{\link{polyMatrix-package}}}
@@ -57,6 +59,4 @@ str(px)
 px
 
 rm(pa,pb,pc,pd,px,.Random.seed)
-
 }
-

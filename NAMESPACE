@@ -3,31 +3,60 @@ importFrom("utils", "head","tail", "type.convert")
 importFrom("polynom", "polynomial","is.polynomial")
 importFrom("MTS", "VARMAsim","VARMA")
 
-export("polyMgen","polyMgen.a","polyMgen.b","polyMgen.c","polyMgen.d","polyMgen.varma",
-       "polyMconvert",
-       "pMdiag",
-       "pMstr",
-       "coefs","const","degree","lead","diag","tr",
-       "predict.polynomial",
-       "predict.polyMatrix",
-       "pMrow", "pMcol", "pMbas", "pMsub",
-       "pMsgn",
-       "pMadj", "pMdet",
-       "charpn",
-       "pMkmm",
-       "pMprod","pVsk",
-       "pn2ch", "ch2pn", "pprt",
-       "cycFill",
-       "colMax","rowMax","colMin","rowMin",
-       "ssetNext", "permNext", "permSign",
-       "M2pM","pM2M",
-       "t.polyMatrix","tr",
-       "polyMul",
-       "CanForm",
-       "proper",
-       "is.polyMatrix",
-       "%x%",
-	   "MTS2pM")
+export(
+  "%X%",
+  "CanForm",
+  "GCD",
+  "LCM",
+  "M2pM",
+  "MTS2pM",
+  "ch2pn",
+  "charpn",
+  "coefs",
+  "colMax",
+  "colMin",
+  "const",
+  "cycFill",
+  "degree",
+  "diag",
+  "is.polyMatrix",
+  "lead",
+  "pM2M",
+  "pMadj",
+  "pMbas",
+  "pMcol",
+  "pMdet",
+  "pMdiag",
+  "pMkmm",
+  "pMprod",
+  "pMrow",
+  "pMsgn",
+  "pMstr",
+  "pMsub",
+  "pVsk",
+  "permNext",
+  "permSign",
+  "pn2ch",
+  "polyMconvert",
+  "polyMgen",
+  "polyMgen.a",
+  "polyMgen.b",
+  "polyMgen.c",
+  "polyMgen.d",
+  "polyMgen.varma",
+  "polyMul",
+  "pprt",
+  "predict.polyMatrix",
+  "predict.polynomial",
+  "proper",
+  "rowMax",
+  "rowMin",
+  "set",
+  "ssetNext",
+  "symb",
+  "t.polyMatrix",
+  "tr"
+)
 
 S3method("diag","list")
 
@@ -53,6 +82,9 @@ S3method("print","polyMatrix")
 S3method("print","pMvarma")
 S3method("tr","polyMatrix")
 S3method("t","polyMatrix")
+S3method("GCD", "polyMatrix")
+S3method("LCM", "polyMatrix")
+S3method("set", "polyMatrix")
 
 S3method("predict","charpn")
 

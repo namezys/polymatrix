@@ -15,7 +15,7 @@ M2pM <- function(m, class=c("polyMarray","polyMbroad","polyMcells","polyMdlist")
   if (osztaly == CLASS_MBOARD) {
     return(polyMgen.b(nrow, ncol, rawData=m, degree=0))
   }
-  if (osztaly == CLASS_MDLIST) {
+  if (osztaly == CLASS_MCELSS) {
     return(polyMgen.c(nrow, ncol, rawData=m, degree=0))
   }
   stopifnot(osztaly == CLASS_MDLIST)

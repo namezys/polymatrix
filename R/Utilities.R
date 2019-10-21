@@ -23,22 +23,22 @@
 
 is.polyMatrix.polyMarray <- function(x)
 {
-  return(all(class(x) == c("polyMarray", "polyMatrix")))
+  return(all(class(x) == c(CLASS_MARRAY, "polyMatrix")))
 }
 
 is.polyMatrix.polyMbroad <- function(x)
 {
-  return(all(class(x) == c("polyMbroad", "polyMatrix")))
+  return(all(class(x) == c(CLASS_MBOARD, "polyMatrix")))
 }
 
 is.polyMatrix.polyMcells <- function(x)
 {
-  return(all(class(x) == c("polyMcells", "polyMatrix")))
+  return(all(class(x) == c(CLASS_MCELSS, "polyMatrix")))
 }
 
 is.polyMatrix.polyMdlist <- function(x)
 {
-  return(all(class(x) == c("polyMdlist", "polyMatrix")))
+  return(all(class(x) == c(CLASS_MDLIST, "polyMatrix")))
 }
 
 is.polyMatrix <- function(x)
@@ -46,8 +46,8 @@ is.polyMatrix <- function(x)
   if(missing("x")) {
     stop("Expected polyMatrix")
   }
-  id (length(class(pM))!=2) {
-    return(false);
+  if (length(class(x))!=2) {
+    return(FALSE);
   }
   return(is.polyMatrix.polyMarray(x) || is.polyMatrix.polyMbroad(x)
          || is.polyMatrix.polyMcells(x) || is.polyMatrix.polyMdlist(x))
@@ -551,7 +551,7 @@ typed_operation = function(x, type, operation)
   }
 
   per_rows <- lapply(x$dlist, function(y) {operation(polynom::as.polylist(y))})
-  if (type == OPERATION_TYPE_ROW) {
+  if (type == OPERATION_TYPE_ROW || type == OPERAIION_TYPE_COLUMN) {
     return(polynom::as.polylist(per_rows))
   }
   stopifnot(type == OPERATION_TYPE_TOTAL)
@@ -561,6 +561,9 @@ typed_operation = function(x, type, operation)
 # -----------------
 # 15. # GCD LCM   - greatest common divisor and least common multiple
 
+GCD <- function(x, ...) { UseMethod("GCD"); }
+LCM <- function(x, ...) { UseMethod("LCM"); }
+
 GCD.polyMatrix <- function(x, type=OPERATION_TYPE_TOTAL, ...)
 {
   return(typed_operation(x, type, polynom::GCD))
@@ -569,7 +572,7 @@ GCD.polyMatrix <- function(x, type=OPERATION_TYPE_TOTAL, ...)
 LCM.polyMatrix <- function(x, type=OPERATION_TYPE_TOTAL,...)
 {
   return(typed_operation(x, type, polynom::LCM))
+}
 
 # -----------------
 # fine
-

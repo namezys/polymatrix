@@ -10,7 +10,7 @@ If the input is a vector then the output is a diagonal matrix.
 }
 
 \usage{
-\method{diag}{list}(v,nrow,ncol=nrow)
+\method{diag}{list}(v, nrow = NULL, ncol=NULL)
 \method{diag}{polyMatrix}(pm,nrow=dim(pm)[1],ncol=dim(pm)[2],type=c("list","polyMatrix"))
 }
 
@@ -26,22 +26,22 @@ If the input is a vector then the output is a diagonal matrix.
 The \code{diag} has two different applications.
 When the class of the first input parameter is
 \itemize{
-    \item {'\code{list}', then returns a polyMatrix with the given diagonal and 
+    \item {'\code{list}', then returns a polyMatrix with the given diagonal and
     zero off-diagonal entries.}
     \item {'\code{polyMatrix}', then extracts the diagonal.}
 }
-Note. 
-In the first case the elements of the list must be \code{polynomial} class objects.   
+Note.
+In the first case the elements of the list must be \code{polynomial} class objects.
 In the second case the result is a \code{list} or \code{polyMatrix} class object
 determined by the value of the \code{type} parameter.
 }
 
 \value{
-The returned value is a 
-\item{list}{class object, when it extracts the diagonal from 
+The returned value is a
+\item{list}{class object, when it extracts the diagonal from
 a \code{polyMatrix}, and the value of \code{type} isn't '\code{polyMatrix}'.}
-\item{polyMatrix}{class object, when builds a matrix from the given diagonal or 
-when returns the diagonal of a \code{polyMatrix}, 
+\item{polyMatrix}{class object, when builds a matrix from the given diagonal or
+when returns the diagonal of a \code{polyMatrix},
 and the \code{type="polyMatrix"}.}
 }
 
@@ -51,7 +51,7 @@ and the \code{type="polyMatrix"}.}
 
 \examples{
 
-# --- 
+# ---
 # case of real matrices
 
 m<-matrix(1:12,3,4)
@@ -64,7 +64,7 @@ diag(v,4)
 diag(v,4,2)
 diag(v,ncol=4)
 
-# --- 
+# ---
 # case of polynomial matrices
 
 # first kind usage: catch the diagonal elements
@@ -104,7 +104,7 @@ diag(v,3)
 diag(v,5)
 diag(v,3,5)
 
-pd<-diag(v,4,5) 
+pd<-diag(v,4,5)
 class(pd) # "polyMdlist" "polyMatrix"
 pd
 

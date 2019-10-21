@@ -2,13 +2,15 @@
 \alias{is.polyMatrix}
 \title{Is an object of type '\code{polyMatrix}'?}
 \description{Checks wether the given object is a \code{polyMatrix} object or not.}
-\usage{is.polyMatrix(x) }
+\usage{is.polyMatrix(x)}
 \arguments{
-  \item{x}{an R object.}   }
-\details{\code{is.polyMatrix} returns \code{TRUE} if its argument is a \code{polyMatrix}
-(that is, has "polyMatrix" amongst its classes
-and one of the four sub-classes:
-"polyMarray", "polyMbroad", "polyMcells", "polyMdlist") and \code{FALSE} otherwise.}
+  \item{x}{an R object.}
+}
+\details{
+  \code{is.polyMatrix} returns \code{TRUE} if its argument is a \code{polyMatrix}
+  (that is, has "polyMatrix" amongst its classes and one of the four sub-classes:
+  "polyMarray", "polyMbroad", "polyMcells", "polyMdlist") and \code{FALSE} otherwise.
+}
 
 \keyword{check}
 
@@ -22,16 +24,5 @@ is.polyMatrix(polyMconvert(pm,"polyMdlist"))
 is.polyMatrix(polyMconvert(pm,"polyMbroad"))
 is.polyMatrix(polyMconvert(pm,"polyMdlist"))
 
-class(pm)<-"polyMatrix"
-is.polyMatrix(polyMconvert(pm,"polyMdlist")) # FALSE
-class(pm)<-"polyMarray"
-is.polyMatrix(polyMconvert(pm,"polyMarray")) # FALSE
-
-class(pm)<-c("polyMarray","polyMatrix")
-is.polyMatrix(pm)
-
 rm(pm)
-
-} 
-
-
+}

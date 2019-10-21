@@ -1,8 +1,9 @@
 # ----
 # The dim of a polynomial matrix
 
-symb <-
-function(pm) return(pm$symb)
+symb <- function(pm) {
+  return(pm$symb)
+}
 
 # ----
 # fine

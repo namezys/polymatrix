@@ -42,14 +42,14 @@ test_that("is.polyMatrix", {
 
 test_that("GCD/LCM", {
   a <- polyMgen.d(3, 2, list(p(c(1, 3)),  2, p(c(2, 3)), 3, p(c(1, 3))))
-  expect_equal(GCD(a), p(1))
-  expect_equal(LCM(a), p(c(2, 9, 9)))
+  expect_equal(GCD.polyMatrix(a), p(1))
+  expect_equal(LCM.polyMatrix(a), p(c(2, 9, 9)))
 
   b <- polyMgen.d(3, 2, list(p(c(1, 3)),  2, p(c(1, 3)), 3, p(c(1, 3))))
-  expect_equal(GCD(b), p(1))
-  expect_equal(LCM(b), p(c(3, 9)))
+  expect_equal(GCD.polyMatrix(b), p(1))
+  expect_equal(LCM.polyMatrix(b), p(c(3, 9)))
 
   c <- polyMgen.d(3, 2, list(p(c(1, 3)),  p(c(1, 6, 9)), p(c(1, 0, -9))))
-  expect_equal(GCD(c), p(c(1, 3)))
-  expect_equal(LCM(c), p(c(1, 3, -9, -27)) / 2)
+  expect_equal(GCD.polyMatrix(c), p(c(1, 3)))
+  expect_equal(LCM.polyMatrix(c), p(c(1, 3, -9, -27)) / 2)
 })
