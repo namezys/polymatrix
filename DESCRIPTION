@@ -1,17 +1,17 @@
 Package: polyMatrix
-Version: 0.1.0
+Version: 0.1.1
 Title: Infrastructure for Manipulation Polynomial Matrices 
 Description: A collection of functions to implement classes for polynomial matrix manipulations.
 Type: Package
 Authors@R: c(
-    person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role="cre"),
+    person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role="aut"),
     person("Peter", "Prohle", email="prohlep@math.elte.hu", role="aut"),
-    person("Nikolai", "Ryzhkov", email="namezys@gmail.com", role="aut"),
-    person("Ildiko", "Laszlo", role="ctb"),
+    person("Nikolai", "Ryzhkov", email="namezys@gmail.com", role=c("aut", "cre")),
+    person("Ildiko", "Laszlo", role="ctb", comment = c(ORCID = "0000-0003-2324-8183")),
     person("Ulas Onat", "Alakent", role="ctb")
     )
 Imports: polynom
-License: MIT + file LICENSE
+License: MIT
 Depends: R (>= 3.0), stats, MTS
 Suggests: testthat
 Repository: CRAN

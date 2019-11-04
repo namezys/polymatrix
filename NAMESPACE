@@ -1,7 +1,7 @@
-importFrom("stats", "rgeom","rnorm", "predict")
-importFrom("utils", "head","tail", "type.convert")
-importFrom("polynom", "polynomial","is.polynomial")
-importFrom("MTS", "VARMAsim","VARMA")
+importFrom("stats", "rgeom", "rnorm", "predict")
+importFrom("utils", "head", "tail", "type.convert")
+importFrom("polynom", "polynomial", "is.polynomial")
+importFrom("MTS", "VARMAsim", "VARMA")
 
 export(
   "%X%",
@@ -58,36 +58,31 @@ export(
   "tr"
 )
 
-S3method("diag","list")
-
-S3method("charpn","matrix")
-S3method("tr","matrix")
-
-S3method("coefs","polynomial")
-S3method("const","polynomial")
-S3method("degree","polynomial")
-S3method("lead","polynomial")
-S3method("predict","polynomial")
-
-S3method("charpn","polyMatrix")
-S3method("const","polyMatrix")
-S3method("coefs","polyMatrix")
-S3method("degree","polyMatrix")
-S3method("diag","polyMatrix")
-S3method("dim","polyMatrix")
-S3method("lead","polyMatrix")
-S3method("Ops","polyMatrix")
-S3method("predict","polyMatrix")
-S3method("print","polyMatrix")
-S3method("print","pMvarma")
-S3method("tr","polyMatrix")
-S3method("t","polyMatrix")
 S3method("GCD", "polyMatrix")
 S3method("LCM", "polyMatrix")
+S3method("Ops", "polyMatrix")
+S3method("charpn", "matrix")
+S3method("charpn", "polyMatrix")
+S3method("coefs", "polyMatrix")
+S3method("coefs", "polynomial")
+S3method("const", "polyMatrix")
+S3method("const", "polynomial")
+S3method("degree", "polyMatrix")
+S3method("degree", "polynomial")
+S3method("diag", "list")
+S3method("diag", "polyMatrix")
+S3method("dim", "polyMatrix")
+S3method("lead", "polyMatrix")
+S3method("lead", "polynomial")
+S3method("predict", "charpn")
+S3method("predict", "polyMatrix")
+S3method("predict", "polynomial")
+S3method("print", "pMvarma")
+S3method("print", "polyMatrix")
 S3method("set", "polyMatrix")
-
-S3method("predict","charpn")
-
+S3method("t", "polyMatrix")
+S3method("tr", "matrix")
+S3method("tr", "polyMatrix")
 
 # ----
 # fine
