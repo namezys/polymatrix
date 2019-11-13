@@ -23,36 +23,37 @@
 
 is.polyMatrix.polyMarray <- function(x)
 {
-  return(all(class(x) == c(CLASS_MARRAY, "polyMatrix")))
+  return(all(class(x) == c(CLASS_MARRAY, CLASS_MATRIX)))
 }
 
 is.polyMatrix.polyMbroad <- function(x)
 {
-  return(all(class(x) == c(CLASS_MBOARD, "polyMatrix")))
+  return(all(class(x) == c(CLASS_MBOARD, CLASS_MATRIX)))
 }
 
 is.polyMatrix.polyMcells <- function(x)
 {
-  return(all(class(x) == c(CLASS_MCELSS, "polyMatrix")))
+  return(all(class(x) == c(CLASS_MCELSS, CLASS_MATRIX)))
 }
 
 is.polyMatrix.polyMdlist <- function(x)
 {
-  return(all(class(x) == c(CLASS_MDLIST, "polyMatrix")))
+  return(all(class(x) == c(CLASS_MDLIST, CLASS_MATRIX)))
 }
 
 is.polyMatrix <- function(x)
 {
-  if(missing("x")) {
-    stop("Expected polyMatrix")
-  }
-  if (length(class(x))!=2) {
-    return(FALSE);
-  }
   return(is.polyMatrix.polyMarray(x) || is.polyMatrix.polyMbroad(x)
          || is.polyMatrix.polyMcells(x) || is.polyMatrix.polyMdlist(x))
 }
 
+is.square <- function(x)
+{
+  if (!is.polyMatrix(x)) {
+    stop("polyMatrix is expected")
+  }
+  return(dim(x)[1] == dim(x)[2])
+}
 
 # -----------------
 #  1. # pMcol     - a column of a polynomial matrix
@@ -60,17 +61,18 @@ is.polyMatrix <- function(x)
 
 pMcol <- function(pm, which=1)
 {
-  plist <- polyMconvert(pm, "polyMdlist")
+  plist <- polyMconvert.dlist(pm)
   pdim <- dim(plist)[1]
   dlist <- vector("list", pdim)
   degree <- matrix(NA, pdim, 1)
 
   for (i in 1:pdim) {
     dlist[[i]] <- list(plist$dlist[[i]][[which]])
-    degree[i,1] <- degree(dlist[[i]][[1]])
+    degree[i, 1] <- degree(dlist[[i]][[1]])
   }
 
-  return(structure(list(dim=c(pdim, 1), degree=degree, symb="x", dlist=dlist), class=c("polyMdlist", "polyMatrix")))
+  return(structure(list(dim=c(pdim, 1), degree=degree, symb="x", dlist=dlist),
+                   class=c(CLASS_MDLIST, CLASS_MATRIX)))
 }
 
 
@@ -79,7 +81,7 @@ pMcol <- function(pm, which=1)
 
 pMrow <- function(pm, which=1)
 {
-  plist <- polyMconvert(pm, "polyMdlist")
+  plist <- polyMconvert.dlist(pm)
   pdim <- dim(plist)[2]
   dlist <- vector("list", 1)
   dlist[[1]] <- vector("list", pdim)
@@ -87,10 +89,11 @@ pMrow <- function(pm, which=1)
 
   for (i in 1:pdim) {
     dlist[[1]][[i]] <- plist$dlist[[which]][[i]]
-    degree[1,i] <- degree(dlist[[1]][[i]])
+    degree[1, i] <- degree(dlist[[1]][[i]])
   }
 
-  return(structure(list(dim=c(1, pdim), degree=degree, symb="x", dlist=dlist), class=c("polyMdlist", "polyMatrix")))
+  return(structure(list(dim=c(1, pdim), degree=degree, symb="x", dlist=dlist),
+                   class=c(CLASS_MDLIST, CLASS_MATRIX)))
 }
 
 # -----------------
@@ -260,22 +263,22 @@ pVsk <- function(pMx, pMy=NULL)
 pMsgn <- function(pm)
 {
   switch(class(pm)[1],
-         polyMarray = {
+         CLASS_MARRAY = {
            pm$const <- -pm$const
            pm$array <- -pm$array
            pmToReturn <- pm
          },
-         polyMbroad = {
+         CLASS_MBOARD = {
            pm$broad <- -pm$broad
            pmToReturn <- pm
          },
-         polyMcells = {
+         CLASS_MCELSS = {
            for(i in 0:degree(pm)) {
              pm$cells[[i+1]] <- -pm$cells[[i+1]]
              pmToReturn <- pm
            }
          },
-         polyMdlist = {
+         CLASS_MDLIST = {
            for(i in 1:dim(pm)[1]) {
              for(j in 1:dim(pm)[2]) {
                pm$dlist[[i]][[j]] <- -pm$dlist[[i]][[j]]

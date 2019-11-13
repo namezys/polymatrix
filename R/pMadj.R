@@ -1,4 +1,4 @@
-# the adjugate of the given polynomial matrix
+# the adjugate of a given polynomial matrix
 pMadj <- function(pm)
 { 
   if (dim(pm)[1] != dim(pm)[2]) {

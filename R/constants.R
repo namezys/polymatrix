@@ -1,7 +1,9 @@
+CLASS_MATRIX = "polyMatrix"
 CLASS_MARRAY = "polyMarray"
 CLASS_MBOARD = "polyMbroad"
 CLASS_MCELSS = "polyMcells"
 CLASS_MDLIST = "polyMdlist"
+CLASS_LIST = "list"
 ALL_CLASSES = list(CLASS_MARRAY, CLASS_MBOARD, CLASS_MCELSS, CLASS_MDLIST)
 
 OPERATION_TYPE_TOTAL = "total"

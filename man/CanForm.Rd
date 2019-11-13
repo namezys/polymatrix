@@ -4,11 +4,11 @@
 \alias{CanForm.final}
 \alias{CanForm.scm}
 
-\title{Conversion an ARMA representation to a canonical form}
+\title{Conversion of an ARMA representation to a canonical form}
 
 \description{
-The representation of ARMA processes is unambiguous only in canonical form.
-The \code{CanForm} method if the necessary parameters are given 
+The representation of an ARMA processes is unambiguous only in canonical form.
+The \code{CanForm} method, if the necessary parameters are given 
 converts the ARMA representation to 
 \code{echelon}, \code{final} or \code{scm} form.
 }
@@ -30,7 +30,7 @@ An \code{pMvarma} class object in echelon, final or scm form.
 }
 
 \note{
-This method does't not work yet.
+This method doesn't work yet - is not implemented yet.
 }
 
 \seealso{

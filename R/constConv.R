@@ -1,5 +1,5 @@
 # ---
-# conversion between the 'matrix' and 'polyMatrix' representation of constant matrices matrix
+# conversion between the 'matrix' and 'polyMatrix' representation
 
 M2pM <- function(m, class=c("polyMarray","polyMbroad","polyMcells","polyMdlist"))
 {
@@ -27,7 +27,7 @@ M2pM <- function(m, class=c("polyMarray","polyMbroad","polyMcells","polyMdlist")
 
 pM2M <- function(pM)
 {
-  if (max(degree(pM))) {
+  if (max(degree(pM)) != 0) {
     stop("The 'pM' is not a zero degree polynomial matrix")
   }
   return(const(pM))

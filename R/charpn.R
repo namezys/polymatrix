@@ -1,5 +1,5 @@
 # -----------------
-# characteristic polynomial of a matrix or polynomial matrix
+# the characteristic polynomial of a matrix or polynomial matrix
 
 charpn <-
 function(M) UseMethod("charpn")
@@ -8,7 +8,7 @@ charpn.matrix <-
 function(M)  
    { n<-dim(M)[1]
      pm <- polyMgen.a(dim(M)[1],dim(M)[2],rawData=as.numeric(M),degree=0)
-     if (!n==dim(pm)[2]) stop("The 'M' is not a square matrix")
+     if (!n==dim(pm)[2]) stop(" 'M' is not a square matrix")
      xI<-pMdiag(ch2pn("x"),n)
      chpn<-pMdet(xI-pm)
      return(chpn) }
@@ -20,7 +20,7 @@ function(M)
       { # v list of polynomials, i diagonal subset indicator
         n<-length(v$dlist) 
         if(length(i)!=n) 
-              stop("The length of polynomial list not equals to length of the subset indicator!")
+              stop("The length of the polynomial list is not equal by the length of the subset indicator!")
 
          dia<-(1:n)[i]  # the index of diagonal terms with x
          out<-(1:n)[!i] # the index of out-diagonal terms without x

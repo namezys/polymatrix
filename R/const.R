@@ -21,7 +21,7 @@ function(p)
                           for(i2 in 1:j) 
                             d.const[i1,i2]<-as.numeric(p$dlist[[i1]][[i2]])[1]
                         d.const   },
-            stop("A not regular 'polyMatrix' class object!")
+            stop("Not a regular 'polyMatrix' class object!")
          )
  }
 

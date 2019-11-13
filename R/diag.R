@@ -1,18 +1,25 @@
 # ----
 # a diagonal polynomial matrix
 
-diag<-
-function(x,nrow=NULL,ncol=nrow,type=c("vector","matrix"),...)
-  { switch(tail(class(x),1),
-          "list"=diag.list(x,nrow=nrow,ncol=ncol),
-          "polyMatrix"=diag.polyMatrix(x,nrow=nrow,ncol=ncol,type),
-          "matrix"=base::diag(x),
-           { if (is.null(nrow)&is.null(ncol)) base::diag(x)
-               else if (is.null(nrow)) base::diag(x,ncol=ncol)
-               else if (is.null(ncol)) base::diag(x,nrow=nrow)
-               else base::diag(x,nrow=nrow,ncol=ncol) }
-          )
-  }
+diag <- function(x, nrow=NULL, ncol=nrow, type=c("vector","matrix"),...)
+{
+  switch(tail(class(x),1),
+         "list"=diag.list(x,nrow=nrow,ncol=ncol),
+         "polyMatrix"=diag.polyMatrix(x,nrow=nrow,ncol=ncol,type),
+         "matrix"=base::diag(x),
+          {
+            if (is.null(nrow) & is.null(ncol)) {
+              base::diag(x)
+            } else if (is.null(nrow)) {
+              base::diag(x,ncol=ncol)
+            } else if (is.null(ncol)) {
+              base::diag(x,nrow=nrow)
+            } else {
+              base::diag(x,nrow=nrow,ncol=ncol)
+            }
+          }
+         )
+}
 
 diag.list <- function(v, nrow=NULL, ncol=NULL)
 {
@@ -34,16 +41,25 @@ diag.list <- function(v, nrow=NULL, ncol=NULL)
   return(pm)
 }
 
-diag.polyMatrix <-
-function(pm,nrow=dim(pm)[1],ncol=dim(pm)[2],type=c("list","polyMatrix"))
-  { tipus<-substr(type[1],1,2)
-    pd<-polyMconvert(pm,"polyMdlist")
-    m<-min(dim(pd))
-    v<-vector("list",m)
-    for(i4 in 1:m) v[[i4]]<-pd$dlist[[i4]][[i4]]
-    return( if(tipus=="pM") {diag(v,nrow,ncol)} else v)
-
-   }
+diag.polyMatrix <- function(pm, nrow=NULL, ncol=NULL, type=CLASS_LIST)
+{
+  pd <- polyMconvert.dlist(pm)
+  if (is.null(nrow)) {
+    nrow <- dim(pm)[1]
+  }
+  if (is.null(ncol)) {
+    ncol <- dim(pm)[2]
+  }
+  m <- min(dim(pd))
+  v <- vector("list", m)
+  for(i in 1:m) {
+    v[[i]] <- pd$dlist[[i]][[i]]
+  }
+  if (type == CLASS_MATRIX) {
+      return(diag(v, nrow, ncol));
+  }
+  return(v);
+}
 
 # ----
 # fine

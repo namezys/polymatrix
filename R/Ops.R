@@ -5,10 +5,7 @@
 
 matrix_equal <- function(first, second)
 {
-  stopifnot(!missing(first), !missing(second))
-  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
-  stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
+  stopifnot(is.polyMatrix.polyMdlist(first), is.polyMatrix.polyMdlist(second))
   if (any(first$dim != second$dim)) {
     return(FALSE)
   }
@@ -27,9 +24,7 @@ matrix_equal <- function(first, second)
 
 scalar_equal <- function(first, second)
 {
-  stopifnot(!missing(first), !missing(second))
-  stopifnot(is.polyMatrix(first), !is.polyMatrix(second))
-  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
+  stopifnot(is.polyMatrix.polyMdlist(first))
   for(r in 1:first$dim[1]) {
     for(c in 1:first$dim[2] ) {
       if (first$dlist[[r]][[c]] != second) {
@@ -50,23 +45,22 @@ build_matrix <- function(rows, columns, dlist, symb)
   }
 
   pd <- list(dim=c(rows, columns), degree=d, symb=symb, dlist=dlist)
-  class(pd) <- c("polyMdlist","polyMatrix")
+  class(pd) <- c(CLASS_MDLIST, CLASS_MATRIX)
   return(pd)
 }
 
 matrix_b_op <- function(first, second, op)
 {
-  stopifnot(!missing(first), !missing(second))
-  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
-  stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
+  stopifnot(is.polyMatrix.polyMdlist(first), is.polyMatrix.polyMdlist(second))
   if (any(first$dim != second$dim)) {
-    stop("Argemnts have a diferent dim")
+    stop("Arguments have diferent dim")
   }
+
   dlist <- vector("list", first$dim[1])
   for(r in 1:first$dim[1]) {
     dlist[[r]] = vector("list", second$dim[2])
   }
+
   for(r in 1:first$dim[1]) {
     for(c in 1:first$dim[2]) {
       dlist[[r]][[c]] = op(first$dlist[[r]][[c]], second$dlist[[r]][[c]])
@@ -78,9 +72,8 @@ matrix_b_op <- function(first, second, op)
 
 scalar_b_op <- function(first, second, op)
 {
-  stopifnot(!missing(first), !missing(second))
-  stopifnot(is.polyMatrix(first), !is.polyMatrix(second))
-  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
+  stopifnot(is.polyMatrix.polyMdlist(first))
+
   dlist <- vector("list", first$dim[1])
 
   for(r in 1:first$dim[1]) {
@@ -95,10 +88,7 @@ scalar_b_op <- function(first, second, op)
 
 matrix_mul <- function(first, second)
 {
-  stopifnot(!missing(first), !missing(second))
-  stopifnot(is.polyMatrix(second), is.polyMatrix(second))
-  stopifnot(all(class(first) == class(second)))
-  stopifnot(all(class(first) == c("polyMdlist", "polyMatrix")))
+  stopifnot(is.polyMatrix.polyMdlist(first), is.polyMatrix.polyMdlist(second))
 
   if (first$dim[2] != second$dim[1]) {
     stop("non-conformable arguments of matrix multiplication")
@@ -126,10 +116,7 @@ matrix_pow <- function(left, right)
   if (!is.polyMatrix(left)) {
     stop("Operator ^ is defined only for matrix as left operand")
   }
-  if (!is.numeric(right)) {
-    stop("Operator ^ is defined only for integer as right operand")
-  }
-  if (right %% 1 != 0) {
+  if (!is.integer(right)) {
     stop("Operator ^ is defined only for integer as right operand")
   }
   if (right < 0) {
@@ -151,73 +138,71 @@ matrix_pow <- function(left, right)
   return(r)
 }
 
-pOps <- function(e1, e2, operator)
+pOps <- function(left, right, operator)
 {
-  # unari operators
-  if(missing(e2)) {
+  if (is.character(left)) {
+    left <- ch2pn(left)
+  }
+  if (is.polyMatrix(left)) {
+    left <- polyMconvert(left, CLASS_MDLIST)
+  }
+
+  # unary operators
+  if(missing(right)) {
+    left <- polyMconvert(left, CLASS_MDLIST)
     result <- switch (operator,
-      "+" = polyMconvert(e1,"polyMdlist"),
-      "-" = pMsgn(polyMconvert(e1,"polyMdlist")),
-      stop("unsupported unary operation")
+      "+" = left,
+      "-" = pMsgn(left),
+      stop(paste("unsupported unary operation: ", operator))
     )
     return(result)
   }
 
-  if (is.polyMatrix(e1)) {
-    e1 <- polyMconvert(e1, "polyMdlist")
+  if (is.character(right)) {
+    right <- ch2pn(right)
   }
-
-  if (is.polyMatrix(e2)) {
-    e2 <- polyMconvert(e2, "polyMdlist")
+  if (is.polyMatrix(right)) {
+    right <- polyMconvert(right, CLASS_MDLIST)
+  } else {
+    stopifnot(is.polyMatrix(left));
   }
-
-  if (is.character(e1)) {
-    e1 <- ch2pn(e1)
-  }
-
-  if (is.character(e2)) {
-    e2 <- ch2pn(e2)
-  }
-
-  stopifnot(is.polyMatrix(e1) || is.polyMatrix(e2))
 
   if (operator == "-") {
     operator <- "+"
-    e2 <- -e2
+    right <- -right
   }
 
   if (operator == "^") {
-    return(matrix_pow(e1, e2))
+    return(matrix_pow(left, right))
   }
 
-  if (!is.polyMatrix(e1) || !is.polyMatrix(e2)) {
-    # we got only one matrix, but all operation is communicative or anticomunicative
-    stopifnot(is.polyMatrix(e1) || is.polyMatrix(e2))
-    anitcomunicative <- FALSE
-    if (is.polyMatrix(e2)) {
-      stopifnot(!is.polyMatrix(e1))
-      tmp <- e1
-      e1 <- e2
-      e2 <- tmp
+  if (!is.polyMatrix(left) || !is.polyMatrix(right)) {
+    stopifnot(is.polyMatrix(left) || is.polyMatrix(right))
+
+    if (is.polyMatrix(right)) {
+      stopifnot(!is.polyMatrix(left))
+      tmp <- left
+      left <- right
+      right <- tmp
     }
 
     result <- switch (operator,
-      "==" = scalar_equal(e1, e2),
-      "!=" = !scalar_equal(e1, e2),
-      "+" = scalar_b_op(e1, e2, function(a, b) {a + b}),
-      "*" = scalar_b_op(e1, e2, function(a, b) {a * b}),
+      "==" = scalar_equal(left, right),
+      "!=" = !scalar_equal(left, right),
+      "+" = scalar_b_op(left, right, function(a, b) {a + b}),
+      "*" = scalar_b_op(left, right, function(a, b) {a * b}),
       stop("Unknown operator")
     )
     return(result)
   }
 
-  stopifnot(is.polyMatrix(e1), is.polyMatrix(e2))
+  stopifnot(is.polyMatrix.polyMdlist(left), is.polyMatrix.polyMdlist(right))
 
   result <- switch (operator,
-    "==" = matrix_equal(e1, e2),
-    "!=" = !matrix_equal(e1, e2),
-    "+" = matrix_b_op(e1, e2, function(a, b) {a + b}),
-    "*" = matrix_mul(e1, e2),
+    "==" = matrix_equal(left, right),
+    "!=" = !matrix_equal(left, right),
+    "+" = matrix_b_op(left, right, function(a, b) {a + b}),
+    "*" = matrix_mul(left, right),
     stop("Unknown operator")
   )
 

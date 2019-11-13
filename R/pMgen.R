@@ -8,7 +8,7 @@
 #  3. # polyMgen.c       - polyMatrix in polyMcells form
 #  4. # polyMgen.d       - polyMatrix in polyMdlist form
 
-#  5. # polyMgen.varma   - Generate a pMvarma class polynomial matrix pair
+#  5. # polyMgen.varma   - Generates a pMvarma class polynomial matrix pair
 
 # ----------------------
 #  0. # polyMgen          - call the generators
@@ -19,7 +19,7 @@ function(nrow, ncol, rawData, symb, rand, degree, byrow, sm="polyMarray",...)
   check_class(sm)
   method <- substr(sm,6,6)
   if (!method %in% c("a","b","c","d")) {
-    stop("the admissible storage methods are: 'polyMarray','polyMbroad','polyMcells' and 'polyMdlist'!")
+    stop("the accepted storage methods are: 'polyMarray','polyMbroad','polyMcells' and 'polyMdlist'!")
   }
   if (missing("degree")) {
     degree <- 2

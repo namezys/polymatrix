@@ -36,6 +36,11 @@ polyMconvert <- function(pm, newclass)
 	return(pN)
 }
 
+polyMconvert.dlist <- function(pm)
+{
+  return(polyMconvert(pm, CLASS_MDLIST))
+}
+
 # -------------------------------------------------------------------
 # polynom matrix dim=c(k,j), max degree=d
 
