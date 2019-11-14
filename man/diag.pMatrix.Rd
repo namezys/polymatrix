@@ -10,8 +10,8 @@ If the input is a vector then the output is a diagonal matrix.
 }
 
 \usage{
-\method{diag}{list}(v, nrow = NULL, ncol=NULL)
-\method{diag}{polyMatrix}(pm,nrow=dim(pm)[1],ncol=dim(pm)[2],type=c("list","polyMatrix"))
+\method{diag}{list}(v, nrow=NULL, ncol=NULL)
+\method{diag}{polyMatrix}(pm, nrow=NULL, ncol=NULL, type=CLASS_LIST)
 }
 
 \arguments{
@@ -19,7 +19,7 @@ If the input is a vector then the output is a diagonal matrix.
 \item{nrow}{number of rows in the output object}
 \item{ncol}{number of columns in the output object}
 \item{pm}{the \code{polyMatrix} class input matrix}
-\item{type}{the required form and class of the result}
+\item{type}{the required form and class of the result: \code{CLASS_LIST} or \code{CLASS_MATRIX}}
 }
 
 \details{
