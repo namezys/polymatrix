@@ -116,7 +116,7 @@ matrix_pow <- function(left, right)
   if (!is.polyMatrix(left)) {
     stop("Operator ^ is defined only for matrix as left operand")
   }
-  if (!is.integer(right)) {
+  if (!is.numeric(right) || right %% 1 != 0) {
     stop("Operator ^ is defined only for integer as right operand")
   }
   if (right < 0) {

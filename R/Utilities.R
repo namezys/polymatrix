@@ -262,34 +262,25 @@ pVsk <- function(pMx, pMy=NULL)
 
 pMsgn <- function(pm)
 {
-  switch(class(pm)[1],
-         CLASS_MARRAY = {
-           pm$const <- -pm$const
-           pm$array <- -pm$array
-           pmToReturn <- pm
-         },
-         CLASS_MBOARD = {
-           pm$broad <- -pm$broad
-           pmToReturn <- pm
-         },
-         CLASS_MCELSS = {
-           for(i in 0:degree(pm)) {
-             pm$cells[[i+1]] <- -pm$cells[[i+1]]
-             pmToReturn <- pm
-           }
-         },
-         CLASS_MDLIST = {
-           for(i in 1:dim(pm)[1]) {
-             for(j in 1:dim(pm)[2]) {
-               pm$dlist[[i]][[j]] <- -pm$dlist[[i]][[j]]
-             }
-           }
-           pmToReturn <- pm
-         },
-         stop("Not a regular 'polyMatrix' class object!")
-  )
-
-  return(pmToReturn)
+  if (is.polyMatrix.polyMarray(pm)) {
+    pm$const <- -pm$const
+    pm$array <- -pm$array
+  } else if (is.polyMatrix.polyMbroad(pm)) {
+    pm$broad <- -pm$broad
+  } else if (is.polyMatrix.polyMcells(pm)) {
+    for(i in 0:degree(pm)) {
+        pm$cells[[i+1]] <- -pm$cells[[i+1]]
+    }
+  } else if (is.polyMatrix.polyMdlist(pm)) {
+    for(r in 1:nrow(pm)) {
+      for(c in 1:ncol(pm)) {
+        pm$dlist[[r]][[c]] <- -pm$dlist[[r]][[c]]
+      }
+    }
+  } else {
+    stop("Not a regular 'polyMatrix' class object!")
+  }
+  return(pm)
 }
 
 
