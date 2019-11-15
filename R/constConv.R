@@ -1,27 +1,28 @@
 # ---
 # conversion between the 'matrix' and 'polyMatrix' representation
 
-M2pM <- function(m, class=c("polyMarray","polyMbroad","polyMcells","polyMdlist"))
+M2pM <- function(m, class=CLASS_MARRAY)
 {
-  osztaly <- class[1]
   nrow <- dim(m)[1]
   ncol <- dim(m)[2]
-  m<-as.numeric(m)
+  m <- as.numeric(m)
 
-  check_class(osztaly)
-  if (osztaly == CLASS_MARRAY) {
+  check_class(class)
+  if (class == CLASS_MARRAY) {
     return(polyMgen.a(nrow, ncol, rawData=m, degree=0))
   }
-  if (osztaly == CLASS_MBOARD) {
+  if (class == CLASS_MBOARD) {
     return(polyMgen.b(nrow, ncol, rawData=m, degree=0))
   }
-  if (osztaly == CLASS_MCELSS) {
+  if (class == CLASS_MCELSS) {
     return(polyMgen.c(nrow, ncol, rawData=m, degree=0))
   }
-  stopifnot(osztaly == CLASS_MDLIST)
-  p <- polynom::polynomial(1)
-  ml <- lapply(as.list(m), function(x) x*p)
-  return(polyMgen.d(nrow, ncol, rawData=ml))
+  if (class == CLASS_MDLIST) {
+    p <- polynom::polynomial(1)
+    ml <- lapply(as.list(m), function(x) x * p)
+    return(polyMgen.d(nrow, ncol, rawData=ml))
+  }
+  stop('Unknonw polymatrix class')
 }
 
 

@@ -15,14 +15,14 @@ function(p,method=c("matrix","column","row","element"))
      k<-dim(pc)[1];j<-dim(pc)[2];
      mit<- switch(modszer,
                   "m" =  matrix(degree(pc),k,j),                # matrix
-                  "c" =  matrix(degree(pc,"c"),k,j,byrow=TRUE), # column
-                  "r" =  matrix(degree(pc,"r"),k,j),            # row
-                  "e" =  mit<-degree(pc,"m")                    # element
-                  )+1 # end of switch  
+                  "c" =  matrix(degree_column(pc),k,j,byrow=TRUE), # column
+                  "r" =  matrix(degree_row(pc),k,j),            # row
+                  "e" =  mit<-degree_matrix(pc)                    # element
+                  )+1 # end of switch
      px <- matrix(NA,k,j)
      for(i1 in 1:k) for(i2 in 1:j)
        px[i1,i2] <- pc$cells[[mit[i1,i2]]][i1,i2]
-     return(px) 
+     return(px)
    }
 
 

@@ -82,7 +82,7 @@ function(pa)
     if(dmax)
       for(i in 1:dmax)
         broad[,i*j+1:j]<-pa$array[,,i]
-    pb<-list(dim=dim,degree=degree(pa,"m"),symb=pa$symb,broad=broad)
+    pb<-list(dim=dim,degree=degree_matrix(pa),symb=pa$symb,broad=broad)
     class(pb) <- c("polyMbroad","polyMatrix")
     return(pb)
 }
@@ -97,7 +97,7 @@ function(pa)
     if(degree(pa))
       for(i in 1:dim(a.coefs)[3])
         cells <- c(cells,list(a.coefs[,,i]))
-    pc<-list(dim=dim,degree=degree(pa,"m"),symb=pa$symb,cells=cells)
+    pc<-list(dim=dim,degree=degree_matrix(pa),symb=pa$symb,cells=cells)
     class(pc)<-c("polyMcells","polyMatrix")
     return(pc)
 }
@@ -115,7 +115,7 @@ function(pa)
     for (i1 in 1:k) dlist[[i1]]<-vector("list", j)
     for (i1 in 1:k) for (i2 in 1:j)
       dlist[[i1]][[i2]] <- polynomial(c(const[i1,i2],a.coefs[i1,i2,]))
-    pd<-list(dim=dim,degree=degree(pa,"m"),symb=pa$symb,dlist=dlist)
+    pd<-list(dim=dim,degree=degree_matrix(pa),symb=pa$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
     return(pd)
   }
@@ -131,7 +131,7 @@ function(pb)
     coefs<-coefs(pb)
     a.coefs<-if(d) array(NA,dim=c(dim,d)) else NULL
     if(d) for (i3 in 1:d) a.coefs[,,i3]<-coefs[[i3]]
-    pa<-list(dim=dim,degree=degree(pb,"m"),symb=pb$symb,const=const,array=a.coefs)
+    pa<-list(dim=dim,degree=degree_matrix(pb),symb=pb$symb,const=const,array=a.coefs)
     class(pa)<-c("polyMarray","polyMatrix")
     return(pa)
 }
@@ -150,7 +150,7 @@ function(pb)
       for(i in 1:d)
         cells <- if(i==1)
                     list(cells[[1]],pb$broad[,i*j+1:j]) else c(cells,list(pb$broad[,i*j+1:j]))
-    pc<-list(dim=dim,degree=degree(pb,"m"),symb=pb$symb,cells=cells)
+    pc<-list(dim=dim,degree=degree_matrix(pb),symb=pb$symb,cells=cells)
     class(pc)<-c("polyMcells","polyMatrix")
     return(pc)
 }
@@ -167,7 +167,7 @@ function(pb)
     for(i1 in 1:k) dlist[[i1]]<-vector("list", j)
     for(i1 in 1:k) for(i2 in 1:j)
       dlist[[i1]][[i2]] <- polynomial(broad[i1,((1:d1)-1)*j+i2])
-    pd<-list(dim=dim,degree=degree(pb,"m"),symb=pb$symb,dlist=dlist)
+    pd<-list(dim=dim,degree=degree_matrix(pb),symb=pb$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
     return(pd)
 }
@@ -182,7 +182,7 @@ function(pc)
     const<-pc$cells[[1]]
     coefs<-array(0,c(k,j,d))
     if(d) for(i in 1:d) coefs[,,i]<-pc$cells[[i+1]]
-    pa<-list(dim=dim,degree=degree(pc,"m"),symb=pc$symb,const=const,array=coefs)
+    pa<-list(dim=dim,degree=degree_matrix(pc),symb=pc$symb,const=const,array=coefs)
     class(pa)<-c("polyMarray","polyMatrix","x")
     return(pa)
 }
@@ -197,7 +197,7 @@ function(pc)
     j<-dim[2]
     broad<-matrix(NA,k,j*(d+1))
     for(i3 in 1:(d+1)) broad[,(i3-1)*j+1:j]<-pc$cells[[i3]]
-    pb<-list(dim=dim,degree=degree(pc,"m"),symb=pc$symb,broad=broad)
+    pb<-list(dim=dim,degree=degree_matrix(pc),symb=pc$symb,broad=broad)
     class(pb) <- c("polyMbroad","polyMatrix")
     return(pb)
 }
@@ -219,7 +219,7 @@ function(pc)
       { pn<-NULL; for(i3 in 0:d)  pn<-c(pn,cells[[i3+1]][i1,i2])
         dlist[[i1]][[i2]] <- polynomial(pn)}
 
-    pd<-list(dim=dim,degree=degree(pc,"m"),symb=pc$symb,dlist=dlist)
+    pd<-list(dim=dim,degree=degree_matrix(pc),symb=pc$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
     return(pd)
 }
@@ -241,7 +241,7 @@ function(pd)
       if(length(coefs(pd$dlist[[i1]][[i2]])))
          coef1[i1,i2,] <- head(c(coefs(pd$dlist[[i1]][[i2]])[-1],rep(0,d)),d)
     pa <- list( dim=dm,
-                degree=degree(pd,"m"),
+                degree=degree_matrix(pd),
 				symb=pd$symb,
                 const=coef0,
                 array=if(d==0) NULL else coef1)
@@ -260,7 +260,7 @@ function(pd)
     broad<-matrix(NA,k,j*(d+1))
     for(i in 1:(d+1))
       broad[,(i-1)*j+1:j]<-coefs[[i]]
-    pb<-list(dim=dim,degree=degree(pd,"m"),symb=pd$symb,broad=broad)
+    pb<-list(dim=dim,degree=degree_matrix(pd),symb=pd$symb,broad=broad)
     class(pb) <- c("polyMbroad","polyMatrix")
     return(pb)
 
@@ -287,7 +287,7 @@ function(pd)
         cells <- if(i==1)
                     list(cells[[1]],a[,,2])
                    else c(cells,list(a[,,i+1]))
-    pc<-list(dim=dim,degree=degree(pd,"m"),symb=pd$symb,cells=cells)
+    pc<-list(dim=dim,degree=degree_matrix(pd),symb=pd$symb,cells=cells)
     class(pc)<-c("polyMcells","polyMatrix")
     return(pc)
 }

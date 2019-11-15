@@ -24,7 +24,7 @@ coefs.polyMatrix <- function(p, degree="all")
     return(result)
   }
   result <- result[degree + 1]
-  result[sapply(result, is.null)] <- matrix(0, nrow(p), ncol(p))
+  result[sapply(result, is.null)] <- list(matrix(0, nrow(p), ncol(p)))
   return(result)
 }
 

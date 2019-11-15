@@ -12,29 +12,36 @@ If the input is a vector then the output is a diagonal matrix.
 }
 
 \usage{
-diag(x,nrow=NULL,ncol=nrow,type=c("vector","matrix"),...)
+  diag(x, nrow=NULL, ncol=NULL, names=NULL, type=CLASS_LIST, ...)
 }
 
 \arguments{
-\item{x}{the \code{list} class input material for the diagonal matrix}
-\item{nrow}{number of rows in the output object}
-\item{ncol}{number of columns in the output object}
-\item{type}{the required form and class of the result: \code{CLASS_LIST} or \code{CLASS_MATRIX}}
-\item{\dots}{...}
+  \item{x}{input material for the diagonal matrix}
+  \item{nrow}{number of rows in the output object}
+  \item{ncol}{number of columns in the output object}
+  \item{names}{
+    (when 'x' is a matrix) logical indicating if the resulting
+    vector, the diagonal of 'x', should inherit 'names' from
+    'dimnames(x)' if available.
+  }
+  \item{type}{the required form and class of the result: \code{CLASS_LIST} or \code{CLASS_MATRIX}}
+  \item{\dots}{...}
 }
 
 \details{
-The \code{diag} has two different applications.
-When the class of the first input parameter is
-\itemize{
-    \item {'\code{list}', then returns a \code{polyMatrix} with the given diagonal and
-    zero off-diagonal entries.}
+  The \code{diag} has two different applications.
+  When the class of the first input parameter is
+  \itemize{
+    \item {
+      '\code{list}', then returns a \code{polyMatrix} with the given diagonal and
+      zero off-diagonal entries.
+    }
     \item {'\code{polyMatrix}', then extracts the diagonal.}
-}
-Note.
-In the first case the elements of the list must be \code{polynomial} class objects.
-In the second case the result is a \code{list} or \code{polyMatrix} class object
-determined by the value of the \code{type} parameter.
+  }
+  Note.
+  In the first case the elements of the list must be \code{polynomial} class objects.
+  In the second case the result is a \code{list} or \code{polyMatrix} class object
+  determined by the value of the \code{type} parameter.
 }
 
 \value{
@@ -88,7 +95,6 @@ w
 w<-diag(px,type="polyMatrix")
 class(w) # "polyMdlist" "polyMatrix"
 w
-
 
 # second kind usage: compose a diagonal polyMatrix
 

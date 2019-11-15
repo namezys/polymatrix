@@ -1,29 +1,36 @@
 # ---
 # the constant of a polynom or polynomial matrix
 
-const <-
-function(p) UseMethod("const")
+const <-function(p) {
+  UseMethod("const")
+}
 
-const.polynomial <-
-function(p)  return(as.numeric(p)[1])
+const.polynomial <- function(p) {
+  return(as.numeric(p)[1])
+}
 
-
-const.polyMatrix <-
-function(p)  
- { switch( class(p)[1],
-           "polyMarray"=p$const,
-           "polyMbroad"=p$broad[,1:dim(p)[2]],
-           "polyMcells"=p$cells[[1]],
-           "polyMdlist"= { dim<-dim(p)
-                        k<-dim[1];j<-dim[2]
-                        d.const<-matrix(NA,k,j)
-                        for(i1 in 1:k) 
-                          for(i2 in 1:j) 
-                            d.const[i1,i2]<-as.numeric(p$dlist[[i1]][[i2]])[1]
-                        d.const   },
-            stop("Not a regular 'polyMatrix' class object!")
-         )
- }
+const.polyMatrix <- function(p)
+{
+  if (is.polyMatrix.polyMarray(p)) {
+    return(p$const)
+  }
+  if (is.polyMatrix.polyMbroad(p)) {
+    return(p$broad[, 1:dim(p)[2]])
+  }
+  if (is.polyMatrix.polyMcells(p)) {
+    return(p$cells[[1]])
+  }
+  if (is.polyMatrix.polyMdlist(p)) {
+    result <- matrix(NA, nrow(p), ncol(p))
+    for(r in 1:nrow(p)) {
+      for(c in 1:ncol(p)) {
+        result[r, c] <- as.numeric(p$dlist[[r]][[c]])[1]
+      }
+    }
+    return(result)
+  }
+  stop("Not a regular 'polyMatrix' class object!")
+}
 
 
 # ----

@@ -1,7 +1,11 @@
 Package: polyMatrix
-Version: 0.1.1
+Version: 0.1.3
 Title: Infrastructure for Manipulation Polynomial Matrices 
-Description: A collection of functions to implement classes for polynomial matrix manipulations.
+Description: 
+  A collection of functions to implement classes for polynomial matrix manipulations.
+  The package introduces class polyMatrix which allows storing a matrix of polynomials and
+  implements basic matrix operations includes a determinant, characteristic polynomial.
+  Additionally, it includes basic methods for implementing VARM processes.
 Type: Package
 Authors@R: c(
     person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role="aut"),
@@ -11,7 +15,7 @@ Authors@R: c(
     person("Ulas Onat", "Alakent", role="ctb")
     )
 Imports: polynom
-License: MIT
+License: MIT + file LICENSE
 Depends: R (>= 3.0), stats, MTS
 Suggests: testthat
 Repository: CRAN

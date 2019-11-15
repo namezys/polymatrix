@@ -10,8 +10,8 @@ If the input is a vector then the output is a diagonal matrix.
 }
 
 \usage{
-\method{diag}{list}(v, nrow=NULL, ncol=NULL)
-\method{diag}{polyMatrix}(pm, nrow=NULL, ncol=NULL, type=CLASS_LIST)
+\method{diag}{list}(x, nrow=NULL, ncol=NULL, names=NULL, type=CLASS_LIST, ...)
+\method{diag}{polyMatrix}(x, nrow=NULL, ncol=NULL, names=NULL, type=CLASS_LIST, ...)
 }
 
 \arguments{

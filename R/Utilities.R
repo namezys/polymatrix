@@ -115,7 +115,7 @@ pMbas <- function(pm, ki, byrow)
 
   if(dim(pd)[2] == 1) {
     v <- pd$dlist[ki]
-    degree <- degree(pm, "m")[ki, 1, drop=FALSE]
+    degree <- degree_matrix(pm)[ki, 1, drop=FALSE]
   } else {
     v <- vector("list", size)
     if (byrow) {
@@ -370,10 +370,9 @@ permSign <- function(prm)
 # 11. # colMax    - column maximum values of a matrix
       # rowMax    - row maximum values of a matrix
 
-colMax <-
-function(matrix)
+colMax <- function(matrix)
 {
-  if(class(matrix) != "matrix") {
+  if (!is.matrix(matrix)) {
      stop("The 'colMax' function requires a 'matrix' class argument!")
   }
 
@@ -387,10 +386,9 @@ function(matrix)
   return(numVector)
 }
 
-rowMax <-
-function(matrix)
+rowMax <- function(matrix)
 {
-  if(class(matrix) != "matrix") {
+  if(!is.matrix(matrix)) {
     stop("The 'rowMax' function requires a 'matrix' class argument!")
   }
 

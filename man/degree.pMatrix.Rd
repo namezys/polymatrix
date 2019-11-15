@@ -1,6 +1,9 @@
 \name{degree.polyMatrix}
 \alias{degree.polyMatrix}
 \alias{degree.polynomial}
+\alias{degree_matrix}
+\alias{degree_row}
+\alias{degree_column}
 
 \title{The degree of a polynomial or a polynomial matrix}
 
@@ -8,31 +11,30 @@
 
 \usage{
   \method{degree}{polynomial}(p, \dots)
-  \method{degree}{polyMatrix}(p,method = c("default", "matrix", "column", "row"),review=FALSE,level=2,\dots) 
+  \method{degree}{polyMatrix}(p, \dots)
 }
 
 \arguments{
   \item{p}{a \code{polynomial} or \code{polyMatrix} class object}
-  \item{method}{in the case of \code{polyMatrix} the calculating method:
-        \code{default}, \code{matrix}, \code{column} or \code{row}}
-  \item{review}{whether we will check the degrees or not}
-  \item{level}{the actions level when check the degree}
-  \item{\dots}{~~~~} 
-} 
+  \item{\dots}{~~~~}
+}
 
 
 \value{
-When the input is a \code{polynomial} class object, then value is 
-the degree of the polynom.
-\cr
+  When the input is a \code{polynomial} class object, then value is
+  the degree of the polynom.
+  \cr
 
-When the input is a \code{polyMatrix} class object, then  
-in case of \code{method="matrix"}
-the value is a matrix by the same size as the input, 
-containing the degrees of the polynomials. 
-In case of \code{method="column"} or \code{="row"} 
-the value are maximums of the columns or rows of the polynom matrix degrees. 
-In case of \code{method="default"} it is the maximum of the degree of all polynoms.
+  When the input is a \code{polyMatrix} class object, then
+  is the maximum of the degree of all polynoms.
+  \cr
+
+  Method \code{degree_matrix} returns a matrix by the same size as the input,
+  containing the degrees of the polynomials.
+  \cr
+
+  And methods \code{degree_column} and \code{degree_row} returns of
+  the columns or rows of the polynom matrix degrees.
 }
 
 
@@ -54,7 +56,7 @@ degree(pM,"c") # column wise maximum degree
 degree(pM,"r") # row wise maximum degree
 degree(pM,"m") # matrix: element wise degree
 
-degree(polyMconvert(pM,"polyMarray"),"m") # polyMarray class 
+degree(polyMconvert(pM,"polyMarray"),"m") # polyMarray class
 degree(polyMconvert(pM,"polyMbroad"),"m") # polyMbroad class
 degree(polyMconvert(pM,"polyMcells"),"m") # polyMcells class
 degree(polyMconvert(pM,"polyMdlist"),"m") # polyMdlist class

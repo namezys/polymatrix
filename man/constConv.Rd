@@ -8,13 +8,14 @@
 }
 
 \usage{
-  M2pM(m, class=c("polyMarray","polyMbroad","polyMcells","polyMdlist"))
+  M2pM(m, class=CLASS_MARRAY)
   pM2M(pM)
 }
 
 \arguments{
   \item{m}{a matrix class object}
-  \item{class}{the required class of the value}
+  \item{class}{the required class of the value: \code{CLASS_MARRAY}, \code{CLASS_MBROAD},
+               \code{CLASS_MCELLS}, and \code{CLASS_MDLIST}}
   \item{pM}{a polyMatrix class object}
 }
 

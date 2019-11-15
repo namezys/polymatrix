@@ -23,7 +23,7 @@ function(pm,i,j,m,byrow=FALSE)
       }
    class <- class(pm)
    dim <- dim(pm)
-   degree <- degree(pm,method="matrix")
+   degree <- degree_matrix(pm)
    symb <- symb(pm)
    dlist <- polyMconvert(pm,"polyMdlist")$dlist
 
