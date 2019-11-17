@@ -1,11 +1,10 @@
 Package: polyMatrix
-Version: 0.1.4
+Version: 0.1.5
 Title: Infrastructure for Manipulation Polynomial Matrices 
 Description: 
-  The package "polyMatrix" introduces class "polyMatrix" 
-  which stores a matrix of polynomials and implements 
+  Implementation of class "polyMatrix" for storing a matrix of polynomials and implements 
   basic matrix operations includes a determinant and characteristic polynomial.
-  It is based on package "polynom" and uses a lot of its methods to implement matrix operations.
+  It is based on package 'polynom' and uses a lot of its methods to implement matrix operations.
   Additionally, it includes basic methods for implementing VARM processes using a matrix of polynomials.
 Type: Package
 Authors@R: c(
