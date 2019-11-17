@@ -487,10 +487,20 @@ function(data, size)
 
 pMdiag <-function(p, diag_dim, symb="x")
 {
-  if (class(p) != "polynomial") {
-    if (class(p) != "list" || all(sapply(p, class) != "polynomial")) {
-      stop("The input not a 'polynomial' or a 'list' class object of 'polynomial's!")
+  if (!polynom::is.polynomial(p) && !is.list(p)) {
+    # try to covert
+    if (length(p) != 1 || !is.numeric(p[1])) {
+      stop("Only constant can be converted to list of polynimails")
     }
+    p <- polynom::polynomial(p[1])
+  }
+
+  if (!is.list(p)) {
+    p <- list(p)
+  }
+
+  if (all(sapply(p, polynom::is.polylist))) {
+    stop("Expect list of polynomials")
   }
 
   if (length(diag_dim) > 2 | (length(diag_dim) == 2 && (diag_dim[1] != diag_dim[2]))) {
@@ -501,34 +511,14 @@ pMdiag <-function(p, diag_dim, symb="x")
 	}
   stopifnot(length(diag_dim) == 1)
 
-  if (class(p)=="polynomial") {
-    p <- list(p)
+  result <- polyMgen.d(rawData=list(polynom::polynomial(0)),
+                       nrow=diag_dim, ncol=diag_dim, symb=symb)
+  source <- cycFill(p, diag_dim)
+  for(i in 1:diag_dim) {
+    result$dlist[[i]][[i]] <- source[[i]]
+    result$degree[i, i] <- degree(source[[i]])
   }
-
-  size <- length(p)
-  rD <- list()
-
-  if (diag_dim %/% size > 0) {
-    for(i in 1:(diag_dim %/% size)) {
-      rD <- c(rD, p)
-    }
-  }
-
-  if (diag_dim %% size != 0) {
-    rD <- c(rD, p[1:(diag_dim %% size)])
-  }
-  rawData <- rD[1]
-
-  if (diag_dim > 1) {
-    for (i1 in 2:diag_dim){
-      for (i2 in 1:diag_dim) {
-        rawData <- c(rawData, list(ch2pn("0")))
-      }
-      rawData <- c(rawData,rD[i1])
-    }
-  }
-
-  return(polyMgen.d(diag_dim, diag_dim, rawData=rawData, symb=symb))
+  return(result)
 }
 
 typed_operation = function(x, type, operation)
