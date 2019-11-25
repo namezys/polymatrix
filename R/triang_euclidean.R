@@ -14,14 +14,13 @@ is_polynomail_monic <- function(p)
 
 is_polynomial_zero <- function(p)
 {
-  stopifnot(polynom::is.polynomial(p))
-  return(all(as.numeric(p) == 0))
+  return(is.zero(p))
 }
 
 is_any_polynomail_nonzero <- function(pl)
 {
   stopifnot(all(sapply(pl, polynom::is.polynomial)))
-  return(any(sapply(pl, function(p) {!is_polynomial_zero(p)})))
+  return(any(sapply(pl, function(p) {!is.zero(p)})))
 }
 
 get_min_degree_non_zero_idx <- function(pl, after)
@@ -33,7 +32,9 @@ get_min_degree_non_zero_idx <- function(pl, after)
   non_zero_ind <- !sapply(pl, is_polynomial_zero)
   non_zero_pl <- pl[non_zero_ind]
   non_zero_idx <- (1:length(pl))[non_zero_ind]
-  stopifnot(length(non_zero_pl) > 0)
+  if (length(non_zero_pl) == 0) {
+    stop("Hermit form doesn't exist")
+  }
   p_degree <- sapply(non_zero_pl, degree)
   return(non_zero_idx[which.min(p_degree)])
 }
@@ -105,9 +106,10 @@ triang_Euclidean_step <- function(transf, column_idx)
 {
   # we can exchange elements starts from row column_idx
   column <- get_column(transf$m, column_idx)
-  while(!is_polynomail_monic(column[[column_idx]])
-        || is_any_polynomail_nonzero(column[(column_idx + 1):length(column)]))
-  {
+  while(
+    !is_polynomail_monic(column[[column_idx]])
+    || (column_idx < length(column) && is_any_polynomail_nonzero(column[(column_idx + 1):length(column)]))
+  ) {
     # look for min degree row
     min_degree_idx <- get_min_degree_non_zero_idx(column[column_idx:length(column)]) + column_idx - 1
     min_degree_p <- column[[min_degree_idx]]
@@ -141,17 +143,8 @@ triang_Euclidean <- function(pm)
   for(c in 1:min(ncol(pm), nrow(pm))) {
     transf <- triang_Euclidean_step(transf, c)
   }
-  # we broke $degree (but to be hoest, we don't need it all)
-  for(r in 1:nrow(transf$m)) {
-    for(c in 1:ncol(transf$m)) {
-      transf$m$degree[r, c] <- degree(get(transf$m, r, c))
-    }
-  }
-  for(r in 1:nrow(transf$u)) {
-    for(c in 1:ncol(transf$u)) {
-      transf$u$degree[r, c] <- degree(get(transf$u, r, c))
-    }
-  }
+  transf$m <- rebuild_degree(transf$m)
+  transf$u <- rebuild_degree(transf$u)
   transf$u$symb <- transf$m$symb
   return(transf)
 }
