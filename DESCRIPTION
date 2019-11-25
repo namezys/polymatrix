@@ -1,11 +1,16 @@
 Package: polyMatrix
-Version: 0.1.5
+Version: 0.1.6
 Title: Infrastructure for Manipulation Polynomial Matrices 
 Description: 
   Implementation of class "polyMatrix" for storing a matrix of polynomials and implements 
-  basic matrix operations includes a determinant and characteristic polynomial.
-  It is based on package 'polynom' and uses a lot of its methods to implement matrix operations.
-  Additionally, it includes basic methods for implementing VARM processes using a matrix of polynomials.
+  basic matrix operations; including a determinant and characteristic polynomial.
+  It is based on the package 'polynom' and uses a lot of its methods to implement matrix operations.
+  This package includes 3 methods of triangulazation of polynomial matrices:
+  * Extended euclidean algorith (most classical but numeracal unstable)
+  * Sylvester algorithm based on LQ decompostion
+  * Inetrpolation
+  Additionally, it includes basic methods for implementing
+  Vector autoregressive Moving Average (VARMA) processes using a matrix of polynomials.
 Type: Package
 Authors@R: c(
     person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role="aut"),
