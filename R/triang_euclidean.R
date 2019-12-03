@@ -1,4 +1,6 @@
 # the  "triang_Euclidean()" function
+# write about roudn to theises
+# round matrix on each step ebcause it can cause a lot of almost zeor coffecient with very big degree
 
 lead_coef <- function(p)
 {
@@ -98,7 +100,7 @@ transf_sub_row <- function(transf, dst_row_idx, src_row_idx, mult=1)
     dst[[i]] <- dst[[i]] - mult * src[[i]]
   }
   transf$m$dlist[[dst_row_idx]] <- dst
-  transf$u = this_u %X% transf$u
+  transf$u <- this_u %X% transf$u
   return(transf)
 }
 
@@ -130,6 +132,7 @@ triang_Euclidean_step <- function(transf, column_idx)
         }
       }
     }
+    transf$m <- zero_round(transf$m)
     column <- get_column(transf$m, column_idx)
   }
   return(transf)
@@ -138,7 +141,7 @@ triang_Euclidean_step <- function(transf, column_idx)
 triang_Euclidean <- function(pm)
 {
   #' return list of result matrix and u-matrix
-  pm <- polyMconvert.dlist(pm)
+  pm <- zero_round(polyMconvert.dlist(pm))
   transf <- transf_init(pm)
   for(c in 1:min(ncol(pm), nrow(pm))) {
     transf <- triang_Euclidean_step(transf, c)
@@ -146,7 +149,7 @@ triang_Euclidean <- function(pm)
   transf$m <- rebuild_degree(transf$m)
   transf$u <- rebuild_degree(transf$u)
   transf$u$symb <- transf$m$symb
-  return(transf)
+  return(list(T=transf$m, U=transf$u))
 }
 
 # -----

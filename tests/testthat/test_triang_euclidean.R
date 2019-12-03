@@ -62,6 +62,13 @@ M_3 <- polyMgen.d(nrow=2, ncol=2, byrow=TRUE, ch2pn(c(
   ), symb="s"), symb="s")
 
 
+M_4 <- polyMgen.d(nrow=3,ncol=3,byrow=TRUE,rawData=ch2pn(c(
+  "4 + 4*s + s^2          ", "2*s + s^2              ", "2 + 3*s + s^2",
+  "6 + 5*s + 3*s^2 + s^3  ", "3 + 3*s + 2*s^2 + s^3  ", "3 + 4*s + 2*s^2 + s^3",
+  "9 + 6*s + 3*s^2 + 2*s^3", "5 + 4*s + 2*s^2 + 2*s^3", "5 + 5*s + 2*s^2 + 2*s^3"
+  ),symb="s"),symb="s")
+
+
 ntest_that <- function(...) {}
 
 euc_test <- function(pm, ch, cu, debug=FALSE)
@@ -75,21 +82,23 @@ euc_test <- function(pm, ch, cu, debug=FALSE)
     print("debug")
     print("src")
     print(pm)
-    print("result")
-    print(result)
+    print("result T")
+    print(round(result$T, 2))
+    print("result U")
+    print(round(result$U, 2))
     print("expect h")
     print(h)
     print("expect u")
     print(u)
     print("det U")
-    print(round(pMdet(result$u), 2))
+    print(round(pMdet(result$U), 2))
   }
-  expect_equal(round(result$m, 2), round(h, 2))
-  expect_equal(round(result$u, 2), round(u, 2))
-  expect_true(all(is.zero(result$m - result$u %X% pm)))
+  expect_equal(round(result$T, 2), round(h, 2))
+  expect_equal(round(result$U, 2), round(u, 2))
+  expect_true(all(is.zero(result$T - result$U %X% pm)))
 
   # check if U unimodular
-  det = round(pMdet(result$u), 2)
+  det = round(pMdet(result$U), 2)
   expect_equal(det, polynom::polynomial(coefs(det, 0)))
 }
 
@@ -203,5 +212,19 @@ test_that("triang_Euclidean_case_3_tr", {
     ), c(
       "1                       ", "0",
       "-0.3333333 - 0.3333333*s", "0.3333333"
+    ))
+})
+
+
+test_that("triang_Euclidean_case_4", {
+  euc_test(
+    M_4, c(
+      "1", "0", "0.423 + 0.229*s - 0.168*s^2 - 0.006*s^3 - 0.06*s^4 - 0.03*s^5",
+      "0", "1", "-0.03 + 0.05*s - 0.02*s^2 - 0.03*s^3 + 0.05*s^4 - 0.02*s^5",
+      "0", "0", "6 + 3*s + 2*s^2 + 7*s^3 + 3*s^4 + 2*s^5 + s^6"
+    ), c(
+      "0.21 - 0.04*s - 0.01*s^2 - 0.06*s^3 - 0.03*s^4", "0.26 + 0.01*s + 0.22*s^2 + 0.08*s^3", "-0.15 - 0.12*s - 0.11*s^2 - 0.03*s^3",
+      "-0.51 + 0.1*s - 0.03*s^2 + 0.05*s^3 - 0.02*s^4", "0.43 - 0.14*s - 0.12*s^2 + 0.07*s^3", "-0.06 + 0.08*s + 0.01*s^2 - 0.02*s^3",
+      "3 + 4*s + 2*s^2 + 3*s^3 + 2*s^4 + s^5         ", "-20 - 18*s - 8*s^2 - 8*s^3 - 3*s^4 ", "12 + 12*s + 7*s^2 + 4*s^3 + s^4"
     ))
 })
