@@ -3,21 +3,21 @@ context("triang_euclidean")
 p <- polynom::polynomial
 
 
-test_that("is_polynomail_monic", {
-  expect_true(is_polynomail_monic(polynom::polynomial(c(1, 3, 4, 5, 1))))
-  expect_true(is_polynomail_monic(polynom::polynomial(c(0, 1))))
-  expect_true(is_polynomail_monic(polynom::polynomial(c(1))))
+test_that("is_polynomial_monic", {
+  expect_true(is_polynomial_monic(polynom::polynomial(c(1, 3, 4, 5, 1))))
+  expect_true(is_polynomial_monic(polynom::polynomial(c(0, 1))))
+  expect_true(is_polynomial_monic(polynom::polynomial(c(1))))
 
-  expect_false(is_polynomail_monic(polynom::polynomial(c(1, 3, 4, 5, 2))))
-  expect_false(is_polynomail_monic(polynom::polynomial(c(0, 2))))
-  expect_false(is_polynomail_monic(polynom::polynomial(c(3))))
+  expect_false(is_polynomial_monic(polynom::polynomial(c(1, 3, 4, 5, 2))))
+  expect_false(is_polynomial_monic(polynom::polynomial(c(0, 2))))
+  expect_false(is_polynomial_monic(polynom::polynomial(c(3))))
 })
 
-test_that("is_any_polynomail_nonzero", {
+test_that("is_any_polynomial_nonzero", {
   p <- polynom::polynomial(c(0, 1))
   zp <- polynom::polynomial(c(0, 0))
-  expect_true(is_any_polynomail_nonzero(list(zp, p)))
-  expect_false(is_any_polynomail_nonzero(list(zp, zp)))
+  expect_true(is_any_polynomial_nonzero(list(zp, p)))
+  expect_false(is_any_polynomial_nonzero(list(zp, zp)))
 })
 
 

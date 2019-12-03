@@ -8,9 +8,9 @@ lead_coef <- function(p)
   return(tail(p, 1))
 }
 
-is_polynomail_monic <- function(p)
+is_polynomial_monic <- function(p)
 {
-  #' Monic polynomail - the leading coefficient (the nonzero coefficient of highest degree) is equal to 1
+  #' Monic polynomial - the leading coefficient (the nonzero coefficient of highest degree) is equal to 1
   return(lead_coef(p) == 1)
 }
 
@@ -19,7 +19,7 @@ is_polynomial_zero <- function(p)
   return(is.zero(p))
 }
 
-is_any_polynomail_nonzero <- function(pl)
+is_any_polynomial_nonzero <- function(pl)
 {
   stopifnot(all(sapply(pl, polynom::is.polynomial)))
   return(any(sapply(pl, function(p) {!is.zero(p)})))
@@ -109,8 +109,8 @@ triang_Euclidean_step <- function(transf, column_idx)
   # we can exchange elements starts from row column_idx
   column <- get_column(transf$m, column_idx)
   while(
-    !is_polynomail_monic(column[[column_idx]])
-    || (column_idx < length(column) && is_any_polynomail_nonzero(column[(column_idx + 1):length(column)]))
+    !is_polynomial_monic(column[[column_idx]])
+    || (column_idx < length(column) && is_any_polynomial_nonzero(column[(column_idx + 1):length(column)]))
   ) {
     # look for min degree row
     min_degree_idx <- get_min_degree_non_zero_idx(column[column_idx:length(column)]) + column_idx - 1

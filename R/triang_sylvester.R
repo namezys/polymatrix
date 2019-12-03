@@ -104,6 +104,9 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   for (c in 1:length(lead_rows)) {
     lead_rows[c] <- which(!is.zero(T[, c], eps=eps))[1]
   }
+  if(any(is.na(lead_rows))) {
+    stop("The given matrix is singular !")
+  }
 
   sub_size <- nrow(T) / nrow(pm)
   lead_hyp_rows <- 1 + (lead_rows - 1) %/% sub_size
