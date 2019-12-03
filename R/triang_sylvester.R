@@ -11,7 +11,7 @@ build_sylvester_sub_matrices <- function(pm)
     local <- matrix(0, sub_nrow, sub_ncol)
     row <- pm$dlist[[r]]
     for(c in 1:length(row)) {
-      column = rev(as.numeric(row[[c]]))
+      column <- rev(as.numeric(row[[c]]))
       local[(sub_nrow - length(column) + 1):sub_nrow, c] <- column
     }
     sub_matrices[[r]] <- local
@@ -91,10 +91,10 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
 {
   pm <- polyMconvert.dlist(pm)
   if (nrow(pm) < ncol(pm)) {
-    was_extended = TRUE
+    was_extended <- TRUE
     pm <- extend_for_sylvester(pm)
   } else {
-    was_extended = FALSE
+    was_extended <- FALSE
   }
   sylv_m <- build_sylvester_matrix(pm, u)
   lq_result <- lq(sylv_m)
@@ -105,7 +105,7 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
     lead_rows[c] <- which(!is.zero(T[, c], eps=eps))[1]
   }
 
-  sub_size = nrow(T) / nrow(pm)
+  sub_size <- nrow(T) / nrow(pm)
   lead_hyp_rows <- 1 + (lead_rows - 1) %/% sub_size
 
   if (length(unique(lead_hyp_rows)) != ncol(pm)) {
@@ -113,7 +113,7 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   }
 
   # select columns
-  columns = c(diff(lead_hyp_rows) != 0, TRUE)
+  columns <- c(diff(lead_hyp_rows) != 0, TRUE)
   stopifnot(length(columns) == ncol(T))
   SU <- U[, columns]
   ST <- T[, columns]
@@ -121,15 +121,15 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   # build matrix
   t_list <- vector("list", nrow(pm) * ncol(pm))
   for(r in 1:nrow(pm)) {
-    sub_row = (r - 1) * sub_size + u + 1
-    sub_row_last = r * sub_size
+    sub_row <- (r - 1) * sub_size + 1
+    sub_row_last <- r * sub_size
     for(c in 1:ncol(pm)) {
       t_list[[(c - 1) * nrow(pm) + r]] <- polynom::polynomial(ST[sub_row_last:sub_row, c])
     }
   }
   u_list <- vector("list", ncol(pm) * ncol(pm))
   for(r in 1:ncol(pm)) {
-    u_rows = (u:0) * ncol(pm) + r
+    u_rows <- (u:0) * ncol(pm) + r
     for(c in 1:ncol(pm)) {
       u_list[[(c - 1) * ncol(pm) + r]] <- polynom::polynomial(SU[u_rows, c])
     }
@@ -140,7 +140,7 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
     RT <- shrink_extended_for_sylvester(RT)
   }
   RU <- polyMgen.d(ncol(pm), ncol(pm), rawData=u_list, symb=pm$symb)
-  return(list(m=RT, u=RU))
+  return(list(T=RT, U=RU))
 }
 
 #

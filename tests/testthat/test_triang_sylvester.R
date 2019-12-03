@@ -141,16 +141,16 @@ sylv_test <- function(pm, u_degree, ch, cu, debug=FALSE)
     print("expect u")
     print(u)
     print("det U")
-    print(round(pMdet(result$u), 2))
+    print(round(pMdet(result$U), 2))
     print("calc T")
-    print(result$m - pm %X% result$u)
+    print(round(result$T - pm %X% result$U, 4))
   }
-  expect_equal(round(result$m, 2), round(h, 2))
-  expect_equal(round(result$u, 2), round(u, 2))
-  expect_true(all(is.zero(result$m - pm %X% result$u)))
+  expect_equal(round(result$T, 2), round(h, 2))
+  expect_equal(round(result$U, 2), round(u, 2))
+  expect_true(all(is.zero(result$T - pm %X% result$U)))
 
   # check if U unimodular
-  det <- round(pMdet(result$u), 2)
+  det <- round(pMdet(result$U), 2)
   expect_equal(det, polynom::polynomial(coefs(det, 0)))
 }
 
@@ -232,15 +232,15 @@ test_that("triang_Sylvester_case_2", {
   ))
 })
 
-ntest_that("triang_Sylvester_case_2_tr", {
+test_that("triang_Sylvester_case_2_tr", {
   sylv_test(t(M_2), 3, c(
-    "-2.197363                                             ", "0 ", "0",
-    "-2.197363 - 2.197363*s - 0.3769985*s^2 + 0.3123702*s^3", "-3", "0"
+    "-2.197363                                                                               ", "0 ", "0",
+    "-2.197363 - 2.197363*s - 0.3769985*s^2 + 0.3123702*s^3 + 0.05385693*s^4 + 0.01077139*s^5", "-3", "0"
   ), c(
     "0.3769985 + 0.06462831*s + 0.01077139*s^2                  ", "0", "-0.7620008",
     "-0.9101821 - 0.1561851*s - 0.02692846*s^2 - 0.005385693*s^3", "0", "-0.3810004 + 0.3810004*s",
     "0                                                          ", "-1", "-0.2540003*s^2 + 0.2540003*s^3"
-  ), 1)
+  ))
 })
 
 test_that("triang_Sylvester_case_3", {
