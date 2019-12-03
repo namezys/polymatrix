@@ -21,40 +21,6 @@
 # 15. # GCD LCM   - greatest common divisor and least common multiple
 # --- # -----------
 
-is.polyMatrix.polyMarray <- function(x)
-{
-  return(all(class(x) == c(CLASS_MARRAY, CLASS_MATRIX)))
-}
-
-is.polyMatrix.polyMbroad <- function(x)
-{
-  return(all(class(x) == c(CLASS_MBOARD, CLASS_MATRIX)))
-}
-
-is.polyMatrix.polyMcells <- function(x)
-{
-  return(all(class(x) == c(CLASS_MCELSS, CLASS_MATRIX)))
-}
-
-is.polyMatrix.polyMdlist <- function(x)
-{
-  return(all(class(x) == c(CLASS_MDLIST, CLASS_MATRIX)))
-}
-
-is.polyMatrix <- function(x)
-{
-  return(is.polyMatrix.polyMarray(x) || is.polyMatrix.polyMbroad(x)
-         || is.polyMatrix.polyMcells(x) || is.polyMatrix.polyMdlist(x))
-}
-
-is.square <- function(x)
-{
-  if (!is.polyMatrix(x)) {
-    stop("polyMatrix is expected")
-  }
-  return(dim(x)[1] == dim(x)[2])
-}
-
 # -----------------
 #  1. # pMcol     - a column of a polynomial matrix
 
@@ -262,6 +228,7 @@ pVsk <- function(pMx, pMy=NULL)
 
 pMsgn <- function(pm)
 {
+  check.is.polyMatrix(pm)
   if (is.polyMatrix.polyMarray(pm)) {
     pm$const <- -pm$const
     pm$array <- -pm$array
@@ -372,14 +339,10 @@ permSign <- function(prm)
 
 colMax <- function(matrix)
 {
-  if (!is.matrix(matrix)) {
-     stop("The 'colMax' function requires a 'matrix' class argument!")
-  }
+  check.is.matrix(matrix)
+  numVector <- vector("numeric", ncol(matrix))
 
-  size <- dim(matrix)[2]
-  numVector <- vector("numeric", size)
-
-  for(i in 1:size) {
+  for(i in 1:ncol(matrix)) {
     numVector[i] <- max(matrix[, i])
   }
 
@@ -388,14 +351,10 @@ colMax <- function(matrix)
 
 rowMax <- function(matrix)
 {
-  if(!is.matrix(matrix)) {
-    stop("The 'rowMax' function requires a 'matrix' class argument!")
-  }
+  check.is.matrix(matrix)
+  numVector <- vector("numeric", nrow(matrix))
 
-  size <- dim(matrix)[1]
-  numVector <- vector("numeric", size)
-
-  for(i in 1:size) {
+  for(i in 1:nrow(matrix)) {
     numVector[i] <- max(matrix[i,])
   }
 
@@ -406,34 +365,24 @@ rowMax <- function(matrix)
 # 12. # colMin    - column minimum values of a matrix
       # rowMin    - row minimum values of a matrix
 
-colMin <-
-function(matrix)
+colMin <- function(matrix)
 {
-  if(class(matrix) != "matrix") {
-    stop("The 'colMin' function requires a 'matrix' class argument!")
-  }
+  check.is.matrix(matrix)
+  numVector <- vector("numeric", ncol(matrix))
 
-  size <- dim(matrix)[2]
-  numVector <- vector("numeric", size)
-
-  for(i in 1:size) {
+  for(i in 1:ncol(matrix)) {
     numVector[i] <- min(matrix[, i])
   }
 
   return(numVector)
 }
 
-rowMin <-
-function(matrix)
+rowMin <- function(matrix)
 {
-  if(class(matrix) != "matrix") {
-    stop("The 'rowMin' function requires a 'matrix' class argument!")
-  }
+  check.is.matrix(matrix)
+  numVector <- vector("numeric", nrow(matrix))
 
-  size <- dim(matrix)[1]
-  numVector <- vector("numeric", size)
-
-  for(i in 1:size) {
+  for(i in 1:nrow(matrix)) {
     numVector[i] <- min(matrix[i,])
   }
 
