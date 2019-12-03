@@ -1,4 +1,4 @@
-ZERO_EPS = .Machine$double.eps^0.5
+ZERO_EPS = 1e-5
 
 is.zero <- function(x, eps=ZERO_EPS)
 {
