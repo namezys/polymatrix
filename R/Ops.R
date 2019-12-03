@@ -144,18 +144,19 @@ pOps <- function(left, right, operator)
     left <- ch2pn(left)
   }
   if (is.polyMatrix(left)) {
-    left <- polyMconvert(left, CLASS_MDLIST)
+    left <- polyMconvert.dlist(left)
   }
 
   # unary operators
   if(missing(right)) {
-    left <- polyMconvert(left, CLASS_MDLIST)
-    result <- switch (operator,
-      "+" = left,
-      "-" = pMsgn(left),
+    left <- polyMconvert.dlist(left)
+    if (operator == "+") {
+      return(left)
+    } else if (operator == "-") {
+      return(pMsgn(left))
+    } else {
       stop(paste("unsupported unary operation: ", operator))
-    )
-    return(result)
+    }
   }
 
   if (is.character(right)) {
