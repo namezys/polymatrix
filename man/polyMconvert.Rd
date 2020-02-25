@@ -58,5 +58,6 @@ class(px) # "polyMarray" "polyMatrix"
 str(px)
 px
 
-rm(pa,pb,pc,pd,px,.Random.seed)
+# clean up
+# rm(pa, pb, pc, pd, px)
 }

@@ -48,5 +48,6 @@ pm
 dim(pm) # 3 x 2
 class(pm) #  "polyMdlist" "polyMatrix"
 
-rm(m,pd)
+# clean up
+# rm(m,pd)
 }

@@ -25,6 +25,7 @@ p <- polynom::polynomial(0:12)
 pprt(p)
 pprt(p,sh=3)
 pprt(p,sh=3,symb="L")
-rm(p)
+# clean up
+# rm(p)
 }
 

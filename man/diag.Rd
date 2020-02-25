@@ -115,7 +115,8 @@ pd<-diag(v,4,5)
 class(pd) # "polyMdlist" "polyMatrix"
 pd
 
-rm(ci,i,m,pd,px,v,w)
+# clean up
+# rm(ci, i, m, pd, px, v, w)
 
 }
 

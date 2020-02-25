@@ -50,7 +50,8 @@ M2pM(m, "polyMbroad")
 M2pM(m, "polyMcells")
 M2pM(m, "polyMdlist")
 
-rm(m,pM)
+# clean up
+# rm(m, pM)
 
 }
 

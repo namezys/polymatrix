@@ -4,7 +4,7 @@
 
 \title{The leading coefficient of a polynom or polynomial matrix}
 \description{
-Returns the leading coefficients of the 
+Returns the leading coefficients of the
 input polynom or polynomial matrix.
 }
 \usage{lead(p,method=c("matrix","column","row","element"))}
@@ -17,11 +17,11 @@ for a polynomial matrix are the followings.
 \itemize{
 
 \item{\code{matrix}: the highest matrix coefficient of the polynomial matrix.}
-\item{\code{column}: taken the polynomial matrix column-wise, the column vector 
+\item{\code{column}: taken the polynomial matrix column-wise, the column vector
             of highest coefficient of each column.}
 \item{\code{row}: taken the polynomial matrix row-wise, the  row vector
             of highest coefficient of each row.}
-\item{\code{element}: a matrix formed by the highest coefficients of the polynomial 
+\item{\code{element}: a matrix formed by the highest coefficients of the polynomial
             elements of the polynomial matrix.}
 }
 }
@@ -46,7 +46,9 @@ lead(pd)
 
 rawAdat <- ch2pn(c("-3 + x^2","2 + 4*x","-x^2","1","2","3 + x","2*x","0","2 - 3*x" ))
 px <- polyMgen.d(3,3,rawData=rawAdat)
-rm(rawAdat)
+
+# clean up
+# rm(rawAdat)
 
 px
 
@@ -55,7 +57,9 @@ lead(px,method="matrix")
 lead(px,method="row")
 lead(px,method="column")
 lead(px,method="element")
-rm(pm,pa,pb,pc,pd,px)
+
+# clean up
+# rm(pm, pa, pb, pc, pd,px)
 }
 
 

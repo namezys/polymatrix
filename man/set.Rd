@@ -34,6 +34,7 @@ pM
 set(pM, 1:2, 1:2, ch2pn(c("3","4","x","x^2")))
 pM
 
-rm(pM)
+# clean up
+# rm(pM)
 }
 

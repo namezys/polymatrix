@@ -38,7 +38,8 @@ pa <- polyMconvert(pm,"polyMarray") # class: "polyMarray" "polyMatrix"
 pb <- polyMconvert(pm,"polyMbroad") # class: "polyMbroad" "polyMatrix"
 pc <- polyMconvert(pm,"polyMcells") # class: "polyMcells" "polyMatrix"
 pd <- polyMconvert(pm,"polyMdlist") # class: "polyMdlist" "polyMatrix"
-rm(pm)
+# clean up
+# rm(pm)
 
 # the default, the "matrix" print image style: matrix of polynomials
 pa
@@ -63,7 +64,8 @@ print(pd,"poly")
 print(pd,"broad")
 print(pd,"raw")
 
-rm(pa,pb,pc,pd)
+# clean up
+# rm(pa,pb,pc,pd)
 
 varma <- polyMgen.varma()
 
@@ -73,7 +75,8 @@ print(varma,"poly")
 print(varma,"broad")
 print(varma,"raw")
 
-rm(varma)
+# clean up
+# rm(varma)
 
 }
 

@@ -24,5 +24,6 @@ is.polyMatrix(polyMconvert(pm,"polyMdlist"))
 is.polyMatrix(polyMconvert(pm,"polyMbroad"))
 is.polyMatrix(polyMconvert(pm,"polyMdlist"))
 
-rm(pm)
+# clean up
+# rm(pm)
 }

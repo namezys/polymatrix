@@ -47,8 +47,11 @@ p <- polynom::polynomial(0:12)
 class(p) # polynom
 degree(p)
 
-pM <- polyMgen.d(3,3,rawData=
-   ch2pn(c("-3+x^3","2+4*x","x^2","1","2","3+x","2*x","0","2-3*x")))
+pM <- polyMgen.d(3,3,rawData=ch2pn(c(
+    "-3+x^3", "2+4*x",  "x^2",
+         "1",     "2", "3+x",
+       "2*x",     "0", "2-3*x"
+)))
 pM
 
 degree(pM) #  the maximum degree
@@ -61,6 +64,7 @@ degree(polyMconvert(pM,"polyMbroad"),"m") # polyMbroad class
 degree(polyMconvert(pM,"polyMcells"),"m") # polyMcells class
 degree(polyMconvert(pM,"polyMdlist"),"m") # polyMdlist class
 
-rm(p,pM)
+# clean up
+# rm(p, pM)
 }
 

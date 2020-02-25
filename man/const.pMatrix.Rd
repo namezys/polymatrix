@@ -5,7 +5,7 @@
 \title{The constant of a polynom or a polynomial matrix}
 
 \description{
-Returns the constant of a \code{polynom} class object or 
+Returns the constant of a \code{polynom} class object or
 the constant matrix of a \code{polyMatrix} class object.
 }
 
@@ -17,8 +17,8 @@ the constant matrix of a \code{polyMatrix} class object.
 \arguments{\item{p}{a \code{polynomial} or \code{polyMatrix} class object}}
 
 \value{
-A \code{numeric} object, containing the constant of the given 
-polynom, or of a \code{matrix} class object which contains the 
+A \code{numeric} object, containing the constant of the given
+polynom, or of a \code{matrix} class object which contains the
 constant matrix of the given polynomial matrix.
 }
 
@@ -46,6 +46,7 @@ pd<-polyMgen.d(2,2)
 pd
 const(pd)
 
-rm(p,pa,pb,pc,pd)
+# clean up
+# rm(p, pa, pb, pc, pd)
 }
 

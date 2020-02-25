@@ -2,8 +2,8 @@
 \alias{MTS2pM}
 \title{Converts MTS representation of a VARMA process to a polyMatrix representation}
 
-\description{The MTS representation of VARMA process is a list 
-of 13 elements. 
+\description{The MTS representation of VARMA process is a list
+of 13 elements.
 The necessary elements to represent a VARMA model are the c(2, 3, 4, 5, 8, 11, 12, 13) elements:
 ARorder, MAorder, cnst, coef, Sigma, Phi, Theta, Ph0.
 The other five are redundant parameters.}
@@ -11,14 +11,14 @@ The other five are redundant parameters.}
 \usage{MTS2pM(M)}
 
 \arguments{
-  \item{M}{an arbitrary VARMA model list-object of the \code{MTS} package}   
+  \item{M}{an arbitrary VARMA model list-object of the \code{MTS} package}
   	}
 
-\details{MTS (Multivariate Time Series)  
+\details{MTS (Multivariate Time Series)
          is a general package for analyzing multivariate linear time series,
          written by Ruey S. Tsay.}
 
-\value{An \code{pMvarma} class object, equivalent with the \code{M} input object, 
+\value{An \code{pMvarma} class object, equivalent with the \code{M} input object,
        created by the package \code{MTS}.}
 
 \seealso{\code{\link{print.pMvarma}}, \code{\link{print.polyMatrix}}}
@@ -28,7 +28,6 @@ The other five are redundant parameters.}
 \examples{
 \donttest{
 # runs longly
-rm(list=ls())
 library(MTS)
 set.seed(1)
 yt <- VARMAsim(300,arlags=1,malags=1,
@@ -42,7 +41,8 @@ print(pMvarma,style="broad",digits=3)
 pMvarma
 print(pMvarma,"matrix",digits=3)
 
-rm(yt,M,pMvarma)}
+# clean up
+# rm(yt, M, pMvarma)}
 
 }
 

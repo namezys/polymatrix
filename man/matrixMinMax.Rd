@@ -38,5 +38,6 @@
   colMin(M)  # c(2,0,3,3)
   rowMax(M)  # c(5,6,3)
   rowMin(M)  # c(2,4,0)
-  rm(M)
+  # clean up
+  # rm(M)
 }

@@ -6,19 +6,19 @@
 
 \description{
 Matrix multipliction for \code{polyMatrix} class polynomial matrices.
-Multiplies the two matrices only if they are conformable. 
+Multiplies the two matrices only if they are conformable.
 }
 
 \usage{left \%X\% right}
 
 \arguments{
-\item{left}{a \code{polyMatrix} class object, scalar number or polynomial} 
-\item{right}{a \code{polyMatrix} class object, scalar number or polynomial} 
+\item{left}{a \code{polyMatrix} class object, scalar number or polynomial}
+\item{right}{a \code{polyMatrix} class object, scalar number or polynomial}
 }
 
 \details{The number of columns in \code{left} must be equal to number of rows in \code{right}.}
 
-\value{A \code{polyMatrix} class object which is the product of 
+\value{A \code{polyMatrix} class object which is the product of
 the \code{polyMatrix} class \code{left} and \code{right} matrices.}
 
 \seealso{\code{\link{polyMatrix-package}}}
@@ -28,8 +28,6 @@ the \code{polyMatrix} class \code{left} and \code{right} matrices.}
 \examples{
 pm <- polyMgen.a()
 pm * t(pm)
-
-rm(pm)
 
 # two constante matrices
 a <- matrix(1:12,3,4)
@@ -43,7 +41,8 @@ a \%X\% b
 
 pM2M(a) \%*\% pM2M(b)
 
-rm(a,b)
+# clean up
+# rm(pm, a, b)
 
 }
 

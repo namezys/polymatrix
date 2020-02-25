@@ -5,14 +5,14 @@
 
 \description{
 Checks the consistency of a \code{polyMatrix} object.
-In the \code{polyMatrix} there are four different but equivalent 
+In the \code{polyMatrix} there are four different but equivalent
 storing methods of polynomial matrices.
 }
 
 \usage{pMstr(pm) }
 
 \arguments{
-\item{pm}{a polynomial matrix}   
+\item{pm}{a polynomial matrix}
 }
 
 \value{
@@ -21,9 +21,9 @@ In case of inconsistency an information about the errors.
 }
 
 \seealso{
-\code{\link{polyMgen.a}}, 
-\code{\link{polyMgen.b}}, 
-\code{\link{polyMgen.c}}, 
+\code{\link{polyMgen.a}},
+\code{\link{polyMgen.b}},
+\code{\link{polyMgen.c}},
 \code{\link{polyMgen.d}}
 }
 
@@ -48,6 +48,8 @@ B[[1]]<-as.list(B[[1]][-1])
 str(B)
 pMstr(B)[[3]]
 
+# clean up
+# rm(A, B)
 
 } # % end of donttest
 }

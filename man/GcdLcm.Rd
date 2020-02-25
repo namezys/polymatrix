@@ -96,7 +96,8 @@ list(
 )
 # 0.5 + 0.5*x - 0.5*x^2 - 0.5*x^3; 0.5*x - 0.5*x^2 - 0.5*x^3 + 0.5*x^4
 
-rm(A, p1, p2, p3, p4, p5, p6, l)
+# clean up
+# rm(A, p1, p2, p3, p4, p5, p6, l)
 }
 \keyword{manip}
 

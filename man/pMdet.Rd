@@ -7,7 +7,7 @@
 
 \usage{pMdet(pm)}
 \arguments{
-  \item{pm}{a \code{polyMatrix} class object}   
+  \item{pm}{a \code{polyMatrix} class object}
   }
 
 \value{A \code{numeric} or \code{polynomial} class polynom.}
@@ -22,9 +22,9 @@ rd <- c(3,0:7)
 
 D <- polyMgen.a(3,3,rawData=rd,degree=1,symb="x")
 D
-#  3        5 + 6*x  2 + 3*x 
-#  1 + 2*x  7 + 3*x  4 + 5*x 
-#  3 + 4*x  x        6 + 7*x 
+#  3        5 + 6*x  2 + 3*x
+#  1 + 2*x  7 + 3*x  4 + 5*x
+#  3 + 4*x  x        6 + 7*x
 
 pMdet(D) # 114 + 150*x + 22*x^2 + 6*x^3
 
@@ -48,7 +48,8 @@ M
 
 c(pMdet(D),det(M))  # det of a polyMatrix == det of a real matrix  (!)
 
-rm("D","d11","d12","d13","d21","d22","d23","d31","d32","d33","elem","M","rd")
+# clean up
+# rm(D, d11, d12, d13, d21, d22, d23, d31, d32, d33, elem, M, rd)
 
 }
 

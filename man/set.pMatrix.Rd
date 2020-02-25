@@ -6,7 +6,7 @@
 \description{Returns a polynomial matrix in which the given element are changed to the new given elements.}
 
 \usage{
-  \method{set}{polyMatrix}(pm,i,j,m,byrow=FALSE) 
+  \method{set}{polyMatrix}(pm,i,j,m,byrow=FALSE)
 }
 
 \arguments{
@@ -14,8 +14,8 @@
   \item{i}{the vector of row}
   \item{j}{the vector of column indexes}
   \item{m}{the list of \code{polynomial} class new elements}
-  \item{byrow}{logical. If FALSE (the default) the \code{m} used by columns, otherwise by rows} 
-} 
+  \item{byrow}{logical. If FALSE (the default) the \code{m} used by columns, otherwise by rows}
+}
 
 
 \value{
@@ -35,6 +35,7 @@ pM
 
 set(pM,1:2,1:2,ch2pn(c("3","4","x","x^2")))
 
-rm(pM)
+# clean up
+# rm(pM)
 }
 

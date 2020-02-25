@@ -42,6 +42,7 @@ pM
 
 symb(pM) # "L"
 
-rm(pM)
+# clean up
+# rm(pM)
 }
 

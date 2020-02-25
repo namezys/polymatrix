@@ -3,7 +3,7 @@
 
 \title{The adjugate of the given polynomial matrix}
 
-\description{The adjugate of the given matrix. 
+\description{The adjugate of the given matrix.
 Also the transpose of the matrix
 formed from the determinants of submatrices
 multiplied by the chessboard rule signs.}
@@ -17,19 +17,19 @@ multiplied by the chessboard rule signs.}
 \seealso{\code{\link{pMdet}}, \code{\link{pMsub}}}
 \examples{
 (A<-polyMgen.a(2,2))
-# 1 + 2*x + 3*x^2           7 + 8*x + 9*x^2 + 10*x^3 
-# 4 + 5*x + 6*x^2           11 + 12*x 
+# 1 + 2*x + 3*x^2           7 + 8*x + 9*x^2 + 10*x^3
+# 4 + 5*x + 6*x^2           11 + 12*x
 pMdet(A)
-# -17 - 33*x - 61*x^2 - 97*x^3 - 104*x^4 - 60*x^5 
+# -17 - 33*x - 61*x^2 - 97*x^3 - 104*x^4 - 60*x^5
 pMsub(A,1,1)*pMsub(A,2,2)-pMsub(A,1,2)*pMsub(A,2,1)
-# -17 - 33*x - 61*x^2 - 97*x^3 - 104*x^4 - 60*x^5 
+# -17 - 33*x - 61*x^2 - 97*x^3 - 104*x^4 - 60*x^5
 (B<-pMadj(A))
-# 11 + 12*x                  -7 - 8*x - 9*x^2 - 10*x^3 
+# 11 + 12*x                  -7 - 8*x - 9*x^2 - 10*x^3
 #  -4 - 5*x - 6*x^2           1 + 2*x + 3*x^2
 A*B         # diagonal
 pMdet(A)
 
-B*A         
+B*A
 pMdet(A)
 
 # real matrices
@@ -45,10 +45,11 @@ solve(X)*det(X)
 #  -3    6   -3
 #   6   16  -18
 #  -3  -10    9
-pMadj(M2pM(X)) # the same 
-	
-rm(A,B,X)			
-			
+pMadj(M2pM(X)) # the same
+
+# clean up
+# rm(A, B, X)
+
 }
 \keyword{math}
 

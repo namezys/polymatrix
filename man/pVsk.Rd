@@ -3,17 +3,17 @@
 \title{The scalar product of two polynomial vectors}
 
 \description{
-If \code{pMy} is \code{NULL}, then the result is the sum of squares of the elements of \code{pMx}. 
+If \code{pMy} is \code{NULL}, then the result is the sum of squares of the elements of \code{pMx}.
 Otherwise equals the scalar product ot the two given polynomial vectors.}
 \usage{pVsk(pMx, pMy=NULL)}
 \arguments{
       \item{pMx}{a \code{polyMatrix} class row or column vector}
-      \item{pMy}{a \code{polyMatrix} class row or column vector}    
+      \item{pMy}{a \code{polyMatrix} class row or column vector}
 }
 
 \details{The two vectors must have the same length.}
 
-\value{A \code{polynomial} class object, which is the sum of 
+\value{A \code{polynomial} class object, which is the sum of
        the elementwise product of the two vectors.}
 
 \seealso{\link{pMprod}}
@@ -30,6 +30,7 @@ pVsk(pMcol(A,1)) # "13 + 16*x + 16*x^2"
 pMrow(A,2) # ("2 + 4*x" , "1")
 pVsk(pMcol(A,1),pMrow(A,2)) # "-4 - 8*x"
 
-rm(A)
+# clean up
+# rm(A)
 }
 

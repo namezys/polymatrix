@@ -16,14 +16,17 @@
 \keyword{math}
 \examples{
 set.seed(12345)
-p<-polynom::polynomial(rpois(rgeom(1,.2)+1,2))
-q<-polynom::polynomial(rpois(rgeom(1,.2)+1,2))
+p <- polynom::polynomial(rpois(rgeom(1,.2)+1,2))
+q <- polynom::polynomial(rpois(rgeom(1,.2)+1,2))
 p
 q
-p*q
-as.numeric(p*q) # 9 30 30 18 19 14  7  3
-polyMul(p,q) 
-polyMul(q,p)
+p * q
+as.numeric(p * q) # 9 30 30 18 19 14  7  3
+polyMul(p, q)
+polyMul(q, p)
+
+# clean up
+# rm(p, q)
 
 }
 

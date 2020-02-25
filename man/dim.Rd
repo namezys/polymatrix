@@ -8,7 +8,7 @@
 
 \arguments{ \item{x}{a \code{polyMatrix} class object} }
 
-\details{A method for \code{polyMatrix} objects. 
+\details{A method for \code{polyMatrix} objects.
 Does not check the validity of the $dim element.}
 
 \value{A 2 element vector which contains the dimension parameters of the input \code{polyMatrix}.}
@@ -30,6 +30,7 @@ dim(polyMgen.b())
 dim(polyMgen.c())
 dim(polyMgen.d())
 
-rm(A,B)
+# clean up
+# rm(A, B)
 }
 

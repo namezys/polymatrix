@@ -13,7 +13,7 @@ returns the \code{-1} times the given polynomial matrix.
   \item{pm}{a polynomial matrix object}          }
 
 \value{
-The polynomial matrix for which the \code{pm+pMsgn(pm)} 
+The polynomial matrix for which the \code{pm+pMsgn(pm)}
 equals a zero polynomial matrix.
 }
 
@@ -33,7 +33,8 @@ A + pMsgn(polyMconvert(A,"polyMbroad"))
 A + pMsgn(polyMconvert(A,"polyMcells"))
 A + pMsgn(polyMconvert(A,"polyMdlist"))
 
-rm(A)
+# clean up
+# rm(A)
 }
 
 \keyword{manip}

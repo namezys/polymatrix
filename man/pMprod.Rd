@@ -13,12 +13,12 @@
 \arguments{\item{pm}{a \code{polyMatrix} class object} }
 
 \details{
-The input must be a \code{polyMatrix} class vector object. 
+The input must be a \code{polyMatrix} class vector object.
 The result is a \code{polynomial} class polynom.
 }
 
 \value{
-A \code{polynomial} which is the product of 
+A \code{polynomial} which is the product of
 the elements of the argument \sQuote{\code{pm}}.
 }
 
@@ -31,6 +31,8 @@ set.seed(32)
 A <- polyMgen.a(1,2)
 A
 pMprod(A)
-rm(A,.Random.seed)
+
+# clean up
+# rm(A)
 }
 

@@ -71,7 +71,7 @@ polyMgen.d(2, 2, rawData=ch2pn(c("1", "x^2", "x", "0")), symb="x")
 # symbole given for input and output
 polyMgen.d(2, 2, rawData=ch2pn(c("1", "x^2", "x", "0"),symb="x"), symb="x")
 
-rm(chz,p,chx)
-
+# clean up
+# rm(chz, p, chx)
 }
 

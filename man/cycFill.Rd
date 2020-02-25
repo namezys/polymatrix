@@ -19,7 +19,7 @@ the class of the result is \code{vector} or \code{list}.
 The length of the result equals by the value of the \code{size} parameter.
 }
 
-\seealso{Used in the code of \code{\link{polyMgen.a}}, 
+\seealso{Used in the code of \code{\link{polyMgen.a}},
 
 \code{\link{polyMgen.d}}}
 
@@ -27,19 +27,22 @@ The length of the result equals by the value of the \code{size} parameter.
 
 \examples{
 
-u<-c(4,1,3,2)
-cycFill(u,2)
-cycFill(u,4)
-cycFill(u,6)
-cycFill(u,11)
-cycFill(u,12)
+u <- c(4, 1, 3, 2)
+cycFill(u, 2)
+cycFill(u, 4)
+cycFill(u, 6)
+cycFill(u, 11)
+cycFill(u, 12)
 
-u<-as.list(c(4,1,3,2))
-cycFill(u,2)
-cycFill(u,4)
-cycFill(u,6)
-cycFill(u,11)
-cycFill(u,12)
+u <- as.list(c(4, 1, 3, 2))
+cycFill(u, 2)
+cycFill(u, 4)
+cycFill(u, 6)
+cycFill(u, 11)
+cycFill(u, 12)
+
+# clean up
+# rm(u)
 
 }
 

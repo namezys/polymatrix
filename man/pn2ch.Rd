@@ -32,6 +32,7 @@ pn2ch(p)
 p <- polynom::polynomial(12:0)
 pn2ch(p)
 
-rm(p)
+# clean up
+# rm(p)
 }
 

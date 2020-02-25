@@ -40,10 +40,10 @@ The four possible methods to generate the polynomial matrix from the given mater
       \code{$const}, and the coefficients of the first, second... degree of the polynomial
       in the first, second,... element of the \code{$array}.
       In this case the sub-class of the generated \code{polyMatrix} object is \code{polyMarray}.
-\item \sQuote{broad-matrix}, 
+\item \sQuote{broad-matrix},
       when the coefficients are stored in one broad matrix in the \code{$broad}
-      element of the \code{polyMatrix} object. 
-	  The size of this broad matrix is: \code{nrow x (ncol*(d+1))}, 
+      element of the \code{polyMatrix} object.
+	  The size of this broad matrix is: \code{nrow x (ncol*(d+1))},
 	  when the degree of the \code{nrow x ncol} size polynomial matrix is \code{d}.
       In this case the sub-class of the generated \code{polyMatrix} object is \code{polyMbroad}.
 \item \sQuote{list of cells}, when the \code{nrow x ncol} size coefficient matrices are stored
@@ -106,6 +106,8 @@ polyMgen.d(rand=TRUE,degree=2)
 polyMgen.d(degree=3)
 polyMgen.d(degree=NULL)
 
+# clean up
+# rm(px)
 
 }
 \keyword{datagen}

@@ -8,8 +8,8 @@
 
 \description{
 The representation of an ARMA processes is unambiguous only in canonical form.
-The \code{CanForm} method, if the necessary parameters are given 
-converts the ARMA representation to 
+The \code{CanForm} method, if the necessary parameters are given
+converts the ARMA representation to
 \code{echelon}, \code{final} or \code{scm} form.
 }
 
@@ -20,9 +20,9 @@ CanForm.final(pM)
 CanForm.scm(pM)
 }
 
-\arguments{  
-\item{pM}{an arbitrary \code{pMvarma} class object}    
-\item{form}{an arbitrary or "\code{echelon}", "\code{final}", "\code{scm}" form code}    
+\arguments{
+\item{pM}{an arbitrary \code{pMvarma} class object}
+\item{form}{an arbitrary or "\code{echelon}", "\code{final}", "\code{scm}" form code}
 }
 
 \value{
@@ -47,9 +47,9 @@ CanForm(parma,"final")
 CanForm(parma,"echelon")
 CanForm(parma,"scm")
 
-rm(parma)
-
+# clean up
+# rm(parma)
 }
 
 % ----
-% fine 
+% fine

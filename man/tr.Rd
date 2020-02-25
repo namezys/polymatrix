@@ -59,7 +59,8 @@ pM
 ( p <- tr(pM) ) # 1 - 3*x + x^2
 class(p) # "polynomial"
 
-rm(M,pM,p)
+# clean up
+# rm(M, pM, p)
 
 }
 

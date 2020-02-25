@@ -16,13 +16,13 @@ depending of the sign of these indices.
 }
 
 \details{
-If the row or column number is \code{NULL}, that means 
+If the row or column number is \code{NULL}, that means
 all elements from the given columns or rows respectively.
 If \code{j} is not given,  that means a symmetric submatrix.
 }
 
 \value{
-A polynomial matrix which is a submatrix of 
+A polynomial matrix which is a submatrix of
 the given matrix in \sQuote{\code{polyMdlist}} format.
 }
 
@@ -38,7 +38,8 @@ pMsub(A, 1:2, 2:4)
 pMsub(A, -3, 2:5)
 pMsub(A, 1:2)
 
-rm(A)
+# clean up
+# rm(A)
 }
 
 \keyword{manip}

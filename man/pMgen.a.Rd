@@ -92,7 +92,9 @@ polyMgen.a(rand=rexp) # exponentially distributed coefficients
 
 pois.vg.fv <- function(x) rpois(x,1)
 polyMgen.a(rand=pois.vg.fv) # Poisson(1) distributed coefficients
-rm(pois.vg.fv)
+
+# clean up
+# rm(pois.vg.fv)
 
 polyMgen.b() # class="polyMbroad", broad matrix form
 polyMgen.c() # class="polyMcells", list of coefficient matrices
@@ -118,5 +120,7 @@ px <- polyMgen.d(3, 3, rawData=ch2pn(
 class(px) # "polyMdlist" "polyMatrix"
 px
 
+# clean up
+# rm(px)
 }
 

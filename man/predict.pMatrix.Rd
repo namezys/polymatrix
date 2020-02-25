@@ -3,8 +3,8 @@
 \title{Calculate the value of a polynomial matrix for real or complex values}
 
 \description{
-Calculate the value of the polynom elements of the 
-\sQuote{\code{polyMatrix}} class object for real and complex argument also. 
+Calculate the value of the polynom elements of the
+\sQuote{\code{polyMatrix}} class object for real and complex argument also.
 }
 
 \usage{\method{predict}{polyMatrix}(object,M,\dots)}
@@ -16,7 +16,7 @@ Calculate the value of the polynom elements of the
 }
 
 \value{
-A matrix the just the same size as the input, 
+A matrix the just the same size as the input,
 filled by the values of the polynom elements, at the given argument.
 }
 
@@ -32,15 +32,16 @@ filled by the values of the polynom elements, at the given argument.
 
 pm <- polyMgen.d(2,2,ch2pn(c("1","x","x^2","0")))
 pm # 1, x^2 \\ x, 0
-               
-predict(pm,2) # 1, 4 \\ 2, 0 
+
+predict(pm,2) # 1, 4 \\ 2, 0
 
 # for predict the result of a linear model
 #    the used method: predict.lm()
 
-x<-1:5;y<-rnorm(5);predict(lm(y~x)) 
+x<-1:5;y<-rnorm(5);predict(lm(y~x))
 
-rm(pm,x,y)
+# clean up
+# rm(pm, x, y)
 }
 
 % -----
