@@ -55,7 +55,9 @@ export(
   "ssetNext",
   "symb",
   "t.polyMatrix",
-  "tr"
+  "tr",
+  "triang_Sylvester",
+  "triang_Euclidean"
 )
 
 S3method("GCD", "polyMatrix")
