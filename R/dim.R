@@ -1,8 +1,5 @@
-# ----
-# The dim of a polynomial matrix
-
-dim.polyMatrix <-
-function(x) return(x$dim)
-
-# ----
-# fine
+dim.polyMatrix <- function(x) {
+  #' The dim of a polynomial matrix
+  check.is.polyMatrix(x);
+  return(x$dim)
+}

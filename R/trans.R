@@ -1,9 +1,6 @@
-# ---
-# the transposed polyMatrix
-
-
 t.polyMatrix <- function(x, ...)
 {
+  #' the transposed polyMatrix
   pd <- polyMconvert(x, "polyMdlist")
   tpd <- pd
   tpd$dim <- rev(tpd$dim)
@@ -24,7 +21,3 @@ t.polyMatrix <- function(x, ...)
 
   return(tpd)
 }
-
-
-# ----
-# fine

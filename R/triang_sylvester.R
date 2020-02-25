@@ -1,6 +1,3 @@
-# # the  "triang_Sylvester" function
-#
-
 build_sylvester_sub_matrices <- function(pm)
 {
   stopifnot(is.polyMatrix.polyMdlist(pm))
@@ -47,7 +44,6 @@ lq <- function(X)
   return(list(L=L,U=U))
 }
 
-
 extend_for_sylvester <- function(pm)
 {
   stopifnot(nrow(pm) < ncol(pm))
@@ -71,7 +67,6 @@ extend_for_sylvester <- function(pm)
   }
   return(polyMgen.d(nrow(pm) + ncol(pm), ncol(pm), rawData=data, symb=pm$symb, byrow=TRUE))
 }
-
 
 shrink_extended_for_sylvester <- function(pm)
 {
@@ -145,8 +140,3 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   RU <- polyMgen.d(ncol(pm), ncol(pm), rawData=u_list, symb=pm$symb)
   return(list(T=RT, U=RU))
 }
-
-#
-#
-# # -----
-# # fine

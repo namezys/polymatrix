@@ -1,7 +1,5 @@
-# ---
-# the constant of a polynom or polynomial matrix
-
 const <-function(p) {
+  #' the constant of a polynom or polynomial matrix
   UseMethod("const")
 }
 
@@ -31,7 +29,3 @@ const.polyMatrix <- function(p)
   }
   stop("Not a regular 'polyMatrix' class object!")
 }
-
-
-# ----
-# fine

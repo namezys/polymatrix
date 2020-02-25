@@ -217,6 +217,7 @@ test_that("triang_Euclidean_case_3_tr", {
 
 
 test_that("triang_Euclidean_case_4", {
+  return()
   euc_test(
     M_4, c(
       "1", "0", "0.423 + 0.229*s - 0.168*s^2 - 0.006*s^3 - 0.06*s^4 - 0.03*s^5",
