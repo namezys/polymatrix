@@ -114,7 +114,7 @@ function(pa)
     dlist<-vector("list", k)
     for (i1 in 1:k) dlist[[i1]]<-vector("list", j)
     for (i1 in 1:k) for (i2 in 1:j)
-      dlist[[i1]][[i2]] <- polynomial(c(const[i1,i2],a.coefs[i1,i2,]))
+      dlist[[i1]][[i2]] <- polynom::polynomial(c(const[i1,i2],a.coefs[i1,i2,]))
     pd<-list(dim=dim,degree=degree_matrix(pa),symb=pa$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
     return(pd)
@@ -166,7 +166,7 @@ function(pb)
     dlist<-vector("list", k)
     for(i1 in 1:k) dlist[[i1]]<-vector("list", j)
     for(i1 in 1:k) for(i2 in 1:j)
-      dlist[[i1]][[i2]] <- polynomial(broad[i1,((1:d1)-1)*j+i2])
+      dlist[[i1]][[i2]] <- polynom::polynomial(broad[i1,((1:d1)-1)*j+i2])
     pd<-list(dim=dim,degree=degree_matrix(pb),symb=pb$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
     return(pd)
@@ -217,7 +217,7 @@ function(pc)
 
     for(i1 in 1:k) for(i2 in 1:j)
       { pn<-NULL; for(i3 in 0:d)  pn<-c(pn,cells[[i3+1]][i1,i2])
-        dlist[[i1]][[i2]] <- polynomial(pn)}
+        dlist[[i1]][[i2]] <- polynom::polynomial(pn)}
 
     pd<-list(dim=dim,degree=degree_matrix(pc),symb=pc$symb,dlist=dlist)
     class(pd) <- c("polyMdlist","polyMatrix")
@@ -373,7 +373,7 @@ function(chv,symb="x")
         for(i in 1:length(ch))
           if(length(which(charToRaw(ch[i])==charToRaw(symb)))!=0)
 		     symb.terms<-c(symb.terms,i)
-        if(length(symb.terms)==0) {w<-c(w,list(polynomial(0)));next}
+        if(length(symb.terms)==0) {w<-c(w,list(polynom::polynomial(0)));next}
         ch<-ch[symb.terms]# the terms with "symb"
 
         v<-NULL
@@ -391,7 +391,7 @@ function(chv,symb="x")
 
         pch<-rep(0,max(ch.degr)+1)
         pch[trunc(ch.degr+1)]<-ch.coef # the coefficient vector
-        w<-c(w,list(polynomial(pch)))
+        w<-c(w,list(polynom::polynomial(pch)))
       }
     return(if(length(w)-1) w else w[[1]])
     }

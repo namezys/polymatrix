@@ -57,7 +57,8 @@ export(
   "t.polyMatrix",
   "tr",
   "triang_Sylvester",
-  "triang_Euclidean"
+  "triang_Euclidean",
+  "triang_Interpolation"
 )
 
 S3method("GCD", "polyMatrix")

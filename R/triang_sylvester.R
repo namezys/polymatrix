@@ -95,16 +95,10 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   lq_result <- lq(sylv_m)
   T <- lq_result$L
   U <- lq_result$U
-  lead_rows <- vector("numeric", ncol(sylv_m))
-  for (c in 1:length(lead_rows)) {
-    lead_rows[c] <- which(!is.zero(T[, c], eps=eps))[1]
-  }
-  if(any(is.na(lead_rows))) {
+  lead_hyp_rows <- zero_lead_hyp_rows(T, nrow(T) / nrow(pm), eps)
+  if (is.null(lead_hyp_rows)) {
     stop("The given matrix is singular !")
   }
-
-  sub_size <- nrow(T) / nrow(pm)
-  lead_hyp_rows <- 1 + (lead_rows - 1) %/% sub_size
 
   if (length(unique(lead_hyp_rows)) != ncol(pm)) {
     return(NULL);
@@ -117,6 +111,7 @@ triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
   ST <- T[, columns]
 
   # build matrix
+  sub_size <- nrow(T) / nrow(pm)
   t_list <- vector("list", nrow(pm) * ncol(pm))
   for(r in 1:nrow(pm)) {
     sub_row <- (r - 1) * sub_size + 1

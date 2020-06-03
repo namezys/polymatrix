@@ -140,7 +140,21 @@ triang_Euclidean_step <- function(transf, column_idx)
 
 triang_Euclidean <- function(pm)
 {
-  #' return list of result matrix and u-matrix
+  #' Triangularization of a polynomial matrix by Euclidean division metho
+  #'
+  #' @param polynomial matrix to triangularize
+  #' @return Upper tringular matrix `T` and transformation matrix `U`.
+  #'
+  #' @details
+  #' The method use the for polynomilas extended Euclidean algorithm.
+  #'
+  #' This method search a solution of the triangulrization by the method of Sylvester matrix,
+  #' descripted in the article Labhalla-Lombardi-Marlin (1996).
+  #'
+  #' @seealso triang_Sylvester
+  #'
+  #' @references Thomas Kailaith:Linear Systems, Prentice-Hall, 1980, pp 373-376
+  #' @author Nikolai Ryzhkov, \email{namezys@gmail.com}
   pm <- zero_round(polyMconvert.dlist(pm))
   transf <- transf_init(pm)
   for(c in 1:min(ncol(pm), nrow(pm))) {
