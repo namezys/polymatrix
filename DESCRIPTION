@@ -8,7 +8,7 @@ Description:
   This package includes 3 methods of triangularization of polynomial matrices:
   Extended Euclidean algorithm which is most classical but numerically unstable;
   Sylvester algorithm based on LQ decomposition;
-  Interppolation algorithm based on LQ decomposition and Newton interpolation.
+  Interpolation algorithm is based on LQ decomposition and Newton interpolation.
   Both methods are described in 
   D. Henrion & M. Sebek, Reliable numerical methods for polynomial matrix triangularization,
   IEEE Transactions on Automatic Control (Volume 44, Issue 3, Mar 1999, Pages 497-508) <doi:10.1109/9.751344>
@@ -31,4 +31,4 @@ Suggests: testthat
 Repository: CRAN
 URL: https://github.com/namezys/polymatrix
 BugReports: https://github.com/namezys/polymatrix/issues
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.0.9000

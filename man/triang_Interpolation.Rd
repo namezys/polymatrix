@@ -24,17 +24,17 @@ triang_Interpolation(
 Tranfortmaiton matrix
 }
 \description{
-The parameters `point_vector`, `round_digits` can significant affect a result.
+The parameters `point_vector`, `round_digits` can significantly affect the result.
 }
 \details{
-Default value of eps usually is enought to determintate real zeros.
+Default value of `eps`` usually is enought to determintate real zeros.
 
 In a polynomial matrix the head elements are the first non-zero polynomials of columns.
 The sequence of row indices of this head elements form the shape of the polynomial matrix.
 A polynomial matrix is in left-lower triangular form, if this sequence is monoton increasing.
 
-This method search a solution of the triangulrization by the method of Sylvester matrix,
-descripted in the article Labhalla-Lombardi-Marlin (1996).
+This method offers a solution of the triangulrization by the Interpolation method,
+described in the article of Labhalla-Lombardi-Marlin (1996).
 }
 \examples{
 A <- polyMgen.d(3,2,ch2pn(c("x-1","2","0","x^2-1","2*x+2","3")))

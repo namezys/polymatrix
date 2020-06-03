@@ -1,6 +1,25 @@
 t.polyMatrix <- function(x, ...)
 {
-  #' the transposed polyMatrix
+  #' Matrix transpose of a \code{polyMatrix} class object
+  #'
+  #' The method first convert the storage method of
+  #' the given \code{polyMatrix} object to \code{polyMdlist} class interpretation,
+  #' then flips the \code{polyMatrix} over its diagonal.
+  #' @param a \code{polyMatrix} class object
+  #' @return A '\code{polyMdlist}, \code{polyMatrix}' class object,
+  #' the transposed version of the given \code{x} polynomial matrix.
+  #'
+  #' @examples
+  #' m <- matrix(1:12,3,4)
+  #' t(m) # the \code{base::t()} function
+  #'
+  #' pa <- polyMgen.a()
+  #' pm <- t(pa)
+  #' dim(pm) # 3 x 2
+  #' class(pm) #  "polyMdlist" "polyMatrix"
+  #'
+  #' @seealso The \sQuote{\code{t}} in the \code{base} package.
+
   pd <- polyMconvert(x, "polyMdlist")
   tpd <- pd
   tpd$dim <- rev(tpd$dim)

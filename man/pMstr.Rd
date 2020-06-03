@@ -31,22 +31,22 @@ In case of inconsistency an information about the errors.
 A <- polyMgen.a(2,3,5)
 B <- polyMconvert(A,"polyMdlist")
 \donttest{
-pMstr(B)$cns
+# pMstr(B)$cns
 
 ## class of elements: polynomial
-B[[1]][[1]]<-1
-str(B)
-(pMstr(B))
+# B[[1]][[1]]<-1
+# str(B)
+# (pMstr(B))
 
 ## class of sublists: list
-B[[1]]<-1:length(B[[1]])
-str(B)
-pMstr(B)
+# B[[1]]<-1:length(B[[1]])
+# str(B)
+# pMstr(B)
 
 # absence of an element
-B[[1]]<-as.list(B[[1]][-1])
-str(B)
-pMstr(B)[[3]]
+# B[[1]]<-as.list(B[[1]][-1])
+# str(B)
+# pMstr(B)[[3]]
 
 # clean up
 # rm(A, B)
