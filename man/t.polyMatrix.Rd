@@ -4,10 +4,10 @@
 \alias{t.polyMatrix}
 \title{Matrix transpose of a \code{polyMatrix} class object}
 \usage{
-\method{t}{polyMatrix}(x, ...)
+\method{t}{polyMatrix}(x)
 }
 \arguments{
-\item{a}{\code{polyMatrix} class object}
+\item{x}{\code{polyMatrix} class object}
 }
 \value{
 A '\code{polyMdlist}, \code{polyMatrix}' class object,

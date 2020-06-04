@@ -142,7 +142,7 @@ triang_Euclidean <- function(pm)
 {
   #' Triangularization of a polynomial matrix by Euclidean division metho
   #'
-  #' @param polynomial matrix to triangularize
+  #' @param pm matrix to triangularize
   #' @return Upper tringular matrix `T` and transformation matrix `U`.
   #'
   #' @details

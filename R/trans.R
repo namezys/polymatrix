@@ -1,11 +1,11 @@
-t.polyMatrix <- function(x, ...)
+t.polyMatrix <- function(x)
 {
   #' Matrix transpose of a \code{polyMatrix} class object
   #'
   #' The method first convert the storage method of
   #' the given \code{polyMatrix} object to \code{polyMdlist} class interpretation,
   #' then flips the \code{polyMatrix} over its diagonal.
-  #' @param a \code{polyMatrix} class object
+  #' @param x \code{polyMatrix} class object
   #' @return A '\code{polyMdlist}, \code{polyMatrix}' class object,
   #' the transposed version of the given \code{x} polynomial matrix.
   #'

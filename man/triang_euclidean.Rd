@@ -7,7 +7,7 @@
 triang_Euclidean(pm)
 }
 \arguments{
-\item{polynomial}{matrix to triangularize}
+\item{pm}{matrix to triangularize}
 }
 \value{
 Upper tringular matrix `T` and transformation matrix `U`.
