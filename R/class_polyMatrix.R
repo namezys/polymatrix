@@ -3,8 +3,10 @@
 # Created by: namezys
 # Created on: 2020. 10. 16.
 
-PM <- "PM"
+PM <- "polyMatrix"
 P <- "polynomial"
+NUM <- "numeric"
+M <- "matrix"
 
 setOldClass(P)
 

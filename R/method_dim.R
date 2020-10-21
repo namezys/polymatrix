@@ -16,4 +16,3 @@ setMethod("ncol", signature(x = P), function(x) { 1 })
 
 setGeneric("dim")
 setMethod("dim", signature(x = PM), function(x) { c(nrow(x), ncol(x)) })
-setMethod("dim", signature(x = P), function(x) { c(1, 1) })
