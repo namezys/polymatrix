@@ -19,6 +19,9 @@ cbind <- function(..., deparse.level = 1) {
   nc <- 0
   nr <- NULL
   for(i in vargs) {
+    if(is.null(i)) {
+      next
+    }
     vnr <- nrow(i)
     if(!is.null(vnr) && vnr == 1) {
       vnr <- NULL
@@ -40,6 +43,9 @@ cbind <- function(..., deparse.level = 1) {
   res <- polyMatrix(0, nr, nc, 0)
   c <- 1
   for(i in vargs) {
+    if(is.null(i)) {
+      next
+    }
     vnc <- ncol(i)
     if(is.null(vnc)) {
       vnc <- 1
@@ -59,11 +65,15 @@ rbind <- function(..., deparse.level = 1) {
     return(.Internal(rbind(deparse.level = deparse.level, ...)))
   }
   if(length(vargs) == 1) {
-    return(vargs[[1]])
+    return(list(v = vargs[[1]]))
   }
+
   nc <- NULL
   nr <- 0
   for(i in vargs) {
+    if(is.null(i)) {
+      next
+    }
     vnc <- ncol(i)
     if(!is.null(vnc) && vnc == 1) {
       vnc <- NULL
@@ -85,6 +95,9 @@ rbind <- function(..., deparse.level = 1) {
   res <- polyMatrix(0, nr, nc, 0)
   r <- 1
   for(i in vargs) {
+    if(is.null(i)) {
+      next
+    }
     vnr <- nrow(i)
     if(is.null(vnr)) {
       vnr <- 1
