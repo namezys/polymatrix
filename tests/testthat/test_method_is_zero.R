@@ -1,7 +1,7 @@
-context("test_is_zero")
+context("method is.zero")
 
 
-test_that("is.zero", {
+test_that("numericals", {
   expect_true(is.zero(0))
   expect_true(is.zero(.Machine$double.eps))
   expect_equal(is.zero(c(0, 0, 0)), c(TRUE, TRUE, TRUE))
@@ -32,41 +32,40 @@ test_that("is.zero", {
 
 
 test_that("is.zero.polynomial", {
-  expect_true(is.zero(p(c(0))))
-  expect_true(is.zero(p(c(0, 0))))
-  expect_true(is.zero(p(c(0, 0, 0))))
-  expect_true(is.zero(p(c(1, 1)) - p(c(1, 1))))
+  expect_true(is.zero(p(0)))
+  expect_true(is.zero(p(0, 0)))
+  expect_true(is.zero(p(0, 0, 0)))
+  expect_true(is.zero(p(1, 1) - p(1, 1)))
 
-  expect_true(is.zero(p(c(.Machine$double.eps))))
-  expect_true(is.zero(p(c(0, .Machine$double.eps))))
-  expect_true(is.zero(p(c(.Machine$double.eps, 0, .Machine$double.eps))))
-  expect_true(is.zero(p(c(.Machine$double.eps, 1)) - p(c(0, 1 + .Machine$double.eps))))
+  expect_true(is.zero(p(.Machine$double.eps)))
+  expect_true(is.zero(p(0, .Machine$double.eps)))
+  expect_true(is.zero(p(.Machine$double.eps, 0, .Machine$double.eps)))
+  expect_true(is.zero(p(.Machine$double.eps, 1) - p(0, 1 + .Machine$double.eps)))
 
-  expect_true(is.zero(p(c(1)), eps=1.1))
-  expect_true(is.zero(p(c(1, -1)), eps=1.1))
-  expect_true(is.zero(p(c(0, -1, 1)), eps=1.1))
-  expect_true(is.zero(p(c(-2, 2)) - p(c(-1, 1)), eps=1.1))
+  expect_true(is.zero(p(1), eps=1.1))
+  expect_true(is.zero(p(1, -1), eps=1.1))
+  expect_true(is.zero(p(0, -1, 1), eps=1.1))
+  expect_true(is.zero(p(-2, 2) - p(-1, 1), eps=1.1))
 
-  expect_false(is.zero(p(c(1))))
-  expect_false(is.zero(p(c(1, -1))))
-  expect_false(is.zero(p(c(0, -1, 1))))
-  expect_false(is.zero(p(c(-2, 2)) - p(c(-1, 1))))
+  expect_false(is.zero(p(1)))
+  expect_false(is.zero(p(1, -1)))
+  expect_false(is.zero(p(0, -1, 1)))
+  expect_false(is.zero(p(-2, 2) - p(-1, 1)))
 
-  expect_false(is.zero(p(c(1)), eps=0.1))
-  expect_false(is.zero(p(c(1, -1)), eps=0.1))
-  expect_false(is.zero(p(c(0, -1, 1)), eps=0.1))
-  expect_false(is.zero(p(c(-2, 2)) - p(c(-1, 1)), eps=0.1))
+  expect_false(is.zero(p(1), eps=0.1))
+  expect_false(is.zero(p(1, -1), eps=0.1))
+  expect_false(is.zero(p(0, -1, 1), eps=0.1))
+  expect_false(is.zero(p(-2, 2) - p(-1, 1), eps=0.1))
 
 })
 
 
 test_that("is.zero.polyMatrxi", {
-  M_0 <- parse.polyMatrix("s-1, s^2 - 1
-                             2, 2*s + 2
-                             0, 3")
-  M_0 <- polyMgen.d(nrow=3, ncol=2 ,byrow=TRUE, ch2pn(c(), symb="s"), symb="s")
+  M_0 <- parse.polyMatrix("-1 + x,   -1 + x^2
+                                2,     2 + 2x
+                                0,          3")
 
-  expect_equal(is.zero(M_0 - M_0), matrix(TRUE, 3, 2))
+#  expect_equal(is.zero(M_0 - M_0), matrix(TRUE, 3, 2))
   expect_equal(is.zero(M_0, eps=3.1), matrix(TRUE, 3, 2))
 
   expect_equal(is.zero(M_0), matrix(c(FALSE, FALSE, TRUE, FALSE, FALSE, FALSE), 3, 2))
