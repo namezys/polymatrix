@@ -1,6 +1,5 @@
 context("test_is_zero")
 
-p <- polynom::polynomial
 
 test_that("is.zero", {
   expect_true(is.zero(0))
@@ -62,11 +61,10 @@ test_that("is.zero.polynomial", {
 
 
 test_that("is.zero.polyMatrxi", {
-  M_0 <- polyMgen.d(nrow=3, ncol=2 ,byrow=TRUE, ch2pn(c(
-    "s - 1", "s^2 - 1",
-    "2    ", "2*s + 2",
-    "0    ", "3"
-    ), symb="s"), symb="s")
+  M_0 <- parse.polyMatrix("s-1, s^2 - 1
+                             2, 2*s + 2
+                             0, 3")
+  M_0 <- polyMgen.d(nrow=3, ncol=2 ,byrow=TRUE, ch2pn(c(), symb="s"), symb="s")
 
   expect_equal(is.zero(M_0 - M_0), matrix(TRUE, 3, 2))
   expect_equal(is.zero(M_0, eps=3.1), matrix(TRUE, 3, 2))
