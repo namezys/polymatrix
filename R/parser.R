@@ -110,18 +110,20 @@ parse.polynomial <- function(s, var = "x") {
   return(res$v)
 }
 
-parse.polyMatrix.prepare <- function(s) {
+parse.polyMatrix.prepare <- function(...) {
+  s <- paste(..., sep="\\")
   rows <- strsplit(s, "\n|\\\\")
   rows <- sapply(rows, function(x) { gsub("\\s", "", x, perl = TRUE) })
   rows <- rows[rows != ""]
   return(rows)
 }
 
-parse.polyMatrix <- function(s, var = "x") {
+parse.polyMatrix <- function(..., var = "x") {
+  # use "..." to suppress name hints in PyCharm
   if(!grepl("^[a-z]$", var) || var == "e") {
     stop(e = "invalid variable name")
   }
-  rows <- parse.polyMatrix.prepare(s)
+  rows <- parse.polyMatrix.prepare(...)
   res <- polyMatrix(0, length(rows), 1)
   for(i in seq_len(length(rows))) {
     p_r <- .parse.polyMatrix.row(rows[i], var, i)
