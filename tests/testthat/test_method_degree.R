@@ -13,7 +13,7 @@ test_that("degree of number", {
 })
 
 test_that("degree of matrix", {
-  expect_equal(degree(matrix(1:6, 2, 3)), matrix(0, 2, 3))
+  expect_equal(degree(matrix(1:6, 2, 3)), 0)
 })
 
 test_that("degree of polynomial", {
