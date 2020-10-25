@@ -13,6 +13,7 @@ test_that("polynomial", {
   expect_equal(parse.polynomial("x^0"), p(1))
 
   expect_equal(parse.polynomial("x "), p(0, 1))
+  expect_equal(parse.polynomial("-x"), p(0, -1))
   expect_equal(parse.polynomial(" 1x"), p(0, 1))
   expect_equal(parse.polynomial("-2 x"), p(0, -2))
   expect_equal(parse.polynomial("-2.0e+7x"), p(0, -2e7))
@@ -30,6 +31,7 @@ test_that("polynomial", {
   expect_equal(parse.polynomial("-2.0e+7x"), p(0, -2e7))
   expect_equal(parse.polynomial("+.2e-6x"), p(0, 2e-7))
 
+  expect_equal(parse.polynomial("1-x"), p(1, -1))
   expect_equal(parse.polynomial("3 * x + 12 - 0.1x^3 + x^2"), p(12, 3, 1, -0.1))
   expect_equal(parse.polynomial("3 * a + 12 - 0.1a^3 + a^2", "a"), p(12, 3, 1, -0.1))
 

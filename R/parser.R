@@ -7,12 +7,15 @@
   res <- regexpr("^[+-]?\\d*\\.?\\d*([eE][+-]?\\d+)?", s, perl = TRUE)
   l <- attr(res, "match.length")
   if(l == 0) {
-    return(list(v = NULL, l = 0))
+    return(list(v = NULL, s = 1, l = 0))
   }
   stopifnot(res == 1)
   c <- substr(s, 1, l)
-  if(c == "+" || c == "-") {
-    return(list(v = NULL, l = 1))
+  if(c == "+") {
+    return(list(v = NULL, s = +1, l = 1))
+  }
+  if(c == "-") {
+    return(list(v = NULL, s = -1, l = 1))
   }
   return(list(v = as.numeric(c), l = l))
 }
@@ -57,7 +60,7 @@
       return(list(v = NULL, e = paste("invalid term at position", term_idx)))
     }
     if(is.null(c)) {
-      c <- 1
+      c <- coef_term$s
     }
     if(is.null(d)) {
       d <- 0
@@ -111,7 +114,7 @@ parse.polynomial <- function(s, var = "x") {
 }
 
 parse.polyMatrix.prepare <- function(...) {
-  s <- paste(..., sep="\\")
+  s <- paste(..., sep = "\\")
   rows <- strsplit(s, "\n|\\\\")
   rows <- sapply(rows, function(x) { gsub("\\s", "", x, perl = TRUE) })
   rows <- rows[rows != ""]
