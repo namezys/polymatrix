@@ -6,7 +6,7 @@ setGeneric("nrow", nrow)
 setMethod("nrow", signature(x = PM), function(x) {
   return(nrow(x@coef))
 })
-setMethod("nrow", signature(x = P), function(...) { 1 })
+setMethod("nrow", signature(x = P), function(x) { 1 })
 
 setGeneric("ncol", ncol)
 setMethod("ncol", signature(x = PM), function(x) {
