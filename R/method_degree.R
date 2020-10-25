@@ -15,3 +15,17 @@ setMethod("degree", signature(x = NUM), function(x) {
 setMethod("degree", signature(x = M), function(x) { as.integer(0) })
 setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 setMethod("degree", signature(x = PM), function(x) { as.integer(ncol(x@coef) / x@ncol - 1) })
+
+#' Get degree per items
+setGeneric("matrix.degree", function(x) { 0 })
+setMethod("matrix.degree", signature(x = M), function(x) { matrix(0, nrow(x), ncol(x)) })
+setMethod("matrix.degree", signature(x = P), function(x) { degree(x) })
+setMethod("matrix.degree", signature(x = PM), function(x) {
+  res <- matrix(NA, nrow(x), ncol(x))
+  for(r in seq_len(nrow(res))) {
+    for(c in seq_len(ncol(res))) {
+      res[r, c] <- degree(x[r, c])
+    }
+  }
+  return(res)
+})

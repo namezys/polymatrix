@@ -27,3 +27,8 @@ test_that("degree of polyMatrix", {
   expect_equal(degree(polyMatrix(1, 2, 5, 5)), 5)
 })
 
+test_that("matrix.degree", {
+  pm <- parse.polyMatrix("x, 1, x^2",
+                         "2x, 0, x^3")
+  expect_equal(matrix.degree(pm), matrix(c(1, 0, 2, 1, 0, 3), 2, 3, byrow = TRUE))
+})
