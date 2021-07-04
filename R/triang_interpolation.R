@@ -64,7 +64,7 @@ triang_Interpolation <- function(pm, point_vector, round_digits=5, eps=.Machine$
 
   # build numerical matrix
   for(hyp_row in 1:hyp_nrow) {
-    hyp_row_polynomials <- pm$dlist[[hyp_row]]
+    hyp_row_polynomials <- pm[hyp_row, ]
     for(sub_row in 1:point_number) {
       point <- point_vector[sub_row]
       sub_values <- sapply(hyp_row_polynomials, function(p) predict(p, point))
@@ -101,14 +101,12 @@ triang_Interpolation <- function(pm, point_vector, round_digits=5, eps=.Machine$
   }
 
   # select polynomial coef from Uv
-  dlist <- vector("list", hyp_ncol * hyp_ncol)
+  L <- polyMatrix(0, hyp_nrow, hyp_ncol)
   for(row in 1:hyp_ncol) {
     for(col in 1:hyp_ncol) {
       source_rows <- ((degree):0) * hyp_ncol + row
-      dlist[[(row - 1) * hyp_ncol + col]] <- polynom::polynomial(Uv[source_rows, col])
+      L[row, col] <- polynom::polynomial(Uv[source_rows, col])
     }
   }
-  # build matrix
-  result <- polyMgen.d(nrow=hyp_ncol, ncol=hyp_ncol, rawData = dlist, symb=pm$symb, byrow = TRUE)
-  return(result)
+  return(L)
 }

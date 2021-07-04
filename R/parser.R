@@ -98,6 +98,12 @@
   return(list(v = res))
 }
 
+#' Parse polynomial from string
+#'
+#' Parse string representation of polynomial into a polynomial object.
+#'
+#' @return new polynomial as `polynom::polynomial` object
+#' @export
 parse.polynomial <- function(s, var = "x") {
   if(!grepl("^[a-z]$", var) || var == "e") {
     stop(e = "invalid variable name")
@@ -121,6 +127,36 @@ parse.polyMatrix.prepare <- function(...) {
   return(rows)
 }
 
+#' Parse polynomial matrix from strings
+#'
+#' This is a convenient way to input a polynomial matrix.
+#'
+#' Space and tabulation characters are ignored.
+#'
+#' Row should be divided by new line "\code{\\n}" or backslash "\code{\\}" (TeX style).
+#'
+#' Elements in each row can be divided by "\code{,}", "\code{;}" or "\code{&}" (TeX style)
+#'
+#' For convenience, this function can accept multiple string.
+#' In this case each string will be treated as a new row.
+#'
+#' This function accepts TeX matrix format.
+#'
+#' @param ... string or strings to parse
+#' @param var variable character.
+#'            Only lower latin characters are allowed except 'e' which is reseved for numbers
+#'
+#' @return new polynomial matrix of polyMatrix class
+#'
+#' @examples
+#' parse.polyMatrix("       1, 2 + x",
+#'                  "2 + 2x^2,    x^3")
+#'
+#' # The function can suggest mistake position in case of invalid format
+#' # TODO: get form examples
+#' \dontrun{}
+#'
+#' @export
 parse.polyMatrix <- function(..., var = "x") {
   # use "..." to suppress name hints in PyCharm
   if(!grepl("^[a-z]$", var) || var == "e") {

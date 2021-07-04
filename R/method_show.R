@@ -4,7 +4,7 @@
 
 .format_polynom <- function(p, s = "x")
 {
-  res <- c()
+  res <- NULL
   for(i in seq_along(p)) {
     d <- i - 1
     cc <- p[i]
@@ -44,7 +44,7 @@
   return(paste(res, collapse = ""))
 }
 
-setMethod("show", signature(object = PM), function(object) {
+.show.polyMarix <- function(object) {
   res <- matrix("+", nrow(object) + 1, ncol(object) + 1)
   res[1, 1] <- " "
   for(j in seq_len(ncol(object))) {
@@ -65,4 +65,61 @@ setMethod("show", signature(object = PM), function(object) {
     cat(s, sep = "   ")
     cat("\n")
   }
+}
+
+.show.polyMarixCharPolynomial <- function (cp) {
+  res <- NULL
+  for(i in seq_len(ncol(cp@coef))) {
+    pc <- cp@coef[1, i]
+    if (pc != 0) {
+      str_p <- .format_polynom(pc)
+      if (sum(c(pc) != 0) == 1) {
+        if (sum(c(pc) > 0) == 1) {
+          str_p <- paste(c("+ ", str_p), collapse = "")
+        }
+        if (!is.null(res)) {
+          res <- c(res, str_p)
+        } else {
+          res <- str_p
+        }
+      } else {
+        if (!is.null(res)) {
+          stopifnot(i != 1)
+          res <- c(res, "+", paste("(", str_p, ")", collapse = ""))
+        } else {
+          if (i == 1) {
+            res <- str_p
+          } else {
+            res <- paste("(", str_p, ")", collapse = "")
+          }
+        }
+      }
+      if (i == 2) {
+        res <- c(res, "l")
+      } else if (i > 2){
+        res <- c(res, paste(c("l^", i - 1), collapse = ""))
+      }
+    }
+  }
+  cat(paste(res, collapse = " "))
+  cat("\n")
+}
+
+#' @describeIn polyMatrix prints out a text representation of a polynomial matrix
+#'
+#' @examples
+#'
+#' # print out a polynomial matrix
+#' show(parse.polyMatrix(
+#'   "      1.0001 - x,          1 - x^2, 1 + 2.0003*x + x^2",
+#'   "0.0001 + x - x^2,            1 + x, 1 - 2*x + x^2",
+#'   "        12.3 x^3,  2 + 3.5 x + x^4, -0.7 + 1.6e-3 x^3"
+#' ))
+#' ##                   [,1]             [,2]                [,3]
+#' ## [1,]        1.0001 - x          1 - x^2   1 + 2.0003x + x^2
+#' ## [2,]   1e-04 + x - x^2            1 + x        1 - 2x + x^2
+#' ## [3,]           12.3x^3   2 + 3.5x + x^4    -0.7 + 0.0016x^3
+setMethod("show", signature(object = PM), .show.polyMarix)
+setMethod("show", signature(object = PMCP), function (object) {
+  .show.polyMarixCharPolynomial(object)
 })

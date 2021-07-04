@@ -27,7 +27,9 @@
 
 # overide missing indexes
 setMethod("[", signature(x = PM, i = "missing", j = "missing"), function(x, ...) { x })
-setMethod("[", signature(x = PM, i = "missing"), function(x, i, j) { x[seq_len(nrow(x)), j] })
+setMethod("[", signature(x = PM, i = "missing"), function(x, i, j) {
+  x[seq_len(nrow(x)), j]
+})
 setMethod("[", signature(x = PM, j = "missing"), function(x, i, j) { x[i, seq_len(ncol(x))] })
 
 setMethod("[", signature(x = PM, i = "logical", j = "logical"), function(x, i, j) {
@@ -141,3 +143,11 @@ setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), fu
   x@coef <- .clean.coef(x@coef, nc)
   return(x)
 })
+
+.subsript.matrix.polynom <- function (x, i, j, value)
+{
+  stopifnot(is.matrix(x) && polynom::is.polynomial(value))
+  result <- polyMatrix(x, nrow(x), ncol(x), 0)
+  result[i, j] <- value
+  return(result)
+}

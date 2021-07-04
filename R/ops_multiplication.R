@@ -2,10 +2,11 @@
 # Created by: namezys
 # Created on: 2020. 10. 16.
 
-setMethod("*", signature(e1 = PM, e2 = "numeric"), function(e1, e2) {
+.mult.polyMatrix.numeric <- function(e1, e2) {
   return(polyMatrix(e1@coef * e2, nrow(e1), ncol(e1), degree(e1)))
-})
-setMethod("*", signature(e1 = PM, e2 = P), function(e1, e2) {
+}
+
+.mult.polyMatrix.polinomial <- function(e1, e2) {
   res_d <- degree(e1) + degree(e2)
   src_c_idx <- seq_len(ncol(e1@coef))
   nc <- ncol(e1)
@@ -15,12 +16,15 @@ setMethod("*", signature(e1 = PM, e2 = P), function(e1, e2) {
     coef[, column_idxs] <- coef[, column_idxs] + e1@coef * e2[i + 1]
   }
   return(polyMatrix(coef, nrow(e1), nc, res_d))
-})
+}
+
+.mult.matrix.polinomial <- function (e1, e2) {
+  return(.mult.polyMatrix.polinomial(polyMatrix(e1, nrow(e1), ncol(e1), 0), e2))
+}
+
+setMethod("*", signature(e1 = PM, e2 = "numeric"), .mult.polyMatrix.numeric)
+setMethod("*", signature(e1 = PM, e2 = P), .mult.polyMatrix.polinomial)
 setMethod("*", signature(e1 = PM, e2 = PM), function(e1, e2) {
   stop("Per element multiplication for polyMatrix isn't supported")
 })
 setMethod("*", signature(e1 = "ANY", e2 = PM), function(e1, e2) { callGeneric(e2, e1) })
-
-op <- parse.polyMatrix("1, 2 + x, 3 + x^2",
-                       "x,   x^3, -6 + x^2")
-op * parse.polynomial("1 - x")

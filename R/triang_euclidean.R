@@ -1,167 +1,84 @@
-lead_coef <- function(p)
-{
-  stopifnot(polynom::is.polynomial(p))
-  return(tail(p, 1))
-}
+# Title     : Euclidean algorithm of triangularization
+# Created by: namezys
+# Created on: 2020. 10. 16.
 
-is_polynomial_monic <- function(p)
-{
-  #' Monic polynomial - the leading coefficient (the nonzero coefficient of highest degree) is equal to 1
-  return(lead_coef(p) == 1)
-}
-
-is_polynomial_zero <- function(p)
-{
-  return(is.zero(p))
-}
-
-is_any_polynomial_nonzero <- function(pl)
-{
-  stopifnot(all(sapply(pl, polynom::is.polynomial)))
-  return(any(sapply(pl, function(p) {!is.zero(p)})))
-}
-
-get_min_degree_non_zero_idx <- function(pl, after)
-{
-  #' Get index of nonzero polynomial in list with minial degree.
-  #' In case of mutliply result method returns first index
-  stopifnot(all(sapply(pl, polynom::is.polynomial)))
-
-  non_zero_ind <- !sapply(pl, is_polynomial_zero)
-  non_zero_pl <- pl[non_zero_ind]
-  non_zero_idx <- (1:length(pl))[non_zero_ind]
-  if (length(non_zero_pl) == 0) {
-    stop("Hermit form doesn't exist")
+# check if column after c-th row has only zero
+.lq.eucl.is.cleaned <- function(pm, c, eps) {
+  if (ncol(pm) == c) {
+    return(TRUE)
   }
-  p_degree <- sapply(non_zero_pl, degree)
-  return(non_zero_idx[which.min(p_degree)])
+  return(all(is.zero(pm[(c + 1):nrow(pm), c], eps=eps)))
 }
 
-get <- function(pm, row, column)
-{
-  return(get_row(pm, row)[[column]])
-}
-
-get_row <- function(pm, row)
-{
-  return(pm$dlist[[row]])
-}
-
-get_column <- function(pm, column)
-{
-  return(t(pm)$dlist[[column]])
-}
-
-exchange_row <- function(x, first_row, second_row) {
-  stopifnot(is.polyMatrix.polyMdlist(x))
-  if (first_row == second_row) {
-    return(x)
-  }
-  x$degree[c(first_row, second_row)] <- x$degree[c(second_row, first_row)]
-  x$dlist[c(first_row, second_row)] <- x$dlist[c(second_row, first_row)]
-  return(x)
-}
-
-transf_init <- function(pm)
-{
-  return(list(m=pm, u=pMdiag(1, nrow(pm), symb=pm$symb)))
-}
-
-transf_exchange_row <- function(transf, first_row, second_row)
-{
-  transf$m <- exchange_row(transf$m, first_row, second_row)
-  this_u <- exchange_row(pMdiag(1, nrow(transf$m)), first_row, second_row)
-  transf$u <- this_u %X% transf$u
-  return(transf)
-}
-
-transf_mult_row <- function(transf, row_idx, mult)
-{
-  transf$m$dlist[[row_idx]] <- lapply(transf$m$dlist[[row_idx]], function(p) {p * mult})
-  this_u <- pMdiag(1, nrow(transf$m))
-  this_u$dlist[[row_idx]][[row_idx]] <- mult
-  transf$u <- this_u %X% transf$u
-  return(transf)
-}
-
-transf_sub_row <- function(transf, dst_row_idx, src_row_idx, mult=1)
-{
-  #' substruct from string dst_row_idx row src_row_idx multiplied by mult
-  this_u <- pMdiag(1, nrow(transf$m))
-  this_u$dlist[[dst_row_idx]][[src_row_idx]] <- -mult
-  dst <- transf$m$dlist[[dst_row_idx]]
-  src <- transf$m$dlist[[src_row_idx]]
-  for(i in 1:ncol(transf$m)) {
-    dst[[i]] <- dst[[i]] - mult * src[[i]]
-  }
-  transf$m$dlist[[dst_row_idx]] <- dst
-  transf$u <- this_u %X% transf$u
-  return(transf)
-}
-
-triang_Euclidean_step <- function(transf, column_idx)
-{
-  count_limit <- 100 * nrow(transf$m)
-  # we can exchange elements starts from row column_idx
-  column <- get_column(transf$m, column_idx)
-  while(
-    !is_polynomial_monic(column[[column_idx]])
-    || (column_idx < length(column) && is_any_polynomial_nonzero(column[(column_idx + 1):length(column)]))
-  ) {
-    # look for min degree row
-    min_degree_idx <- get_min_degree_non_zero_idx(column[column_idx:length(column)]) + column_idx - 1
-    min_degree_p <- column[[min_degree_idx]]
-    # convert to monic
-    lead_c <- lead_coef(min_degree_p)
-    transf <- transf_mult_row(transf, min_degree_idx, 1 / lead_c)
-    # put this element to diagonal
-    transf <- transf_exchange_row(transf, min_degree_idx, column_idx)
-    # clean all row
-    column <- get_column(transf$m, column_idx)
-    selected_p <- column[[column_idx]]
-    for(r in 1:nrow(transf$m)) {
-      # for all other rows we have to remove higher degrees
-      if (r != column_idx) {
-        coef <- column[[r]] / selected_p
-        if (!is_polynomial_zero(coef)) {
-          transf <- transf_sub_row(transf, r, column_idx, coef)
-        }
+# perform Gausian elimination in column c starting from row c
+.lq.eucl.col <- function(pm, c, eps) {
+  stopifnot(nrow(pm) == ncol(pm) && c <= ncol(pm))
+  selected_r <- NA
+  selected_d <- NA
+  for(r in c:nrow(pm)) {
+    p <- pm[r, c]
+    if (!is.zero(p, eps=eps)) {
+      if (is.na(selected_d) || selected_d > degree(p)) {
+        selected_d <- degree(p)
+        selected_r <- r
       }
     }
-    transf$m <- zero_round(transf$m)
-    column <- get_column(transf$m, column_idx)
-    count_limit <- count_limit - 1
-    if (count_limit <= 0) {
-      stop("Looks like we get infinite loop in eclidean")
-    }
   }
-  return(transf)
+  stopifnot(!is.na(selected_r))
+  q <- diag(1, nrow(pm), ncol(pm))
+  if (selected_r != c) {
+    # exchange columns
+    q[c, c] <- 0
+    q[selected_r, selected_r] <- 0
+    q[selected_r, c] <- 1
+    q[c, selected_r] <- 1
+  }
+  pm <- q %*% pm
+  qq <- diag(polynom::polynomial(c(1)), nrow(pm), ncol(pm))
+  p <- pm[c, c]
+  for(r in (c + 1):nrow(pm)) {
+    coef <- pm[r, c] / p
+    qq[r, c] <- -coef
+  }
+  q <- qq %*% q
+  pm <-  qq %*% pm
+  for(r in (c + 1):nrow(pm)) {
+    pm[r, c] <- 0
+  }
+  return(list(inv_q=q, r=pm))
 }
 
-triang_Euclidean <- function(pm)
-{
-  #' Triangularization of a polynomial matrix by Euclidean division metho
-  #'
-  #' @param pm matrix to triangularize
-  #' @return Upper tringular matrix `T` and transformation matrix `U`.
-  #'
-  #' @details
-  #' The method use the for polynomilas extended Euclidean algorithm.
-  #'
-  #' This method search a solution of the triangulrization by the method of Sylvester matrix,
-  #' descripted in the article Labhalla-Lombardi-Marlin (1996).
-  #'
-  #' @seealso triang_Sylvester
-  #'
-  #' @references Thomas Kailaith:Linear Systems, Prentice-Hall, 1980, pp 373-376
-  #' @author Nikolai Ryzhkov, \email{namezys@gmail.com}
-  pm <- zero_round(polyMconvert.dlist(pm))
-  transf <- transf_init(pm)
-  for(c in 1:min(ncol(pm), nrow(pm))) {
-    transf <- triang_Euclidean_step(transf, c)
+#' Triangularization of a polynomial matrix by Euclidean division method
+#'
+#' @param pm matrix to triangularize
+#' @param eps threshold of non zero coefficients
+#' @return Upper tringular matrix `R`, transformation matrix `Q` and iverse `INV_Q` of matrix `Q`
+#'
+#' @details
+#' The method use the for polynomials extended Euclidean algorithm.
+#'
+#' @seealso [triang_Sylvester()]
+#' @export
+triang.euclidean <- function (pm, eps=ZERO_EPS, iteration_limit=nrow(pm) * 100) {
+  if (!is.polyMatrix(pm)) {
+    stop("Only polynomial matrices are supported")
   }
-  transf$m <- rebuild_degree(transf$m)
-  transf$u <- rebuild_degree(transf$u)
-  transf$u$symb <- transf$m$symb
-  return(list(T=transf$m, U=transf$u))
+  if (nrow(pm) != ncol(pm)) {
+    stop("Only square matrices can be triangulirized")
+  }
+  r <- pm
+  inv_q <- diag(polynom::polynomial(1), nrow(pm), ncol(pm))
+  for(c in seq_len(ncol(pm) - 1)) {
+    col_count_limit <- iteration_limit
+    while(!.lq.eucl.is.cleaned(r, c, eps=eps)) {
+      if (col_count_limit == 0) {
+        stop("Iteration limit was reached")
+      }
+      col_count_limit <- col_count_limit - 1
+      step <- .lq.eucl.col(r, c, eps=eps)
+      inv_q <- step$inv_q %*% inv_q
+      r <- step$r
+    }
+  }
+  return(list(R=r, Q=inv(inv_q), INV_Q=inv_q))
 }

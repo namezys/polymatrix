@@ -2,6 +2,14 @@
 # Created by: namezys
 # Created on: 2020. 10. 23.
 
+#' Apply for polynomial matrix
+#'
+#' Apply function to each element of matrix
+#'
+#' @param x an polynomial matrix
+#' @param f an function with only one argument
+#'
+#' @export
 polyMatrix.apply <- function(x, f) {
   if (ncol(x) == 0 || nrow(x) == 0) {
     return(matrix(NA, ncol(x), nrow(x)))

@@ -4,7 +4,18 @@
 # Created by: namezys
 # Created on: 2020. 10. 23.
 
-
+#' Combine polynial matrices by rows or coluns
+#'
+#' @param ... (generalzed) vectors or mmatrices.
+#'   If any of objects are polynomail matrix
+#'
+#' @return if at least one argument is a polynomail matrix,
+#'   the result will be combined polynomial matrix.
+#'   Overwise, base package implementatioon [base::cbind()] or [base::rbind()]
+#'   will be called.
+#'
+#' @seealso [base::cbind()]
+#' @export
 cbind <- function(..., deparse.level = 1) {
   vargs <- list(...)
   if(length(vargs) == 0) {
@@ -56,6 +67,8 @@ cbind <- function(..., deparse.level = 1) {
   return(res)
 }
 
+#' @describeIn cbind row based bind
+#' @export
 rbind <- function(..., deparse.level = 1) {
   vargs <- list(...)
   if(length(vargs) == 0) {
