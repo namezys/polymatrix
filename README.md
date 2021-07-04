@@ -1,4 +1,4 @@
-polymatrix
-==========
+polyMatrix package
+==================
 
-R package which append support of matrixes of polynomial
+R package which append support of matrices of polynomial.

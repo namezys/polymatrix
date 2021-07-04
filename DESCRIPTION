@@ -1,5 +1,5 @@
 Package: polyMatrix
-Version: 0.3.0
+Version: 0.9.7
 Title: Infrastructure for Manipulation Polynomial Matrices 
 Description: 
   Implementation of class "polyMatrix" for storing a matrix of polynomials and implements 
@@ -26,9 +26,10 @@ Authors@R: c(
     )
 Imports: polynom
 License: MIT + file LICENSE
-Depends: R (>= 3.0), stats, MTS
+Depends: R (>= 6.0), Matrix
 Suggests: testthat
 Repository: CRAN
 URL: https://github.com/namezys/polymatrix
 BugReports: https://github.com/namezys/polymatrix/issues
-RoxygenNote: 7.1.0.9000
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
