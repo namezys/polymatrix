@@ -25,8 +25,9 @@
   if (!missing(nrow) || !missing(ncol)) {
     stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
   }
-  result <- polyMatrix(0, 1, ncol(x))
-  for(i in seq_len(min(nrow(x), ncol(x)))) {
+  size <- min(dim(x)[1], dim(x)[2])
+  result <- polyMatrix(0, 1, size)
+  for(i in seq_len(size)) {
     result[1, i] <- x[i, i]
   }
   return(result)
@@ -88,4 +89,4 @@ setMethod("diag", signature(x=P), .diag.polynomail)
 #' ))
 #' ##            [,1]   [,2]     [,3]
 #' ## [1,]   -3 + x^2      2   2 - 3x
-setMethod("diag", signature(x=PM), .diag.polyMatrix)
+setMethod("diag", signature(x=PM), function (x) {.diag.polyMatrix(x)})

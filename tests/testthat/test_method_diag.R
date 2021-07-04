@@ -16,9 +16,7 @@ test_that("from polyMatrix", {
 
   expect_equal(diag(pm_first),
                parse.polyMatrix(
-                 "1 + x + 2x^2, 0, 0",
-                 "           0, 2, 0",
-                 "           0, 0, 1"
+                 "1 + x + 2x^2, 2, 1"
                ))
-  expect_equal(diag(pm_second), polyMatrix(0, 3, 3))
+  expect_equal(diag(pm_second), polyMatrix(0, 1, 3))
 })
