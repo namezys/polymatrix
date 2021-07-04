@@ -449,3 +449,14 @@ test_that("set whole matrix", {
   expect_equal(pm_small,
                polyMatrix(matrix(c(2, 2, 8, 8, 2, 2, 8, 8), 2, 4, byrow = TRUE), 2, 2, 1))
 })
+
+################################################################################################
+# custom text from real bugs
+
+test_that("custom 1", {
+  pm <- parse.polyMatrix("1, x + 2",
+                         "0, x^2",
+                         "0, 0")
+  expect_equal(pm[, 1], parse.polyMatrix("1", "0", "0"))
+  expect_equal(pm[, 2], parse.polyMatrix("2 + x", "x^2", "0"))
+})

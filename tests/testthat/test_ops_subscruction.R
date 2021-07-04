@@ -43,7 +43,7 @@ test_that("with matrix", {
                                 "2 - x^2, 2",
                                 "  2 - x, 5 - x^2"))
 
-  expect_error(first + matrix(0, 1, 2), "non-conformable")
+  expect_error(pm + matrix(0, 1, 2), "non-conformable")
 })
 
 test_that("with polyMatrix", {

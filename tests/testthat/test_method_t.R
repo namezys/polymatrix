@@ -1,4 +1,4 @@
-context("t.polyMatrix")
+context("method t")
 
 test_that("t.polyMatrix", {
   a <- parse.polyMatrix("-3 + x^2, 2 + 4*x, -x^2",

@@ -14,3 +14,9 @@ test_that("get coefficient matrix", {
   expect_equal(p[[2]], c2)
   expect_error(p[[3]])
 })
+
+test_that("get coef of char polynomial of polyMarix", {
+  expect_equal(pmcp[[0]], p(1, 1, 0))
+  expect_equal(pmcp[[1]], p(0, 1, -1))
+  expect_equal(pmcp[[2]], p(-1, 0, 2))
+})

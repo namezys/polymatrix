@@ -9,7 +9,7 @@ test_that("polyMaytix by polyMaytix", {
                              "    x, -3x, x")
 
   expect_equal(first %*% second,
-               parse.polyMatrix("            3 + 3x,           - 3x - 2x^2,                2 + x^2",
-                                "2 + 4x - x^2 + x^3,    - x^2 + 3x^3 + x^4,   4 - 2x + 3x^2 - 2x^3",
-                                "       6 - x - x^2,            - 9x - x^3,                x + x^2"))
+               parse.polyMatrix("1 + 2x +  x^2,           - 3x - 2x^2,                2 + x^2",
+                                "2 + 2x + 2x^2,    - x^2 + 3x^3 + x^4,   4 - 2x + 3x^2 - 2x^3",
+                                "    2x -  x^2,            - 9x - x^3,                x + x^2"))
 })

@@ -36,6 +36,21 @@ test_that("create from matrix less size", {
   expect_equal(p@ncol, 3)
 })
 
+test_that("create from polynomial", {
+  pp <- p(1, 2, 3)
+  pm <- polyMatrix(pp)
+  expect_equal(pm@coef, matrix(c(1, 2, 3), 1, 3))
+  expect_equal(pm@ncol, 1)
+
+  pm_b <- polyMatrix(pp, 3, 2, 10)
+  expect_equal(pm_b@coef, matrix(c(
+    1, 1, 2, 2, 3, 3,
+    1, 1, 2, 2, 3, 3,
+    1, 1, 2, 2, 3, 3
+  ), 3, 6, byrow = TRUE))
+  expect_equal(pm_b@ncol, 2)
+})
+
 # check type validation
 
 test_that("type validation", {

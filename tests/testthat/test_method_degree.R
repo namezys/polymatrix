@@ -1,7 +1,5 @@
 context("method degree")
 
-p <- polynom::polynomial
-
 test_that("invalid request", {
   expect_error(degree("foo"))
   expect_error(degree(TRUE))
@@ -25,6 +23,10 @@ test_that("degree of polynomial", {
 test_that("degree of polyMatrix", {
   expect_equal(degree(polyMatrix(0, 4, 5, 1000)), 0)
   expect_equal(degree(polyMatrix(1, 2, 5, 5)), 5)
+})
+
+test_that("degree of char polynomial of polyMatrix", {
+  expect_equal(degree(pmcp), 2)
 })
 
 test_that("matrix.degree", {
