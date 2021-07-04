@@ -24,7 +24,7 @@ triang_Interpolation(
 Tranfortmaiton matrix
 }
 \description{
-The parameters `point_vector`, `round_digits` can significantly affect the result.
+The parameters \code{point_vector}, \code{round_digits} can significantly affect the result.
 }
 \details{
 Default value of `eps`` usually is enought to determintate real zeros.
