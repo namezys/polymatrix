@@ -43,6 +43,7 @@ cofactor <- function(x, r, c) {
 #' The adjugate or classical adjoint of a square matrix is the transpose of its cofactor matrix.
 #' It is also occasionally known as adjunct matrix,[ though this nomenclature appears to have decreased in usage.
 #'
+#' @param x an matrix
 #' @export
 setGeneric("adjoint", .adjoint.generic)
 setMethod("adjoint", signature(x = PM), .adjoint.polyMatrix)

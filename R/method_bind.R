@@ -8,6 +8,7 @@
 #'
 #' @param ... (generalzed) vectors or mmatrices.
 #'   If any of objects are polynomail matrix
+#' @param deparse.level details in base function, polynomial matrices doesn't use it
 #'
 #' @return if at least one argument is a polynomail matrix,
 #'   the result will be combined polynomial matrix.
