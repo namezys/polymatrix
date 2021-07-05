@@ -2,6 +2,8 @@
 # Created by: namezys
 # Created on: 2021. 05. 09.
 
+#' @describeIn GCD the least common multiple of polynomial
+#'
 #' @export
 setGeneric("LCM", polynom::LCM)
 #' @describeIn GCD the least common multiple of polynomial matrices

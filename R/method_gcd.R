@@ -6,6 +6,7 @@
 #'
 #' The greatest common divisor and least common multiple of polynomials or polynomial matrices.
 #'
+#' @param ... an list of polynomial objects
 #' @seealso polynomial implementation [polynom::GCD()]
 #'
 #' @export
