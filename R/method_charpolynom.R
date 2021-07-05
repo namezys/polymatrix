@@ -67,6 +67,8 @@
 
 #' Characteristic polynomial of matrix
 #'
+#' @param x an matrix
+#'
 #' @export
 setGeneric("charpolynom", function(x) {
   stop("Matrix object is exppected")

@@ -11,7 +11,7 @@
 #' for polynomial objects.
 #'
 #' @details
-#' By default, this function raises [FOR Ildiko: raise is better in term of error]
+#' By default, this function raises
 #' error for unknown type of object.
 #'
 #' @export

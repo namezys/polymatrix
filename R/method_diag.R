@@ -38,6 +38,7 @@
 #'
 #' @param x a polynomial matrix, or a polynomial, or an \R object
 #' @param nrow,ncol optional dimensions for the result when x is not a matrix.
+#' @param nammes not usedd
 #' @details
 #'
 #' In case of polynomail objets, `diag` has 2 distinct usage:
@@ -47,7 +48,7 @@
 #' * \code{x} is a polynomial matrix, it returns a vector as a polynomial matrix of
 #'    diagonal elements
 #'
-#' @seealso Base [base:diag()] for numericals and numerical matrices
+#' @seealso Base [base::diag()] for numericals and numerical matrices
 #'
 #' @examples
 #'

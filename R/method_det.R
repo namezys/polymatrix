@@ -48,7 +48,7 @@
   for(i in seq_len(nc)) {
     c <- pm[i, c]
     if(c != 0) {
-      cc <- if((i + r) %% 2 == 0) c else -c
+      cc <- if((i + c) %% 2 == 0) c else -c
       result <- result + cc * .det.polyMatrix(pm[1:nc != i, 1:nc != c])
     }
   }
