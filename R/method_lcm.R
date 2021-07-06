@@ -7,7 +7,7 @@
 #' The least common multiple of polynomials or polynomial matrices.
 #'
 #' @param ... an list of polynomial objects
-#' @seealso polynomial implementation [polynom::GCD()] and [GCM()]
+#' @seealso polynomial implementation [polynom::GCD()] and [GCD()]
 #'
 #' @export
 setGeneric("LCM", polynom::LCM)

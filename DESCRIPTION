@@ -24,7 +24,7 @@ Authors@R: c(
     person("Ildiko", "Laszlo", role="aut", comment = c(ORCID = "0000-0003-2324-8183")),
     person("Ulas Onat", "Alakent", role="ctb")
     )
-Imports: polynom
+Imports: methods
 License: MIT + file LICENSE
 Depends: R (>= 4.0), polynom
 Suggests: testthat

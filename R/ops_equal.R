@@ -48,5 +48,6 @@ setMethod("==", signature(e1 = PM, e2 = NUM), function(e1, e2) {
 })
 setMethod("==", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 == e1 })
 
+#' @export
 setMethod("!=", signature(e1 = PM, e2 = "ANY"), function(e1, e2) { !(e1 == e2) })
 setMethod("!=", signature(e1 = "ANY", e2 = PM), function(e1, e2) { !(e2 == e1) })
