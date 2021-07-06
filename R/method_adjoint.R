@@ -9,6 +9,7 @@
 #' @return cofactor which is number or polynomial
 #'
 #' @seealso [adjoint()]
+#'
 #' @export
 cofactor <- function(x, r, c) {
   cc <- if((r + c) %% 2 == 0) 1 else -1
@@ -44,6 +45,9 @@ cofactor <- function(x, r, c) {
 #' It is also occasionally known as adjunct matrix,[ though this nomenclature appears to have decreased in usage.
 #'
 #' @param x an matrix
+#'
 #' @export
 setGeneric("adjoint", .adjoint.generic)
+#' @describeIn adjoint adjugate of polynomial matrix
+#' @export
 setMethod("adjoint", signature(x = PM), .adjoint.polyMatrix)

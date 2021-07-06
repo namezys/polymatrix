@@ -58,6 +58,7 @@
 #' The method use the for polynomials extended Euclidean algorithm.
 #'
 #' @seealso [triang_Sylvester()]
+#'
 #' @export
 triang.euclidean <- function (pm, eps=ZERO_EPS, iteration_limit=nrow(pm) * 100) {
   if (!is.polyMatrix(pm)) {

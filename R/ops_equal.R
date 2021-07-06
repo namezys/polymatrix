@@ -2,6 +2,7 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @export
 setMethod("==", signature(e1 = PM, e2 = PM), function(e1, e2) {
   if(nrow(e1) != nrow(e2) || ncol(e1) != ncol(e2)) {
     stop("non-conformable arrays")
@@ -20,6 +21,7 @@ setMethod("==", signature(e1 = PM, e2 = PM), function(e1, e2) {
   }
   return(res)
 })
+#' @export
 setMethod("==", signature(e1 = PM, e2 = P), function(e1, e2) {
   if(degree(e2) > degree(e1)) {
     return(matrix(FALSE, nrow(e1), ncol(e1)))
@@ -39,15 +41,19 @@ setMethod("==", signature(e1 = PM, e2 = P), function(e1, e2) {
   }
   return(res)
 })
+#' @export
 setMethod("==", signature(e1 = PM, e2 = M), function(e1, e2) { e1 == polyMatrix(e2, nrow(e2), ncol(e2)) })
+#' @export
 setMethod("==", signature(e1 = PM, e2 = NUM), function(e1, e2) {
   if(length(e2) != 1) {
     stop("Compare polyMatrix with sequence is unsupported")
   }
   return(e1 == polynom::polynomial(c(e2)))
 })
+#' @export
 setMethod("==", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 == e1 })
 
 #' @export
 setMethod("!=", signature(e1 = PM, e2 = "ANY"), function(e1, e2) { !(e1 == e2) })
+#' @export
 setMethod("!=", signature(e1 = "ANY", e2 = PM), function(e1, e2) { !(e2 == e1) })

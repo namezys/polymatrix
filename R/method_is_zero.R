@@ -42,10 +42,13 @@ setGeneric("is.zero", function (x, eps=ZERO_EPS) {abs(x) < eps})
 #' # polynomials
 #' is.zero(parse.polynomial("0.1 - 0.5 x")) ## FALSE
 #' is.zero(parse.polynomial("0.0001 - 0.0005 x + 0.00002 x^2"), eps=0.01) ## TRUE
+#'
+#' @export
 setMethod("is.zero", signature(x=P), function (x, eps=ZERO_EPS) {all(abs(as.numeric(x)) < eps)})
 
 #' @describeIn is.zero for a polunomial matrix every item is checked as polynomial
 #'
+#' @export
 setMethod("is.zero", signature(x=PM), function (x, eps=ZERO_EPS) {
   return(polyMatrix.apply(x, function(x) {is.zero(x, eps=eps)}))
 })

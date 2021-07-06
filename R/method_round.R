@@ -4,6 +4,8 @@
 
 #' @describeIn polyMatrix round of polynomial matrix is rounding of polynomial coefficients
 #'
+#' @param x an matrix object
+#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used
 #' @examples
 #'
 #' # round
@@ -14,6 +16,8 @@
 #' ##           [,1]      [,2]           [,3]
 #' ## [1,]     1 - x   1 - x^2   1 + 2x + x^2
 #' ## [2,]   x - x^2     1 + x   1 - 2x + x^2
+#'
+#' @export
 setMethod("round", signature(x = PM), function(x, digits = 0) {
   return(polyMatrix(round(x@coef, digits = digits), nrow(x), ncol(x), degree(x)))
 })

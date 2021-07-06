@@ -25,22 +25,28 @@
   return(if(length(p) == 1) p[1] else p)
 }
 
-# overide missing indexes
+#' @export
 setMethod("[", signature(x = PM, i = "missing", j = "missing"), function(x, ...) { x })
+#' @export
 setMethod("[", signature(x = PM, i = "missing"), function(x, i, j) {
   x[seq_len(nrow(x)), j]
 })
+#' @export
 setMethod("[", signature(x = PM, j = "missing"), function(x, i, j) { x[i, seq_len(ncol(x))] })
 
+#' @export
 setMethod("[", signature(x = PM, i = "logical", j = "logical"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), .logic.index.to.integer.index(j, ncol(x))])
 })
+#' @export
 setMethod("[", signature(x = PM, i = "logical", j = "numeric"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), j])
 })
+#' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "logical"), function(x, i, j) {
   return(x[i, .logic.index.to.integer.index(j, ncol(x))])
 })
+#' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), function(x, i, j) {
   nr <- nrow(x)
   nc <- ncol(x)
@@ -88,21 +94,27 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), function(x, i, j
 }
 
 
+#' @export
 setMethod("[<-", signature(x = PM, i = "missing", j = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), seq_len(ncol(x))] <- value
   return(x)
 })
+#' @export
 setMethod("[<-", signature(x = PM, i = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), j] <- value
   return(x)
 })
+#' @export
 setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
   x[i, seq_len(ncol(x))] <- value
   return(x)
 })
 
+#' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "numeric"), .set.numerical.or.matrix)
+#' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "matrix"), .set.numerical.or.matrix)
+#' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), function(x, i, j, value) {
   if(length(value) == 1) {
     x[i, j] <- value[1]
@@ -123,6 +135,7 @@ setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), fun
   return(x)
 })
 
+#' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), function(x, i, j, value) {
   if(ncol(value) == 1 && nrow(value) == 1) {
     x[i, j] <- value[1, 1]

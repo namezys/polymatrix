@@ -19,6 +19,7 @@
 #' zero.round(c(1, 0, .01, 1e-10)) ##  1.00 0.00 0.01 0.00
 #'
 #' @seealso [is.zero()]
+#'
 #' @export
 setGeneric("zero.round", function(x, eps = ZERO_EPS) {
   if (eps <= 0) {
@@ -35,6 +36,8 @@ setGeneric("zero.round", function(x, eps = ZERO_EPS) {
 #' # polynomials
 #' zero.round(parse.polynomial("0.1 + x + 1e-7 x^2")) ## 0.1 + x
 #' zero.round(parse.polynomial("0.1 + x + 1e-7 x^2"), eps=0.5) ## x
+#'
+#' @export
 setMethod("zero.round", signature(x = P), function(x, eps = ZERO_EPS) {
   return(polynom::polynomial(zero.round(as.numeric(x), eps = eps)))
 })
@@ -58,6 +61,8 @@ setMethod("zero.round", signature(x = P), function(x, eps = ZERO_EPS) {
 #' ##        [,1]     [,2]   [,3]
 #' ## [1,]      1   10 + x      0
 #' ## [2,]    x^2        0      0
+#'
+#' @export
 setMethod("zero.round", signature(x = PM), function(x, eps = ZERO_EPS) {
   return(polyMatrix(zero.round(x@coef, eps = eps), nrow(x), ncol(x), degree(x)))
 })

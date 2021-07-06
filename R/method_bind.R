@@ -16,6 +16,7 @@
 #'   will be called.
 #'
 #' @seealso [base::cbind()]
+#'
 #' @export
 cbind <- function(..., deparse.level = 1) {
   vargs <- list(...)
@@ -69,6 +70,7 @@ cbind <- function(..., deparse.level = 1) {
 }
 
 #' @describeIn cbind row based bind
+#'
 #' @export
 rbind <- function(..., deparse.level = 1) {
   vargs <- list(...)

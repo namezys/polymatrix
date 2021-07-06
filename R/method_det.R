@@ -103,6 +103,7 @@ setMethod("det", signature(x = PM), function(x) { .det.polyMatrix(x) })
 #'
 #' @param x a matrix
 #' @param r,c row and column
+#'
 #' @export
 minor <- function(x, r, c) {
   det(x[-r, -c])

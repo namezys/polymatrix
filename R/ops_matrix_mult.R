@@ -2,6 +2,7 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @export
 setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   if(ncol(x) != nrow(y)) {
     stop("non-conformable arguments")
@@ -22,5 +23,7 @@ setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   }
   return(polyMatrix(coef, nrow(x), ncol(y), degree(x) + degree(y)))
 })
+#' @export
 setMethod("%*%", signature(x = PM, y = "matrix"), function(x, y) { x %*% polyMatrix(y, nrow(y), ncol(y)) })
+#' @export
 setMethod("%*%", signature(x = "matrix", y = PM), function(x, y) { polyMatrix(x, nrow(x), ncol(x)) %*% y })

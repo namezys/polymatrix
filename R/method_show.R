@@ -119,7 +119,10 @@
 #' ## [1,]        1.0001 - x          1 - x^2   1 + 2.0003x + x^2
 #' ## [2,]   1e-04 + x - x^2            1 + x        1 - 2x + x^2
 #' ## [3,]           12.3x^3   2 + 3.5x + x^4    -0.7 + 0.0016x^3
+#'
+#' @export
 setMethod("show", signature(object = PM), .show.polyMarix)
+#' @export
 setMethod("show", signature(object = PMCP), function (object) {
   .show.polyMarixCharPolynomial(object)
 })

@@ -21,4 +21,6 @@ setGeneric("GCD", polynom::GCD)
 #'  "  1 - x, 1 - x^2, 1 + 2*x + x^2",
 #'  "x - x^2,   1 + x, 1 - 2*x + x^2"
 #' ))  ## 1
+#'
+#' @export
 setMethod("GCD", signature(...=PM), function (...) { polynom::GCD(.as.list.polyMatrix(...)) })

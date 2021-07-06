@@ -28,6 +28,7 @@ setMethod("[[", signature(x = PM, i = "numeric"), function(x, i) {
   return(x@coef[, seq_len(ncol(x)) + ncol(x) * i])
 })
 #' @describeIn charpolynom get polynomial coefficient of characteristic
+#'
 #' @export
 setMethod("[[", signature(x = PMCP), function(x, i) {
   if(length(i) != 1) {

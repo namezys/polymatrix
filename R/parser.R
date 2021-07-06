@@ -106,6 +106,7 @@
 #' @param var an variable name
 #'
 #' @return new polynomial as `polynom::polynomial` object
+#'
 #' @export
 parse.polynomial <- function(s, var = "x") {
   if(!grepl("^[a-z]$", var) || var == "e") {

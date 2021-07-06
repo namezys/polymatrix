@@ -87,6 +87,7 @@ lq <- function(X)
 #'   Salah Labhalla, Henri Lombardi, Roger Marlin:
 #'   Algorithm de calcule de la reduction de Hermite d'une matrice a coefficients polynomiaux,
 #'   Theoretical Computer Science 161 (1996) pp 69-92
+#'
 #' @export
 triang_Sylvester <- function(pm, u, eps=ZERO_EPS)
 {

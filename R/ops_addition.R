@@ -2,8 +2,10 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @export
 setMethod("+", signature(e1 = PM), function(e1) { e1 })
 
+#' @export
 setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
   if(nrow(e1) != nrow(e2) || ncol(e1) != ncol(e2)) {
     stop("non-conformable arrays")
@@ -21,6 +23,7 @@ setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
   return(polyMatrix(bc, nrow(e1), ncol(e1), d))
 })
 
+#' @export
 setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
   d <- degree(e2)
   res_d <- max(d, degree(e1))
@@ -34,10 +37,13 @@ setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
   return(polyMatrix(coef, nrow(e1), nc, res_d))
 })
 
+#' @export
 setMethod("+", signature(e1 = PM, e2 = "numeric"), function(e1, e2) {
   callGeneric(e1, polynom::polynomial(e2))
 })
+#' @export
 setMethod("+", signature(e1 = PM, e2 = "matrix"), function(e1, e2) { e1 + polyMatrix(e2, nrow(e2), ncol(e2)) })
+#' @export
 setMethod("+", signature(e1 = "ANY", e2 = PM), function(e1, e2) {
   callGeneric(e2, e1)
 })

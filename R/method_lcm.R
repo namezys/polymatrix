@@ -20,4 +20,6 @@ setGeneric("LCM", polynom::LCM)
 #'  "  1 - x, 1 - x^2, 1 + 2*x + x^2",
 #'  "x - x^2,   1 + x, 1 - 2*x + x^2"
 #' ))  ## 0.25*x - 0.5*x^3 + 0.25*x^5
+#'
+#' @export
 setMethod("LCM", signature(...=PM), function (...) { polynom::LCM(.as.list.polyMatrix(...)) })

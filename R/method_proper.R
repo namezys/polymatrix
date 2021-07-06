@@ -27,6 +27,7 @@ is.proper <- function (pm) {
 }
 
 #' @describeIn is.proper tests if its argument is a column-proper matrix
+#'
 #' @export
 is.column.proper <- function(pm) {
   col_degree <- apply(matrix.degree(pm), 2,  max)
@@ -39,6 +40,7 @@ is.column.proper <- function(pm) {
 }
 
 #' @describeIn is.proper tests if its argument is a row-proper matrix
+#'
 #' @export
 is.row.proper <- function (pm) {
   row_degree <- apply(matrix.degree(pm), 1, max)

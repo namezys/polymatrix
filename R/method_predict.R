@@ -43,5 +43,7 @@
 
 #' @export
 setGeneric("predict", predict)
+#' @export
 setMethod("predict", signature(object = PM), .predict.polyMatrix)
+#' @export
 setMethod("predict", signature(object = PMCP), .predict.polyMatrix.charPoly)

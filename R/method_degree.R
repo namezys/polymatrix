@@ -28,6 +28,8 @@ setGeneric("degree", function(x) {
 #'
 #' # numerical
 #' degree(1)  ## 0
+#'
+#' @export
 setMethod("degree", signature(x = NUM), function(x) {
   if(length(x) != 1) {
     stop("Numeric suquence is unsupported")
@@ -44,6 +46,8 @@ setMethod("degree", signature(x = NUM), function(x) {
 #'
 #' # numerical matrix
 #' degree(matrix(1:6, 3, 2)) ## 0
+#'
+#' @export
 setMethod("degree", signature(x = M), function(x) { as.integer(0) })
 
 #' @describeIn degree the degree of a polynomial
@@ -57,6 +61,8 @@ setMethod("degree", signature(x = M), function(x) { as.integer(0) })
 #' degree(parse.polynomial("1")) ## 0
 #' degree(parse.polynomial("1 + x")) ## 1
 #' degree(parse.polynomial("1 + x^3")) ## 3
+#'
+#' @export
 setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 
 #' @describeIn degree the degree of a polynomial matrix is the highest degree of its elements
@@ -68,6 +74,8 @@ setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 #'    "x; x^2 + 1",
 #'    "0; 2x"))
 #' ## 2
+#'
+#' @export
 setMethod("degree", signature(x = PM), function(x) { as.integer(ncol(x@coef) / x@ncol - 1) })
 setMethod("degree", signature(x = PMCP), function(x) { as.integer(ncol(x@coef) - 1) })
 

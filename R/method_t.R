@@ -32,5 +32,6 @@ setGeneric("t")
 #' ## [2,]      x      1
 #' ## [3,]    x^2    x^3
 #' @seealso [base::t()] for numerical matrix tranpose
+#'
 #' @export
 setMethod("t", signature(x = PM), .t.polyMatrix)

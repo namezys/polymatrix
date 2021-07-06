@@ -38,7 +38,7 @@
 #'
 #' @param x a polynomial matrix, or a polynomial, or an \R object
 #' @param nrow,ncol optional dimensions for the result when x is not a matrix.
-#' @param nammes not usedd
+#' @param names not usedd
 #' @details
 #'
 #' In case of polynomail objets, `diag` has 2 distinct usage:
@@ -75,6 +75,8 @@ setGeneric("diag", diag)
 #' ##                [,1]           [,2]   [,3]
 #' ## [1,]   1 + x + 3x^2              0      0
 #' ## [2,]              0   1 + x + 3x^2      0
+#'
+#' @export
 setMethod("diag", signature(x=P), .diag.polynomail)
 #' @describeIn diag for a polynomial matrix extract diagonal
 #'
@@ -90,4 +92,6 @@ setMethod("diag", signature(x=P), .diag.polynomail)
 #' ))
 #' ##            [,1]   [,2]     [,3]
 #' ## [1,]   -3 + x^2      2   2 - 3x
+#'
+#' @export
 setMethod("diag", signature(x=PM), function (x) {.diag.polyMatrix(x)})
