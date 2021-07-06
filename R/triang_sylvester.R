@@ -50,7 +50,7 @@ lq <- function(X)
 {
   stopifnot(nrow(pm) < ncol(pm))
   stopifnot(is.polyMatrix(pm))
-  return(rbind(pm, diad(polynom::polynomial(1), ncol(pm), ncol(pm))))
+  return(rbind(pm, diag(polynom::polynomial(1), ncol(pm), ncol(pm))))
 }
 
 .shrink_extended_for_sylvester <- function(pm)

@@ -50,11 +50,10 @@ triang_Interpolation <- function(pm, point_vector, round_digits=5, eps=.Machine$
   #' # 0.79057 - 0.3161*x + 0.15803*x^2   0.25574 - 0.3541*x - 0.60984*x^2
   #' # 0.47448 - 0.15807*x                -0.25574 + 0.60984*x
 
-  pm <- polyMconvert.dlist(pm)
 
   # numerical matrix of values should contains enough rows for store all values from point_vector
   # and enough columns to store all degrees
-  degree <- max(degree_matrix(pm))
+  degree <- degree(pm)
   point_number <- length(point_vector)
   hyp_nrow <- nrow(pm)
   hyp_ncol <- ncol(pm)

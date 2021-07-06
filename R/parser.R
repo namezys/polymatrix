@@ -102,6 +102,9 @@
 #'
 #' Parse string representation of polynomial into a polynomial object.
 #'
+#' @param s an string for parsing
+#' @param var an variable name
+#'
 #' @return new polynomial as `polynom::polynomial` object
 #' @export
 parse.polynomial <- function(s, var = "x") {
