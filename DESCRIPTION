@@ -27,7 +27,7 @@ Authors@R: c(
 Imports: methods
 License: MIT + file LICENSE
 Depends: R (>= 4.0), polynom
-Suggests: testthat
+Suggests: testthat, withr
 Repository: CRAN
 URL: https://github.com/namezys/polymatrix
 BugReports: https://github.com/namezys/polymatrix/issues
