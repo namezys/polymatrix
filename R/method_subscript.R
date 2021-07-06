@@ -47,7 +47,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical"), function(x, i, j
   return(x[i, .logic.index.to.integer.index(j, ncol(x))])
 })
 #' @export
-setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), function(x, i, j) {
+.get.by.number.number <- function(x, i, j) {
   nr <- nrow(x)
   nc <- ncol(x)
   if(max(i) > nr || max(j) > nc) {
@@ -70,13 +70,17 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), function(x, i, j
     }
     return(x[i, j])
   }
-  stopifnot(all(nr >= i && i >= 1) && all(nc >= j && j >= 1))
+
+  stopifnot(all((nr >= i) && (i >= 1)))
+  stopifnot(all(nc >= j && j >= 1))
   if(length(i) == 1 && length(j) == 1) {
     return(.to.polynomail(x@coef[i, j + nc * (0:degree(x))]))
   }
   c_idx <- .rep.seq(j, nc, degree(x))
   return(polyMatrix(x@coef[i, c_idx], length(i), length(j), degree(x)))
-})
+}
+#' @export
+setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), .get.by.number.number)
 
 .set.numerical.or.matrix <- function(x, i, j, value) {
   if(any(i < 1) | any(nrow(x) < i)) {
@@ -93,6 +97,46 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), function(x, i, j
   return(x)
 }
 
+.set.polyMatrix <- function(x, i, j, value) {
+  if(ncol(value) == 1 && nrow(value) == 1) {
+    x[i, j] <- value[1, 1]
+    return(x)
+  }
+  if(length(i) != nrow(value) || length(j) != ncol(value)) {
+    stop("number of items to replace is not compatable with the replacement")
+  }
+  d <- degree(x)
+  value_d <- degree(value)
+  nc <- ncol(x)
+  if(value_d > d) {
+    x@coef <- cbind(x@coef, matrix(0, nrow(x), nc * (value_d - d)))
+  } else if(value_d < d) {
+    x@coef[i, .rep.seq(j, nc, up_to = d, from = value_d + 1)] <- 0
+  }
+  x@coef[i, .rep.seq(j, nc, up_to = value_d, from = 0)] <- value@coef
+  x@coef <- .clean.coef(x@coef, nc)
+  return(x)
+}
+
+.set.polynomial <- function(x, i, j, value) {
+  if(length(value) == 1) {
+    x[i, j] <- value[1]
+    return(x)
+  }
+  d <- degree(x)
+  value_d <- degree(value)
+  nc <- ncol(x)
+  if(value_d > d) {
+    x@coef <- cbind(x@coef, matrix(0, nrow(x), nc * (value_d - d)))
+  } else if(value_d < d) {
+    x@coef[i, .rep.seq(j, nc, from = value_d + 1, up_to = d)] <- 0
+  }
+  value <- matrix(as.numeric(value), 1)
+  r_dub <- rep(1, length(i))
+  x@coef[i, .rep.seq(j, nc, up_to = value_d, from = 0)] <- value[r_dub, rep(seq_len(value_d + 1), each = length(j))]
+  x@coef <- .clean.coef(x@coef, nc)
+  return(x)
+}
 
 #' @export
 setMethod("[<-", signature(x = PM, i = "missing", j = "missing"), function(x, i, j, value) {
@@ -115,47 +159,9 @@ setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "numeri
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "matrix"), .set.numerical.or.matrix)
 #' @export
-setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), function(x, i, j, value) {
-  if(length(value) == 1) {
-    x[i, j] <- value[1]
-    return(x)
-  }
-  d <- degree(x)
-  value_d <- degree(value)
-  nc <- ncol(x)
-  if(value_d > d) {
-    x@coef <- cbind(x@coef, matrix(0, nrow(x), nc * (value_d - d)))
-  } else if(value_d < d) {
-    x@coef[i, .rep.seq(j, nc, from = value_d + 1, up_to = d)] <- 0
-  }
-  value <- matrix(as.numeric(value), 1)
-  r_dub <- rep(1, length(i))
-  x@coef[i, .rep.seq(j, nc, up_to = value_d, from = 0)] <- value[r_dub, rep(seq_len(value_d + 1), each = length(j))]
-  x@coef <- .clean.coef(x@coef, nc)
-  return(x)
-})
-
+setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), .set.polynomial)
 #' @export
-setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), function(x, i, j, value) {
-  if(ncol(value) == 1 && nrow(value) == 1) {
-    x[i, j] <- value[1, 1]
-    return(x)
-  }
-  if(length(i) != nrow(value) || length(j) != ncol(value)) {
-    stop("number of items to replace is not compatable with the replacement")
-  }
-  d <- degree(x)
-  value_d <- degree(value)
-  nc <- ncol(x)
-  if(value_d > d) {
-    x@coef <- cbind(x@coef, matrix(0, nrow(x), nc * (value_d - d)))
-  } else if(value_d < d) {
-    x@coef[i, .rep.seq(j, nc, up_to = d, from = value_d + 1)] <- 0
-  }
-  x@coef[i, .rep.seq(j, nc, up_to = value_d, from = 0)] <- value@coef
-  x@coef <- .clean.coef(x@coef, nc)
-  return(x)
-})
+setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), .set.polyMatrix)
 
 .subsript.matrix.polynom <- function (x, i, j, value)
 {

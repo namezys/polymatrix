@@ -4,6 +4,7 @@
 
 #' @export
 setGeneric("nrow", nrow)
+#' @export
 setMethod("nrow", signature(x = PM), function(x) { return(nrow(x@coef)) })
 #' @describeIn polyMatrix number of rows of a polynomial matrix
 #'
@@ -17,6 +18,7 @@ setMethod("nrow", signature(x = P), function(x) { 1 })
 
 #' @export
 setGeneric("ncol", ncol)
+#' @export
 setMethod("ncol", signature(x = PM), function(x) { return(x@ncol) })
 #' @describeIn polyMatrix number of column of a polynomial matrix
 #'
