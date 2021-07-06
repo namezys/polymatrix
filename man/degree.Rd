@@ -5,6 +5,7 @@
 \alias{degree,numeric-method}
 \alias{degree,matrix-method}
 \alias{degree,polynomial-method}
+\alias{degree,polyMatrix-method}
 \title{Gets maximum degree of polynomial objects}
 \usage{
 degree(x)
@@ -14,6 +15,8 @@ degree(x)
 \S4method{degree}{matrix}(x)
 
 \S4method{degree}{polynomial}(x)
+
+\S4method{degree}{polyMatrix}(x)
 }
 \arguments{
 \item{x}{an \R objects}
@@ -26,7 +29,7 @@ for polynomial objects.
 Returns the maximum degree as an integer number.
 }
 \details{
-By default, this function raises \link{FOR Ildiko: raise is better in term of error}
+By default, this function raises
 error for unknown type of object.
 
 A numerical scalar has zero degree.
@@ -42,6 +45,8 @@ For polynomials this function returns the highest degree of its terms with non-z
 \item \code{matrix}: a numerical matrix always has zero degree
 
 \item \code{polynomial}: the degree of a polynomial
+
+\item \code{polyMatrix}: the degree of a polynomial matrix is the highest degree of its elements
 }}
 
 \examples{
@@ -49,11 +54,21 @@ For polynomials this function returns the highest degree of its terms with non-z
 # numerical
 degree(1)  ## 0
 
+
 # numerical matrix
 degree(matrix(1:6, 3, 2)) ## 0
+
 
 # polinomial
 degree(parse.polynomial("1")) ## 0
 degree(parse.polynomial("1 + x")) ## 1
 degree(parse.polynomial("1 + x^3")) ## 3
+
+
+# polynomial matrices
+degree(parse.polyMatrix(
+   "x; x^2 + 1",
+   "0; 2x"))
+## 2
+
 }

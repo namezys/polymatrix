@@ -45,6 +45,7 @@ zero.round(c(1, 0, .01, 1e-10)) ##  1.00 0.00 0.01 0.00
 zero.round(parse.polynomial("0.1 + x + 1e-7 x^2")) ## 0.1 + x
 zero.round(parse.polynomial("0.1 + x + 1e-7 x^2"), eps=0.5) ## x
 
+
 # polynomial matrix
 zero.round(parse.polyMatrix(
   "1 + 0.1 x, 10 + x + 3e-8 x^2, 1e-8",
@@ -61,6 +62,7 @@ zero.round(parse.polyMatrix(
 ##        [,1]     [,2]   [,3]
 ## [1,]      1   10 + x      0
 ## [2,]    x^2        0      0
+
 }
 \seealso{
 \code{\link[=is.zero]{is.zero()}}

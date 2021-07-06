@@ -57,6 +57,7 @@ is.zero(matrix(c(1, 9, 0, 0), 2, 2))
 # polynomials
 is.zero(parse.polynomial("0.1 - 0.5 x")) ## FALSE
 is.zero(parse.polynomial("0.0001 - 0.0005 x + 0.00002 x^2"), eps=0.01) ## TRUE
+
 }
 \seealso{
 \code{\link[=zero.round]{zero.round()}}

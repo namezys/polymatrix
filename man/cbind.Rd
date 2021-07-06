@@ -12,6 +12,8 @@ rbind(..., deparse.level = 1)
 \arguments{
 \item{...}{(generalzed) vectors or mmatrices.
 If any of objects are polynomail matrix}
+
+\item{deparse.level}{details in base function, polynomial matrices doesn't use it}
 }
 \value{
 if at least one argument is a polynomail matrix,

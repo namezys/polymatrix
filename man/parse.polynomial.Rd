@@ -6,6 +6,11 @@
 \usage{
 parse.polynomial(s, var = "x")
 }
+\arguments{
+\item{s}{an string for parsing}
+
+\item{var}{an variable name}
+}
 \value{
 new polynomial as \code{polynom::polynomial} object
 }

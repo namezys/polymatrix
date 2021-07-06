@@ -15,6 +15,9 @@ charpolynom(x)
 
 \S4method{[[}{polyMatrixCharPolynomail,ANY}(x, i)
 }
+\arguments{
+\item{x}{an matrix}
+}
 \value{
 When the input is a numerical matrix of \code{matrix} class
 then the value is a \code{polynomial} object.

@@ -25,6 +25,11 @@
 
 \S4method{show}{polyMatrix}(object)
 }
+\arguments{
+\item{x}{an matrix object}
+
+\item{digits}{integer indicating the number of decimal places (round) or significant digits (signif) to be used}
+}
 \description{
 A class to represent matrix of polinomials
 }
@@ -74,9 +79,12 @@ pm[[1]]
 # dimensions
 nrow(pm) ## 2
 
+
 ncol(pm) ## 3
 
+
 dim(pm) ## [1] 2 3
+
 
 # round
 round(parse.polyMatrix(
@@ -86,6 +94,7 @@ round(parse.polyMatrix(
 ##           [,1]      [,2]           [,3]
 ## [1,]     1 - x   1 - x^2   1 + 2x + x^2
 ## [2,]   x - x^2     1 + x   1 - 2x + x^2
+
 
 # print out a polynomial matrix
 show(parse.polyMatrix(
@@ -97,4 +106,5 @@ show(parse.polyMatrix(
 ## [1,]        1.0001 - x          1 - x^2   1 + 2.0003x + x^2
 ## [2,]   1e-04 + x - x^2            1 + x        1 - 2x + x^2
 ## [3,]           12.3x^3   2 + 3.5x + x^4    -0.7 + 0.0016x^3
+
 }

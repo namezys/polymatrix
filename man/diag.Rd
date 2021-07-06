@@ -11,12 +11,14 @@ diag(x = 1, nrow, ncol, names = TRUE)
 
 \S4method{diag}{polynomial}(x, nrow, ncol)
 
-\S4method{diag}{polyMatrix}(x, nrow, ncol)
+\S4method{diag}{polyMatrix}(x)
 }
 \arguments{
 \item{x}{a polynomial matrix, or a polynomial, or an \R object}
 
 \item{nrow, ncol}{optional dimensions for the result when x is not a matrix.}
+
+\item{names}{not usedd}
 }
 \description{
 Polynomial matrix Diagonals
@@ -59,6 +61,7 @@ diag(parse.polynomial("1+x+3x^2"), 2, 3)
 ## [1,]   1 + x + 3x^2              0      0
 ## [2,]              0   1 + x + 3x^2      0
 
+
 # polynomial matrix
 diag(parse.polyMatrix(
   "-3 + x^2, 2 + 4 x,  -x^2",
@@ -67,7 +70,8 @@ diag(parse.polyMatrix(
 ))
 ##            [,1]   [,2]     [,3]
 ## [1,]   -3 + x^2      2   2 - 3x
+
 }
 \seealso{
-Base \code{\link[=base:diag]{base:diag()}} for numericals and numerical matrices
+Base \code{\link[base:diag]{base::diag()}} for numericals and numerical matrices
 }
