@@ -2,12 +2,12 @@
 # Created by: namezys
 # Created on: 2021. 05. 09.
 
-#' GCD and LCM for polynomial matrices
+#' GCD for polynomial matrices
 #'
-#' The greatest common divisor and least common multiple of polynomials or polynomial matrices.
+#' The greatest common divisor of polynomials or polynomial matrices.
 #'
 #' @param ... an list of polynomial objects
-#' @seealso polynomial implementation [polynom::GCD()]
+#' @seealso polynomial implementation [polynom::GCD()] and [LCM()]
 #'
 #' @export
 setGeneric("GCD", polynom::GCD)

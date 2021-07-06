@@ -2,11 +2,16 @@
 # Created by: namezys
 # Created on: 2021. 05. 09.
 
-#' @describeIn GCD the least common multiple of polynomial
+#' LCM for polynomial matrices
+#'
+#' The least common multiple of polynomials or polynomial matrices.
+#'
+#' @param ... an list of polynomial objects
+#' @seealso polynomial implementation [polynom::GCD()] and [GCM()]
 #'
 #' @export
 setGeneric("LCM", polynom::LCM)
-#' @describeIn GCD the least common multiple of polynomial matrices
+#' @describeIn LCM the least common multiple of polynomial matrices
 #'
 #' @examples
 #'

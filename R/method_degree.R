@@ -59,7 +59,7 @@ setMethod("degree", signature(x = M), function(x) { as.integer(0) })
 #' degree(parse.polynomial("1 + x^3")) ## 3
 setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 
-#' @describeIn the degree of a polynomial matrix is the highest degree of its elements
+#' @describeIn degree the degree of a polynomial matrix is the highest degree of its elements
 #'
 #' @examples
 #'
