@@ -71,8 +71,8 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical"), function(x, i, j
     return(x[i, j])
   }
 
-  stopifnot(all((nr >= i) && (i >= 1)))
-  stopifnot(all(nc >= j && j >= 1))
+  stopifnot(all(nr >= i) && all(i >= 1))
+  stopifnot(all(nc >= j) && all(j >= 1))
   if(length(i) == 1 && length(j) == 1) {
     return(.to.polynomail(x@coef[i, j + nc * (0:degree(x))]))
   }
