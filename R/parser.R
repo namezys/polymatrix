@@ -158,7 +158,6 @@ parse.polyMatrix.prepare <- function(...) {
 #'
 #' # The function can suggest mistake position in case of invalid format
 #' # TODO: get form examples
-#' \dontrun{}
 #'
 #' @export
 parse.polyMatrix <- function(..., var = "x") {
