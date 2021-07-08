@@ -43,7 +43,13 @@
 
 #' @export
 setGeneric("predict", predict)
+#' @describeIn polyMatrix value of polynomial matrix in point
+#'
+#' @param newdata the value to evaluate
 #' @export
 setMethod("predict", signature(object = PM), .predict.polyMatrix)
+#' @describeIn charpolynom value of char polynomail in polynomial point
+#'
+#' @param newdata the value to evaluate
 #' @export
 setMethod("predict", signature(object = PMCP), .predict.polyMatrix.charPoly)

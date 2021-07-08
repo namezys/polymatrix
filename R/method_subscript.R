@@ -25,6 +25,12 @@
   return(if(length(p) == 1) p[1] else p)
 }
 
+#' @describeIn polyMatrix get matrix content
+#'
+#' @param j column indeces
+#' @param ... unused
+#' @param drop unused
+#'
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "missing"), function(x, ...) { x })
 #' @export
@@ -138,28 +144,44 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), .get.by.number.n
   return(x)
 }
 
+#' @describeIn polyMatrix replace matrix content
+#'
+#' @param value new value
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "missing", j = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), seq_len(ncol(x))] <- value
   return(x)
 })
+#' @describeIn polyMatrix assign rows
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), j] <- value
   return(x)
 })
+#' @describeIn polyMatrix assign columns
+#'
 #' @export
 setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
   x[i, seq_len(ncol(x))] <- value
   return(x)
 })
 
+#' @describeIn polyMatrix assign part of matrix with number
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "numeric"), .set.numerical.or.matrix)
+#' @describeIn polyMatrix assign part of matrix with another matrix
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "matrix"), .set.numerical.or.matrix)
+#' @describeIn polyMatrix assign part of matrix with polynomial
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), .set.polynomial)
+#' @describeIn polyMatrix assign part of matrix with another polynomial matrix
+#'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), .set.polyMatrix)
 

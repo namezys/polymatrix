@@ -77,6 +77,9 @@ setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 #'
 #' @export
 setMethod("degree", signature(x = PM), function(x) { as.integer(ncol(x@coef) / x@ncol - 1) })
+#' @describeIn charpolynom the degree of char polynomail of polynomial matrix
+#'
+#' @export
 setMethod("degree", signature(x = PMCP), function(x) { as.integer(ncol(x@coef) - 1) })
 
 #' Degree of each item of matrix

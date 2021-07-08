@@ -86,6 +86,9 @@ setGeneric("charpolynom", function(x) {
 #' charpolynom(m)
 #' @export
 setMethod("charpolynom", signature(x="matrix"), .charpolynom.matrix)
+#' @describeIn charpolynom for polynomial it treats as a matrix 1x1
+#'
+#' @export
 setMethod("charpolynom", signature(x=P), function (x) {
   return(charpolynom(polyMatrix(x)))
 })
