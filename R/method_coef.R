@@ -4,6 +4,7 @@
 
 #' @describeIn polyMatrix get coefficient matrix by degree
 #'
+#' @param i the degree to extract matrix of coefficient
 #' @examples
 #'
 #' # get coefficient matrix for degree 0
@@ -29,6 +30,7 @@ setMethod("[[", signature(x = PM, i = "numeric"), function(x, i) {
 })
 #' @describeIn charpolynom get polynomial coefficient of characteristic
 #'
+#' @param i the degree to extract polinomial coefficient
 #' @export
 setMethod("[[", signature(x = PMCP), function(x, i) {
   if(length(i) != 1) {

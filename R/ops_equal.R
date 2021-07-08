@@ -2,6 +2,8 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @describeIn polyMatrix equal operator for two polinomial matrices, result is a boolean matrix
+#'
 #' @export
 setMethod("==", signature(e1 = PM, e2 = PM), function(e1, e2) {
   if(nrow(e1) != nrow(e2) || ncol(e1) != ncol(e2)) {
@@ -21,6 +23,8 @@ setMethod("==", signature(e1 = PM, e2 = PM), function(e1, e2) {
   }
   return(res)
 })
+#' @describeIn polyMatrix equal operator for polinomail matrix and polinomail, result is a matrix
+#'
 #' @export
 setMethod("==", signature(e1 = PM, e2 = P), function(e1, e2) {
   if(degree(e2) > degree(e1)) {
@@ -41,8 +45,12 @@ setMethod("==", signature(e1 = PM, e2 = P), function(e1, e2) {
   }
   return(res)
 })
+#' @describeIn polyMatrix equal operator for polinomial and numerical matrices
+#'
 #' @export
 setMethod("==", signature(e1 = PM, e2 = M), function(e1, e2) { e1 == polyMatrix(e2, nrow(e2), ncol(e2)) })
+#' @describeIn polyMatrix equal operator for polinomial matrix and number, result is a matrix
+#'
 #' @export
 setMethod("==", signature(e1 = PM, e2 = NUM), function(e1, e2) {
   if(length(e2) != 1) {
@@ -50,10 +58,19 @@ setMethod("==", signature(e1 = PM, e2 = NUM), function(e1, e2) {
   }
   return(e1 == polynom::polynomial(c(e2)))
 })
+#' @describeIn polyMatrix equal operator for aby object and polinomial matrix
+#'
 #' @export
 setMethod("==", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 == e1 })
 
+#' @describeIn polyMatrix not equal operator
+#'
+#' @param e1 an left operand
+#' @param e2 an right operand
+#'
 #' @export
 setMethod("!=", signature(e1 = PM, e2 = "ANY"), function(e1, e2) { !(e1 == e2) })
+#' @describeIn polyMatrix not equal operator
+#'
 #' @export
 setMethod("!=", signature(e1 = "ANY", e2 = PM), function(e1, e2) { !(e2 == e1) })

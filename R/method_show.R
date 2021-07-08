@@ -107,6 +107,7 @@
 
 #' @describeIn polyMatrix prints out a text representation of a polynomial matrix
 #'
+#' @param object an \R object
 #' @examples
 #'
 #' # print out a polynomial matrix
@@ -122,6 +123,11 @@
 #'
 #' @export
 setMethod("show", signature(object = PM), .show.polyMarix)
+#' @describeIn charpolynom prints out a text representation of a characteristic polinomial of
+#' polinomial matrix
+#'
+#' @param object an \R object
+#'
 #' @export
 setMethod("show", signature(object = PMCP), function (object) {
   .show.polyMarixCharPolynomial(object)

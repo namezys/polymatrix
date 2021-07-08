@@ -39,16 +39,16 @@ triang_Interpolation <- function(pm, point_vector, round_digits=5, eps=.Machine$
   #' @param eps calculation zero errors
   #' @return Tranfortmaiton matrix
   #'
-  #' @examples
-  #' A <- polyMgen.d(3,2,ch2pn(c("x-1","2","0","x^2-1","2*x+2","3")))
-  #'
-  #' triang_Interpolation(A, -2:2)
-  #' # 0.79057 - 0.31623*x + 0.15812*x^2   -0.57735 - 0.57735*x
-  #' # 0.47434 - 0.15811*x - 1e-05*x^2     0.57735
-  #'
-  #' triang_Interpolation(A, -10:10)
-  #' # 0.79057 - 0.3161*x + 0.15803*x^2   0.25574 - 0.3541*x - 0.60984*x^2
-  #' # 0.47448 - 0.15807*x                -0.25574 + 0.60984*x
+  # @examples
+  # A <- polyMgen.d(3,2,ch2pn(c("x-1","2","0","x^2-1","2*x+2","3")))
+  #
+  # triang_Interpolation(A, -2:2)
+  # # 0.79057 - 0.31623*x + 0.15812*x^2   -0.57735 - 0.57735*x
+  # # 0.47434 - 0.15811*x - 1e-05*x^2     0.57735
+  #
+  # triang_Interpolation(A, -10:10)
+  # # 0.79057 - 0.3161*x + 0.15803*x^2   0.25574 - 0.3541*x - 0.60984*x^2
+  # # 0.47448 - 0.15807*x                -0.25574 + 0.60984*x
 
 
   # numerical matrix of values should contains enough rows for store all values from point_vector
