@@ -2,6 +2,10 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @describeIn polyMatrix matrix multiplicatoin of polynomial matrices
+#'
+#' @param y second argument
+#'
 #' @export
 setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   if(ncol(x) != nrow(y)) {
@@ -23,7 +27,11 @@ setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   }
   return(polyMatrix(coef, nrow(x), ncol(y), degree(x) + degree(y)))
 })
+#' @describeIn polyMatrix matrix multiplicatoin of polynomial and numerical matrices
+#'
 #' @export
 setMethod("%*%", signature(x = PM, y = "matrix"), function(x, y) { x %*% polyMatrix(y, nrow(y), ncol(y)) })
+#' @describeIn polyMatrix matrix multiplicatoin of numerical and polynomial matrices
+#'
 #' @export
 setMethod("%*%", signature(x = "matrix", y = PM), function(x, y) { polyMatrix(x, nrow(x), ncol(x)) %*% y })

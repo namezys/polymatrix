@@ -2,9 +2,13 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
+#' @describeIn polyMatrix summation with polynomial matrix
+#'
 #' @export
-setMethod("+", signature(e1 = PM), function(e1) { e1 })
+setMethod("+", signature(e1 = PM, e2 = "missing"), function(e1) { e1 })
 
+#' @describeIn polyMatrix summation of polynomial matrices
+#'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
   if(nrow(e1) != nrow(e2) || ncol(e1) != ncol(e2)) {
@@ -23,6 +27,8 @@ setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
   return(polyMatrix(bc, nrow(e1), ncol(e1), d))
 })
 
+#' @describeIn polyMatrix summation of polynomial matrix and scalar polynomial
+#'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
   d <- degree(e2)
@@ -37,12 +43,18 @@ setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
   return(polyMatrix(coef, nrow(e1), nc, res_d))
 })
 
+#' @describeIn polyMatrix summation of polynomial matrix and scalar nummber
+#'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "numeric"), function(e1, e2) {
   callGeneric(e1, polynom::polynomial(e2))
 })
+#' @describeIn polyMatrix summation of polynomial matrix and numerical matrix
+#'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "matrix"), function(e1, e2) { e1 + polyMatrix(e2, nrow(e2), ncol(e2)) })
+#' @describeIn polyMatrix summation of polynomial matrix
+#'
 #' @export
 setMethod("+", signature(e1 = "ANY", e2 = PM), function(e1, e2) {
   callGeneric(e2, e1)

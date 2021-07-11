@@ -32,27 +32,37 @@
 #' @param drop unused
 #'
 #' @export
-setMethod("[", signature(x = PM, i = "missing", j = "missing"), function(x, ...) { x })
+setMethod("[", signature(x = PM, i = "missing", j = "missing", drop="missing"), function(x, ...) { x })
+#' @describeIn polyMatrix get columns
+#'
 #' @export
-setMethod("[", signature(x = PM, i = "missing"), function(x, i, j) {
+setMethod("[", signature(x = PM, i = "missing", j = "ANY", drop="missing"), function(x, i, j) {
   x[seq_len(nrow(x)), j]
 })
+#' @describeIn polyMatrix get rows
+#'
 #' @export
 setMethod("[", signature(x = PM, j = "missing"), function(x, i, j) { x[i, seq_len(ncol(x))] })
 
+#' @describeIn polyMatrix get by logical index
+#'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "logical"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), .logic.index.to.integer.index(j, ncol(x))])
 })
+#' @describeIn polyMatrix get by logical index and numerical indeces
+#'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "numeric"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), j])
 })
+#' @describeIn polyMatrix get by logical index and numerical indeces
+#'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "logical"), function(x, i, j) {
   return(x[i, .logic.index.to.integer.index(j, ncol(x))])
 })
-#' @export
+
 .get.by.number.number <- function(x, i, j) {
   nr <- nrow(x)
   nc <- ncol(x)
@@ -85,6 +95,8 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical"), function(x, i, j
   c_idx <- .rep.seq(j, nc, degree(x))
   return(polyMatrix(x@coef[i, c_idx], length(i), length(j), degree(x)))
 }
+#' @describeIn polyMatrix get by row and column indeces
+#'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "numeric"), .get.by.number.number)
 
