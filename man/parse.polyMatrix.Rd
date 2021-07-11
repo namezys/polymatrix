@@ -35,7 +35,12 @@ parse.polyMatrix("       1, 2 + x",
                  "2 + 2x^2,    x^3")
 
 # The function can suggest mistake position in case of invalid format
-# TODO: get form examples
-\dontrun{}
+\dontrun{
+parse.polyMatrix(
+    "1 + y &    2\\\\
+        -2 &  x^2"
+)
+## Fail to parse polyMatrix: invalid term at position 2 in item [1, 1]
+}
 
 }
