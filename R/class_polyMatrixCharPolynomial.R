@@ -4,7 +4,7 @@
 # Created on: 2021. 05. 05.
 
 
-PMCP <- "polyMatrixCharPolynomail"
+PMCP <- "polyMatrixCharPolynomial"
 
 .check.polyMatrixCharClass <- function (object) {
   if (nrow(object@coef) != 1) {

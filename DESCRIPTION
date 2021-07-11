@@ -1,5 +1,5 @@
 Package: polyMatrix
-Version: 0.9.10
+Version: 0.9.11
 Title: Infrastructure for Manipulation Polynomial Matrices 
 Description: 
   Implementation of class "polyMatrix" for storing a matrix of polynomials and implements 

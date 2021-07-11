@@ -24,7 +24,7 @@ cbind <- function(..., deparse.level = 1) {
     return(NULL)
   }
   if(!any(sapply(vargs, is.polyMatrix))) {
-    return(.Internal(cbind(deparse.level = deparse.level, ...)))
+    return(base::cbind(deparse.level = deparse.level, ...))
   }
   if(length(vargs) == 1) {
     return(vargs[[1]])
@@ -78,7 +78,7 @@ rbind <- function(..., deparse.level = 1) {
     return(NULL)
   }
   if(!any(sapply(vargs, is.polyMatrix))) {
-    return(.Internal(rbind(deparse.level = deparse.level, ...)))
+    return(base::rbind(deparse.level = deparse.level, ...))
   }
   if(length(vargs) == 1) {
     return(list(v = vargs[[1]]))
