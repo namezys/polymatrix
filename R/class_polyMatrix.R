@@ -33,6 +33,7 @@ setOldClass(P)
 #'      "1; 1 + x^3; - x + x^3"
 #' )
 #' @export
+#' @importFrom methods new
 polyMatrixClass <- setClass(
   PM,
   slots = c(coef= "matrix", ncol = "integer"),

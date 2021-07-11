@@ -47,7 +47,7 @@ setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "numeric"), function(e1, e2) {
-  callGeneric(e1, polynom::polynomial(e2))
+  e1 + polynom::polynomial(e2)
 })
 #' @describeIn polyMatrix summation of polynomial matrix and numerical matrix
 #'
@@ -56,6 +56,4 @@ setMethod("+", signature(e1 = PM, e2 = "matrix"), function(e1, e2) { e1 + polyMa
 #' @describeIn polyMatrix summation of polynomial matrix
 #'
 #' @export
-setMethod("+", signature(e1 = "ANY", e2 = PM), function(e1, e2) {
-  callGeneric(e2, e1)
-})
+setMethod("+", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 + e1 })

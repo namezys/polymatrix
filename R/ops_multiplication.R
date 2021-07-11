@@ -39,4 +39,4 @@ setMethod("*", signature(e1 = PM, e2 = PM), function(e1, e2) {
 #' @describeIn polyMatrix scalar multiplication
 #'
 #' @export
-setMethod("*", signature(e1 = "ANY", e2 = PM), function(e1, e2) { callGeneric(e2, e1) })
+setMethod("*", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 * e1 })
