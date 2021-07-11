@@ -5,7 +5,7 @@
 #' @describeIn polyMatrix summation with polynomial matrix
 #'
 #' @export
-setMethod("+", signature(e1 = PM, e2 = "missing"), function(e1) { e1 })
+setMethod("+", signature(e1 = PM, e2 = "missing"), function(e1, e2) { e1 })
 
 #' @describeIn polyMatrix summation of polynomial matrices
 #'
