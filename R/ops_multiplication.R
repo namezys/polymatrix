@@ -22,21 +22,23 @@
   return(.mult.polyMatrix.polinomial(polyMatrix(e1, nrow(e1), ncol(e1), 0), e2))
 }
 
-#' @describeIn polyMatrix scalar multiplication with number
+#' @rdname polyMatrix-Arith
+#'
+#' @return Binary `*` is elementwise multiplication with matrix or scalar operands.
 #'
 #' @export
 setMethod("*", signature(e1 = PM, e2 = "numeric"), .mult.polyMatrix.numeric)
-#' @describeIn polyMatrix scalar multiplication with polynomial
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("*", signature(e1 = PM, e2 = P), .mult.polyMatrix.polinomial)
-#' @describeIn polyMatrix scalar multiplication of polynomial mattrices elementwise
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("*", signature(e1 = PM, e2 = PM), function(e1, e2) {
   stop("Per element multiplication for polyMatrix isn't supported")
 })
-#' @describeIn polyMatrix scalar multiplication
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("*", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 * e1 })

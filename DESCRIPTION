@@ -20,7 +20,7 @@ Type: Package
 Authors@R: c(
     person("Tamas", "Prohle", email="prohlet@ludens.elte.hu", role="aut"),
     person("Peter", "Prohle", email="prohlep@math.elte.hu", role="aut"),
-    person("Nikolai", "Ryzhkov", email="namezys@gmail.com", role=c("aut", "cre")),
+    person("Nikolai", "Ryzhkov", email="namezys@gmail.com", role=c("aut", "cre"), comment = c(ORCID = "0000-0003-4896-280X")),
     person("Ildiko", "Laszlo", role="aut", comment = c(ORCID = "0000-0003-2324-8183")),
     person("Ulas Onat", "Alakent", role="ctb")
     )

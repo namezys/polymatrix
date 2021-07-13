@@ -2,10 +2,13 @@
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
-#' @describeIn polyMatrix matrix multiplicatoin of polynomial matrices
+#' Matrix multiplication
 #'
-#' @param y second argument
+#' Matrix multiplication accepts both polynomial and numerical matrices.
 #'
+#' @param x,y first and second operands
+#'
+#' @rdname polyMatrix-mmult
 #' @export
 setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   if(ncol(x) != nrow(y)) {
@@ -27,11 +30,11 @@ setMethod("%*%", signature(x = PM, y = PM), function(x, y) {
   }
   return(polyMatrix(coef, nrow(x), ncol(y), degree(x) + degree(y)))
 })
-#' @describeIn polyMatrix matrix multiplicatoin of polynomial and numerical matrices
+#' @rdname polyMatrix-mmult
 #'
 #' @export
 setMethod("%*%", signature(x = PM, y = "matrix"), function(x, y) { x %*% polyMatrix(y, nrow(y), ncol(y)) })
-#' @describeIn polyMatrix matrix multiplicatoin of numerical and polynomial matrices
+#' @rdname polyMatrix-mmult
 #'
 #' @export
 setMethod("%*%", signature(x = "matrix", y = PM), function(x, y) { polyMatrix(x, nrow(x), ncol(x)) %*% y })
