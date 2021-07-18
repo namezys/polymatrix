@@ -6,7 +6,7 @@
   return(polyMatrix(e1@coef * e2, nrow(e1), ncol(e1), degree(e1)))
 }
 
-.mult.polyMatrix.polinomial <- function(e1, e2) {
+.mult.polyMatrix.polynomial <- function(e1, e2) {
   res_d <- degree(e1) + degree(e2)
   src_c_idx <- seq_len(ncol(e1@coef))
   nc <- ncol(e1)
@@ -18,7 +18,7 @@
   return(polyMatrix(coef, nrow(e1), nc, res_d))
 }
 
-.mult.matrix.polinomial <- function (e1, e2) {
+.mult.matrix.polynomial <- function (e1, e2) {
   return(.mult.polyMatrix.polinomial(polyMatrix(e1, nrow(e1), ncol(e1), 0), e2))
 }
 
@@ -31,7 +31,7 @@ setMethod("*", signature(e1 = PM, e2 = "numeric"), .mult.polyMatrix.numeric)
 #' @rdname polyMatrix-Arith
 #'
 #' @export
-setMethod("*", signature(e1 = PM, e2 = P), .mult.polyMatrix.polinomial)
+setMethod("*", signature(e1 = PM, e2 = P), .mult.polyMatrix.polynomial)
 #' @rdname polyMatrix-Arith
 #'
 #' @export

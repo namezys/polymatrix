@@ -25,12 +25,14 @@
   return(if(length(p) == 1) p[1] else p)
 }
 
-#' @describeIn polyMatrix get matrix content
+#' Extract or Replace Parts of an polynomial matrix
 #'
+#' @param i row indeces
 #' @param j column indeces
 #' @param ... unused
 #' @param drop unused
 #'
+#' @rdname polyMatrix-subscript
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "missing", drop="missing"), function(x, ...) { x })
 #' @describeIn polyMatrix get columns

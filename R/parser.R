@@ -107,6 +107,7 @@
 #'
 #' @return new polynomial as `polynom::polynomial` object
 #'
+#' @seealso [parse.polyMatrix()]
 #' @export
 parse.polynomial <- function(s, var = "x") {
   if(!grepl("^[a-z]$", var) || var == "e") {
@@ -165,6 +166,7 @@ parse.polyMatrix.prepare <- function(...) {
 #' ## Fail to parse polyMatrix: invalid term at position 2 in item [1, 1]
 #' }
 #'
+#' @seealso [parse.polynomial()]
 #' @export
 parse.polyMatrix <- function(..., var = "x") {
   # use "..." to suppress name hints in PyCharm
