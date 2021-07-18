@@ -1,4 +1,4 @@
-# Title     : Suscribe to get element of matrix as polynoam or numeric
+# Title     : Subscribe to get element or part of matrix as polynom or numeric
 # Created by: namezys
 # Created on: 2020. 10. 17.
 
@@ -25,40 +25,43 @@
   return(if(length(p) == 1) p[1] else p)
 }
 
-#' @describeIn polyMatrix get matrix content
+#' Extract or Replace Parts of a polynomial matrix
 #'
+#' @param x a polynomial matrix
+#' @param i row indeces
 #' @param j column indeces
 #' @param ... unused
 #' @param drop unused
 #'
+#' @rdname polyMatrix-subscript
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "missing", drop="missing"), function(x, ...) { x })
-#' @describeIn polyMatrix get columns
+#' @describeIn polyMatrix-subscript get columns
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "ANY", drop="missing"), function(x, i, j) {
   x[seq_len(nrow(x)), j]
 })
-#' @describeIn polyMatrix get rows
+#' @describeIn polyMatrix-subscript gets rows
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "ANY", j = "missing", drop="missing"), function(x, i, j) {
   x[i, seq_len(ncol(x))]
 })
 
-#' @describeIn polyMatrix get by logical index
+#' @describeIn polyMatrix-subscript gets by logical index
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "logical", drop="missing"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), .logic.index.to.integer.index(j, ncol(x))])
 })
-#' @describeIn polyMatrix get by logical index and numerical indeces
+#' @describeIn polyMatrix-subscript gets by logical index and numerical indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "numeric", drop="missing"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), j])
 })
-#' @describeIn polyMatrix get by logical index and numerical indeces
+#' @describeIn polyMatrix-subscript gets by logical index and numerical indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "logical", drop="missing"), function(x, i, j) {
@@ -69,20 +72,20 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical", drop="missing"), 
   nr <- nrow(x)
   nc <- ncol(x)
   if(max(i) > nr || max(j) > nc) {
-    stop("subscript out of bounds")
+    stop("subscript out of bounds  OR RANGE...")
   }
   i <- i[i != 0]
   j <- j[j != 0]
   if(any(i < 0) || any(j < 0)) {
     if(any(i < 0)) {
       if(any(i > 0)) {
-        stop("only 0's may be mixed with negative subscripts")
+        stop("only 0's may be mixed with negative subscripts I DON'T UNDERSTAND")
       }
       i <- !(seq_len(nr) %in% -i)
     }
     if(any(j < 0)) {
       if(any(j > 0)) {
-        stop("only 0's may be mixed with negative subscripts")
+        stop("only 0's may be mixed with negative subscripts  SAME..")
       }
       j <- !(seq_len(nc) %in% -j)
     }
@@ -97,7 +100,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical", drop="missing"), 
   c_idx <- .rep.seq(j, nc, degree(x))
   return(polyMatrix(x@coef[i, c_idx], length(i), length(j), degree(x)))
 }
-#' @describeIn polyMatrix get by row and column indeces
+#' @describeIn polyMatrix-subscript gets by row and column indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
@@ -108,7 +111,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
     stop("subscript out of bounds")
   }
   if(any(j < 1) | any(ncol(x) < j)) {
-    stop("subscript out of bounds")
+    stop("subscript out of bounds   RANGE ... ")
   }
   if(degree(x) > 0) {
     x@coef[i, .rep.seq(j, ncol(x), up_to = degree(x), from = 1)] <- 0
@@ -124,7 +127,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
     return(x)
   }
   if(length(i) != nrow(value) || length(j) != ncol(value)) {
-    stop("number of items to replace is not compatable with the replacement")
+    stop("number of items to be replaced is not compatible with the replacement")
   }
   d <- degree(x)
   value_d <- degree(value)
@@ -159,7 +162,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
   return(x)
 }
 
-#' @describeIn polyMatrix replace matrix content
+#' @describeIn polyMatrix-subscript replace o matrix by a new one
 #'
 #' @param value new value
 #'
@@ -168,14 +171,14 @@ setMethod("[<-", signature(x = PM, i = "missing", j = "missing"), function(x, i,
   x[seq_len(nrow(x)), seq_len(ncol(x))] <- value
   return(x)
 })
-#' @describeIn polyMatrix assign rows
+#' @describeIn polyMatrix-subscript assigns rows
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), j] <- value
   return(x)
 })
-#' @describeIn polyMatrix assign columns
+#' @describeIn polyMatrix-subscript assigns columns
 #'
 #' @export
 setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
@@ -183,19 +186,21 @@ setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
   return(x)
 })
 
-#' @describeIn polyMatrix assign part of matrix with number
+#' @describeIn polyMatrix-subscript replace part of matrix by one number
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "numeric"), .set.numerical.or.matrix)
-#' @describeIn polyMatrix assign part of matrix with another matrix
+#' @describeIn polyMatrix-subscript replace part of matrix by another numerical matrix.
+#' Size of the new matrix should be same as replaced part
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "matrix"), .set.numerical.or.matrix)
-#' @describeIn polyMatrix assign part of matrix with polynomial
+#' @describeIn polyMatrix-subscript replace part of matrix by one polynomail
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), .set.polynomial)
-#' @describeIn polyMatrix assign part of matrix with another polynomial matrix
+#' @describeIn polyMatrix-subscript replace part of matrix by another polunomial matrix.
+#' Size of the new matrix should be same as replaced part
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), .set.polyMatrix)

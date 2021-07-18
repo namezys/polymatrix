@@ -65,18 +65,18 @@
   return(polyMatrixCharClass(coef=.char.step(x, diag(1, nrow(x), ncol(x)))))
 }
 
-#' Characteristic polynomial of matrix
+#' Characteristic polynomial of a matrix
 #'
 #' @param x an matrix
 #'
 #' @export
 setGeneric("charpolynom", function(x) {
-  stop("Matrix object is exppected")
+  stop("Matrix object is expected")
 })
 #' @describeIn charpolynom for numerical matrix it is a polynomial with numerical coefficients
 #'
 #' @return When the input is a numerical matrix of `matrix` class
-#'         then the value is a `polynomial` object.
+#'         the value is a `polynomial` object.
 #'
 #' @examples
 #'
@@ -92,13 +92,13 @@ setMethod("charpolynom", signature(x="matrix"), .charpolynom.matrix)
 setMethod("charpolynom", signature(x=P), function (x) {
   return(charpolynom(polyMatrix(x)))
 })
-#' @describeIn charpolynom for polynomial matrix it has polynomial coefficients
+#' @describeIn charpolynom for polynomial matrix has polynomial coefficients
 #'
 #' @details
 #' The characteristic polynom of a polynomial matrix is a polynom with polynomial coefficients.
 #'
 #' @return When the input is a `polyMatrix` object
-#'         then a value is `polyMatrixCharClass` class object,
+#'         then the value is `polyMatrixCharClass` class object,
 #'
 #' @seealso [polyMatrixCharClass]
 #' @export

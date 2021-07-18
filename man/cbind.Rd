@@ -3,30 +3,30 @@
 \name{cbind}
 \alias{cbind}
 \alias{rbind}
-\title{Combine polynial matrices by rows or coluns}
+\title{Combine polynomial matrices by rows or columns}
 \usage{
 cbind(..., deparse.level = 1)
 
 rbind(..., deparse.level = 1)
 }
 \arguments{
-\item{...}{(generalzed) vectors or mmatrices.
-If any of objects are polynomail matrix}
+\item{...}{(generalized) vectors or matrices.
+If any of the objects is a polynomail matrix}
 
-\item{deparse.level}{details in base function, polynomial matrices doesn't use it}
+\item{deparse.level}{details in the base function, polynomial matrices doesn't use this argument}
 }
 \value{
-if at least one argument is a polynomail matrix,
-the result will be combined polynomial matrix.
-Overwise, base package implementatioon \code{\link[base:cbind]{base::cbind()}} or \code{\link[base:cbind]{base::rbind()}}
+if at least one argument is a polynomial matrix,
+the result will be a combined polynomial matrix.
+Otherwise, the base package implementation \code{\link[base:cbind]{base::cbind()}} or \code{\link[base:cbind]{base::rbind()}}
 will be called.
 }
 \description{
-Combine polynial matrices by rows or coluns
+Combine polynomial matrices by rows or columns
 }
 \section{Functions}{
 \itemize{
-\item \code{rbind}: row based bind
+\item \code{rbind}: row based bind  DON'T UNDERSTAND.. !!!
 }}
 
 \seealso{

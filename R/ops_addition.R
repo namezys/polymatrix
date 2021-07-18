@@ -1,13 +1,15 @@
-# Title     : adidiotnal
+# Title     : addition
 # Created by: namezys
 # Created on: 2020. 10. 25.
 
-#' @describeIn polyMatrix summation with polynomial matrix
+#' @describeIn polyMatrix-Arith unary `+`
+#' @return Unary `+` return same object.
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "missing"), function(e1, e2) { e1 })
 
-#' @describeIn polyMatrix summation of polynomial matrices
+#' @rdname polyMatrix-Arith
+#' @return Binary `+` with two matrix operands returns elementwise summation.
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
@@ -27,7 +29,8 @@ setMethod("+", signature(e1 = PM, e2 = PM), function(e1, e2) {
   return(polyMatrix(bc, nrow(e1), ncol(e1), d))
 })
 
-#' @describeIn polyMatrix summation of polynomial matrix and scalar polynomial
+#' @rdname polyMatrix-Arith
+#' @return Binary `+` with matrix and scalar operands returns elementwise summation with scalar.
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
@@ -43,17 +46,19 @@ setMethod("+", signature(e1 = PM, e2 = P), function(e1, e2) {
   return(polyMatrix(coef, nrow(e1), nc, res_d))
 })
 
-#' @describeIn polyMatrix summation of polynomial matrix and scalar nummber
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "numeric"), function(e1, e2) {
   e1 + polynom::polynomial(e2)
 })
-#' @describeIn polyMatrix summation of polynomial matrix and numerical matrix
+
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("+", signature(e1 = PM, e2 = "matrix"), function(e1, e2) { e1 + polyMatrix(e2, nrow(e2), ncol(e2)) })
-#' @describeIn polyMatrix summation of polynomial matrix
+
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("+", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e2 + e1 })

@@ -44,3 +44,6 @@ parse.polyMatrix(
 }
 
 }
+\seealso{
+\code{\link[=parse.polynomial]{parse.polynomial()}}
+}

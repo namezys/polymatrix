@@ -6,7 +6,7 @@
 #'
 #' Trace of a matrix is the sum of the diagonal elements of the given matrix.
 #'
-#' @param x an matrix or a polynomial matrix
+#' @param x a matrix or a polynomial matrix
 #' @return Returns the trace of the given matrix as a number or a polynomial.
 #'
 #' @details

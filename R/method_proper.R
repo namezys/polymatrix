@@ -1,25 +1,26 @@
-# Title     : Row and column proper prooperty of polyMatrix
+# Title     : Row and column proper property of polyMatrix
 # Created by: namezys
 
 #' Proper polynomial matrices
 #'
-#' Polynomial matrix is column (row, full) proper (or reduced) if associated matrix has same rank
-#' as the number of column (row)
+#' A polynomial matrix is column (row, full) proper (or reduced)
+#' if the associated matrix has the same rank
+#' as the number of columns (rows)
 #'
-#' @param pm a polyMatrix objects
-#' @return True if object \code{pm} is a (row-/column-) proper matrix
+#' @param pm a polyMatrix object
+#' @return True if object `pm` is a (row-/column-) proper matrix
 #'
-#' @description Tests the proper property of polynomial matrix.
+#' @description Tests the proper property of a polynomial matrix.
 #'   A polynomial matrix is proper if the associeted matrix has a full rank.
 #'
 #' @examples
-#'   pm <- parse.polyMatrix(
-#'     "-1 + 7x     , x",
-#'     " 3 - x + x^2, -1 + x^2 - 3 x^3"
-#'   )
-#'   is.column.proper(pm)
-#'   is.row.proper(pm)
-#'   is.proper(pm)
+#' pm <- parse.polyMatrix(
+#'   "-1 + 7x     , x",
+#'   " 3 - x + x^2, -1 + x^2 - 3 x^3"
+#' )
+#' is.column.proper(pm)
+#' is.row.proper(pm)
+#' is.proper(pm)
 #'
 #' @export
 is.proper <- function (pm) {

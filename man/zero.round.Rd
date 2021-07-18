@@ -4,7 +4,7 @@
 \alias{zero.round}
 \alias{zero.round,polynomial-method}
 \alias{zero.round,polyMatrix-method}
-\title{Rounds object to zero if it's too small}
+\title{Rounds objects to zero if there is too small}
 \usage{
 zero.round(x, eps = ZERO_EPS)
 
@@ -15,15 +15,13 @@ zero.round(x, eps = ZERO_EPS)
 \arguments{
 \item{x}{an \R object}
 
-\item{eps}{Minimal numerical value which will not treat as zero}
+\item{eps}{Minimal numerical value which will not be treated as zero}
 }
 \description{
-Rounds object to zero if it's too small
+Rounds objects to zero if there is too small
 }
 \details{
-By befault eps:\if{html}{\out{<div class="r">}}\preformatted{ZERO_EPS
-}\if{html}{\out{</div>}}\preformatted{## [1] 1e-05
-}
+By befault \code{eps} = \verb{\{r\} ZERO_EPS}
 }
 \section{Methods (by class)}{
 \itemize{

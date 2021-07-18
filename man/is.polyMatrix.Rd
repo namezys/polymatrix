@@ -10,7 +10,7 @@ is.polyMatrix(x)
 \item{x}{an \R object}
 }
 \value{
-TRUE if object is a polonial matrix
+TRUE if object is a polynomial matrix
 }
 \description{
 Check if object is polyMatrix

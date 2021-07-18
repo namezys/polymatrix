@@ -10,7 +10,7 @@
 \alias{degree,polyMatrixCharPolynomial-method}
 \alias{predict,polyMatrixCharPolynomial-method}
 \alias{show,polyMatrixCharPolynomial-method}
-\title{Characteristic polynomial of matrix}
+\title{Characteristic polynomial of a matrix}
 \usage{
 charpolynom(x)
 
@@ -31,21 +31,21 @@ charpolynom(x)
 \arguments{
 \item{x}{an matrix}
 
-\item{i}{the degree to extract polinomial coefficient}
+\item{i}{the degree of the polynomial coefficient to be extract}
 
 \item{object}{an \R object}
 
-\item{newdata}{the value to evaluate}
+\item{newdata}{the value to be evaluated}
 }
 \value{
 When the input is a numerical matrix of \code{matrix} class
-then the value is a \code{polynomial} object.
+the value is a \code{polynomial} object.
 
 When the input is a \code{polyMatrix} object
-then a value is \code{polyMatrixCharClass} class object,
+then the value is \code{polyMatrixCharClass} class object,
 }
 \description{
-Characteristic polynomial of matrix
+Characteristic polynomial of a matrix
 }
 \details{
 The characteristic polynom of a polynomial matrix is a polynom with polynomial coefficients.
@@ -56,16 +56,16 @@ The characteristic polynom of a polynomial matrix is a polynom with polynomial c
 
 \item \code{polynomial}: for polynomial it treats as a matrix 1x1
 
-\item \code{polyMatrix}: for polynomial matrix it has polynomial coefficients
+\item \code{polyMatrix}: for polynomial matrix has polynomial coefficients
 
-\item \code{x = polyMatrixCharPolynomial,i = ANY}: get polynomial coefficient of characteristic
+\item \code{x = polyMatrixCharPolynomial,i = ANY}: get polynomial coefficient of characteristic polynomial
 
-\item \code{polyMatrixCharPolynomial}: the degree of char polynomail of polynomial matrix
+\item \code{polyMatrixCharPolynomial}: the degree of char polynomial of polynomial matrix
 
-\item \code{polyMatrixCharPolynomial}: value of char polynomail in polynomial point
+\item \code{polyMatrixCharPolynomial}: the value of char polynomial in a polynomial point
 
-\item \code{polyMatrixCharPolynomial}: prints out a text representation of a characteristic polinomial of
-polinomial matrix
+\item \code{polyMatrixCharPolynomial}: prints out a text representation of a characteristic polynomial of
+a polynomial matrix
 }}
 
 \examples{

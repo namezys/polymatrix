@@ -1,4 +1,4 @@
-# Title     : Lagest common multiplier of matrix
+# Title     : Largest common multiplier of a matrix
 # Created by: namezys
 # Created on: 2021. 05. 09.
 
@@ -6,7 +6,7 @@
 #'
 #' The least common multiple of polynomials or polynomial matrices.
 #'
-#' @param ... an list of polynomial objects
+#' @param ... a list of polynomial objects
 #' @seealso polynomial implementation [polynom::GCD()] and [GCD()]
 #'
 #' @export

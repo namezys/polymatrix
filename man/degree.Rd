@@ -6,7 +6,7 @@
 \alias{degree,matrix-method}
 \alias{degree,polynomial-method}
 \alias{degree,polyMatrix-method}
-\title{Gets maximum degree of polynomial objects}
+\title{Gets the maximum degree of polynomial objects}
 \usage{
 degree(x)
 
@@ -29,10 +29,9 @@ for polynomial objects.
 Returns the maximum degree as an integer number.
 }
 \details{
-By default, this function raises
-error for unknown type of object.
+By default, this function raises error for unknown type of object.
 
-A numerical scalar has zero degree.
+A numerical scalar can be treated as a polynomial with zero degree.
 
 A numerical matrix has zero degree as each of its items has zero degree as well.
 

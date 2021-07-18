@@ -4,11 +4,14 @@
 # Created on: 2020. 10. 25.
 
 
-#' @describeIn polyMatrix substractioin
+#' @describeIn polyMatrix-Arith unary `-`
+#' @return Unary `-` return a matrix with changed sign.
 #'
 #' @export
 setMethod("-", signature(e1 = PM, e2 = PM), function(e1, e2) { e1 + (-e2) })
-#' @describeIn polyMatrix substractioin
+
+#' @rdname polyMatrix-Arith
+#' @return Binary '-' of matrices or scalar operands returns matrix subtraction.
 #'
 #' @export
 setMethod("-", signature(e1 = PM, e2 = "ANY"), function(e1, e2) {
@@ -17,7 +20,7 @@ setMethod("-", signature(e1 = PM, e2 = "ANY"), function(e1, e2) {
   }
   return(e1 + -e2)
 })
-#' @describeIn polyMatrix substractioin
+#' @rdname polyMatrix-Arith
 #'
 #' @export
 setMethod("-", signature(e1 = "ANY", e2 = PM), function(e1, e2) { e1 + -e2 })

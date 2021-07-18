@@ -1,11 +1,13 @@
-# Title     : Roung of polynomial matrix
+# Title     : Rounding of a polynomial matrix
 # Created by: namezys
 # Created on: 2020. 10. 16.
 
-#' @describeIn polyMatrix round of polynomial matrix is rounding of polynomial coefficients
+#' @describeIn polyMatrix rounding of a polynomial matrix is rounding of polynomial coefficients
 #'
-#' @param x an matrix object
-#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used
+#' @param x a matrix object
+#' @param digits an integer indicating the number of decimal places (round)
+#'  or significant digits (signif) to be used
+#'
 #' @examples
 #'
 #' # round

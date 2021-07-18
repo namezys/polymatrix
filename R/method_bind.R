@@ -1,18 +1,18 @@
-# Title     : row and column bind
-# Objective : because core function use only "..." we have to redefine method to allow to use with polyMatrix in any
-# poisition
+# Title     : row and column binding
+# Objective : because core functions use only "..." we have to redefine the method
+#             in order to allow us to use with polyMatrix in any poisition  of argument liist
 # Created by: namezys
 # Created on: 2020. 10. 23.
 
-#' Combine polynial matrices by rows or coluns
+#' Combine polynomial matrices by rows or columns
 #'
-#' @param ... (generalzed) vectors or mmatrices.
-#'   If any of objects are polynomail matrix
-#' @param deparse.level details in base function, polynomial matrices doesn't use it
+#' @param ... (generalized) vectors or matrices.
+#'   If any of the objects is a polynomail matrix
+#' @param deparse.level details in the base function, polynomial matrices doesn't use this argument
 #'
-#' @return if at least one argument is a polynomail matrix,
-#'   the result will be combined polynomial matrix.
-#'   Overwise, base package implementatioon [base::cbind()] or [base::rbind()]
+#' @return if at least one argument is a polynomial matrix,
+#'   the result will be a combined polynomial matrix.
+#'   Otherwise, the base package implementation [base::cbind()] or [base::rbind()]
 #'   will be called.
 #'
 #' @seealso [base::cbind()]
@@ -42,7 +42,7 @@ cbind <- function(..., deparse.level = 1) {
     if(is.null(nr)) {
       nr <- vnr
     } else if(!is.null(vnr) && nr != vnr) {
-      stop("number of rows of matrices must match")
+      stop("the number of rows of the matrices must match")
     }
     vnc <- ncol(i)
     if(is.null(vnc)) {
@@ -69,7 +69,7 @@ cbind <- function(..., deparse.level = 1) {
   return(res)
 }
 
-#' @describeIn cbind row based bind
+#' @describeIn cbind row based bind  DON'T UNDERSTAND.. !!!
 #'
 #' @export
 rbind <- function(..., deparse.level = 1) {
@@ -97,7 +97,7 @@ rbind <- function(..., deparse.level = 1) {
     if(is.null(nc)) {
       nc <- vnc
     } else if(!is.null(vnc) && nc != vnc) {
-      stop("number of columns of matrices must match")
+      stop("the number of columns of the matrices must match")
     }
     vnr <- nrow(i)
     if(is.null(vnr)) {

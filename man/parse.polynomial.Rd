@@ -17,3 +17,6 @@ new polynomial as \code{polynom::polynomial} object
 \description{
 Parse string representation of polynomial into a polynomial object.
 }
+\seealso{
+\code{\link[=parse.polyMatrix]{parse.polyMatrix()}}
+}

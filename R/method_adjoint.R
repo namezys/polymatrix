@@ -1,12 +1,12 @@
-# Title     : cofactor and adjoint matrix
+# Title     : cofactor and the adjoint matrix
 # Created by: namezys
 # Created on: 2021. 04. 29.
 
-#' Cofactor of matrix
+#' Cofactor of a matrix
 #'
-#' @param x an matrix
-#' @param r,c the row and column
-#' @return cofactor which is number or polynomial
+#' @param x a matrix
+#' @param r,c the rows and columns
+#' @return cofactor which is a number or a polynomial
 #'
 #' @seealso [adjoint()]
 #'
@@ -39,15 +39,15 @@ cofactor <- function(x, r, c) {
   return(result)
 }
 
-#' Adjugate or classical adjoint of a square matrix
+#' Adjungate or classical adjoint of a square matrix
 #'
-#' The adjugate or classical adjoint of a square matrix is the transpose of its cofactor matrix.
-#' It is also occasionally known as adjunct matrix,[ though this nomenclature appears to have decreased in usage.
+#' The adjungate or classical adjoint of a square matrix is the transpose of its cofactor matrix.
+#' It is also occasionally known as adjunct matrix, though this nomenclature appears to have been decreased in usage.
 #'
-#' @param x an matrix
+#' @param x a matrix
 #'
 #' @export
 setGeneric("adjoint", .adjoint.generic)
-#' @describeIn adjoint adjugate of polynomial matrix
+#' @describeIn adjoint adjungate of polynomial matrix DON'T UNDERSTAND!!!
 #' @export
 setMethod("adjoint", signature(x = PM), .adjoint.polyMatrix)

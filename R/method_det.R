@@ -1,10 +1,10 @@
-# Title     : deteminant of polyMatrix
+# Title     : determinant of polyMatrix
 # Created by: namezys
 # Created on: 2021. 04. 02.
 
 .number.nonzero.item.in.row <- function(pm, r)
 {
-  # We should it very fast, use coef matrix directly
+  # We should do it very fast, use coef matrix directly
   positions <- ncol(pm) * 0:degree(pm)
   result <- 0
   for(i in seq_len(ncol(pm))) {

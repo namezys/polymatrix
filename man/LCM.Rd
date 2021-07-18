@@ -10,7 +10,7 @@ LCM(...)
 \S4method{LCM}{polyMatrix}(...)
 }
 \arguments{
-\item{...}{an list of polynomial objects}
+\item{...}{a list of polynomial objects}
 }
 \description{
 The least common multiple of polynomials or polynomial matrices.

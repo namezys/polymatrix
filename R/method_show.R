@@ -124,8 +124,8 @@
 #' @export
 #' @importFrom methods show
 setMethod("show", signature(object = PM), .show.polyMarix)
-#' @describeIn charpolynom prints out a text representation of a characteristic polinomial of
-#' polinomial matrix
+#' @describeIn charpolynom prints out a text representation of a characteristic polynomial of
+#' a polynomial matrix
 #'
 #' @param object an \R object
 #'
