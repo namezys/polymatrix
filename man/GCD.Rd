@@ -10,14 +10,14 @@ GCD(...)
 \S4method{GCD}{polyMatrix}(...)
 }
 \arguments{
-\item{...}{an list of polynomial objects}
+\item{...}{a list of polynomial objects}
 }
 \description{
 The greatest common divisor of polynomials or polynomial matrices.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{polyMatrix}: the greatest common divisor of all elements of the polynomial matrice
+\item \code{polyMatrix}: the greatest common divisor of all elements of the polynomial matrix
 }}
 
 \examples{

@@ -7,7 +7,7 @@
 tr(x)
 }
 \arguments{
-\item{x}{an matrix or a polynomial matrix}
+\item{x}{a matrix or a polynomial matrix}
 }
 \value{
 Returns the trace of the given matrix as a number or a polynomial.

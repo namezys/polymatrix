@@ -7,29 +7,30 @@
 polyMatrix(data, nrow, ncol, degree)
 }
 \arguments{
-\item{data}{an matrix in case of creation from coefficient matrices or an numer/polynomial}
+\item{data}{A matrix containing matrices of coefficients
+or a number or a polynomial}
 
-\item{nrow}{A numer of rows of matrix.
-If data is a matrix, default value is the number of rows of data matrix.
-In other case, it's a required parameter}
+\item{nrow}{The numer of rows of a polynomial matrix. Must be postive.
+If data is a matrix, the default value is the number of rows of matrix \code{data}.
+In other cases it is a required parameter.}
 
-\item{ncol}{Must be positibe.
-If data is a matrix, default value is the number of columns of data matrix.
-In other ccase, it's a required parameter.}
+\item{ncol}{A number of columns of a polynomial matrix. Must be positive.
+If data is a matrix, the default value is the number of columns of matrix \code{data}.
+In other cases it is a required parameter.}
 
-\item{degree}{Degree of polynomials in coefficient matrix. Can't be negative.
-If data is polynomail, degree can be evaluated automatcal.
+\item{degree}{Degree of polynomials in the coefficient matrix. Must be zero or positive.
+If data is polynomial, degree can be evaluated automatcal.
 In other case, default value is 0.}
 }
 \value{
 new polynomial matrix of polyMatrix class
 }
 \description{
-This function will create polynomial object fromm
+This function will create a polynomial object from
 coefficient matrix or signle value
 }
 \details{
 A coefficient matrix is a matrix which contains
-matrices of coefficients from lower degree to higher
+matrices of coefficients starting from lower degree to higher ones,
 side-by-side
 }

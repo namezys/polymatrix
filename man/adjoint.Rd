@@ -3,21 +3,21 @@
 \name{adjoint}
 \alias{adjoint}
 \alias{adjoint,polyMatrix-method}
-\title{Adjugate or classical adjoint of a square matrix}
+\title{Adjungate or classical adjoint of a square matrix}
 \usage{
 adjoint(x)
 
 \S4method{adjoint}{polyMatrix}(x)
 }
 \arguments{
-\item{x}{an matrix}
+\item{x}{a matrix}
 }
 \description{
-The adjugate or classical adjoint of a square matrix is the transpose of its cofactor matrix.
-It is also occasionally known as adjunct matrix,[ though this nomenclature appears to have decreased in usage.
+The adjungate or classical adjoint of a square matrix is the transpose of its cofactor matrix.
+It is also occasionally known as adjunct matrix, though this nomenclature appears to have been decreased in usage.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{polyMatrix}: adjugate of polynomial matrix
+\item \code{polyMatrix}: adjungate of polynomial matrix DON'T UNDERSTAND!!!
 }}
 

@@ -13,18 +13,19 @@ is.column.proper(pm)
 is.row.proper(pm)
 }
 \arguments{
-\item{pm}{a polyMatrix objects}
+\item{pm}{a polyMatrix object}
 }
 \value{
 True if object \code{pm} is a (row-/column-) proper matrix
 }
 \description{
-Tests the proper property of polynomial matrix.
+Tests the proper property of a polynomial matrix.
 A polynomial matrix is proper if the associeted matrix has a full rank.
 }
 \details{
-Polynomial matrix is column (row, full) proper (or reduced) if associated matrix has same rank
-as the number of column (row)
+A polynomial matrix is column (row, full) proper (or reduced)
+if the associated matrix has the same rank
+as the number of columns (rows)
 }
 \section{Functions}{
 \itemize{
@@ -34,12 +35,12 @@ as the number of column (row)
 }}
 
 \examples{
-  pm <- parse.polyMatrix(
-    "-1 + 7x     , x",
-    " 3 - x + x^2, -1 + x^2 - 3 x^3"
-  )
-  is.column.proper(pm)
-  is.row.proper(pm)
-  is.proper(pm)
+pm <- parse.polyMatrix(
+  "-1 + 7x     , x",
+  " 3 - x + x^2, -1 + x^2 - 3 x^3"
+)
+is.column.proper(pm)
+is.row.proper(pm)
+is.proper(pm)
 
 }

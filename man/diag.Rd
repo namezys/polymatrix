@@ -16,20 +16,20 @@ diag(x = 1, nrow, ncol, names = TRUE)
 \arguments{
 \item{x}{a polynomial matrix, or a polynomial, or an \R object}
 
-\item{nrow, ncol}{optional dimensions for the result when x is not a matrix.}
+\item{nrow, ncol}{optional dimensions for the result when x is not a matrix}
 
-\item{names}{not usedd}
+\item{names}{not used for polynomial matrices}
 }
 \description{
 Polynomial matrix Diagonals
 Extract or construct a diagonal polynomial matrix.
 }
 \details{
-In case of polynomail objets, \code{diag} has 2 distinct usage:
+In case of polynomial objects, \code{diag} has 2 distinct usage:
 \itemize{
-\item \code{x} is a polynomial, it returns a polynomial matrix the given diagonal
+\item \code{x} is a polynomial, returns a polynomial matrix the given diagonal
 and zero off-diagonal entries.
-\item \code{x} is a polynomial matrix, it returns a vector as a polynomial matrix of
+\item \code{x} is a polynomial matrix, returns a vector as a polynomial matrix of
 diagonal elements
 }
 
@@ -37,16 +37,16 @@ For polynomial, either \code{nrow} or \code{ncol} must be provided.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{polynomial}: for a polynomial, returns polynomial matrix with given diagonal
+\item \code{polynomial}: for a polynomial, returns a polynomial matrix with the given diagonal
 
-\item \code{polyMatrix}: for a polynomial matrix extract diagonal
+\item \code{polyMatrix}: for a polynomial matrix extracts diagonal
 
-For polynomial matrix, neither \code{nrow} and \code{ncol} can't be provided.
+For polynomial matrix, neither \code{nrow} nor \code{ncol} cannot be provided.
 }}
 
 \examples{
 
-# numericals and numerical matrix
+# numericals and numerical matrices
 diag(matrix(1:12, 3, 4)) ## 1 5 8
 diag(9, 2, 2)
 ##      [,1] [,2]

@@ -4,7 +4,7 @@
 \alias{is.zero}
 \alias{is.zero,polynomial-method}
 \alias{is.zero,polyMatrix-method}
-\title{Test if something is zero}
+\title{Tests if something is zero or not}
 \usage{
 is.zero(x, eps = ZERO_EPS)
 
@@ -13,9 +13,9 @@ is.zero(x, eps = ZERO_EPS)
 \S4method{is.zero}{polyMatrix}(x, eps = ZERO_EPS)
 }
 \arguments{
-\item{x}{The checked object}
+\item{x}{An \R object}
 
-\item{eps}{Minimal numerical value which will not treat as zero}
+\item{eps}{The minimal numerical value which will not be treated as zero}
 }
 \value{
 TRUE if the object can be treat as zero
@@ -25,33 +25,34 @@ Generic function to check if we can treat on object as being zero.
 For matrices the result is a matrix of the same size.
 }
 \details{
-Different type of objects can be treated as a zero in different ways:
+Different type of objects can be treated as zero in different ways:
 \itemize{
-\item Numerical types can be compare by absolute value with \code{eps}.
-\item Customer types should define an an customer method.
+\item Numerical types can be compared by absolute value with \code{eps}.
+\item Other types should define its own method.
 }
 
-By befault eps:\if{html}{\out{<div class="r">}}\preformatted{ZERO_EPS
-}\if{html}{\out{</div>}}\preformatted{## [1] 1e-05
-}
+By befault \code{eps} = \verb{\{r\} ZERO_EPS}
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{polynomial}: a polynomail can be treated as zero
+\item \code{polynomial}: a polynomial can be treated as zero
 if all its coefficients can be treated as zero
 
-\item \code{polyMatrix}: for a polunomial matrix every item is checked as polynomial
+\item \code{polyMatrix}: for a polynomial matrix every item is checked if it is zero polynomial
 }}
 
 \examples{
 
 # numericals and matrices
-is.zero(0) ## TRUE
-is.zero(0.0001, eps=0.01) ## TRUE
-is.zero(c(0, 1, 0)) ## TRUE, FALSE, TRUE
+is.zero(0)  ## TRUE
+
+is.zero(0.0001, eps=0.01)  ## TRUE
+
+is.zero(c(0, 1, 0))  ## TRUE, FALSE, TRUE
+
 is.zero(matrix(c(1, 9, 0, 0), 2, 2))
-# FALSE TRUE
-# FALSE TRUE
+## FALSE TRUE
+## FALSE TRUE
 
 
 # polynomials

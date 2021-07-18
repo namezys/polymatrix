@@ -93,7 +93,7 @@
 
 #' @export
 setGeneric("det")
-#' @describe In polyMatrix determinant of a polynomial matrix
+#' @describeIn polyMatrix determinant of a polynomial matrix
 #'
 #' @export
 setMethod("det", signature(x = PM), function(x) { .det.polyMatrix(x) })

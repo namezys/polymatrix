@@ -27,6 +27,7 @@
 
 #' Extract or Replace Parts of a polynomial matrix
 #'
+#' @param x a polynomial matrix
 #' @param i row indeces
 #' @param j column indeces
 #' @param ... unused
@@ -35,32 +36,32 @@
 #' @rdname polyMatrix-subscript
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "missing", drop="missing"), function(x, ...) { x })
-#' @describeIn polyMatrix get columns
+#' @describeIn polyMatrix-subscript get columns
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "missing", j = "ANY", drop="missing"), function(x, i, j) {
   x[seq_len(nrow(x)), j]
 })
-#' @describeIn polyMatrix gets rows
+#' @describeIn polyMatrix-subscript gets rows
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "ANY", j = "missing", drop="missing"), function(x, i, j) {
   x[i, seq_len(ncol(x))]
 })
 
-#' @describeIn polyMatrix gets by logical index
+#' @describeIn polyMatrix-subscript gets by logical index
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "logical", drop="missing"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), .logic.index.to.integer.index(j, ncol(x))])
 })
-#' @describeIn polyMatrix gets by logical index and numerical indices
+#' @describeIn polyMatrix-subscript gets by logical index and numerical indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "logical", j = "numeric", drop="missing"), function(x, i, j) {
   return(x[.logic.index.to.integer.index(i, nrow(x)), j])
 })
-#' @describeIn polyMatrix gets by logical index and numerical indices
+#' @describeIn polyMatrix-subscript gets by logical index and numerical indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "logical", drop="missing"), function(x, i, j) {
@@ -99,7 +100,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "logical", drop="missing"), 
   c_idx <- .rep.seq(j, nc, degree(x))
   return(polyMatrix(x@coef[i, c_idx], length(i), length(j), degree(x)))
 }
-#' @describeIn polyMatrix gets by row and column indices
+#' @describeIn polyMatrix-subscript gets by row and column indices
 #'
 #' @export
 setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
@@ -161,7 +162,7 @@ setMethod("[", signature(x = PM, i = "numeric", j = "numeric", drop="missing"),
   return(x)
 }
 
-#' @describeIn polyMatrix replace matrix content  DON'T UNDERSTAND...
+#' @describeIn polyMatrix-subscript replace o matrix by a new one
 #'
 #' @param value new value
 #'
@@ -170,14 +171,14 @@ setMethod("[<-", signature(x = PM, i = "missing", j = "missing"), function(x, i,
   x[seq_len(nrow(x)), seq_len(ncol(x))] <- value
   return(x)
 })
-#' @describeIn polyMatrix assigns rows
+#' @describeIn polyMatrix-subscript assigns rows
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "missing"), function(x, i, j, value) {
   x[seq_len(nrow(x)), j] <- value
   return(x)
 })
-#' @describeIn polyMatrix assigns columns
+#' @describeIn polyMatrix-subscript assigns columns
 #'
 #' @export
 setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
@@ -185,19 +186,21 @@ setMethod("[<-", signature(x = PM, j = "missing"), function(x, i, j, value) {
   return(x)
 })
 
-#' @describeIn polyMatrix assigns a part of a matrix with number  NOT CLEAR...!!!
+#' @describeIn polyMatrix-subscript replace part of matrix by one number
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "numeric"), .set.numerical.or.matrix)
-#' @describeIn polyMatrix assigns  NOT CLEAR..!!! part of matrix with another matrix
+#' @describeIn polyMatrix-subscript replace part of matrix by another numerical matrix.
+#' Size of the new matrix should be same as replaced part
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = "matrix"), .set.numerical.or.matrix)
-#' @describeIn polyMatrix assigns  NOT CLEAR...!!! part of matrix with polynomial
+#' @describeIn polyMatrix-subscript replace part of matrix by one polynomail
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = P), .set.polynomial)
-#' @describeIn polyMatrix assigns part of matrix with another polynomial matrix NOT CLEAR...!!!
+#' @describeIn polyMatrix-subscript replace part of matrix by another polunomial matrix.
+#' Size of the new matrix should be same as replaced part
 #'
 #' @export
 setMethod("[<-", signature(x = PM, i = "numeric", j = "numeric", value = PM), .set.polyMatrix)

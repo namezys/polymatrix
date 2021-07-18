@@ -7,13 +7,13 @@
 inv(x, eps = ZERO_EPS)
 }
 \arguments{
-\item{x}{an polynomial matrix}
+\item{x}{a polynomial matrix}
 
 \item{eps}{zero threshold}
 }
 \description{
-During inversion we will try to round to zero
+During inversion we will try to round elememnts to zero.
 }
 \details{
-Right now only matrices with numerical determinant is supported
+Right now only matrices with numerical determinant are supported.
 }

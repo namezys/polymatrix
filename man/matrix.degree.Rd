@@ -5,7 +5,7 @@
 \alias{matrix.degree,matrix-method}
 \alias{matrix.degree,polynomial-method}
 \alias{matrix.degree,polyMatrix-method}
-\title{Degree of each item of matrix}
+\title{Degree of each item of the matrix}
 \usage{
 matrix.degree(x)
 
@@ -32,7 +32,7 @@ for each element of the matrix.
 }
 \details{
 Degree of each item is calculated using \code{\link[=degree]{degree()}} which is defined for polynomials
-as the highest degree of the terms with non-zero coefficient.
+as the highest degree of the terms with non-zero coefficients.
 
 For convenience this function is defined for any object,
 but returns zero for non polynomial objects.

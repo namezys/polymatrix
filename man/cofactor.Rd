@@ -2,20 +2,20 @@
 % Please edit documentation in R/method_adjoint.R
 \name{cofactor}
 \alias{cofactor}
-\title{Cofactor of matrix}
+\title{Cofactor of a matrix}
 \usage{
 cofactor(x, r, c)
 }
 \arguments{
-\item{x}{an matrix}
+\item{x}{a matrix}
 
-\item{r, c}{the row and column}
+\item{r, c}{the rows and columns}
 }
 \value{
-cofactor which is number or polynomial
+cofactor which is a number or a polynomial
 }
 \description{
-Cofactor of matrix
+Cofactor of a matrix
 }
 \seealso{
 \code{\link[=adjoint]{adjoint()}}
