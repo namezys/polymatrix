@@ -1,4 +1,4 @@
-# Title     : Greater commmon divisor of matrix
+# Title     : Greater common divisor of a matrix
 # Created by: namezys
 # Created on: 2021. 05. 09.
 
@@ -6,12 +6,12 @@
 #'
 #' The greatest common divisor of polynomials or polynomial matrices.
 #'
-#' @param ... an list of polynomial objects
+#' @param ... a list of polynomial objects
 #' @seealso polynomial implementation [polynom::GCD()] and [LCM()]
 #'
 #' @export
 setGeneric("GCD", polynom::GCD)
-#' @describeIn GCD the greatest common divisor of all elements of the polynomial matrice
+#' @describeIn GCD the greatest common divisor of all elements of the polynomial matrix
 #'
 #' @examples
 #'

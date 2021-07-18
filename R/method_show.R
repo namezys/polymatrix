@@ -122,10 +122,10 @@
 #' ## [3,]           12.3x^3   2 + 3.5x + x^4    -0.7 + 0.0016x^3
 #'
 #' @export
-#' @importFrom methods show
+#' @import From methods show
 setMethod("show", signature(object = PM), .show.polyMarix)
-#' @describeIn charpolynom prints out a text representation of a characteristic polinomial of
-#' polinomial matrix
+#' @describesIn charpolynom prints out a text representation of a characteristic polynomial of
+#' a polynomial matrix
 #'
 #' @param object an \R object
 #'

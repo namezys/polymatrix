@@ -19,7 +19,7 @@
 }
 
 .mult.matrix.polynomial <- function (e1, e2) {
-  return(.mult.polyMatrix.polinomial(polyMatrix(e1, nrow(e1), ncol(e1), 0), e2))
+  return(.mult.polyMatrix.polynomial(polyMatrix(e1, nrow(e1), ncol(e1), 0), e2))
 }
 
 #' @rdname polyMatrix-Arith

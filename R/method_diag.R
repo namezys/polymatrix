@@ -1,4 +1,4 @@
-# Title     : get diagnola matrix from polynomail
+# Title     : get diagnoal matrix from polynomial
 # Created by: namezys
 # Created on: 2021. 04. 02.
 
@@ -37,22 +37,22 @@
 #' Extract or construct a diagonal polynomial matrix.
 #'
 #' @param x a polynomial matrix, or a polynomial, or an \R object
-#' @param nrow,ncol optional dimensions for the result when x is not a matrix.
-#' @param names not usedd
+#' @param nrow,ncol optional dimensions for the result when x is not a matrix
+#' @param names not used for polynomial matrices
 #' @details
 #'
-#' In case of polynomail objets, `diag` has 2 distinct usage:
+#' In case of polynomial objects, `diag` has 2 distinct usage:
 #'
-#' * \code{x} is a polynomial, it returns a polynomial matrix the given diagonal
+#' * `x` is a polynomial, returns a polynomial matrix the given diagonal
 #'   and zero off-diagonal entries.
-#' * \code{x} is a polynomial matrix, it returns a vector as a polynomial matrix of
-#'    diagonal elements
+#' * `x` is a polynomial matrix, returns a vector as a polynomial matrix of
+#'   diagonal elements
 #'
 #' @seealso Base [base::diag()] for numericals and numerical matrices
 #'
 #' @examples
 #'
-#' # numericals and numerical matrix
+#' # numericals and numerical matrices
 #' diag(matrix(1:12, 3, 4)) ## 1 5 8
 #' diag(9, 2, 2)
 #' ##      [,1] [,2]
@@ -62,11 +62,11 @@
 #'
 #' @export
 setGeneric("diag", diag)
-#' @describeIn diag for a polynomial, returns polynomial matrix with given diagonal
+#' @describeIn diag for a polynomial, returns a polynomial matrix with the given diagonal
 #'
 #' @details
 #'
-#' For polynomial, either \code{nrow} or \code{ncol} must be provided.
+#' For polynomial, either `nrow` or `ncol` must be provided.
 #'
 #' @examples
 #'
@@ -78,9 +78,9 @@ setGeneric("diag", diag)
 #'
 #' @export
 setMethod("diag", signature(x=P), .diag.polynomail)
-#' @describeIn diag for a polynomial matrix extract diagonal
+#' @describeIn diag for a polynomial matrix extracts diagonal
 #'
-#' For polynomial matrix, neither \code{nrow} and \code{ncol} can't be provided.
+#' For polynomial matrix, neither `nrow` nor `ncol` cannot be provided.
 #'
 #' @examples
 #'

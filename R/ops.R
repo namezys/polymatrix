@@ -1,6 +1,6 @@
 #' Arithmetic Operators
 #'
-#' These unary and binary operators perform arithmetic on polynomial or numeric marices.
+#' These unary and binary operators perform arithmetical operations on polynomial or numerical marices.
 #'
 #' @param e1,e2 first and second operands
 #'

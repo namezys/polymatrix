@@ -1,10 +1,10 @@
-# Title     : Get coeffisient matrix by using "[[" operator
+# Title     : Gets coefficient matrix by using "[[" operator
 # Created by: namezys
 # Created on: 2020. 10. 16.
 
 #' @describeIn polyMatrix get coefficient matrix by degree
 #'
-#' @param i the degree to extract matrix of coefficient
+#' @param i the degree of the matrix of coefficient to be extracted
 #' @examples
 #'
 #' # get coefficient matrix for degree 0
@@ -21,20 +21,20 @@
 #' @export
 setMethod("[[", signature(x = PM, i = "numeric"), function(x, i) {
   if(length(i) != 1) {
-    stop("Only one coefficient matrix can be gotten")
+    stop("Only one coefficient matrix can be gotten at once")
   }
   if(i > degree(x) || i < 0) {
     stop("degree out of bounds")
   }
   return(x@coef[, seq_len(ncol(x)) + ncol(x) * i])
 })
-#' @describeIn charpolynom get polynomial coefficient of characteristic
+#' @describeIn charpolynom get polynomial coefficient of characteristic polynomial
 #'
-#' @param i the degree to extract polinomial coefficient
+#' @param i the degree of the polynomial coefficient to be extract
 #' @export
 setMethod("[[", signature(x = PMCP), function(x, i) {
   if(length(i) != 1) {
-    stop("Only one coefficient matrix can be gotten")
+    stop("Only one coefficient matrix can be gotten at once")
   }
   if(i + 1 > ncol(x@coef) || i < 0) {
     stop("degree out of bounds")

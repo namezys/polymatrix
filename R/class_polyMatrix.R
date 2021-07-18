@@ -1,5 +1,5 @@
 # Title     : Main class of polymatrix
-# Objective : Definition of class
+# Objective : The definition of the class
 # Created by: namezys
 # Created on: 2020. 10. 16.
 
@@ -15,15 +15,15 @@ setOldClass(P)
     return("Negative number of columns")
   }
   if(ncol(object@coef) %% object@ncol != 0) {
-    return("Invalid coefficient matrix size")
+    return("Invalid matrix size and size of coef")
   }
   return(TRUE)
 }
 
-#' A class to represent matrix of polinomials
+#' A class to represent a matrix of polynomials
 #'
 #' @slot coef A matrix of coefficients which are joined into one matrix from lower degree to higher
-#' @slot ncol Actual number of columns in the polynomial matrix
+#' @slot ncol The actual number of columns in the polynomial matrix
 #'
 #' @examples
 #'
@@ -41,7 +41,7 @@ polyMatrixClass <- setClass(
 )
 
 .clean.coef <- function(coef, ncol) {
-  # clean up coef matrix by removing zero tails
+  # cleans up coef matrix by removing zero tails
   stopifnot(ncol(coef) %% ncol == 0)
   nr <- nrow(coef)
   d <- ncol(coef) / ncol - 1
@@ -73,23 +73,25 @@ polyMatrixClass <- setClass(
 
 #' Create polyMatrix object
 #'
-#' This function will create polynomial object fromm
+#' This function will create a polynomial object from
 #' coefficient matrix or signle value
 #'
 #' A coefficient matrix is a matrix which contains
-#' matrices of coefficients from lower degree to higher
+#' matrices of coefficients starting from lower degree to higher ones,
 #' side-by-side
 #'
-#' @param data an matrix in case of creation from coefficient matrices or an numer/polynomial
-#' @param nrow A numer of rows of matrix.
-#'             If data is a matrix, default value is the number of rows of data matrix.
-#'             In other case, it's a required parameter
-#' @param ncol Must be positibe.
-#'             If data is a matrix, default value is the number of columns of data matrix.
-#'             In other ccase, it's a required parameter.
-#' @param degree Degree of polynomials in coefficient matrix. Can't be negative.
-#'        If data is polynomail, degree can be evaluated automatcal.
-#'        In other case, default value is 0.
+#' @param data A matrix containing matrices of coefficients
+#'  or a number or a polynomial
+#' @param nrow The numer of rows of a polynomial matrix. Must be postive.
+#'  If data is a matrix, the default value is the number of rows of matrix `data`.
+#'  In other cases it is a required parameter.
+#' @param ncol A number of columns of a polynomial matrix. Must be positive.
+#'  If data is a matrix, the default value is the number of columns of matrix `data`.
+#'  In other cases it is a required parameter.
+#' @param degree Degree of polynomials in the coefficient matrix. Must be zero or positive.
+#'  If data is polynomial, degree can be evaluated automatcal.
+#'  In other case, default value is 0.
+#'
 #' @return new polynomial matrix of polyMatrix class
 #' @export
 polyMatrix <- function(data, nrow, ncol, degree) {
@@ -104,7 +106,7 @@ polyMatrix <- function(data, nrow, ncol, degree) {
       ncol <- 1
     }
     if(!missing(degree) && degree < length(data) - 1) {
-      stop("Polynomail has higher degree than requested")
+      stop("Polynomial has higher degree than requested")
     }
     degree <- length(data) - 1
     nrow <- as.integer(nrow)
@@ -158,7 +160,7 @@ polyMatrix <- function(data, nrow, ncol, degree) {
 #' Check if object is polyMatrix
 #'
 #' @param x an \R object
-#' @return TRUE if object is a polonial matrix
+#' @return TRUE if object is a polynomial matrix
 #' @examples
 #' is.polyMatrix(c(1, 2, 3))
 #' is.polyMatrix(polyMatrix(0, 2, 2))

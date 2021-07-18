@@ -4,7 +4,7 @@
 
 .predict.polyMatrix <- function(object, newdata) {
   if (!polynom::is.polynomial(newdata) && !is.numeric(newdata)) {
-    stop("Only polynomail or numerical argument is supported")
+    stop("Only polynomial or numerical argument is supported")
   }
   d <- degree(object)
   if (newdata == 0) {
@@ -25,7 +25,7 @@
 
 .predict.polyMatrix.charPoly <- function(object, newdata) {
   if (!polynom::is.polynomial(newdata) && !is.numeric(newdata)) {
-    stop("Only polynomail or numerical argument is supported")
+    stop("Only polynomial or numerical argument is supported")
   }
   d <- degree(object)
   if (newdata == 0) {
@@ -43,13 +43,13 @@
 
 #' @export
 setGeneric("predict", predict)
-#' @describeIn polyMatrix value of polynomial matrix in point
+#' @describeIn polyMatrix the value of a polynomial matrix in a point
 #'
-#' @param newdata the value to evaluate
+#' @param newdata the value to be evaluated
 #' @export
 setMethod("predict", signature(object = PM), .predict.polyMatrix)
-#' @describeIn charpolynom value of char polynomail in polynomial point
+#' @describeIn charpolynom the value of char polynomial in a polynomial point
 #'
-#' @param newdata the value to evaluate
+#' @param newdata the value to be evaluated
 #' @export
 setMethod("predict", signature(object = PMCP), .predict.polyMatrix.charPoly)

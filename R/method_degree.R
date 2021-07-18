@@ -2,7 +2,7 @@
 # Created by: namezys
 # Created on: 2020. 10. 17.
 
-#' Gets maximum degree of polynomial objects
+#' Gets the maximum degree of polynomial objects
 #'
 #' Returns the maximum degree as an integer number.
 #'
@@ -11,8 +11,7 @@
 #' for polynomial objects.
 #'
 #' @details
-#' By default, this function raises
-#' error for unknown type of object.
+#' By default, this function raises error for unknown type of object.
 #'
 #' @export
 setGeneric("degree", function(x) {
@@ -22,7 +21,7 @@ setGeneric("degree", function(x) {
 #' @describeIn degree a scalar argument always has zero degree
 #'
 #' @details
-#' A numerical scalar has zero degree.
+#' A numerical scalar can be treated as a polynomial with zero degree.
 #'
 #' @examples
 #'
@@ -32,7 +31,7 @@ setGeneric("degree", function(x) {
 #' @export
 setMethod("degree", signature(x = NUM), function(x) {
   if(length(x) != 1) {
-    stop("Numeric suquence is unsupported")
+    stop("Numeric sequence is unsupported")
   }
   return(0)
 })
@@ -77,12 +76,12 @@ setMethod("degree", signature(x = P), function(x) { length(x) - 1 })
 #'
 #' @export
 setMethod("degree", signature(x = PM), function(x) { as.integer(ncol(x@coef) / x@ncol - 1) })
-#' @describeIn charpolynom the degree of char polynomail of polynomial matrix
+#' @describeIn charpolynom the degree of char polynomial of polynomial matrix
 #'
 #' @export
 setMethod("degree", signature(x = PMCP), function(x) { as.integer(ncol(x@coef) - 1) })
 
-#' Degree of each item of matrix
+#' Degree of each item of the matrix
 #'
 #' Returns a matrix obtained by applying a function [degree()]
 #' for each element of the matrix.
@@ -94,7 +93,7 @@ setMethod("degree", signature(x = PMCP), function(x) { as.integer(ncol(x@coef) -
 #'
 #' @details
 #' Degree of each item is calculated using [degree()] which is defined for polynomials
-#' as the highest degree of the terms with non-zero coefficient.
+#' as the highest degree of the terms with non-zero coefficients.
 #'
 #' For convenience this function is defined for any object,
 #' but returns zero for non polynomial objects.

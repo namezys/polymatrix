@@ -1,14 +1,11 @@
-#' Rounds object to zero if it's too small
+#' Rounds objects to zero if there is too small
 #'
 #' @param x an \R object
-#' @param eps Minimal numerical value which will not treat as zero
+#' @param eps Minimal numerical value which will not be treated as zero
 #'
 #' @details
 #'
-#' By befault eps:
-#' ```{r}
-#' ZERO_EPS
-#' ```
+#' By befault `eps` = `{r} ZERO_EPS`
 #'
 #' @examples
 #'
